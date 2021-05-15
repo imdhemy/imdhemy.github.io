@@ -1,5 +1,4 @@
 const validArguments = {
-  start: [],
   post: ['title'],
   page: ['title'],
 }

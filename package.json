@@ -2,7 +2,9 @@
   "name": "imdhemy.github.io",
   "version": "1.0.0",
   "description": "Personal blog!",
-  "scripts": {},
+  "scripts": {
+    "serve": "bundle exec jekyll serve --livereload"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/imdhemy/imdhemy.github.io.git"

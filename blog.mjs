@@ -12,7 +12,10 @@ if (input.args().length) {
   }
 
   const action = actionFactory.create(input.managerType())
-  action.execute(...input.params())
+  const params = input.params()
+  params.unshift($)
+
+  await action.execute(...params)
 
   process.exit(0)
 }
