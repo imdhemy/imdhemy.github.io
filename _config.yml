@@ -52,6 +52,6 @@ plugins:
     - vendor/gems/
     - vendor/ruby/
     - zx/
-    - .mjs
+    - blog.mjs
     - yarn.lock
     - package.json
