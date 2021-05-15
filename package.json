@@ -1,0 +1,27 @@
+{
+  "name": "imdhemy.github.io",
+  "version": "1.0.0",
+  "description": "Personal blog!",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imdhemy/imdhemy.github.io.git"
+  },
+  "keywords": [
+    "jekyll",
+    "blog"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imdhemy/imdhemy.github.io/issues"
+  },
+  "homepage": "https://github.com/imdhemy/imdhemy.github.io#readme",
+  "devDependencies": {
+    "zx": "^1.6.0"
+  },
+  "dependencies": {
+    "chalk": "^4.1.1",
+    "node-core-lib": "^0.11.11"
+  }
+}

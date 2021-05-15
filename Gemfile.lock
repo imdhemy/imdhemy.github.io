@@ -74,7 +74,7 @@ DEPENDENCIES
   jekyll-feed (~> 0.12)
   minima (~> 2.5)
   tzinfo (~> 1.2)
-  tzinfo-data
+  tzinfo-arguments
   wdm (~> 0.1.1)
   webrick (~> 1.7)
 

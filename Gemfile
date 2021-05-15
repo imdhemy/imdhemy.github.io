@@ -18,11 +18,11 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
 end
 
-# Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
+# Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-arguments gem
 # and associated library.
 platforms :mingw, :x64_mingw, :mswin, :jruby do
   gem "tzinfo", "~> 1.2"
-  gem "tzinfo-data"
+  gem "tzinfo-arguments"
 end
 
 # Performance-booster for watching directories on Windows
