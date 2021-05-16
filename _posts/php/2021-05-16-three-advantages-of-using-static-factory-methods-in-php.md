@@ -56,6 +56,8 @@ class Carbon
 ```
 On instantiation, the debugger/interpreter will choose the proper constructor to use based on the parameter types, count, and order.
 
+Even If PHP was allowing constructor overloading, I'd go for another technique that should be a part of every programmer's toolkit as Joshua Bloch mentioned in his book "[Effective Java](https://www.goodreads.com/book/show/34927404-effective-java)". A class can provide a public _static factory method_, which is simply a static method that returns an instance of the class.
+
 Let me show you another example from the Carbon Library:
 ```php
 $now = Carbon::now();
@@ -67,8 +69,6 @@ $timeFromFormat = Carbon::createFromFormat('Y-m-d H', '1990-09-07 22');
 ```
 
 Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed!
-
-Even If PHP was allowing constructor overloading, I'd go for another technique that should be a part of every programmer's toolkit as Joshua Bloch mentioned in his book "[Effective Java](https://www.goodreads.com/book/show/34927404-effective-java)". A class can provide a public _static factory method_, which is simply a static method that returns an instance of the class.
 
 Another Good example is the `Request` [class from Symfony](https://github.com/symfony/http-foundation/blob/5.x/Request.php), which has a [long list of constructor params](https://github.com/symfony/http-foundation/blob/5.x/Request.php#L258)
 
