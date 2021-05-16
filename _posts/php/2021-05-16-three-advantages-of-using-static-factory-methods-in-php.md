@@ -7,7 +7,7 @@ categories: php
 Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn't allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an [example from the Carbon Library](https://github.com/briannesbitt/Carbon/blob/2.48.0/src/Carbon/Traits/Creator.php#L56:L97).
 
 - If the `$time` is instance of the `DateTimeInterface`, it calls another private creator method `constructTimezoneFromDateTime`.
-- If the `$time` is a timestamp, it starts another journey with creator methods starting from `createFromTimestampUTC`
+- If the `$time` is a timestamp, it starts another journey with creator methods starting from `createFromTimestampUTC`.
 - If the `$time` is an empty string or is `"now"`, it creates a new object of the current time.
 
 **If PHP allows constructor overloading, we may have the following constructors:**
@@ -56,8 +56,6 @@ class Carbon
 ```
 On instantiation, the debugger/interpreter will choose the proper constructor to use based on the parameter types, count, and order.
 
-Even If PHP was allowing constructor overloading, I'd go for another technique that should be a part of every programmer's toolkit as Joshua Bloch mentioned in his book "[Effective Java](https://www.goodreads.com/book/show/34927404-effective-java)". A class can provide a public _static factory method_, which is simply a static method that returns an instance of the class.
-
 Let me show you another example from the Carbon Library:
 ```php
 $now = Carbon::now();
@@ -69,8 +67,6 @@ $timeFromFormat = Carbon::createFromFormat('Y-m-d H', '1990-09-07 22');
 ```
 
 Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed!
-
-After this quite long introduction, let's get into the topic. Here are five advantages to consider using static factory methods instead of constructors.
 
 Another Good example is the `Request` [class from Symfony](https://github.com/symfony/http-foundation/blob/5.x/Request.php), which has a [long list of constructor params](https://github.com/symfony/http-foundation/blob/5.x/Request.php#L258)
 
@@ -85,6 +81,10 @@ You can check a fresh project of Symfony-5 to find the following line in `public
 ```php
 $request = Request::createFromGlobals();
 ```
+
+Even If PHP was allowing constructor overloading, I'd go for another technique that should be a part of every programmer's toolkit as Joshua Bloch mentioned in his book "[Effective Java](https://www.goodreads.com/book/show/34927404-effective-java)". A class can provide a public _static factory method_, which is simply a static method that returns an instance of the class.
+
+After this quite long introduction, let's get into the topic. Here are five advantages to consider using static factory methods instead of constructors.
 
 ## They have names
 Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic-free constructors besides descriptive easy to remember static factory methods. Consider the following example:
