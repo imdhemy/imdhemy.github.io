@@ -68,6 +68,8 @@ $timeFromFormat = Carbon::createFromFormat('Y-m-d H', '1990-09-07 22');
 
 Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed!
 
+Even If PHP was allowing constructor overloading, I'd go for another technique that should be a part of every programmer's toolkit as Joshua Bloch mentioned in his book "[Effective Java](https://www.goodreads.com/book/show/34927404-effective-java)". A class can provide a public _static factory method_, which is simply a static method that returns an instance of the class.
+
 Another Good example is the `Request` [class from Symfony](https://github.com/symfony/http-foundation/blob/5.x/Request.php), which has a [long list of constructor params](https://github.com/symfony/http-foundation/blob/5.x/Request.php#L258)
 
 ```php
@@ -82,9 +84,7 @@ You can check a fresh project of Symfony-5 to find the following line in `public
 $request = Request::createFromGlobals();
 ```
 
-Even If PHP was allowing constructor overloading, I'd go for another technique that should be a part of every programmer's toolkit as Joshua Bloch mentioned in his book "[Effective Java](https://www.goodreads.com/book/show/34927404-effective-java)". A class can provide a public _static factory method_, which is simply a static method that returns an instance of the class.
-
-After this quite long introduction, let's get into the topic. Here are five advantages to consider using static factory methods instead of constructors.
+After this quite long introduction, let's get into the topic. Here are three advantages to consider using static factory methods instead of constructors.
 
 ## They have names
 Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic-free constructors besides descriptive easy to remember static factory methods. Consider the following example:
