@@ -4,11 +4,11 @@ title: Three advantages of using static factory methods in PHP
 date: 2021-05-16T06:05:51.560Z
 categories: php
 ---
-Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn't allow constructor overloading. Developer overtime developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an [example from the Carbon Library](https://github.com/briannesbitt/Carbon/blob/2.48.0/src/Carbon/Traits/Creator.php#L56:L97).
+Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn't allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an [example from the Carbon Library](https://github.com/briannesbitt/Carbon/blob/2.48.0/src/Carbon/Traits/Creator.php#L56:L97).
 
 - If the `$time` is instance of the `DateTimeInterface`, it calls another private creator method `constructTimezoneFromDateTime`.
 - If the `$time` is a timestamp, it starts another journey with creator methods starting from `createFromTimestampUTC`
-- If the `$time` is empty string or is `"now"`, it creates a new object of the current time.
+- If the `$time` is an empty string or is `"now"`, it creates a new object of the current time.
 
 **If PHP allows constructor overloading, we may have the following constructors:**
 
@@ -38,7 +38,7 @@ class Carbon
     */
     function Carbon(DatetimeInterface $datetime)
     {
-        // construct from a datetime
+        // construct from a DateTime
     }
 
     /**
@@ -54,7 +54,7 @@ class Carbon
     // Other constructors todo...
 }
 ```
-On Instantiation the debugger/interpreter will choose the proper constructor to use based on the parameter types, count and order.
+On instantiation, the debugger/interpreter will choose the proper constructor to use based on the parameter types, count, and order.
 
 Even If PHP was allowing constructor overloading, I'd go for another technique that should be a part of every programmer's toolkit as Joshua Bloch mentioned in his book "[Effective Java](https://www.goodreads.com/book/show/34927404-effective-java)". A class can provide a public _static factory method_, which is simply a static method that returns an instance of the class.
 
@@ -70,7 +70,7 @@ $timeFromFormat = Carbon::createFromFormat('Y-m-d H', '1990-09-07 22');
 
 Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed!
 
-After this quite long introduction, let's get into topic. Here are five advantages to consider using static factory methods instead of constructors.
+After this quite long introduction, let's get into the topic. Here are five advantages to consider using static factory methods instead of constructors.
 
 Another Good example is the `Request` [class from Symfony](https://github.com/symfony/http-foundation/blob/5.x/Request.php), which has a [long list of constructor params](https://github.com/symfony/http-foundation/blob/5.x/Request.php#L258)
 
@@ -87,7 +87,7 @@ $request = Request::createFromGlobals();
 ```
 
 ## They have names
-Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic free constructors beside a descriptive easy to remember static factory methods. Consider the following example:
+Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic-free constructors besides descriptive easy to remember static factory methods. Consider the following example:
 
 ```php
 class Conversation
@@ -126,12 +126,12 @@ class Conversation
 ```
 For more explanation, In a chat application, we have two types of conversations, a user can start a one-to-one conversation or a group conversation. The `Conversation` constructor accepts a `ConversationType` and `UserCollection` to instantiate a new conversation object. To make it easier for the client, we provided two static factory methods `oneToOne` and `group`.
 
-Obviously, we can solve the same problem through [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)). Polymorphism may be a good idea for a Conversation instantiation, but it's not so good for a Value object class, the `ConversationType` for instance is a good example for this.
+We can solve the same problem through [polymorphism](https://en.wikipedia.org/wiki/Polymorphism_(computer_science)). Polymorphism may be a good idea for a Conversation instantiation, but it's not so good for a Value object class, the `ConversationType` for instance is a good example for this.
 
 ## They can cache
-Unlike constructors, static factory methods are not required to create a new object each time they invoked. Consider the Value object class `ConversationType` in the previous chat app example. Our chat application allows the user to list all his chat history, suppose the user has 10 conversations in his history, half of them are one-to-one conversations. In this case if we used the ordinary constructors, we will end with five identical objects of type `ConversationType` for the five one-to-one conversations and another five identical objects for the group conversations. 
+Unlike constructors, static factory methods are not required to create a new object each time they are invoked. Consider the Value object class `ConversationType` in the previous chat app example. Our chat application allows the user to list all his chat history, suppose the user has 10 conversations in his history, half of them are one-to-one conversations. In this case, if we used the ordinary constructors, we will end with five identical objects of type `ConversationType` for the five one-to-one conversations and another five identical objects for the group conversations. 
 
-I agree they are lightweight objects, but in other scenarios and application we may overload our limited Memory! Back to our example, at most we only need two different objects of `ConversationType` at most!
+I agree they are lightweight objects, but in other scenarios and applications, we may overload our limited Memory! Back to our example, at most we only need two different objects of `ConversationType` at most!
 
 ```php
 final class ConversationType
@@ -165,7 +165,7 @@ final class ConversationType
 }
 ```
 
-The ability of static factory methods to return the same object from repeated invocations allows classes to maintain strict control over what instances exist at anytime. I suggest you to check the rarely used in PHP [Flyweight](https://refactoring.guru/design-patterns/flyweight) pattern after reading this article. 
+The ability of static factory methods to return the same object from repeated invocations allows classes to maintain strict control over what instances exist at any time. I suggest you check the rarely used within PHP applications [Flyweight](https://refactoring.guru/design-patterns/flyweight) pattern after reading this article. 
 
 ## They form the basis of Service provider frameworks
 
@@ -176,7 +176,7 @@ A service provider framework is a system in which providers implement a _service
 3. A service access API.
 
 Let's have an example from our beloved framework, [Laravel](https://laravel.com/docs/8.x/providers), it's official documentation states:
->Service providers are the central place of all Laravel application bootstrapping. Your own application, as well as all of Laravel's core services, are bootstrapped via service providers.
+>Service providers are the central place of all Laravel application bootstrapping. Your application, as well as all of Laravel's core services, are bootstrapped via service providers.
 
 1. Any Service should extend the abstract class `Illuminate\Support\ServiceProvider`. [**Interface^**]
 2. All service providers are registered in the config/app.php configuration file. [**Registration^**]
@@ -190,7 +190,7 @@ In a standard laravel request, Laravel bootstrap an [Application instance](https
 - `Illuminate\Log\LogServiceProvider`
 - `Illuminate\Routing\RoutingServiceProvider`
 
-The same way, laravel allows you to add service providers as much as your application requires!
+In the same way, laravel allows you to add service providers as much as your application requires!
 
 ## Summary
 In summary, static factory methods and public constructors both have their uses, and it pays to understand their relative merits. Firstly, think about the best fit [creational design pattern](https://refactoring.guru/design-patterns/creational-patterns) to use, secondly consider using a static factory method, lastly, write clean logic free public constructors.
