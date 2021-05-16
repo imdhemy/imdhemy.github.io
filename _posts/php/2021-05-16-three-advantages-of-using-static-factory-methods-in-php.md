@@ -184,7 +184,7 @@ Let's have an example from our beloved framework, [Laravel](https://laravel.com/
 
 Service providers are responsible for bootstrapping all the framework’s various parts, such as the database, queue, validation, and routing components. Since it configures all the features offered by Laravel, it’s the essential component of your Laravel application.
 
-In a standard laravel request, Laravel bootstrap an Application instance, which in turn invokes the `register` methods of the base service providers including: 
+In a standard laravel request, Laravel bootstrap an [Application instance](https://github.com/laravel/laravel/blob/8.x/public/index.php#L47), which in turn invokes the `register` methods of the [base service providers](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L177) including: 
 
 - `Illuminate\Events\EventServiceProvider`
 - `Illuminate\Log\LogServiceProvider`
