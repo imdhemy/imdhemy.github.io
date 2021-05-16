@@ -29,6 +29,7 @@ github_username: imdhemy
 
 # Build settings
 theme: minima
+show_excerpts: true
 plugins:
   - jekyll-feed
 permalink: /:categories/:title:output_ext
