@@ -194,3 +194,4 @@ The same way, laravel allows you to add service providers as much as your applic
 
 ## Summary
 In summary, static factory methods and public constructors both have their uses, and it pays to understand their relative merits. Firstly, think about the best fit [creational design pattern](https://refactoring.guru/design-patterns/creational-patterns) to use, secondly consider using a static factory method, lastly, write clean logic free public constructors.
+
