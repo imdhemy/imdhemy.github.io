@@ -131,7 +131,7 @@ We can solve the same problem through [polymorphism](https://en.wikipedia.org/wi
 ## They can cache
 Unlike constructors, static factory methods are not required to create a new object each time they are invoked. Consider the Value object class `ConversationType` in the previous chat app example. Our chat application allows the user to list all his chat history, suppose the user has 10 conversations in his history, half of them are one-to-one conversations. In this case, if we used the ordinary constructors, we will end with five identical objects of type `ConversationType` for the five one-to-one conversations and another five identical objects for the group conversations. 
 
-I agree they are lightweight objects, but in other scenarios and applications, we may overload our limited Memory! Back to our example, at most we only need two different objects of `ConversationType` at most!
+I agree they are lightweight objects, but in other scenarios and applications, we may overload our limited Memory! Back to our example, we only need two different objects of `ConversationType` at most!
 
 ```php
 final class ConversationType
@@ -142,7 +142,7 @@ final class ConversationType
     private static array $cache = [];
     private string $type;
 
-    public function __construct(string $type)
+    private function __construct(string $type)
     {
         $this->type = $type;
     }
