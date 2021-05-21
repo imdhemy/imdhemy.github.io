@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Why you need a builder to create your entities and models
-date: 2021-05-19T19:56:11.961Z
 categories: php
 ---
+[Static factories]({% post_url php/2021-05-16-three-advantages-of-using-static-factory-methods-in-php %}) and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User in a social network platform.
 
 ```php
 /**
