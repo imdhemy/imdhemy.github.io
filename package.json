@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Personal blog!",
   "scripts": {
-    "serve": "bundle exec jekyll serve --livereload"
+    "serve": "bundle exec jekyll serve --livereload",
+    "drafts": "bundle exec jekyll serve --livereload --drafts"
   },
   "repository": {
     "type": "git",
