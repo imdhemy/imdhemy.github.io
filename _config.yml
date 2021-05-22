@@ -21,17 +21,29 @@
 title: '@imdhemy'
 email: imdhemy@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
-  I'm a software-artist and a real-life superhero. I earn my living as a fullstack developer.
+  I'm a software-artist and a real-life superhero.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://imdhemy.com" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: imdhemy
-github_username: imdhemy
 
 # Build settings
 theme: minima
-show_excerpts: true
+remote_theme: jekyll/minima
+minima:
+  skin: imdhemy
+  # generate social links in footer
+  social_links:
+    twitter: imdhemy
+    github: imdhemy
+    linkedin: imdhemy
+    instagram: imdhemy
+  author:
+    name: Mohamad Eldhemy
+    email: "imdhemy@gmail.com"
+
+show_excerpts: false
 plugins:
   - jekyll-feed
+  - jekyll-remote-theme
 permalink: /:categories/:title:output_ext
 
 # Exclude from processing.
