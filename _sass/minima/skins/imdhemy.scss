@@ -1,0 +1,124 @@
+@charset "utf-8";
+
+$brand-color:           #828282 !default;
+$brand-color-light:     lighten($brand-color, 40%) !default;
+$brand-color-dark:      darken($brand-color, 25%) !default;
+
+$site-title-color:      $brand-color-dark !default;
+
+$text-color:            #111111 !default;
+$background-color:      #fdfdfd !default;
+$code-background-color: #f6f8fa !default;
+
+$link-base-color:       #2a7ae2 !default;
+$link-visited-color:    darken($link-base-color, 15%) !default;
+$link-hover-color:      $text-color !default;
+
+$border-color-01:       $brand-color-light !default;
+$border-color-02:       lighten($brand-color, 35%) !default;
+$border-color-03:       $brand-color-dark !default;
+
+$table-text-color:      lighten($text-color, 18%) !default;
+$table-zebra-color:     lighten($brand-color, 46%) !default;
+$table-header-bg-color: lighten($brand-color, 43%) !default;
+$table-header-border:   lighten($brand-color, 37%) !default;
+$table-border-color:    $border-color-01 !default;
+
+
+// Syntax highlighting styles should be adjusted appropriately for every "skin"
+// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+$color-prettylights-syntax-comment: #6a737d;
+$color-prettylights-syntax-constant: #005cc5;
+$color-prettylights-syntax-entity: #6f42c1;
+$color-prettylights-syntax-storage-modifier-import: #24292e;
+$color-prettylights-syntax-entity-tag: #22863a;
+$color-prettylights-syntax-keyword: #d73a49;
+$color-prettylights-syntax-string: #032f62;
+$color-prettylights-syntax-variable: #e36209;
+$color-prettylights-syntax-brackethighlighter-unmatched: #b31d28;
+$color-prettylights-syntax-invalid-illegal-text: #fafbfc;
+$color-prettylights-syntax-invalid-illegal-bg: #b31d28;
+$color-prettylights-syntax-carriage-return-text: #fafbfc;
+$color-prettylights-syntax-carriage-return-bg: #d73a49;
+$color-prettylights-syntax-string-regexp: #22863a;
+$color-prettylights-syntax-markup-list: #735c0f;
+$color-prettylights-syntax-markup-heading: #005cc5;
+$color-prettylights-syntax-markup-italic: #24292e;
+$color-prettylights-syntax-markup-bold: #24292e;
+$color-prettylights-syntax-markup-deleted-text: #b31d28;
+$color-prettylights-syntax-markup-deleted-bg: #ffeef0;
+$color-prettylights-syntax-markup-inserted-text: #22863a;
+$color-prettylights-syntax-markup-inserted-bg: #f0fff4;
+$color-prettylights-syntax-markup-changed-text: #e36209;
+$color-prettylights-syntax-markup-changed-bg: #ffebda;
+$color-prettylights-syntax-markup-ignored-text: #f6f8fa;
+$color-prettylights-syntax-markup-ignored-bg: #005cc5;
+$color-prettylights-syntax-meta-diff-range: #6f42c1;
+$color-prettylights-syntax-brackethighlighter-angle: #586069;
+$color-prettylights-syntax-sublimelinter-gutter-mark: #959da5;
+$color-prettylights-syntax-constant-other-reference-link: #032f62;
+
+.highlight {
+  .c     { color: red; font-style: italic } // Comment
+  .cd    { color: $color-prettylights-syntax-comment; font-style: italic } // Comment
+  .c1    { color: $color-prettylights-syntax-comment !important; font-style: italic !important;} // Comment
+  .err   { color: #a61717; background-color: #e3d2d2 } // Error
+  .k     { color: $color-prettylights-syntax-keyword} // Keyword
+  .o     {} // Operator
+  .cm    { color: #998; font-style: italic } // Comment.Multiline
+  .cp    { color: #999;} // Comment.Preproc
+  .c1    { color: #998; font-style: italic } // Comment.Single
+  .cs    { color: #999; font-weight: bold; font-style: italic } // Comment.Special
+  .gd    { color: #000; background-color: #fdd } // Generic.Deleted
+  .gd .x { color: #000; background-color: #faa } // Generic.Deleted.Specific
+  .ge    { font-style: italic } // Generic.Emph
+  .gr    { color: #a00 } // Generic.Error
+  .gh    { color: #999 } // Generic.Heading
+  .gi    { color: #000; background-color: #dfd } // Generic.Inserted
+  .gi .x { color: #000; background-color: #afa } // Generic.Inserted.Specific
+  .go    { color: #888 } // Generic.Output
+  .gp    { color: #555 } // Generic.Prompt
+  .gs    {} // Generic.Strong
+  .gu    { color: #aaa } // Generic.Subheading
+  .gt    { color: #a00 } // Generic.Traceback
+  .kc    { color: $color-prettylights-syntax-constant } // Keyword.Constant
+  .kd    { color: $color-prettylights-syntax-keyword } // Keyword.Declaration
+  .kp    {} // Keyword.Pseudo
+  .kr    {} // Keyword.Reserved
+  .kt    { color: $color-prettylights-syntax-entity} // Keyword.Type
+  .m     { color: #099 } // Literal.Number
+  .s     { color: #d14 } // Literal.String
+  .na    { color: #008080 } // Name.Attribute
+  .nb    { color: $color-prettylights-syntax-entity } // Name.Builtin
+  .nc    { color: $color-prettylights-syntax-variable;} // Name.Class
+  .no    { color: $color-prettylights-syntax-constant } // Name.Constant
+  .ni    { color: #800080 } // Name.Entity
+  .ne    { color: #900;} // Name.Exception
+  .nf    { color: $color-prettylights-syntax-entity;} // Name.Function
+  .nn    { color: #555 } // Name.Namespace
+  .nt    { color: #000080 } // Name.Tag
+  .nv    { color: $color-prettylights-syntax-string } // Name.Variable
+  .ow    {} // Operator.Word
+  .w     { color: #bbb } // Text.Whitespace
+  .mf    { color: #099 } // Literal.Number.Float
+  .mh    { color: #099 } // Literal.Number.Hex
+  .mi    { color: $color-prettylights-syntax-constant } // Literal.Number.Integer
+  .mo    { color: #099 } // Literal.Number.Oct
+  .sb    { color: #d14 } // Literal.String.Backtick
+  .sc    { color: #d14 } // Literal.String.Char
+  .sd    { color: #d14 } // Literal.String.Doc
+  .s2    { color: #d14 } // Literal.String.Double
+  .se    { color: #d14 } // Literal.String.Escape
+  .sh    { color: #d14 } // Literal.String.Heredoc
+  .si    { color: #d14 } // Literal.String.Interpol
+  .sx    { color: #d14 } // Literal.String.Other
+  .sr    { color: #009926 } // Literal.String.Regex
+  .s1    { color: $color-prettylights-syntax-string } // Literal.String.Single
+  .ss    { color: #990073 } // Literal.String.Symbol
+  .bp    { color: #999 } // Name.Builtin.Pseudo
+  .vc    { color: #008080 } // Name.Variable.Class
+  .vg    { color: #008080 } // Name.Variable.Global
+  .vi    { color: #008080 } // Name.Variable.Instance
+  .il    { color: #099 } // Literal.Number.Integer.Long
+}
