@@ -10,7 +10,7 @@ _**As a side note:** this is not my preferred way to design a user entity, but t
 Starting from here, I'll explore the practices I previously did or noticed them in other developers code.
 
 ## The Laravel Models Taste
-Laravel models provides two methods to create a model instance, the most popular `create` method and the less popular`make` method. Both methods are not implemented in the base `Model` class. But Laravel defines a `__call()` and `__calStatic()` methods, it goes handled through them. [Those methods forward the call to a query builder!](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Database/Eloquent/Model.php#L1952)
+Laravel models provides two methods to create a model instance, the most popular `create` method and the less popular`make` method. Both methods are not implemented in the base `Model` class. But Laravel defines a `__call()` and `__callStatic()` methods, it goes handled through them. [Those methods forward the call to a query builder!](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Database/Eloquent/Model.php#L1952)
 
 Finally, we have a model class that has no properties, a parameterless constructor! Everything is injected magically into the class. 
 
@@ -46,6 +46,7 @@ class User extends Entity
 {
     private string $name;
     private string $email;
+    
     // and so on ...
     
     public function setName(string $name)
@@ -103,7 +104,27 @@ The telescoping constructor work, but it is hard to write client code when there
 
 
 ## Fluent Setters
-@TODO
+Fluent Setters is the PHP way to imitate the [JavaBeans](https://en.wikipedia.org/wiki/JavaBeans) Pattern In which you call a parameterless constructor followed by call to setter methods. It's called fluent because all setter method return the object instance allowing you to call them in chains.
+
+This pattern has none of the disadvantages of the telescoping constructor pattern. It is easy and easy to read the resulting code:
+
+```php
+$user = new User();
+$user->setName('John Doe')
+    ->setEmail('john@example.com')
+    ->setPassword($passwordHash)
+    ->setAddress('Via Lactea');
+```
+
+Unfortunately, the Fluent setters pattern has the following disadvantages:
+- A class with a parameterless constructor is subject to being instantiated in **invalid state**.
+- Having to create setters for every property which leads to immense quantity of **boilerplate code**.
+
+## Using a builder is a good solution!
+We can use a form of the [Builder Pattern](https://refactoring.guru/design-patterns/builder) which combines the safety of the telescoping constructors and the readability of the fluent setters. Instead of creating the desired object directly, the client calls a static factory method with all the required parameters and gets an object of the builder class which provides setter-like methods for other optional methods. Finally, the client calls a parameterless `build` method to get an instance of the required class.
+
+
+
 
 ---
 ```php
