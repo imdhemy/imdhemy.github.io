@@ -3,14 +3,14 @@ layout: post
 title: Why you need a builder to create your entities and models
 categories: php
 ---
-[Static factories]({% post_url php/2021-05-16-three-advantages-of-using-static-factory-methods-in-php %}) and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a **User** in a social network platform. This class has only three required fields (`$name`, `$email` & `$password`) and a bunch of optional fields with default values, for instance: (`$address`, `$avatar`, `$gender`, `$emailVerifiedAt`, etc...).
+[Static factories]({% post_url php/2021-05-16-three-advantages-of-using-static-factory-methods-in-php %}) and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a **User** on a social network platform. This class has only three required fields (`$name`, `$email` & `$password`) and a bunch of optional fields with default values, for instance: (`$address`, `$avatar`, `$gender`, `$emailVerifiedAt`, etc...).
 
-_**As a side note:** this is not my preferred way to design a user entity, but this is only here in purpose of clarifying the situation of having a long parameter list._
+_**As a side note:** this is not my preferred way to design a user entity, but this is only here for purpose of clarifying the situation of having a long parameter list._
 
-Starting from here, I'll explore the practices I previously did or noticed them in other developers code.
+Starting from here, I'll explore the practices I previously did or noticed in other developers' code.
 
 ## The Laravel Models Taste
-Laravel models provides two methods to create a model instance, the most popular `create` method and the less popular`make` method. Both methods are not implemented in the base `Model` class. But Laravel defines a `__call()` and `__callStatic()` methods, it goes handled through them. [Those methods forward the call to a query builder!](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Database/Eloquent/Model.php#L1952)
+Laravel models provide two methods to create a model instance, the most popular `create` method and the less popular `make` method. Both methods are not implemented in the base `Model` class. But Laravel defines a `__call()` and `__callStatic()` methods, it goes handled through them. [Those methods forward the call to a query builder!](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Database/Eloquent/Model.php#L1952)
 
 Finally, we have a model class that has no properties, a parameterless constructor! Everything is injected magically into the class. 
 
@@ -31,7 +31,7 @@ $user = User::create([
 ```
 **IMHO, this is not so good due to the following reasons!**
 
-- Sooner or latter, you'll end up with a model with **invalid state** or any [kind of unexpected behaviour](https://www.php.net/manual/en/language.oop5.overloading.php#119407).
+- Sooner or later, you'll end up with a model with **an invalid state** or any [kind of unexpected behavior](https://www.php.net/manual/en/language.oop5.overloading.php#119407).
 - The model **has no properties** and even more if you defined the properties to solve this problem the code will break!
 - All properties are treated as public properties which means **no encapsulation** at all!
 - Your **IDE doesn't understand** that!
@@ -39,7 +39,7 @@ $user = User::create([
 - Feel free to add more problems to this list... 
 
 ## A factory that accepts an array of attributes
-Another technique I noticed some developers use is to provide a factory that receives an array of attributes, then starts a series of `isset` call accompanied by a call to a setter method! 
+Another technique I noticed some developers use is to provide a factory that receives an array of attributes, then starts a series of `isset` calls accompanied by a call to a setter method! 
 
 ```php
 class User extends Entity
@@ -74,13 +74,13 @@ class User extends Entity
 
 Just imagine repeating this to cover all the class properties!
 
-- With **parameterless constructors** you need to handle required params yourself!
-- Again, have entities with **invalid state**!
+- With **parameterless constructors**, you need to handle the required params yourself!
+- Again, have entities with **an invalid state**!
 - **Hard to read**, hard to maintain code.
 - Your **IDE doesn't understand** that!
 
 ## Telescoping constructor
-Telescoping constructor means to provide a constructor with only the required parameters, another with a single optional parameter, a third with two optional parameters and so on.
+Telescoping constructor means to provide a constructor with only the required parameters, another with a single optional parameter, a third with two optional parameters, and so on.
 
 Since PHP doesn't allow constructor overloading, PHP developers started to provide a constructor with a full list of properties starting with the required params.
 
@@ -94,17 +94,17 @@ class User
     }
 }
 ```
-When you want to create an instance, you use pass the shortest list of parameters you want to set. Typically, this constructor invocation will require many parameters that you don't to set, but you are forced to pass a value for them.
+When you want to create an instance, you can pass the shortest list of parameters you want to set. Typically, this constructor invocation will require many parameters that you don't want to set, but you are forced to pass a value for them.
 ```php
 $user = new User('John Doe', 'john@example.com', $passwordHash, 5, 12, null, $avatar);
 ```
 In this case, we're forced to pass `5, 12, null` values which are the default values since the avatar comes after them in order!
 
-The telescoping constructor work, but it is hard to write client code when there are many parameters, and harder still to read it. The reader is left wondering what all those values mean and must carefully count parameters to find out. Umm, what if he swapped the `12` and `50` being having the same data type, the code won't break, but it's invalid state again!
+The telescoping constructor work, but it is hard to write client code when there are many parameters, and harder still to read it. The reader is left wondering what all those values mean and must carefully count parameters to find out. Umm, what if he swapped the `12` and `50` since having the same data type, the code won't break, but it's an invalid state again!
 
 
 ## Fluent Setters
-Fluent Setters is the PHP way to imitate the [JavaBeans](https://en.wikipedia.org/wiki/JavaBeans) Pattern In which you call a parameterless constructor followed by call to setter methods. It's called fluent because all setter method return the object instance allowing you to call them in chains.
+Fluent Setters is the PHP way to imitate the [JavaBeans](https://en.wikipedia.org/wiki/JavaBeans) Pattern In which you call a parameterless constructor followed by call to setter methods. It's called fluent because all setter methods return the object instance allowing you to call them in chains.
 
 This pattern has none of the disadvantages of the telescoping constructor pattern. It is easy and easy to read the resulting code:
 
@@ -117,16 +117,13 @@ $user->setName('John Doe')
 ```
 
 Unfortunately, the Fluent setters pattern has the following disadvantages:
-- A class with a parameterless constructor is subject to being instantiated in **invalid state**.
-- Having to create setters for every property which leads to immense quantity of **boilerplate code**.
+- A class with a parameterless constructor is subject to being instantiated in **an invalid state**.
+- Having to create setters for every property leads to an immense quantity of **boilerplate code**.
 
 ## Using a builder is a good solution!
-We can use a form of the [Builder Pattern](https://refactoring.guru/design-patterns/builder) which combines the safety of the telescoping constructors and the readability of the fluent setters. Instead of creating the desired object directly, the client calls a static factory method with all the required parameters and gets an object of the builder class which provides setter-like methods for other optional methods. Finally, the client calls a parameterless `build` method to get an instance of the required class.
+We can use a form of the [Builder Pattern](https://refactoring.guru/design-patterns/builder) which combines the safety of the telescoping constructors and the readability of the fluent setters. Instead of creating the desired object directly, the client calls a static factory method with all the required parameters and gets an object of the builder class which provides setter-like methods for other optional methods. Finally, the client calls a parameterless `build` method to get an instance of the required class. Let me show you an example:
 
-
-
-
----
+**I prefer to start with The Client Code:**
 ```php
 /**
  * @test
@@ -139,9 +136,10 @@ public function test_builder_can_create_user()
         ->address('Via Lactea')
         ->build();
     $this->assertInstanceOf(User::class, $user);
+    // More assertions...
 }
 ```
-
+**Then the Entity class:**
 ```php
 class User
 {
@@ -159,8 +157,14 @@ class User
      * @var string
      */
     private string $address;
+    
+    //More attributes...
+    //...
 
     /**
+     * You can use one of the following options for the constructor:
+     * 1. Parameterless constructor & add a static factory method that accepts the UserBuilder as a param
+     * 2. A constructor that accepts the UserBuilder as a param.
      * User constructor.
      * @param \App\UserBuilder $builder
      */
@@ -169,6 +173,7 @@ class User
         $this->name = $builder->getName();
         $this->email = $builder->getEmail();
         $this->address = $builder->getAddress();
+        // .. Set other attributes
     }
 
     /**
@@ -234,7 +239,7 @@ class User
     }
 }
 ```
-
+**Finally, the Builder class:**
 ```php
 class UserBuilder
 {
@@ -316,3 +321,6 @@ class UserBuilder
     }
 }
 ```
+
+## Summary
+In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if much of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than the Fluent setters.
