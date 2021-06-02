@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Why you need a builder to create your entities and models
+date: 2021-06-02T00:01:38.109Z
 categories: php
 ---
 [Static factories]({% post_url php/2021-05-16-three-advantages-of-using-static-factory-methods-in-php %}) and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a **User** on a social network platform. This class has only three required fields (`$name`, `$email` & `$password`) and a bunch of optional fields with default values, for instance: (`$address`, `$avatar`, `$gender`, `$emailVerifiedAt`, etc...).
@@ -9,7 +10,7 @@ _**As a side note:** this is not my preferred way to design a user entity, but t
 
 Starting from here, I'll explore the practices I previously did or noticed in other developers' code.
 
-## The Laravel Models Taste
+## The Laravel models taste
 Laravel models provide two methods to create a model instance, the most popular `create` method and the less popular `make` method. Both methods are not implemented in the base `Model` class. But Laravel defines a `__call()` and `__callStatic()` methods, it goes handled through them. [Those methods forward the call to a query builder!](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Database/Eloquent/Model.php#L1952)
 
 Finally, we have a model class that has no properties, a parameterless constructor! Everything is injected magically into the class. 
@@ -106,7 +107,7 @@ The telescoping constructor work, but it is hard to write client code when there
 ## Fluent Setters
 Fluent Setters is the PHP way to imitate the [JavaBeans](https://en.wikipedia.org/wiki/JavaBeans) Pattern In which you call a parameterless constructor followed by call to setter methods. It's called fluent because all setter methods return the object instance allowing you to call them in chains.
 
-This pattern has none of the disadvantages of the telescoping constructor pattern. It is easy and easy to read the resulting code:
+This pattern has none of the disadvantages of the telescoping constructor pattern. It makes it easy to create instances, and easy to read the resulting code:
 
 ```php
 $user = new User();
