@@ -323,5 +323,7 @@ class UserBuilder
 }
 ```
 
+**Note:** The previous example uses a parameterless `UserBuilder` constructor, but you should add the required attributes as parameters to confirm creating an object in a valid state.
+
 ## Summary
 In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if much of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than the Fluent setters.
