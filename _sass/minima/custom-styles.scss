@@ -50,3 +50,53 @@
     color: $link-base-color;
   }
 }
+
+//Mailing List Form
+#mc_embed_signup{
+  form{
+    position: relative;
+    #mc_embed_signup_scroll{
+      .mc-field-group{
+        display: flex;
+        label{
+          input{
+            background-color: transparent;
+            border: none;
+            border: 1px solid #9e9e9e;
+            border-radius: 0;
+            outline: none;
+            font-size: 16px;
+            margin: 0 5px 0 0;
+            padding: 7px;
+            -webkit-box-shadow: none;
+            box-shadow: none;
+            -webkit-box-sizing: content-box;
+            box-sizing: content-box;
+            -webkit-transition: border .3s, -webkit-box-shadow .3s;
+            transition: border .3s, -webkit-box-shadow .3s;
+            transition: box-shadow .3s, border .3s;
+            transition: box-shadow .3s, border .3s, -webkit-box-shadow .3s;
+          }
+        }
+        button{
+          text-decoration: none;
+          color: #fff;
+          background-color: $brand-border-color;
+          text-align: center;
+          letter-spacing: .5px;
+          -webkit-transition: background-color .2s ease-out;
+          transition: background-color .2s ease-out;
+          cursor: pointer;
+          outline: 0;
+          border: none;
+          border-radius: 2px;
+          display: inline-block;
+          padding: 0 16px;
+          text-transform: uppercase;
+          vertical-align: middle;
+          -webkit-tap-highlight-color: transparent;
+        }
+      }
+    }
+  }
+}
