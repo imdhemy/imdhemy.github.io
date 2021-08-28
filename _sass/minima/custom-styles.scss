@@ -100,3 +100,35 @@
     }
   }
 }
+
+//About Page starts
+.about {
+  display: flex;
+
+  .about-summary {
+    font-size: 1.5em;
+  }
+
+  section {
+    padding: 5px;
+
+    .about-figure {
+      .author-avatar {
+        box-sizing: border-box;
+        border-radius: 50%;
+        margin-bottom: 3.5px;
+      }
+      text-align: center;
+
+      .caption {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .about-content {
+    text-align: justify;
+    text-justify: newspaper;
+  }
+}
+//About Page ends
