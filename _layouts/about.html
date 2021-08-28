@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<article class="about">
+    <section>
+        <img src="{{ page.image }}" alt="">
+    </section>
+    <section>
+        <header>
+            <h1 class="about-title">{{ page.author | escape }}</h1>
+            <h2 class="about-summary">{{ page.summary | escape }}</h2>
+        </header>
+        <div class="about-content">
+            {{ content }}
+        </div>
+    </section>
+</article>
