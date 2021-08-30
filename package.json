@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Personal blog!",
   "scripts": {
-    "serve": "bundle exec jekyll serve --livereload",
+    "serve": "bundle exec jekyll serve --livereload --open",
     "drafts": "bundle exec jekyll serve --livereload --drafts",
     "doctor": "bundle exec jekyll doctor"
   },
@@ -24,12 +24,5 @@
   "bugs": {
     "url": "https://github.com/imdhemy/imdhemy.github.io/issues"
   },
-  "homepage": "https://github.com/imdhemy/imdhemy.github.io#readme",
-  "devDependencies": {
-    "zx": "^1.6.0"
-  },
-  "dependencies": {
-    "chalk": "^4.1.1",
-    "node-core-lib": "^0.11.11"
-  }
+  "homepage": "https://imdhemy.com"
 }
