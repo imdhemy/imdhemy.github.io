@@ -15,7 +15,11 @@
     "jekyll",
     "blog"
   ],
-  "author": "",
+  "author": {
+    "name": "Mohamad Eldhemy",
+    "email": "imdhemy@gmail.com",
+    "url": "https://imdhemy.com"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/imdhemy/imdhemy.github.io/issues"
