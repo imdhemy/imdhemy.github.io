@@ -1,5 +1,6 @@
 // Placeholder to allow defining custom styles that override everything else.
 // (Use `_sass/minima/custom-variables.scss` to override variable defaults)
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;700&family=Roboto&display=swap');
 
 /**
  * Site header
@@ -30,7 +31,11 @@
 .post-content {
   margin-bottom: $spacing-unit;
 
-  h1, h2, h3, h4, h5, h6 { margin-top: auto;  border-bottom: 1px solid #eaecef; }
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: auto;
+    border-bottom: 1px solid #eaecef;
+    font-family: $headers-font-family;
+  }
 }
 
 /**
@@ -39,6 +44,7 @@
 .post-link {
   display: block;
   @include relative-font-size(1.5);
+  font-family: $headers-font-family;
 
   &,
   &:visited{
