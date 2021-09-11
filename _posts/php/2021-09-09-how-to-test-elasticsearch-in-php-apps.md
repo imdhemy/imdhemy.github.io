@@ -106,6 +106,8 @@ For this part, you don't just need to run your application but also the componen
 Let's create our configuration file. Don't be worry if you didn't use CircleCI before, all you need is to understand the following YAML file.
 
 on `.circleci/config.yml`
+
+{% raw %}
 ```yaml
 # PHP8.0 & ES7.14.0 CircleCI 2.0 configuration file
 #
@@ -146,6 +148,7 @@ jobs:
       - run: composer test #6
 
 ```
+{% endraw %}
 
 I'm using docker images to build my application, `#1` for **PHP8.0** and `#2` for the **Elasticsearch** prebuild image. CircleCI provides other ways to start your machine, but docker 🐳 is super easy to use.
 
