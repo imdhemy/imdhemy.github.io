@@ -6,9 +6,10 @@ categories: php
 ---
 Currently, I'm working on the [Elasticsearch PHP Sugar package][1]. It's a wrapper over the low-level Elasticsearch client that adds [syntactic sugar][2] for PHP developers. I'll publish a blog post once I publish the first release.
 
-One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I'm will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let's start with a short note about the Practical Test Pyramid.
+One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let's start with a short note about the Practical Test Pyramid.
 
 ### Practical Test Pyramid
+![Test Pyramid](/assets/img/test-pyramid.png)
 
 In his book [_Succeeding With Agile_][3]_,_ Mike Cohn came up with the Test Pyramid concept. Test Pyramid tells you to think about different layers of testing. It also tells you how much testing to do on each layer. It consists of three layers from the bottom up:
 
