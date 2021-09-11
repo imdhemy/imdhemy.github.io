@@ -63,7 +63,7 @@ The previous example is provided by the official package maintainers. Besides, I
 $handler = MockHandler::_mockTemplate_('index_document');
 ```
 
-Just provide the template name to the static method, and it will do the rest for you. [The template][6] is a PHP file that returns an array representing the expected client response.
+Just provide the template name to the [static method][13], and it will do the rest for you. [The template][6] is a PHP file that returns an array representing the expected client response.
 
 **Here is an example of a unit test**
 
@@ -207,3 +207,4 @@ Feel free to make a PR of your answers.
 [10]: https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Integration/SearchEngineTest.php#L35
 [11]: https://app.circleci.com/
 [12]: https://github.com/imdhemy/testing-es-in-php
+[13]: https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Utils/MockHandler.php#L45
