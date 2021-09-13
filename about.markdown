@@ -19,7 +19,7 @@ So why a **real-life superhero**? Life is very challenging in any third-world co
 
 I'm the **creator and the maintainer** of the [Laravel in-app purchase](https://imdhemy.com/laravel-iap-docs/) package, besides the two packages used under the hood for Google Play and App Store.
 
-I'm also the **founder** of the [Piscibus](https://github.com/piscibus) open-source organization, where we create the e-creatures of the see. Feel free to request joining us.
+I'm also the **founder** of the [Piscibus](https://github.com/piscibus) open-source organization, where we create the e-creatures of the sea. Feel free to request joining us.
 
 On December, 9th 2020, my son gave birth. He is called **Mohaia**. Good to mention on that day I felt the real meaning of _"Wealth and sons are allurements of the life of this world"_. I wish to be a good father!
 
