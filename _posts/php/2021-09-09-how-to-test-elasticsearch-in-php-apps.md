@@ -60,6 +60,12 @@ $client = $builder->build();
 
 The previous example is provided by the official package maintainers. Besides, I don't like the idea of using JSON files, we may need to override some values or options during the runtime. This is why I created [these Utils][5] to be used as follows:
 
+---
+**[UPDATE: 5 November 2021: 02:21 PM]**
+I published a PHP package with enhanced [Utils to test Elasticsearch][14]. You can use composer to install it.
+
+---
+
 ```php
 $handler = MockHandler::_mockTemplate_('index_document');
 ```
@@ -212,3 +218,4 @@ Feel free to make a PR of your answers.
 [11]: https://app.circleci.com/
 [12]: https://github.com/imdhemy/testing-es-in-php
 [13]: https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Utils/MockHandler.php#L45
+[14]: https://github.com/imdhemy/es-testing-utils
