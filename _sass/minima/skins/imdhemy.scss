@@ -5,6 +5,10 @@ $brand-color-light:     lighten($brand-color, 40%) !default;
 $brand-color-dark:      darken($brand-color, 25%) !default;
 $brand-border-color:    #499bff;
 
+$grey-color: #586072 !default;
+$grey-color-light: lighten($brand-color, 40%) !default;
+$grey-color-dark: darken($brand-color, 25%) !default;
+
 $site-title-color:      $brand-color-dark !default;
 
 $text-color:            #24292e !default;
@@ -27,9 +31,6 @@ $table-border-color:    $border-color-01 !default;
 
 $code-background-color: #F6F8FE;
 
-$grey-color: grey;
-$grey-color-light: grey;
-$grey-color-dark: grey;
 
 /**
  * Code formatting
