@@ -116,4 +116,10 @@ class Singleton
 }
 ```
 
-Laravel container note: it's completely fine to have a single object within your application, but it's not fine to make it impossible to make a second instance.
+## Why Laravel Container is a special singleton class
+If you checked the [Laravel source code](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L29), you will find that the `Application` class extends the `Container` class. The latter is a special singleton implementation. It makes sense to have a single instance of application within your application.
+
+You can easily find the `getInstance` [method on the Container class](https://github.com/laravel/framework/blob/8.x/src/Illuminate/Container/Container.php#L1382-L1389), but if you checked the container constructor, you **will not** find a private constructor. This is why I'm saying that the Laravel Container is a special singleton. 
+
+It's implemented in a way that gains the pros of a Singleton and avoids the cons. Laravel developer are smart enough to realize that _it's completely fine to have a single object within your application, but it's not fine to make it impossible to make a second instance_. 
+
