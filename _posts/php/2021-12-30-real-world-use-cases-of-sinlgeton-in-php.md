@@ -1,7 +1,7 @@
 ---
 layout: post
 title: PHP Real-world use cases of singleton design pattern
-date: 2021-12-30T12:45:00.000Z
+date: 2021-12-30T12:45:00.130Z
 categories: php
 ---
 The singleton pattern insures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don't. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.
