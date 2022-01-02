@@ -27,7 +27,7 @@ url: "https://imdhemy.com" # the base hostname & protocol for your site, e.g. ht
 
 # Build settings
 theme: minima
-#remote_theme: jekyll/minima@2.5-stable
+remote_theme: jekyll/minima
 minima:
   skin: imdhemy
   # generate social links in footer
