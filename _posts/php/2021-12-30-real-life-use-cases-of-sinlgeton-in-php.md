@@ -133,3 +133,11 @@ Let's imagine the situation when a particular part of your application code is m
 As a solution we need to ensure having a single instance of the file resource on our application during manipulation. Actually this is not a singleton class implementation, but it still implies the mathematics definition of a singleton.
 
 Flysystem ships with a default adpater, which is the Local adapter. By default this adapter [uses a lock](https://github.com/thephpleague/flysystem/blob/2.x/src/Local/LocalFilesystemAdapter.php#L87) during writes and updates.
+
+## Summary
+
+Singleton is a creational design pattern, which ensures that only one object of its kind exists and provides a single point of access to it for any other code.
+
+I'd prefer to assign the responsibility of ensure having only one object to another Class or helper, or at least do the same as Laravel developers did, and I'd also avoid hiding the constructor.
+
+It's completely fine to have a single object within your application, but it's not fine to make it impossible to make a second instance.
