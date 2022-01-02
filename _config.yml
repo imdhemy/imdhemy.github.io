@@ -27,7 +27,6 @@ url: "https://imdhemy.com" # the base hostname & protocol for your site, e.g. ht
 
 # Build settings
 theme: minima
-remote_theme: jekyll/minima@minima-next
 minima:
   # generate social links in footer
   social_links:
@@ -42,7 +41,6 @@ minima:
 show_excerpts: false
 plugins:
   - jekyll-feed
-  - jekyll-remote-theme
 permalink: /blog/:categories/:title:output_ext
 
 # Exclude from processing.
