@@ -72,3 +72,10 @@ reading:
   title: "Hooked: How to Build Habit-Forming Products"
   author: "Nir Eyal"
   link: "https://amzn.to/3pLB69d"
+
+nav:
+  - title: Blog
+    path: blog
+
+  - title: About
+    path: about
