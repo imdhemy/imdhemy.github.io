@@ -252,3 +252,11 @@ table {
     border: 1px solid $grey-color-light;
   }
 }
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}

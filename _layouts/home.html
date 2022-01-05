@@ -8,13 +8,30 @@
 <!--{%- include home/header.html -%}-->
 <div class="container mx-auto">
   <header class="flex flex-row">
-    <div class="p-3 pl-0">
-        <a href="/" class="flex justify-start items-center mr-3 hover:no-underline">
+    <!-- Brand start-->
+    <div class="p-5">
+        <a href="/" class="flex justify-start items-center mr-3 hover:no-underline block">
             <img class="w-5 h-5 lg:w-10 lg:h-10" src="/logo.png" alt="{{ site.title }}">
             <span class="font-bold text-xl lg:text-4xl text-black font-sans">{{ site.title }}</span>
         </a>
     </div>
-    <nav class="flex-auto border border-black">Nav</nav>
+    <!-- Brand End -->
+
+    <!-- Navigation menu End -->
+
+    <!-- Mobile Navigation Start -->
+    <div class="flex-auto flex justify-end p-5">
+        <button class="focus:outline-none focus:bg-white block">
+            <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
+        </button>
+    </div>
+    <!-- Mobile Navigation End -->
+
+    <!-- Desktop Navigation Start -->
+    <!-- Desktop Navigation End -->
+
+    <!-- Navigation menu End -->
+
   </header>
 </div>
 
