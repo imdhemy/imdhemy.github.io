@@ -74,8 +74,11 @@ reading:
   link: "https://amzn.to/3pLB69d"
 
 nav:
+  - title: Home
+    path: /
+
   - title: Blog
-    path: blog
+    path: /blog
 
   - title: About
-    path: about
+    path: /about
