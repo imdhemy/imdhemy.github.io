@@ -21,11 +21,10 @@
 
     <!-- Mobile Navigation Start -->
     <div class="flex-auto flex justify-end p-5">
-        <button class="focus:outline-none focus:bg-white block">
+        <button id="nav-controller" class="focus:outline-none focus:bg-white block">
             <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
-            <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="close-outline"></ion-icon>
         </button>
-        <div class="fixed bg-white right-0 bottom-0 left-0 top-64-px">
+        <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 top-64-px hidden">
             <div class="flex h-full justify-center p-10">
                 <ul class="flex flex-col justify-center text-left p-0 m-0">
                     {% for page in site.nav %}
