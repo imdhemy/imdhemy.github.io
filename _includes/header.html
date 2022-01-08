@@ -29,10 +29,19 @@
 
     <!-- Desktop Navigation Start -->
     <div class="hidden lg:block flex-auto flex p-5">
+        {% assign navItemStyle = 'text-xl font-light mobile-nav-link-item nav-item' %}
+        {% assign navItemActiveStyle = 'text-xl font-light mobile-nav-link-item nav-item nav-item-active' %}
         <ul class="flex justify-end text-left p-0 m-0">
             {% for item in site.nav %}
             {% if item.title %}
-                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="{{ item.path }}">{{ item.title }}</a></li>
+                {% assign itemTitle = item.title | downcase  %}
+                {% if itemTitle == page.layout %}
+                    <li class="{{ navItemActiveStyle }}"><a href="{{ item.path }}">{{ item.title }}</a></li>
+                {% elsif page.layout == 'post' and itemTitle == 'blog' %}
+                    <li class="{{ navItemActiveStyle }}"><a href="{{ item.path }}">{{ item.title }}</a></li>
+                {% else %}
+                    <li class="{{ navItemStyle }}"><a href="{{ item.path }}">{{ item.title }}</a></li>
+                {% endif %}
             {% endif %}
             {% endfor %}
         </ul>

@@ -14,7 +14,14 @@
     padding-bottom: 10px;
     border-bottom: 1px solid transparent;
   }
+
   a:hover, a:focus a:active {
+    border-bottom: 1px solid black;
+  }
+}
+
+.nav-item-active {
+  a:link, a:visited, a:hover, a:focus, a:active {
     border-bottom: 1px solid black;
   }
 }
