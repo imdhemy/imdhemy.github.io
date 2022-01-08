@@ -1,8 +1,42 @@
-<header class="site-header" role="banner">
-
-    <div class="wrapper">
-        <a class="site-title" rel="author" href="{{ "/" }}">{{ site.title | escape }}</a>
-        {%- include nav.html -%}
+<header class="flex flex-row">
+    <!-- Brand start-->
+    <div class="p-5">
+        <a href="/" class="flex justify-start items-center mr-3 hover:no-underline block">
+            <img class="w-5 h-5 lg:w-10 lg:h-10" src="/logo.png" alt="{{ site.title }}">
+            <span class="font-bold text-xl lg:text-4xl text-black font-sans">{{ site.title }}</span>
+        </a>
     </div>
-</header>
+    <!-- Brand End -->
 
+    <!-- Mobile Navigation Start -->
+    <div class="flex-auto flex justify-end p-5 lg:hidden">
+        <button id="nav-controller" class="focus:outline-none focus:bg-white block">
+            <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
+        </button>
+        <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 top-64-px hidden">
+            <div class="flex h-full justify-center p-10">
+                <ul class="flex flex-col justify-center text-left p-0 m-0">
+                    {% for item in site.nav %}
+                    {% if item.title %}
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="{{ item.path }}">{{ item.title }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- Mobile Navigation End -->
+
+    <!-- Desktop Navigation Start -->
+    <div class="hidden lg:block flex-auto flex p-5">
+        <ul class="flex justify-end text-left p-0 m-0">
+            {% for item in site.nav %}
+            {% if item.title %}
+                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="{{ item.path }}">{{ item.title }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+    <!-- Desktop Navigation End -->
+
+</header>
