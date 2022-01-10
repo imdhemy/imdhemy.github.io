@@ -20,6 +20,7 @@ const menuHandler = function(event) {
 const showNavMenu = function () {
   document.body.classList.add('overflow-hidden');
   mobileNavMenu.classList.remove('hidden');
+  controller.querySelector('ion-icon').setAttribute('name', 'close-outline');
 }
 
 /**
@@ -28,6 +29,7 @@ const showNavMenu = function () {
 const hideNavMenu = function() {
   document.body.classList.remove('overflow-hidden');
   mobileNavMenu.classList.add('hidden');
+  controller.querySelector('ion-icon').setAttribute('name', 'menu-outline')
 }
 
 /**
