@@ -16,7 +16,7 @@
 </section>
 
 <!-- Welcome section -->
-<section class="bg-blue-100">
+<section class="bg-gray-100">
     <div class="container mx-auto lg:p-0 p-5">
         <div class="lg:flex flex-auto pt-32 lg:pb-32">
             <div class="tracking-widest flex flex-col justify-center">
@@ -28,6 +28,33 @@
             <div class="flex justify-center pt-10 pb-10 lg:flex lg:justify-end lg:p-0">
                 <img class="lg:w-7/12 lg:h-7/12 w-full" src="/assets/img/imdhemy.jpeg" alt="Mohamad Eldhemy">
             </div>
+        </div>
+    </div>
+</section>
+
+<!--Recent blog posts -->
+<section class="pt-16">
+    <div class="container mx-auto p-5 lg:p-0">
+        <h2 class="text-4xl lg:text-5xl tracking-widest pb-10">Recent Blog Posts</h2>
+    </div>
+    <div class="container mx-auto">
+        <div class="grid grid-col-1 lg:grid-cols-3 p-5 lg:p-0 lg:gap-7">
+            {% for post in site.posts limit:3 %}
+            <div class="mb-10">
+                {% if post.thumbnail %}
+                <a href="{{ post.url }}">
+                    <img class="w-full" src="{{ post.thumbnail }}" alt="{{post.title}}">
+                </a>
+                {% endif %}
+                <h3 class="text-3xl font-thin home-post-title text-gray-900"><a href="{{ post.url }}">{{post.title}}</a></h3>
+                <div class="text-sm font-light text-gray-700 pb-5">
+                    {{post.excerpt | strip_html | strip_newlines | truncate: 128}}
+                </div>
+                <div>
+                  <p class="text-xs text-gray-400">{{ post.date | date: "%-d %B %Y" }}</p>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
 </section>
