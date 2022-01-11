@@ -31,8 +31,27 @@
 }
 
 .home-post-title {
-  a:link, a:visited, a:hover, a:focus, a:active {
+  a:link, a:visited {
     color: black;
     text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  a:hover, a:focus, a:active {
+    font-weight: normal;
+    color: rgba(0, 0, 0, 1);
+  }
+}
+
+.footer-social-links {
+  a:link, a:visited {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px solid black;
+    margin-right: 15px;
+  }
+
+  a:hover, a:focus, a:active {
+    border-bottom: 1px solid transparent;
   }
 }

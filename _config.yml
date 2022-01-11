@@ -38,6 +38,15 @@ minima:
     name: Mohamad Eldhemy
     email: "imdhemy@gmail.com"
 
+cairo:
+  social_links:
+    - title: Twitter
+      url: https://twitter.com/imdhemy
+    - title: Github
+      url: https://github.com/imdhemy
+    - title: Linkedin
+      url: https://linkedin.com/in/imdhemy
+
 show_excerpts: false
 plugins:
   - jekyll-feed

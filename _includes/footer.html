@@ -1,37 +1,19 @@
-<footer class="site-footer h-card">
-    <data class="u-url" href="{{ "/" | relative_url }}"></data>
-
-    <div class="wrapper">
-
-        <h2 class="footer-heading">{{ site.title | escape }}</h2>
-
-        <div class="footer-col-wrapper">
-            <div class="footer-col footer-col-1">
-                <ul class="contact-list">
-                    <li class="p-name">
-                        {%- if site.author -%}
-                        {{ site.author | escape }}
-                        {%- else -%}
-                        {{ site.title | escape }}
-                        {%- endif -%}
-                    </li>
-                    {%- if site.email -%}
-                    <li><a class="u-email" href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-                    {%- endif -%}
+<footer class="bg-gray-100">
+    <div class="container mx-auto lg:p-0 p-5">
+        <div class="flex flex-col justify-center pt-24 pb-10 text-lg">
+            <div class="flex-1 text-center">
+                <ul class="footer-social-links p-0 m-0">Let's get together:
+                    {% for social_link in site.cairo.social_links %}
+                    <li class="inline"><a href="{{ social_link.url }}">{{ social_link.title }}</a></li>
+                    {% endfor %}
                 </ul>
             </div>
 
-            <div class="footer-col footer-col-2">
-                {%- include social.html -%}
-            </div>
-
-            <div class="footer-col footer-col-3">
-                <p>{{- site.description | escape -}}</p>
+            <div class="flex-1 text-center mt-10">
+                <p>&copy; 2021 - {{ site.time | date: '%Y' }} imdhemy.com</p>
             </div>
         </div>
-
     </div>
-
 </footer>
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
