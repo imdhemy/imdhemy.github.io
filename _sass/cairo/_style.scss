@@ -55,3 +55,23 @@
     border-bottom: 1px solid transparent;
   }
 }
+
+.post-list-item {
+  a{
+    text-decoration: none;
+  }
+
+  .post-list-item-title {
+    background-color: #159bff;
+
+    a:link, a:visited {
+      color: white;
+      font-weight: bold;
+    }
+  }
+}
+
+.post-list-item:hover {
+  border-color: #159bff;
+  background-color: lighten(#159bff, 42%);
+}
