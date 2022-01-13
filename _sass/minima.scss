@@ -43,6 +43,10 @@ $on-laptop: 800px !default;
   font-size: $base-font-size * $ratio;
 }
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Import partials.
 @import "cairo/base",
 "cairo/layout",
