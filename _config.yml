@@ -50,6 +50,7 @@ cairo:
 show_excerpts: false
 plugins:
   - jekyll-feed
+  - jekyll-postcss-v2
 permalink: /blog/:categories/:title:output_ext
 
 # Exclude from processing.
