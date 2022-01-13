@@ -1,43 +1,28 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your whole blog, values
-# which you are expected to set up once and rarely edit after that. If you find
-# yourself editing this file very often, consider using Jekyll's arguments files
-# feature for the arguments you need to update frequently.
-#
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
-#
-# If you need help with YAML syntax, here are some quick references for you: 
-# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
-# https://learnxinyminutes.com/docs/yaml/
-#
-# Site settings
-# These are used to personalize your new site. If you look in the HTML files,
-# you will see them accessed via {{ site.title }}, {{ site.email }}, and so on.
-# You can execute any custom variable you would like, and they will be accessible
-# in the templates via {{ site.myvariable }}.
-
+# General settings
 title: 'imdhemy'
 email: imdhemy@gmail.com
-description: >- # this means to ignore newlines until "baseurl:"
-  I'm a software-artist and a real-life superhero.
-baseurl: "" # the subpath of your site, e.g. /blog
-url: "https://imdhemy.com" # the base hostname & protocol for your site, e.g. http://example.com
+description: "I'm a software-artist. This is my inner voice."
+baseurl: ""
+url: "https://imdhemy.com"
 
 # Build settings
 theme: minima
-minima:
-  # generate social links in footer
-  social_links:
-    twitter: imdhemy
-    github: imdhemy
-    linkedin: imdhemy
-    instagram: imdhemy
-  author:
-    name: Mohamad Eldhemy
-    email: "imdhemy@gmail.com"
+show_excerpts: false
+plugins:
+  - jekyll-feed
+permalink: /blog/:categories/:title:output_ext
 
+nav:
+  - title: Home
+    path: /
+
+  - title: Blog
+    path: /blog
+
+  - title: About
+    path: /about
+
+# Cairo theme settings
 cairo:
   social_links:
     - title: Twitter
@@ -47,10 +32,6 @@ cairo:
     - title: Linkedin
       url: https://linkedin.com/in/imdhemy
 
-show_excerpts: false
-plugins:
-  - jekyll-feed
-permalink: /blog/:categories/:title:output_ext
 
 # Exclude from processing.
 # The following items will not be processed, by default.
@@ -75,19 +56,3 @@ exclude:
   - blog.mjs
   - yarn.lock
   - package.json
-
-reading:
-  image: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1407112405l/22668729.jpg"
-  title: "Hooked: How to Build Habit-Forming Products"
-  author: "Nir Eyal"
-  link: "https://amzn.to/3pLB69d"
-
-nav:
-  - title: Home
-    path: /
-
-  - title: Blog
-    path: /blog
-
-  - title: About
-    path: /about
