@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>Three advantages of using static factory methods in PHP | imdhemy</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="Three advantages of using static factory methods in PHP" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an example from the Carbon Library." />
+<meta property="og:description" content="Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an example from the Carbon Library." />
+<link rel="canonical" href="https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html" />
+<meta property="og:url" content="https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html" />
+<meta property="og:site_name" content="imdhemy" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-16T06:05:51+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Three advantages of using static factory methods in PHP" />
+<script type="application/ld+json">
+{"description":"Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an example from the Carbon Library.","url":"https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html","@type":"BlogPosting","headline":"Three advantages of using static factory methods in PHP","dateModified":"2021-05-16T06:05:51+00:00","datePublished":"2021-05-16T06:05:51+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
+<body><div class="container mx-auto pt-7 pb-7">
+    <header class="flex flex-row">
+        <!-- Brand start-->
+        <div class="p-5">
+            <a href="/" class="flex justify-start items-center mr-3 hover:no-underline block">
+                <img class="w-5 h-5 lg:w-10 lg:h-10" src="/logo.png" alt="imdhemy">
+                <span class="font-bold text-xl lg:text-4xl text-black font-sans">imdhemy</span>
+            </a>
+        </div>
+        <!-- Brand End -->
+
+        <!-- Mobile Navigation Start -->
+        <div class="flex-auto flex justify-end p-5 lg:hidden">
+            <button id="nav-controller" class="focus:outline-none focus:bg-white block">
+                <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
+            </button>
+            <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 hidden">
+                <div class="flex h-full justify-center p-10">
+                    <ul class="flex flex-col justify-center text-left p-0 m-0">
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/">Home</a></li>
+                        
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/blog">Blog</a></li>
+                        
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/about">About</a></li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation End -->
+
+        <!-- Desktop Navigation Start -->
+        <div class="hidden lg:block flex-auto flex p-5">
+            
+            
+            <ul class="flex justify-end text-left p-0 m-0">
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/">Home</a></li>
+                
+                
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item nav-item-active"><a href="/blog">Blog</a></li>
+                
+                
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/about">About</a></li>
+                
+                
+                
+            </ul>
+        </div>
+        <!-- Desktop Navigation End -->
+    </header>
+</div>
+<main class="container mx-auto lg:w-1/2" aria-label="Content">
+    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Three advantages of using static factory methods in PHP</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2021-05-16T06:05:51+00:00" itemprop="datePublished">May 16, 2021
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an <a href="https://github.com/briannesbitt/Carbon/blob/2.48.0/src/Carbon/Traits/Creator.php#L56:L97">example from the Carbon Library</a>.</p>
+
+<ul>
+  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is instance of the <code class="language-plaintext highlighter-rouge">DateTimeInterface</code>, it calls another private creator method <code class="language-plaintext highlighter-rouge">constructTimezoneFromDateTime</code>.</li>
+  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is a timestamp, it starts another journey with creator methods starting from <code class="language-plaintext highlighter-rouge">createFromTimestampUTC</code>.</li>
+  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is an empty string or is <code class="language-plaintext highlighter-rouge">"now"</code>, it creates a new object of the current time.</li>
+</ul>
+
+<p><strong>If PHP allows constructor overloading, we may have the following constructors:</strong></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Carbon</span>
+<span class="p">{</span>   
+    <span class="cd">/**
+    * Carbon constructor.
+    */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// construct with no params</span>
+    <span class="p">}</span>
+       
+     <span class="cd">/**
+     * Carbon constructor.
+     * @param Timestamp $timestamp
+     */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">Timestamp</span> <span class="nv">$timestamp</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// construct using a timestamp param</span>
+    <span class="p">}</span>
+    
+    <span class="cd">/**
+    * Carbon constructor.
+    * @param DatetimeInterface $datetime
+    */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">DatetimeInterface</span> <span class="nv">$datetime</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// construct from a DateTime</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+    * Carbon constructor.
+    * @param DateTimeInterface $dateTime
+    * @param DateTimeZone $timeZone
+    */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">DateTimeInterface</span> <span class="nv">$dateTime</span><span class="p">,</span> <span class="kt">DateTimeZone</span> <span class="nv">$timeZone</span><span class="p">)</span> 
+    <span class="p">{</span>
+        <span class="c1">// construct from a datetime &amp; timezone</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Other constructors todo...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>On instantiation, the debugger/interpreter will choose the proper constructor to use based on the parameter types, count, and order.</p>
+
+<p>Even If PHP was allowing constructor overloading, I’d go for another technique that should be a part of every programmer’s toolkit as Joshua Bloch mentioned in his book “<a href="https://www.goodreads.com/book/show/34927404-effective-java">Effective Java</a>”. A class can provide a public <em>static factory method</em>, which is simply a static method that returns an instance of the class.</p>
+
+<p>Let me show you another example from the Carbon Library:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$now</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">now</span><span class="p">();</span>
+<span class="nv">$tomorrow</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">tomorrow</span><span class="p">();</span>
+<span class="nv">$y2k</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">create</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// year, month, day, hour, minute</span>
+<span class="nv">$fromDate</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromDate</span><span class="p">(</span><span class="nv">$year</span><span class="p">,</span> <span class="nv">$month</span><span class="p">,</span> <span class="nv">$day</span><span class="p">,</span> <span class="nv">$tz</span><span class="p">);</span>
+<span class="nv">$time</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromTimestamp</span><span class="p">(</span><span class="nb">time</span><span class="p">());</span>
+<span class="nv">$timeFromFormat</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d H'</span><span class="p">,</span> <span class="s1">'1990-09-07 22'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed!</p>
+
+<p>Another Good example is the <code class="language-plaintext highlighter-rouge">Request</code> <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php">class from Symfony</a>, which has a <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php#L258">long list of constructor params</a></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$query</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$request</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$attributes</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$cookies</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$files</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$server</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">$content</span> <span class="o">=</span> <span class="kc">null</span><span class="p">){</span>
+<span class="c1">//</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>They provided a static factory method to instantiate this class <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php#L304">from globals</a>:</p>
+
+<p>You can check a fresh project of Symfony-5 to find the following line in <code class="language-plaintext highlighter-rouge">public/index.php</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$request</span> <span class="o">=</span> <span class="nc">Request</span><span class="o">::</span><span class="nf">createFromGlobals</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>After this quite long introduction, let’s get into the topic. Here are three advantages to consider using static factory methods instead of constructors.</p>
+
+<h2 id="they-have-names">They have names</h2>
+<p>Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic-free constructors besides descriptive easy to remember static factory methods. Consider the following example:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Conversation</span>
+<span class="p">{</span>   
+    <span class="cd">/**
+    * Conversation constructor.
+    * @param ConversationType $type
+    * @param UserCollection $members
+    */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">ConversationType</span> <span class="nv">$type</span><span class="p">,</span> <span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">)</span> 
+    <span class="p">{</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="nv">$type</span><span class="p">;</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">members</span> <span class="o">=</span> <span class="nv">$members</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="cd">/**
+    * creates a one-to-one conversation
+    * @param UserCollection $members
+    * @return static
+    */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">oneToOne</span><span class="p">(</span><span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="nc">ConversationType</span><span class="o">::</span><span class="nf">oneToOne</span><span class="p">(),</span> <span class="nv">$members</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="cd">/**
+    * creates a group conversation
+    * @param UserCollection $members
+     * @return static
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">group</span><span class="p">(</span><span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="nc">ConversationType</span><span class="o">::</span><span class="nf">group</span><span class="p">(),</span> <span class="nv">$members</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>For more explanation, In a chat application, we have two types of conversations, a user can start a one-to-one conversation or a group conversation. The <code class="language-plaintext highlighter-rouge">Conversation</code> constructor accepts a <code class="language-plaintext highlighter-rouge">ConversationType</code> and <code class="language-plaintext highlighter-rouge">UserCollection</code> to instantiate a new conversation object. To make it easier for the client, we provided two static factory methods <code class="language-plaintext highlighter-rouge">oneToOne</code> and <code class="language-plaintext highlighter-rouge">group</code>.</p>
+
+<p>We can solve the same problem through <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a>. Polymorphism may be a good idea for a Conversation instantiation, but it’s not so good for a Value object class, the <code class="language-plaintext highlighter-rouge">ConversationType</code> for instance is a good example for this.</p>
+
+<h2 id="they-can-cache">They can cache</h2>
+<p>Unlike constructors, static factory methods are not required to create a new object each time they are invoked. Consider the Value object class <code class="language-plaintext highlighter-rouge">ConversationType</code> in the previous chat app example. Our chat application allows the user to list all his chat history, suppose the user has 10 conversations in his history, half of them are one-to-one conversations. In this case, if we used the ordinary constructors, we will end with five identical objects of type <code class="language-plaintext highlighter-rouge">ConversationType</code> for the five one-to-one conversations and another five identical objects for the group conversations.</p>
+
+<p>I agree they are lightweight objects, but in other scenarios and applications, we may overload our limited Memory! Back to our example, we only need two different objects of <code class="language-plaintext highlighter-rouge">ConversationType</code> at most!</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="kd">class</span> <span class="nc">ConversationType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">ONE_TO_ONE</span> <span class="o">=</span> <span class="s1">'one_to_one'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">GROUP</span> <span class="o">=</span> <span class="s1">'group'</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">array</span> <span class="nv">$cache</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$type</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$type</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="nv">$type</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">oneToOne</span><span class="p">():</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="nv">$isCached</span> <span class="o">=</span> <span class="k">isset</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">]);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$isCached</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">::</span><span class="nf">cacheOneToOne</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">function</span> <span class="n">cacheOneToOne</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The ability of static factory methods to return the same object from repeated invocations allows classes to maintain strict control over what instances exist at any time. I suggest you check the rarely used within PHP applications <a href="https://refactoring.guru/design-patterns/flyweight">Flyweight</a> pattern after reading this article.</p>
+
+<h2 id="they-form-the-basis-of-service-provider-frameworks">They form the basis of Service provider frameworks</h2>
+
+<p>A service provider framework is a system in which providers implement a <em>service</em>, and the system makes the implementation available to clients, decoupling the clients from the implementation. There are three essential components in a service provider framework:</p>
+
+<ol>
+  <li>A service interface.</li>
+  <li>A provider registration API.</li>
+  <li>A service access API.</li>
+</ol>
+
+<p>Let’s have an example from our beloved framework, <a href="https://laravel.com/docs/8.x/providers">Laravel</a>, it’s official documentation states:</p>
+<blockquote>
+  <p>Service providers are the central place of all Laravel application bootstrapping. Your application, as well as all of Laravel’s core services, are bootstrapped via service providers.</p>
+</blockquote>
+
+<ol>
+  <li>Any Service should extend the abstract class <code class="language-plaintext highlighter-rouge">Illuminate\Support\ServiceProvider</code>. [<strong>Interface^</strong>]</li>
+  <li>All service providers are registered in the config/app.php configuration file. [<strong>Registration^</strong>]</li>
+  <li>First, the register method will be called on all providers, then, once all providers have been registered, the boot method will be called. [<strong>Access^</strong>]</li>
+</ol>
+
+<p>Service providers are responsible for bootstrapping all the framework’s various parts, such as the database, queue, validation, and routing components. Since it configures all the features offered by Laravel, it’s the essential component of your Laravel application.</p>
+
+<p>In a standard laravel request, Laravel bootstrap an <a href="https://github.com/laravel/laravel/blob/8.x/public/index.php#L47">Application instance</a>, which in turn invokes the <code class="language-plaintext highlighter-rouge">register</code> methods of the <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L177">base service providers</a> including:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Illuminate\Events\EventServiceProvider</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Illuminate\Log\LogServiceProvider</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Illuminate\Routing\RoutingServiceProvider</code></li>
+</ul>
+
+<p>In the same way, laravel allows you to add service providers as much as your application requires!</p>
+
+<h2 id="summary">Summary</h2>
+<p>In summary, static factory methods and public constructors both have their uses, and it pays to understand their relative merits. Firstly, think about the best fit <a href="https://refactoring.guru/design-patterns/creational-patterns">creational design pattern</a> to use, secondly consider using a static factory method, lastly, write clean logic free public constructors.</p>
+
+
+  </div><a class="u-url" href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html" hidden></a>
+</article>
+
+</main><footer class="bg-gray-100">
+    <div class="container mx-auto lg:p-0 p-5">
+        <div class="flex flex-col justify-center pt-10 pb-10 text-lg">
+            <div class="flex-1 text-center">
+                <p>Let's get together</p>
+                <ul class="footer-social-links p-0 m-0">
+                    
+                    <li class="inline"><a href="https://twitter.com/imdhemy">Twitter</a></li>
+                    
+                    <li class="inline"><a href="https://github.com/imdhemy">Github</a></li>
+                    
+                    <li class="inline"><a href="https://linkedin.com/in/imdhemy">Linkedin</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="flex-1 text-center mt-10">
+                <p>&copy; 2021 - 2022 imdhemy.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://imdhemy.com/assets/js/script.js"></script>
+</body>
+
+</html>

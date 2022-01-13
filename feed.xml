@@ -1,0 +1,851 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-01-13T13:47:01+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><entry><title type="html">PHP Real-world use cases of singleton design pattern</title><link href="https://imdhemy.com/blog/php/real-world-use-cases-of-sinlgeton-in-php.html" rel="alternate" type="text/html" title="PHP Real-world use cases of singleton design pattern" /><published>2021-12-30T12:45:00+00:00</published><updated>2021-12-30T12:45:00+00:00</updated><id>https://imdhemy.com/blog/php/real-world-use-cases-of-sinlgeton-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/real-world-use-cases-of-sinlgeton-in-php.html"><![CDATA[<p>The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.</p>
+
+<p><strong>The singleton pattern is responsible for:</strong></p>
+<ul>
+  <li>Creating an instance of its class.</li>
+  <li>Ensures that a class has just a single instance.</li>
+</ul>
+
+<p>This obviously violates the Single Responsibility Principle, as the pattern solves two problems at the same time.</p>
+
+<p>In the following lines, I’ll start by explaining <strong>how to implement a singleton</strong>, then I’ll discuss how <strong>Laravel Container</strong> uses the singleton pattern, Finally, show you how the Local Adapter within <strong>Flysystem</strong> PHP package uses the same concept to manipulate files.</p>
+
+<h2 id="how-to-implement-a-singleton">How to implement a singleton</h2>
+<p>The Singleton class declares the static method <code class="language-plaintext highlighter-rouge">getInstance</code> that returns the same instance of its class. To do so, we declare a static private property that holds the instance. By checking its value we can decide whether to create a new instance or return the already instantiated one. The Singleton <code class="language-plaintext highlighter-rouge">constructor</code> should be hidden from the client code. Calling the <code class="language-plaintext highlighter-rouge">getInstance</code> method should be the only way to create an instance of the Singleton class. Cloning the object should be prevented as well.</p>
+
+<p><strong>I start by writing tests…</strong></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//SingletonTest.php
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">Tests</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Com\Imdhemy\Singleton</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Error</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">SingletonTest</span> <span class="kd">extends</span> <span class="nc">TestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @test
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">it_can_be_instantiated_by_a_static_factory_method</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$instance</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="nc">Singleton</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="nv">$instance</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @test
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">it_must_return_the_same_instance_every_time</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$firstCall</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
+        <span class="nv">$secondCall</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
+
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$firstCall</span><span class="p">,</span> <span class="nv">$secondCall</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @test
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">it_should_not_be_instantiated_through_a_constructor</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">Error</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="k">new</span> <span class="nc">Singleton</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @test
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">it_should_not_be_cloned</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">Error</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+        <span class="nv">$instance</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
+        <span class="k">clone</span> <span class="nv">$instance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p><strong>And here is the Singleton class code…</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//Singleton.php
+<span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">Com\Imdhemy</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">Singleton</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var Singleton|null
+     */</span>
+    <span class="k">private</span> <span class="k">static</span> <span class="o">?</span><span class="nc">Singleton</span> <span class="nv">$instance</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * Singleton constructor
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * Prevents Cloning
+     */</span>
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__clone</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="c1">//</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return Singleton
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">getInstance</span><span class="p">():</span> <span class="kt">Singleton</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$instance</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">static</span><span class="o">::</span><span class="nv">$instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">static</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$instance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="why-laravel-container-is-a-special-singleton-class">Why Laravel Container is a special singleton class</h2>
+<p>If you checked the <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L29">Laravel source code</a>, you will find that the <code class="language-plaintext highlighter-rouge">Application</code> class extends the <code class="language-plaintext highlighter-rouge">Container</code> class. The latter is a special singleton implementation. It makes sense to have a single instance of the application within your application.</p>
+
+<p>You can easily find the <code class="language-plaintext highlighter-rouge">getInstance</code> <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Container/Container.php#L1382-L1389">method on the Container class</a>, but if you checked the container constructor, you <strong>will not</strong> find a private constructor. This is why I’m saying that the Laravel Container is a special singleton. It’s implemented in a way that gains the pros of a Singleton and avoids the cons.</p>
+
+<p>Laravel developers are smart enough to realize that <em>it’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance</em>.</p>
+
+<h2 id="a-single-instance-of-a-file-counts-as-a-singleton">A single instance of a file counts as a singleton</h2>
+
+<p>The term Singleton comes from mathematics. In mathematics, a Singleton, also known as a unit set, is a set with exactly one element. For example, the set <code class="language-plaintext highlighter-rouge">{M}</code> is a singleton containing the element <code class="language-plaintext highlighter-rouge">M</code>.</p>
+
+<p>Let’s imagine the situation when a particular part of your application code is manipulating the contents of a local file, and another part is updating the same file simultaneously! For instance, the first one is adding to the file, and the other one is removing lines from there! Definitely, this will result in inconsistent file contents.</p>
+
+<p>As a solution, we need to ensure having a single instance of the file resource on our application during manipulation. Actually this is not a singleton class implementation, but it still implies the mathematics definition of a singleton.</p>
+
+<p>The wonderful <a href="https://github.com/thephpleague/flysystem">Flysystem</a> PHP package provides one interface to interact with many types of filesystems.</p>
+
+<p>Flysystem ships with a default adapter, which is the Local adapter. By default, this adapter <a href="https://github.com/thephpleague/flysystem/blob/2.x/src/Local/LocalFilesystemAdapter.php#L87">uses a lock</a> during writes and updates.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Singleton is a creational design pattern, which ensures that only one object of its kind exists and provides a single point of access to it for any other code.</p>
+
+<p>I’d prefer to assign the responsibility of ensuring having only one object to another Class or helper or at least do the same as Laravel developers did, and I’d also avoid hiding the constructor.</p>
+
+<p>It’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance.</p>]]></content><author><name></name></author><category term="php" /><summary type="html"><![CDATA[The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.]]></summary></entry><entry><title type="html">How to test Elasticsearch in PHP applications</title><link href="https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html" rel="alternate" type="text/html" title="How to test Elasticsearch in PHP applications" /><published>2021-09-09T00:00:00+00:00</published><updated>2021-09-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps</id><content type="html" xml:base="https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"><![CDATA[<p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
+
+<p>One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let’s start with a short note about the Practical Test Pyramid.</p>
+
+<h3 id="practical-test-pyramid">Practical Test Pyramid</h3>
+<p><img src="/assets/img/test-pyramid.png" alt="Test Pyramid" /></p>
+
+<p>In his book <a href="https://www.goodreads.com/book/show/6707987-succeeding-with-agile"><em>Succeeding With Agile</em></a><em>,</em> Mike Cohn came up with the Test Pyramid concept. Test Pyramid tells you to think about different layers of testing. It also tells you how much testing to do on each layer. It consists of three layers from the bottom up:</p>
+
+<ul>
+  <li>Unit Tests.</li>
+  <li>Service Tests.</li>
+  <li>UI Tests.</li>
+</ul>
+
+<p>The names introduced by Mike Cohn are confusing, at least for me. I’ll go for different naming for each testing layer:</p>
+
+<ul>
+  <li>Unit Tests. It’s the same 😅</li>
+  <li>Integration Tests.</li>
+  <li>End to End Tests.</li>
+</ul>
+
+<p>As a rule of thumb, stick to the pyramid shape to come up with a healthy, fast, and maintainable test suite. Below is a list of tips to follow:</p>
+
+<ol>
+  <li>Write tests with different granularity</li>
+  <li>The more high-level you get the fewer tests you should have</li>
+  <li>Write <em>lots</em> of small and fast <em>unit tests</em>.</li>
+  <li>Write <em>some</em> more coarse-grained tests.</li>
+  <li>Write <em>very few</em> high-level tests that test your application from end to end.</li>
+</ol>
+
+<p>In this blog post, I will cover only the first two types of the Test Pyramid. Unit and Integration Tests.</p>
+
+<h3 id="how-to-unit-test-elasticsearch-in-php">How to Unit Test Elasticsearch in PHP</h3>
+
+<p>Unit tests <a href="https://github.com/elastic/elasticsearch-php/pull/618#issuecomment-323816444">shouldn’t depend on a running cluster</a>, should be mocked out instead. To be more specific the client response should be mocked.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">GuzzleHttp\Ring\Client\MockHandler</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Elasticsearch\ClientBuilder</span><span class="p">;</span>
+
+<span class="c1">// The connection class requires 'body' to be a file stream handle</span>
+<span class="c1">// Depending on what kind of request you do, you may need to set more values here</span>
+<span class="nv">$handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MockHandler</span><span class="p">([</span>
+  <span class="s1">'status'</span> <span class="o">=&gt;</span> <span class="mi">200</span><span class="p">,</span>
+  <span class="s1">'transfer_stats'</span> <span class="o">=&gt;</span> <span class="p">[</span>
+     <span class="s1">'total_time'</span> <span class="o">=&gt;</span> <span class="mi">100</span>
+  <span class="p">],</span>
+  <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'somefile.json'</span><span class="p">),</span>
+  <span class="s1">'effective_url'</span> <span class="o">=&gt;</span> <span class="s1">'localhost'</span>
+<span class="p">]);</span>
+<span class="nv">$builder</span> <span class="o">=</span> <span class="nc">ClientBuilder</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">setHosts</span><span class="p">([</span><span class="s1">'somehost'</span><span class="p">]);</span>
+<span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">setHandler</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
+<span class="nv">$client</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
+<span class="c1">// Do a request and you'll get back the 'body' response above</span>
+</code></pre></div></div>
+
+<p>The previous example is provided by the official package maintainers. Besides, I don’t like the idea of using JSON files, we may need to override some values or options during the runtime. This is why I created <a href="https://github.com/imdhemy/testing-es-in-php/tree/master/tests/Utils">these Utils</a> to be used as follows:</p>
+
+<hr />
+<p><strong>[UPDATE: 5 November 2021: 02:21 PM]</strong>
+I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-testing-utils">Utils to test Elasticsearch</a>. You can use composer to install it.</p>
+
+<hr />
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$handler</span> <span class="o">=</span> <span class="nc">MockHandler</span><span class="o">::</span><span class="nf">_mockTemplate_</span><span class="p">(</span><span class="s1">'index_document'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Just provide the template name to the <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Utils/MockHandler.php#L45">static method</a>, and it will do the rest for you. <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/fixtures/responses/index_document.php">The template</a> is a PHP file that returns an array representing the expected client response.</p>
+
+<p><strong>Here is an example of a unit test</strong></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ElasticSearchEngineTest</span> <span class="kd">extends</span> <span class="nc">UnitTestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @test
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">test_it_can_index_a_document</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$handler</span> <span class="o">=</span> <span class="nc">MockHandler</span><span class="o">::</span><span class="nf">mockTemplate</span><span class="p">(</span><span class="s1">'index_document'</span><span class="p">);</span>
+
+        <span class="nv">$builder</span> <span class="o">=</span> <span class="nc">ClientBuilder</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
+        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">setHandler</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
+
+
+        <span class="nv">$elasticSearchEngine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ElasticSearchEngine</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+        <span class="nv">$document</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">'author'</span> <span class="o">=&gt;</span> <span class="s1">'Albert Einstein'</span><span class="p">,</span>
+            <span class="s1">'quote'</span> <span class="o">=&gt;</span> <span class="s1">'I have no special talents. I am only passionately curious.'</span><span class="p">,</span>
+        <span class="p">];</span>
+
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$elasticSearchEngine</span><span class="o">-&gt;</span><span class="nf">index</span><span class="p">(</span><span class="s1">'quotes_index'</span><span class="p">,</span> <span class="nv">$document</span><span class="p">);</span>
+
+        <span class="nv">$expectedResponse</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTemplate</span><span class="p">(</span><span class="s1">'index_document'</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$expectedResponse</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>As simple as that 🚀</p>
+
+<h3 id="how-to-add-integration-tests-to-elasticsearch-in-php">How to add Integration Tests to Elasticsearch in PHP</h3>
+
+<p>For this part, you don’t just need to run your application but also the component you’re integrating with, Elasticsearch in our case. To automate this process I’m going to use <a href="https://circleci.com/">CircleCI</a>. CircleCI integrates with GitHub and Bitbucket, in our example project we will use Github, but you can do the same on Bitbucket.</p>
+
+<p>Let’s create our configuration file. Don’t be worry if you didn’t use CircleCI before, all you need is to understand the following YAML file.</p>
+
+<p>on <code class="language-plaintext highlighter-rouge">.circleci/config.yml</code></p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PHP8.0 &amp; ES7.14.0 CircleCI 2.0 configuration file</span>
+<span class="c1">#</span>
+<span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">build</span><span class="pi">:</span>
+    <span class="na">docker</span><span class="pi">:</span>
+      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">circleci/php:8.0.10-cli</span> <span class="c1">#1</span>
+      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">docker.elastic.co/elasticsearch/elasticsearch:7.14.0</span> <span class="c1">#2</span>
+        <span class="na">environment</span><span class="pi">:</span> <span class="c1">#3</span>
+          <span class="pi">-</span> <span class="na">transport.host</span><span class="pi">:</span> <span class="s">localhost</span>
+          <span class="pi">-</span> <span class="na">network.host</span><span class="pi">:</span> <span class="s">127.0.0.1</span>
+          <span class="pi">-</span> <span class="na">http.port</span><span class="pi">:</span> <span class="m">9200</span>
+          <span class="pi">-</span> <span class="na">cluster.name</span><span class="pi">:</span> <span class="s">es-cluster</span>
+          <span class="pi">-</span> <span class="na">discovery.type</span><span class="pi">:</span> <span class="s">single-node</span>
+          <span class="pi">-</span> <span class="na">xpack.security.enabled</span><span class="pi">:</span> <span class="no">false</span>
+          <span class="pi">-</span> <span class="na">ES_JAVA_OPTS</span><span class="pi">:</span> <span class="s2">"</span><span class="s">-Xms256m</span><span class="nv"> </span><span class="s">-Xmx256m"</span>
+    <span class="na">steps</span><span class="pi">:</span> <span class="c1">#4</span>
+      <span class="pi">-</span> <span class="s">checkout</span>
+
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">sudo apt update</span>
+
+      <span class="c1"># Download and cache dependencies</span>
+      <span class="pi">-</span> <span class="na">restore_cache</span><span class="pi">:</span>
+          <span class="na">keys</span><span class="pi">:</span>
+            <span class="c1"># "composer.lock" can be used if it is committed to the repo</span>
+            <span class="pi">-</span> <span class="s">v1-dependencies-{{ checksum "composer.json" }}</span>
+            <span class="c1"># fallback to using the latest cache if no exact match is found</span>
+            <span class="pi">-</span> <span class="s">v1-dependencies-</span>
+
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">composer install -n --prefer-dist</span>
+
+      <span class="c1"># Wait for ES startup</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="c1">#5</span>
+          <span class="na">name</span><span class="pi">:</span> <span class="s">Waiting for Elasticsearch</span>
+          <span class="na">command</span><span class="pi">:</span> <span class="s">dockerize --wait http://localhost:9200 -timeout 1m</span>
+      <span class="c1"># run tests with phpunit</span>
+      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">composer test</span> <span class="c1">#6</span>
+
+</code></pre></div></div>
+
+<p>I’m using docker images to build my application, <code class="language-plaintext highlighter-rouge">#1</code> for <strong>PHP8.0</strong> and <code class="language-plaintext highlighter-rouge">#2</code> for the <strong>Elasticsearch</strong> prebuild image. CircleCI provides other ways to start your machine, but docker 🐳 is super easy to use.</p>
+
+<p><code class="language-plaintext highlighter-rouge">#3</code> is the environment variables used for Elasticsearch configuration.</p>
+
+<p>Number <code class="language-plaintext highlighter-rouge">#4</code> shows the build job steps, but give more attention to <code class="language-plaintext highlighter-rouge">#5</code> which allows our test suites to wait for Elasticsearch to be ready. Finally, on <code class="language-plaintext highlighter-rouge">#6</code> we are using composer to run PHPUnit Tests.</p>
+
+<p><strong>Let’s add the first integration test.</strong> For your local development, you can depend on the docker-compose to start Elasticsearch.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up -d
+</code></pre></div></div>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">SearchEngineTest</span> <span class="kd">extends</span> <span class="nc">TestCase</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @test
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">test_get_client_info</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="nc">ClientBuilder</span><span class="o">::</span><span class="nf">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
+        <span class="nv">$searchEngine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ElasticSearchEngine</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
+        <span class="nv">$info</span> <span class="o">=</span> <span class="nv">$searchEngine</span><span class="o">-&gt;</span><span class="nf">info</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'tagline'</span><span class="p">,</span> <span class="nv">$info</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'You Know, for Search'</span><span class="p">,</span> <span class="nv">$info</span><span class="p">[</span><span class="s1">'tagline'</span><span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+<p><strong>Final steps:</strong></p>
+
+<p><img src="/assets/img/circle-ci-es-php-app.png" alt="CircleCi Dashboard" /></p>
+
+<ul>
+  <li>Push your code to GitHub.</li>
+  <li><a href="https://app.circleci.com/">Give CircleCI access</a> to this repository.</li>
+  <li>And watch your integration tests running. 🚀 🔥</li>
+</ul>
+
+<h3 id="summary">Summary</h3>
+
+<p>I have created a <a href="https://github.com/imdhemy/testing-es-in-php">repository of an example application</a>. You can clone it and start playing with code. It requires PHP.8 installed on your host machine. If you prefer PHP7, you can checkout to PHP7.3 branch.</p>
+
+<p>It would be better if completed the exercises I added for you.</p>
+
+<ul>
+  <li>Exercise No.1: <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Unit/ElasticSearchEngineTest.php#L39">Add a unit test for search by a keyword.</a></li>
+  <li>Exercise No.2: <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Integration/SearchEngineTest.php#L26">Add an integration test for indexing a document.</a></li>
+  <li>Exercise No.3: <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Integration/SearchEngineTest.php#L35">Add an integration test for searching for a keyword.</a></li>
+</ul>
+
+<p>Feel free to make a PR of your answers.</p>]]></content><author><name></name></author><category term="php" /><summary type="html"><![CDATA[Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release.]]></summary></entry><entry><title type="html">Why you need a builder to create your entities and models</title><link href="https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html" rel="alternate" type="text/html" title="Why you need a builder to create your entities and models" /><published>2021-06-02T00:01:38+00:00</published><updated>2021-06-02T00:01:38+00:00</updated><id>https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models</id><content type="html" xml:base="https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html"><![CDATA[<p><a href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html">Static factories</a> and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a <strong>User</strong> on a social network platform. This class has only three required fields (<code class="language-plaintext highlighter-rouge">$name</code>, <code class="language-plaintext highlighter-rouge">$email</code> &amp; <code class="language-plaintext highlighter-rouge">$password</code>) and a bunch of optional fields with default values, for instance: (<code class="language-plaintext highlighter-rouge">$address</code>, <code class="language-plaintext highlighter-rouge">$avatar</code>, <code class="language-plaintext highlighter-rouge">$gender</code>, <code class="language-plaintext highlighter-rouge">$emailVerifiedAt</code>, etc…).</p>
+
+<p><em><strong>As a side note:</strong> this is not my preferred way to design a user entity, but this is only here for purpose of clarifying the situation of having a long parameter list.</em></p>
+
+<p>Starting from here, I’ll explore the practices I previously did or noticed in other developers’ code.</p>
+
+<h2 id="the-laravel-models-taste">The Laravel models taste</h2>
+<p>Laravel models provide two methods to create a model instance, the most popular <code class="language-plaintext highlighter-rouge">create</code> method and the less popular <code class="language-plaintext highlighter-rouge">make</code> method. Both methods are not implemented in the base <code class="language-plaintext highlighter-rouge">Model</code> class. But Laravel defines a <code class="language-plaintext highlighter-rouge">__call()</code> and <code class="language-plaintext highlighter-rouge">__callStatic()</code> methods, it goes handled through them. <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Database/Eloquent/Model.php#L1952">Those methods forward the call to a query builder!</a></p>
+
+<p>Finally, we have a model class that has no properties, a parameterless constructor! Everything is injected magically into the class.</p>
+
+<p>The Model class looks like the following snippet:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span> <span class="kd">extends</span> <span class="nc">Model</span>
+<span class="p">{</span>
+    <span class="c1">//</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The client code be like:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">::</span><span class="nf">create</span><span class="p">([</span>
+    <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'John Doe'</span><span class="p">,</span>
+    <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'john@example.com'</span><span class="p">,</span>
+    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="nv">$passwordHash</span>
+<span class="p">]);</span>
+</code></pre></div></div>
+<p><strong>IMHO, this is not so good due to the following reasons!</strong></p>
+
+<ul>
+  <li>Sooner or later, you’ll end up with a model with <strong>an invalid state</strong> or any <a href="https://www.php.net/manual/en/language.oop5.overloading.php#119407">kind of unexpected behavior</a>.</li>
+  <li>The model <strong>has no properties</strong> and even more if you defined the properties to solve this problem the code will break!</li>
+  <li>All properties are treated as public properties which means <strong>no encapsulation</strong> at all!</li>
+  <li>Your <strong>IDE doesn’t understand</strong> that!</li>
+  <li>You need to <strong>check your schema</strong> in a repeated manner to remember the properties and their types.</li>
+  <li>Feel free to add more problems to this list…</li>
+</ul>
+
+<h2 id="a-factory-that-accepts-an-array-of-attributes">A factory that accepts an array of attributes</h2>
+<p>Another technique I noticed some developers use is to provide a factory that receives an array of attributes, then starts a series of <code class="language-plaintext highlighter-rouge">isset</code> calls accompanied by a call to a setter method!</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span> <span class="kd">extends</span> <span class="nc">Entity</span>
+<span class="p">{</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">;</span>
+    
+    <span class="c1">// and so on ...</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setName</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setEmail</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// ... </span>
+    
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">create</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$attributes</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">();</span>
+        
+        <span class="k">if</span><span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]))</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
+        <span class="k">if</span><span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]))</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="nf">setEmail</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]);</span>
+        <span class="c1">// ... Pew Pew Pew</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Just imagine repeating this to cover all the class properties!</p>
+
+<ul>
+  <li>With <strong>parameterless constructors</strong>, you need to handle the required params yourself!</li>
+  <li>Again, have entities with <strong>an invalid state</strong>!</li>
+  <li><strong>Hard to read</strong>, hard to maintain code.</li>
+  <li>Your <strong>IDE doesn’t understand</strong> that!</li>
+</ul>
+
+<h2 id="telescoping-constructor">Telescoping constructor</h2>
+<p>Telescoping constructor means to provide a constructor with only the required parameters, another with a single optional parameter, a third with two optional parameters, and so on.</p>
+
+<p>Since PHP doesn’t allow constructor overloading, PHP developers started to provide a constructor with a full list of properties starting with the required params.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="c1">// .. </span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$password</span><span class="p">,</span> <span class="kt">int</span> <span class="nv">$foo</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="kt">int</span> <span class="nv">$bar</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="kt">?Address</span> <span class="nv">$address</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span> <span class="kt">?File</span> <span class="nv">$avatar</span><span class="o">=</span><span class="kc">null</span><span class="p">,</span> <span class="kt">?DateTime</span> <span class="nv">$createdAt</span><span class="o">=</span><span class="kc">null</span><span class="p">)</span>
+    <span class="p">{</span>
+       <span class="c1">// ..</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>When you want to create an instance, you can pass the shortest list of parameters you want to set. Typically, this constructor invocation will require many parameters that you don’t want to set, but you are forced to pass a value for them.</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">(</span><span class="s1">'John Doe'</span><span class="p">,</span> <span class="s1">'john@example.com'</span><span class="p">,</span> <span class="nv">$passwordHash</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nv">$avatar</span><span class="p">);</span>
+</code></pre></div></div>
+<p>In this case, we’re forced to pass <code class="language-plaintext highlighter-rouge">5, 12, null</code> values which are the default values since the avatar comes after them in order!</p>
+
+<p>The telescoping constructor work, but it is hard to write client code when there are many parameters, and harder still to read it. The reader is left wondering what all those values mean and must carefully count parameters to find out. Umm, what if he swapped the <code class="language-plaintext highlighter-rouge">12</code> and <code class="language-plaintext highlighter-rouge">50</code> since having the same data type, the code won’t break, but it’s an invalid state again!</p>
+
+<h2 id="fluent-setters">Fluent Setters</h2>
+<p>Fluent Setters is the PHP way to imitate the <a href="https://en.wikipedia.org/wiki/JavaBeans">JavaBeans</a> Pattern In which you call a parameterless constructor followed by call to setter methods. It’s called fluent because all setter methods return the object instance allowing you to call them in chains.</p>
+
+<p>This pattern has none of the disadvantages of the telescoping constructor pattern. It makes it easy to create instances, and easy to read the resulting code:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">();</span>
+<span class="nv">$user</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'John Doe'</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="nf">setEmail</span><span class="p">(</span><span class="s1">'john@example.com'</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="nf">setPassword</span><span class="p">(</span><span class="nv">$passwordHash</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="nf">setAddress</span><span class="p">(</span><span class="s1">'Via Lactea'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Unfortunately, the Fluent setters pattern has the following disadvantages:</p>
+<ul>
+  <li>A class with a parameterless constructor is subject to being instantiated in <strong>an invalid state</strong>.</li>
+  <li>Having to create setters for every property leads to an immense quantity of <strong>boilerplate code</strong>.</li>
+</ul>
+
+<h2 id="using-a-builder-is-a-good-solution">Using a builder is a good solution!</h2>
+<p>We can use a form of the <a href="https://refactoring.guru/design-patterns/builder">Builder Pattern</a> which combines the safety of the telescoping constructors and the readability of the fluent setters. Instead of creating the desired object directly, the client calls a static factory method with all the required parameters and gets an object of the builder class which provides setter-like methods for other optional methods. Finally, the client calls a parameterless <code class="language-plaintext highlighter-rouge">build</code> method to get an instance of the required class. Let me show you an example:</p>
+
+<p><strong>I prefer to start with The Client Code:</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
+ * @test
+ */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="n">test_builder_can_create_user</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">::</span><span class="nf">builder</span><span class="p">()</span>
+        <span class="o">-&gt;</span><span class="nf">name</span><span class="p">(</span><span class="s1">'John Doe'</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="nf">email</span><span class="p">(</span><span class="s1">'john@example.com'</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="nf">address</span><span class="p">(</span><span class="s1">'Via Lactea'</span><span class="p">)</span>
+        <span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="nc">User</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
+    <span class="c1">// More assertions...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>Then the Entity class:</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$address</span><span class="p">;</span>
+    
+    <span class="c1">//More attributes...</span>
+    <span class="c1">//...</span>
+
+    <span class="cd">/**
+     * You can use one of the following options for the constructor:
+     * 1. Parameterless constructor &amp; add a static factory method that accepts the UserBuilder as a param
+     * 2. A constructor that accepts the UserBuilder as a param.
+     * User constructor.
+     * @param \App\UserBuilder $builder
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">UserBuilder</span> <span class="nv">$builder</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">getName</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">getEmail</span><span class="p">();</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">getAddress</span><span class="p">();</span>
+        <span class="c1">// .. Set other attributes</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return \App\UserBuilder
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">builder</span><span class="p">():</span> <span class="kt">UserBuilder</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">UserBuilder</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $name
+     * @return User
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setName</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">):</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getEmail</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $email
+     * @return User
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setEmail</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">):</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getAddress</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $address
+     * @return User
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">setAddress</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$address</span><span class="p">):</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span> <span class="o">=</span> <span class="nv">$address</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p><strong>Finally, the Builder class:</strong></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">UserBuilder</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$name</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @var string
+     */</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$address</span><span class="p">;</span>
+
+    <span class="cd">/**
+     * @param string $name
+     * @return $this
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">name</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $email
+     * @return $this
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">email</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @param string $address
+     * @return $this
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">address</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$address</span><span class="p">):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span> <span class="o">=</span> <span class="nv">$address</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getEmail</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return string
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">getAddress</span><span class="p">():</span> <span class="kt">string</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+     * @return \App\User
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">build</span><span class="p">():</span> <span class="kt">User</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">User</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p><strong>Note:</strong> The previous example uses a parameterless <code class="language-plaintext highlighter-rouge">UserBuilder</code> constructor, but you should add the required attributes as parameters to confirm creating an object in a valid state.</p>
+
+<h2 id="summary">Summary</h2>
+<p>In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if much of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than the Fluent setters.</p>]]></content><author><name></name></author><category term="php" /><summary type="html"><![CDATA[Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…).]]></summary></entry><entry><title type="html">Three advantages of using static factory methods in PHP</title><link href="https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html" rel="alternate" type="text/html" title="Three advantages of using static factory methods in PHP" /><published>2021-05-16T06:05:51+00:00</published><updated>2021-05-16T06:05:51+00:00</updated><id>https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html"><![CDATA[<p>Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an <a href="https://github.com/briannesbitt/Carbon/blob/2.48.0/src/Carbon/Traits/Creator.php#L56:L97">example from the Carbon Library</a>.</p>
+
+<ul>
+  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is instance of the <code class="language-plaintext highlighter-rouge">DateTimeInterface</code>, it calls another private creator method <code class="language-plaintext highlighter-rouge">constructTimezoneFromDateTime</code>.</li>
+  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is a timestamp, it starts another journey with creator methods starting from <code class="language-plaintext highlighter-rouge">createFromTimestampUTC</code>.</li>
+  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is an empty string or is <code class="language-plaintext highlighter-rouge">"now"</code>, it creates a new object of the current time.</li>
+</ul>
+
+<p><strong>If PHP allows constructor overloading, we may have the following constructors:</strong></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Carbon</span>
+<span class="p">{</span>   
+    <span class="cd">/**
+    * Carbon constructor.
+    */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="c1">// construct with no params</span>
+    <span class="p">}</span>
+       
+     <span class="cd">/**
+     * Carbon constructor.
+     * @param Timestamp $timestamp
+     */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">Timestamp</span> <span class="nv">$timestamp</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// construct using a timestamp param</span>
+    <span class="p">}</span>
+    
+    <span class="cd">/**
+    * Carbon constructor.
+    * @param DatetimeInterface $datetime
+    */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">DatetimeInterface</span> <span class="nv">$datetime</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// construct from a DateTime</span>
+    <span class="p">}</span>
+
+    <span class="cd">/**
+    * Carbon constructor.
+    * @param DateTimeInterface $dateTime
+    * @param DateTimeZone $timeZone
+    */</span>
+    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">DateTimeInterface</span> <span class="nv">$dateTime</span><span class="p">,</span> <span class="kt">DateTimeZone</span> <span class="nv">$timeZone</span><span class="p">)</span> 
+    <span class="p">{</span>
+        <span class="c1">// construct from a datetime &amp; timezone</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// Other constructors todo...</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>On instantiation, the debugger/interpreter will choose the proper constructor to use based on the parameter types, count, and order.</p>
+
+<p>Even If PHP was allowing constructor overloading, I’d go for another technique that should be a part of every programmer’s toolkit as Joshua Bloch mentioned in his book “<a href="https://www.goodreads.com/book/show/34927404-effective-java">Effective Java</a>”. A class can provide a public <em>static factory method</em>, which is simply a static method that returns an instance of the class.</p>
+
+<p>Let me show you another example from the Carbon Library:</p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$now</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">now</span><span class="p">();</span>
+<span class="nv">$tomorrow</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">tomorrow</span><span class="p">();</span>
+<span class="nv">$y2k</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">create</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// year, month, day, hour, minute</span>
+<span class="nv">$fromDate</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromDate</span><span class="p">(</span><span class="nv">$year</span><span class="p">,</span> <span class="nv">$month</span><span class="p">,</span> <span class="nv">$day</span><span class="p">,</span> <span class="nv">$tz</span><span class="p">);</span>
+<span class="nv">$time</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromTimestamp</span><span class="p">(</span><span class="nb">time</span><span class="p">());</span>
+<span class="nv">$timeFromFormat</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d H'</span><span class="p">,</span> <span class="s1">'1990-09-07 22'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed!</p>
+
+<p>Another Good example is the <code class="language-plaintext highlighter-rouge">Request</code> <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php">class from Symfony</a>, which has a <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php#L258">long list of constructor params</a></p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$query</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$request</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$attributes</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$cookies</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$files</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$server</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">$content</span> <span class="o">=</span> <span class="kc">null</span><span class="p">){</span>
+<span class="c1">//</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>They provided a static factory method to instantiate this class <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php#L304">from globals</a>:</p>
+
+<p>You can check a fresh project of Symfony-5 to find the following line in <code class="language-plaintext highlighter-rouge">public/index.php</code></p>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$request</span> <span class="o">=</span> <span class="nc">Request</span><span class="o">::</span><span class="nf">createFromGlobals</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>After this quite long introduction, let’s get into the topic. Here are three advantages to consider using static factory methods instead of constructors.</p>
+
+<h2 id="they-have-names">They have names</h2>
+<p>Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic-free constructors besides descriptive easy to remember static factory methods. Consider the following example:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Conversation</span>
+<span class="p">{</span>   
+    <span class="cd">/**
+    * Conversation constructor.
+    * @param ConversationType $type
+    * @param UserCollection $members
+    */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">ConversationType</span> <span class="nv">$type</span><span class="p">,</span> <span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">)</span> 
+    <span class="p">{</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="nv">$type</span><span class="p">;</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">members</span> <span class="o">=</span> <span class="nv">$members</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="cd">/**
+    * creates a one-to-one conversation
+    * @param UserCollection $members
+    * @return static
+    */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">oneToOne</span><span class="p">(</span><span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="nc">ConversationType</span><span class="o">::</span><span class="nf">oneToOne</span><span class="p">(),</span> <span class="nv">$members</span><span class="p">);</span>
+    <span class="p">}</span>
+    
+    <span class="cd">/**
+    * creates a group conversation
+    * @param UserCollection $members
+     * @return static
+     */</span>
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">group</span><span class="p">(</span><span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">):</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="nc">ConversationType</span><span class="o">::</span><span class="nf">group</span><span class="p">(),</span> <span class="nv">$members</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+<p>For more explanation, In a chat application, we have two types of conversations, a user can start a one-to-one conversation or a group conversation. The <code class="language-plaintext highlighter-rouge">Conversation</code> constructor accepts a <code class="language-plaintext highlighter-rouge">ConversationType</code> and <code class="language-plaintext highlighter-rouge">UserCollection</code> to instantiate a new conversation object. To make it easier for the client, we provided two static factory methods <code class="language-plaintext highlighter-rouge">oneToOne</code> and <code class="language-plaintext highlighter-rouge">group</code>.</p>
+
+<p>We can solve the same problem through <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a>. Polymorphism may be a good idea for a Conversation instantiation, but it’s not so good for a Value object class, the <code class="language-plaintext highlighter-rouge">ConversationType</code> for instance is a good example for this.</p>
+
+<h2 id="they-can-cache">They can cache</h2>
+<p>Unlike constructors, static factory methods are not required to create a new object each time they are invoked. Consider the Value object class <code class="language-plaintext highlighter-rouge">ConversationType</code> in the previous chat app example. Our chat application allows the user to list all his chat history, suppose the user has 10 conversations in his history, half of them are one-to-one conversations. In this case, if we used the ordinary constructors, we will end with five identical objects of type <code class="language-plaintext highlighter-rouge">ConversationType</code> for the five one-to-one conversations and another five identical objects for the group conversations.</p>
+
+<p>I agree they are lightweight objects, but in other scenarios and applications, we may overload our limited Memory! Back to our example, we only need two different objects of <code class="language-plaintext highlighter-rouge">ConversationType</code> at most!</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="kd">class</span> <span class="nc">ConversationType</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">ONE_TO_ONE</span> <span class="o">=</span> <span class="s1">'one_to_one'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">GROUP</span> <span class="o">=</span> <span class="s1">'group'</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">array</span> <span class="nv">$cache</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$type</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$type</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="nv">$type</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">oneToOne</span><span class="p">():</span> <span class="kt">self</span>
+    <span class="p">{</span>
+        <span class="nv">$isCached</span> <span class="o">=</span> <span class="k">isset</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">]);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$isCached</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">self</span><span class="o">::</span><span class="nf">cacheOneToOne</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">];</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">static</span> <span class="k">function</span> <span class="n">cacheOneToOne</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The ability of static factory methods to return the same object from repeated invocations allows classes to maintain strict control over what instances exist at any time. I suggest you check the rarely used within PHP applications <a href="https://refactoring.guru/design-patterns/flyweight">Flyweight</a> pattern after reading this article.</p>
+
+<h2 id="they-form-the-basis-of-service-provider-frameworks">They form the basis of Service provider frameworks</h2>
+
+<p>A service provider framework is a system in which providers implement a <em>service</em>, and the system makes the implementation available to clients, decoupling the clients from the implementation. There are three essential components in a service provider framework:</p>
+
+<ol>
+  <li>A service interface.</li>
+  <li>A provider registration API.</li>
+  <li>A service access API.</li>
+</ol>
+
+<p>Let’s have an example from our beloved framework, <a href="https://laravel.com/docs/8.x/providers">Laravel</a>, it’s official documentation states:</p>
+<blockquote>
+  <p>Service providers are the central place of all Laravel application bootstrapping. Your application, as well as all of Laravel’s core services, are bootstrapped via service providers.</p>
+</blockquote>
+
+<ol>
+  <li>Any Service should extend the abstract class <code class="language-plaintext highlighter-rouge">Illuminate\Support\ServiceProvider</code>. [<strong>Interface^</strong>]</li>
+  <li>All service providers are registered in the config/app.php configuration file. [<strong>Registration^</strong>]</li>
+  <li>First, the register method will be called on all providers, then, once all providers have been registered, the boot method will be called. [<strong>Access^</strong>]</li>
+</ol>
+
+<p>Service providers are responsible for bootstrapping all the framework’s various parts, such as the database, queue, validation, and routing components. Since it configures all the features offered by Laravel, it’s the essential component of your Laravel application.</p>
+
+<p>In a standard laravel request, Laravel bootstrap an <a href="https://github.com/laravel/laravel/blob/8.x/public/index.php#L47">Application instance</a>, which in turn invokes the <code class="language-plaintext highlighter-rouge">register</code> methods of the <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L177">base service providers</a> including:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Illuminate\Events\EventServiceProvider</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Illuminate\Log\LogServiceProvider</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Illuminate\Routing\RoutingServiceProvider</code></li>
+</ul>
+
+<p>In the same way, laravel allows you to add service providers as much as your application requires!</p>
+
+<h2 id="summary">Summary</h2>
+<p>In summary, static factory methods and public constructors both have their uses, and it pays to understand their relative merits. Firstly, think about the best fit <a href="https://refactoring.guru/design-patterns/creational-patterns">creational design pattern</a> to use, secondly consider using a static factory method, lastly, write clean logic free public constructors.</p>]]></content><author><name></name></author><category term="php" /><summary type="html"><![CDATA[Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an example from the Carbon Library.]]></summary></entry><entry><title type="html">Hello World!</title><link href="https://imdhemy.com/blog/generic/hello-world.html" rel="alternate" type="text/html" title="Hello World!" /><published>2021-05-15T17:18:23+00:00</published><updated>2021-05-15T17:18:23+00:00</updated><id>https://imdhemy.com/blog/generic/hello-world</id><content type="html" xml:base="https://imdhemy.com/blog/generic/hello-world.html"><![CDATA[<h1 id="hello-world">Hello world!</h1>
+<p><img src="/assets/img/hello-world.png" alt="My helpful screenshot" /></p>]]></content><author><name></name></author><category term="generic" /><summary type="html"><![CDATA[Hello world!]]></summary></entry></feed>
