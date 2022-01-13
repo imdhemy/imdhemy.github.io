@@ -4,6 +4,7 @@ email: imdhemy@gmail.com
 description: "I'm a software-artist. This is my inner voice."
 baseurl: ""
 url: "https://imdhemy.com"
+author: "Mohamad Eldhemy"
 
 # Build settings
 theme: minima
@@ -12,6 +13,7 @@ plugins:
   - jekyll-feed
   - jekyll-postcss-v2
 permalink: /blog/:categories/:title:output_ext
+highlighter: rouge
 
 nav:
   - title: Home
