@@ -6,6 +6,7 @@
 <title>Why you need a builder to create your entities and models | imdhemy</title>
 <meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="Why you need a builder to create your entities and models" />
+<meta name="author" content="Mohamad Eldhemy" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…)." />
 <meta property="og:description" content="Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…)." />
@@ -17,9 +18,9 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Why you need a builder to create your entities and models" />
 <script type="application/ld+json">
-{"description":"Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…).","url":"https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html","@type":"BlogPosting","headline":"Why you need a builder to create your entities and models","dateModified":"2021-06-02T00:01:38+00:00","datePublished":"2021-06-02T00:01:38+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Mohamad Eldhemy"},"description":"Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…).","url":"https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html","@type":"BlogPosting","headline":"Why you need a builder to create your entities and models","dateModified":"2021-06-02T00:01:38+00:00","datePublished":"2021-06-02T00:01:38+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css?t=2022-01-13-14-12"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
+<link rel="stylesheet" href="/assets/main.css?t=2022-01-13-15-33"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
 <body><div class="container mx-auto pt-7 pb-7">
     <header class="flex flex-row">
         <!-- Brand start-->
@@ -33,7 +34,7 @@
 
         <!-- Mobile Navigation Start -->
         <div class="flex-auto flex justify-end p-5 lg:hidden">
-            <button id="nav-controller" class="focus:outline-none focus:bg-white block">
+            <button id="nav-controller" class="focus:outline-none block">
                 <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
             </button>
             <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 hidden">
@@ -90,18 +91,20 @@
         <!-- Desktop Navigation End -->
     </header>
 </div>
-<main class="container mx-auto lg:w-1/2" aria-label="Content">
-    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
+<main class="container mx-auto lg:w-2/3" aria-label="Content">
+    <header class="container mx-auto p-5 text-center">
     <h1 class="post-title p-name" itemprop="name headline">Why you need a builder to create your entities and models</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-06-02T00:01:38+00:00" itemprop="datePublished">Jun 2, 2021
-      </time></p>
-  </header>
+        <time class="dt-published" datetime="2021-06-02T00:01:38+00:00" itemprop="datePublished">Jun 2, 2021
+        </time>
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Mohamad Eldhemy</span></span>
+    </p>
+</header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p><a href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html">Static factories</a> and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a <strong>User</strong> on a social network platform. This class has only three required fields (<code class="language-plaintext highlighter-rouge">$name</code>, <code class="language-plaintext highlighter-rouge">$email</code> &amp; <code class="language-plaintext highlighter-rouge">$password</code>) and a bunch of optional fields with default values, for instance: (<code class="language-plaintext highlighter-rouge">$address</code>, <code class="language-plaintext highlighter-rouge">$avatar</code>, <code class="language-plaintext highlighter-rouge">$gender</code>, <code class="language-plaintext highlighter-rouge">$emailVerifiedAt</code>, etc…).</p>
+<article class="bg-white rounded-lg drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="p-5 post-content" itemprop="articleBody">
+        <p><a href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html">Static factories</a> and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a <strong>User</strong> on a social network platform. This class has only three required fields (<code class="language-plaintext highlighter-rouge">$name</code>, <code class="language-plaintext highlighter-rouge">$email</code> &amp; <code class="language-plaintext highlighter-rouge">$password</code>) and a bunch of optional fields with default values, for instance: (<code class="language-plaintext highlighter-rouge">$address</code>, <code class="language-plaintext highlighter-rouge">$avatar</code>, <code class="language-plaintext highlighter-rouge">$gender</code>, <code class="language-plaintext highlighter-rouge">$emailVerifiedAt</code>, etc…).</p>
 
 <p><em><strong>As a side note:</strong> this is not my preferred way to design a user entity, but this is only here for purpose of clarifying the situation of having a long parameter list.</em></p>
 
@@ -421,10 +424,10 @@
 <h2 id="summary">Summary</h2>
 <p>In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if much of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than the Fluent setters.</p>
 
-  </div><a class="u-url" href="/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html" hidden></a>
+    </div><a class="u-url" href="/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html" hidden></a>
 </article>
 
-</main><footer class="bg-gray-100">
+</main><footer class="bg-white">
     <div class="container mx-auto lg:p-0 p-5">
         <div class="flex flex-col justify-center pt-10 pb-10 text-lg">
             <div class="flex-1 text-center">
@@ -449,7 +452,7 @@
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://imdhemy.com/assets/js/script.js?v=2022-01-13-14-12"></script>
+<script src="https://imdhemy.com/assets/js/script.js?v=2022-01-13-15-33"></script>
 </body>
 
 </html>

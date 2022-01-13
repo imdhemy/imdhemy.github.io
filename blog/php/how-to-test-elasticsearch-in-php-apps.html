@@ -6,6 +6,7 @@
 <title>How to test Elasticsearch in PHP applications | imdhemy</title>
 <meta name="generator" content="Jekyll v4.2.1" />
 <meta property="og:title" content="How to test Elasticsearch in PHP applications" />
+<meta name="author" content="Mohamad Eldhemy" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release." />
 <meta property="og:description" content="Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release." />
@@ -17,9 +18,9 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to test Elasticsearch in PHP applications" />
 <script type="application/ld+json">
-{"description":"Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release.","url":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html","@type":"BlogPosting","headline":"How to test Elasticsearch in PHP applications","dateModified":"2021-09-09T00:00:00+00:00","datePublished":"2021-09-09T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Mohamad Eldhemy"},"description":"Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release.","url":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html","@type":"BlogPosting","headline":"How to test Elasticsearch in PHP applications","dateModified":"2021-09-09T00:00:00+00:00","datePublished":"2021-09-09T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css?t=2022-01-13-14-12"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
+<link rel="stylesheet" href="/assets/main.css?t=2022-01-13-15-33"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
 <body><div class="container mx-auto pt-7 pb-7">
     <header class="flex flex-row">
         <!-- Brand start-->
@@ -33,7 +34,7 @@
 
         <!-- Mobile Navigation Start -->
         <div class="flex-auto flex justify-end p-5 lg:hidden">
-            <button id="nav-controller" class="focus:outline-none focus:bg-white block">
+            <button id="nav-controller" class="focus:outline-none block">
                 <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
             </button>
             <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 hidden">
@@ -90,18 +91,20 @@
         <!-- Desktop Navigation End -->
     </header>
 </div>
-<main class="container mx-auto lg:w-1/2" aria-label="Content">
-    <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
+<main class="container mx-auto lg:w-2/3" aria-label="Content">
+    <header class="container mx-auto p-5 text-center">
     <h1 class="post-title p-name" itemprop="name headline">How to test Elasticsearch in PHP applications</h1>
     <p class="post-meta">
-      <time class="dt-published" datetime="2021-09-09T00:00:00+00:00" itemprop="datePublished">Sep 9, 2021
-      </time></p>
-  </header>
+        <time class="dt-published" datetime="2021-09-09T00:00:00+00:00" itemprop="datePublished">Sep 9, 2021
+        </time>
+        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">Mohamad Eldhemy</span></span>
+    </p>
+</header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
+<article class="bg-white rounded-lg drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="p-5 post-content" itemprop="articleBody">
+        <p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
 
 <p>One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let’s start with a short note about the Practical Test Pyramid.</p>
 
@@ -305,10 +308,10 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 <p>Feel free to make a PR of your answers.</p>
 
 
-  </div><a class="u-url" href="/blog/php/how-to-test-elasticsearch-in-php-apps.html" hidden></a>
+    </div><a class="u-url" href="/blog/php/how-to-test-elasticsearch-in-php-apps.html" hidden></a>
 </article>
 
-</main><footer class="bg-gray-100">
+</main><footer class="bg-white">
     <div class="container mx-auto lg:p-0 p-5">
         <div class="flex flex-col justify-center pt-10 pb-10 text-lg">
             <div class="flex-1 text-center">
@@ -333,7 +336,7 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://imdhemy.com/assets/js/script.js?v=2022-01-13-14-12"></script>
+<script src="https://imdhemy.com/assets/js/script.js?v=2022-01-13-15-33"></script>
 </body>
 
 </html>
