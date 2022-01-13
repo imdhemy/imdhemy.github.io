@@ -13,7 +13,6 @@ plugins:
   - jekyll-feed
   - jekyll-postcss-v2
 permalink: /blog/:categories/:title:output_ext
-highlighter: rouge
 
 nav:
   - title: Home

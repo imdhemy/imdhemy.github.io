@@ -59,7 +59,7 @@ code {
 
   /* Name */
   .n {
-    color: $nord4;
+    color: $nord7;
   }
 
   /* Name.Attribute */
@@ -283,7 +283,7 @@ code {
   }
 
   /* Comment.Multiline */
-  .cm {
+  .cm, .cd {
     color: $nord3;
   }
 

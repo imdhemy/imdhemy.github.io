@@ -69,14 +69,12 @@ GEM
 
 PLATFORMS
   universal-darwin-21
-  x86_64-linux
 
 DEPENDENCIES
   jekyll (~> 4.2.0)
   jekyll-feed (~> 0.12)
   jekyll-postcss-v2
   minima (~> 2.5)
-  rouge
   tzinfo (~> 1.2)
   tzinfo-arguments
   wdm (~> 0.1.1)
