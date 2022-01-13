@@ -92,6 +92,24 @@
   ol {
     list-style-type: decimal;
   }
+
+  strong {
+    font-weight: 700;
+  }
+
+  img {
+    box-shadow: rgba(184, 194, 215, 0.35) 0 3px 6px 0;
+    border-radius: 0.5em;
+  }
+
+  h1,h2,h3,h4,h5,h6 {
+    cursor: pointer;
+  }
+
+  h1:before, h2:before, h3:before ,h4:before,h5:before,h6:before {
+    content: '#';
+    margin-right: 5px;
+  }
 }
 
 .post-title {
