@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - theme/*
+      - master
 
 jobs:
   jekyll:
