@@ -3,7 +3,7 @@ name: Build and deploy jekyll site
 on:
   push:
     branches:
-      - theme/cairo
+      - master
     paths-ignore:
       - 'Gemfile'
       - 'README.md'
