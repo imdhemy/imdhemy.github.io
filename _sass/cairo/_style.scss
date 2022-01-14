@@ -125,3 +125,7 @@ hr {
     border-radius: 50%;
   }
 }
+
+*, *:focus-within {
+  scroll-behavior: auto !important;
+}
