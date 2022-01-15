@@ -53,5 +53,6 @@ $on-laptop: 800px !default;
 // Import partials.
 @import "cairo/base",
 "cairo/layout",
+"cairo/syntax-highlighting",
 "cairo/home",
 "cairo/style";
