@@ -126,3 +126,6 @@ hr {
   }
 }
 
+html, body, html:focus-within, body:focus-within {
+  scroll-behavior: initial !important;
+}
