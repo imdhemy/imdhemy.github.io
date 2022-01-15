@@ -1,21 +1,21 @@
 /**
  * Syntax highlighting styles
  */
-.highlight {
-  background: #fff;
-  @extend %vertical-rhythm;
-
-  .highlighter-rouge & {
-    background: $nord0;
-  }
-
-  code {
-    background: transparent;
-    color: $nord6;
-  }
-}
-
-code.highlighter-rouge {
-  background: $nord6;
-  color: $nord0;
-}
+//.highlight {
+//  background: #fff;
+//  @extend %vertical-rhythm;
+//
+//  .highlighter-rouge & {
+//    background: $nord0;
+//  }
+//
+//  code {
+//    background: transparent;
+//    color: $nord6;
+//  }
+//}
+//
+//code.highlighter-rouge {
+//  background: $nord6;
+//  color: $nord0;
+//}
