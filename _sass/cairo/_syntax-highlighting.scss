@@ -19,6 +19,11 @@ $nord13: #ebcb8b;
 $nord14: #a3be8c;
 $nord15: #b48ead;
 
+
+.highlight, .highlighter-rouge {
+  scroll-behavior: initial !important;
+}
+
 .highlight {
   @extend %vertical-rhythm;
 
