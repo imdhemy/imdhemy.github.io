@@ -46,43 +46,6 @@ $on-laptop: 800px !default;
   font-size: $base-font-size * $ratio;
 }
 
-// Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
-// Copyright (c) 2016-present Sven Greb <code@svengreb.de>
-
-// Project:    Nord
-// Version:    0.2.0
-// Repository: https://github.com/arcticicestudio/nord
-// License:    MIT
-// References:
-//   http://sass-lang.com
-//   http://sassdoc.com
-
-////
-/// An arctic, north-bluish color palette.
-/// Created for the clean- and minimal flat design pattern to achieve a optimal focus and readability for code syntax
-/// highlighting and UI.
-/// It consists of a total of sixteen, carefully selected, dimmed pastel colors for a eye-comfortable, but yet colorful
-/// ambiance.
-///
-/// @author Arctic Ice Studio <development@arcticicestudio.com>
-////
-
-/// Base component color of "Polar Night".
-///
-/// Used for texts, backgrounds, carets and structuring characters like curly- and square brackets.
-///
-/// @access public
-/// @example scss - SCSS
-///   /* For dark ambiance themes */
-///   .background {
-///     background-color: $nord0;
-///   }
-///   /* For light ambiance themes */
-///   .text {
-///     color: $nord0;
-///   }
-/// @group polarnight
-/// @since 0.1.0
 $nord0: #2e3440;
 
 /// Lighter shade color of the base component color.
