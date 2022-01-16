@@ -15,7 +15,7 @@ layout: default
     </p>
 </header>
 
-<article class="bg-white rounded-lg drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
+<article class="bg-white rounded-lg filter drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="p-5 post-content" itemprop="articleBody">
         {{ content }}
@@ -27,18 +27,24 @@ layout: default
 
     <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
 
-    <div class="lg:flex border-t bg-gray-100 border-gray-300 justify-between p-4 text-lg rounded-br-lg rounded-bl-lg">
-        <p class="text-center border-gray-300">
+    <div class="lg:flex bg-sky-100 border-t-2 border-sky-300 justify-between p-4 text-lg rounded-br-lg rounded-bl-lg">
+        <div class="flex flex-col justify-center">
             {% if page.previous.url %}
-            <a href="{{page.previous.url}}">&larr;{{page.previous.title}}</a>
+           <div class="text-center">
+               <p>Previous Post</p>
+               <a href="{{page.previous.url}}">&larr;{{page.previous.title}}</a>
+           </div>
             {% endif %}
-        </p>
+        </div>
 
-        <p class="text-center">
+        <div class="flex flex-col justify-center">
             {% if page.next.url %}
-            <a class="next" href="{{page.next.url}}">{{page.next.title}}&rarr;</a>
+            <div class="text-center">
+                <p>Next Post</p>
+                <a class="next" href="{{page.next.url}}">{{page.next.title}}&rarr;</a>
+            </div>
             {% endif %}
-        </p>
+        </div>
 
     </div>
 </article>
