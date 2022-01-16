@@ -46,7 +46,7 @@ $on-laptop: 800px !default;
   font-size: $base-font-size * $ratio;
 }
 
-@tailwind base;
+@import "https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/base.css";
 @tailwind components;
 @tailwind utilities;
 
