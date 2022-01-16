@@ -129,3 +129,18 @@ hr {
 html, body, html:focus-within, body:focus-within {
   scroll-behavior: initial !important;
 }
+
+.snippet-controller {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.collapsed-code {
+  max-height: 0;
+  overflow: hidden;
+}
+
+.expanded-code {
+  max-height: initial;
+}
