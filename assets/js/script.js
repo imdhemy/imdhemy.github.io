@@ -94,10 +94,10 @@
   /**
    * Prepends a controller to code container
    * @param element
-   * @param key
    */
-  const prependControllerToCodeContainers = function (element, key) {
+  const prependControllerToCodeContainers = function (element) {
     element.classList.add('collapsed-code');
+    element.querySelector('pre.highlight').classList.remove('highlight');
     const controller = document.createElement('a');
     controller.addEventListener('click', codeSnippetHandler);
     controller.setAttribute('href', '#');
