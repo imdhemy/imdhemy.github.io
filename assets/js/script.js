@@ -44,6 +44,7 @@
    * @returns {boolean}
    */
   const isMobile = () => {
+    return false;
     return window.innerWidth <= 800 ;
   }
 
