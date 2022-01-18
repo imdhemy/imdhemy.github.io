@@ -9,7 +9,7 @@ Well, It's not about Coronavirus pandemic this time 😷. [Moisés Belchín Mart
 
 There's a reason for optimism about your own code because you wrote it, it works, and you did your best following the best practices of clean code, but is that enough to merge and release this code? TBH, No!
 
-Moi doesn't mean the quantity, but actually he meant the quality of tests we wrote to avoid the [technical debt](https://www.atlassian.com/agile/software-development/technical-debt) as much as possible by having a strict definition of Done. In this article, I'm discussing the metrics of code coverage, are they reliable enough? de we really need more tests?
+Moi doesn't mean the quantity, but actually he meant the quality of tests we wrote to avoid the [technical debt](https://www.atlassian.com/agile/software-development/technical-debt) as much as possible by having a strict definition of Done. In this article, I'm discussing the metrics of code coverage, are they reliable enough? de we really need more tests? What makes a successful test suite?
 
 ## What is the goal of unit testing?
 
