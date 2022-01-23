@@ -19,7 +19,7 @@ As per wikipedia, the idea that software eventually rots as it is changed is cal
 
 Software entropy is tied to the notion of change and has no meaning in a static system. If there is no intent to alter the system, we cannot speak of its entropy. One more idea to put in mind, when software entropy overwhelms a project, the project freezes!
 
-Tests help overturn this tendency. They act as a safety net. Tests help make sure the existing functionality works, even after you introduce new features or refactor the code to better fit new requirements. Besides, it helps have a well-designed software.
+Tests act as a safety net. Tests help make sure the existing functionality works, even after you introduce new features or refactor the code to better fit new requirements. Besides, it helps have a well-designed software.
 
 ## Are coverage metrics enough to measure test suite quality?
 
