@@ -376,7 +376,8 @@ $nord15: #b48ead;
 
   /* Generic.Lineno */
   .gl {
-    color: $nord2;
+    color: $nord3;
+    border-right: 1px solid $nord2;
   }
 
   .cd {
@@ -387,4 +388,14 @@ $nord15: #b48ead;
 code.highlighter-rouge {
   background: $nord6;
   color: $nord0;
+}
+
+code{
+  table {
+    margin-bottom: 0;
+    tbody, tr, td, th{
+      border-color: transparent;
+      padding: 0;
+    }
+  }
 }
