@@ -392,6 +392,9 @@ code.highlighter-rouge {
 
 code{
   table {
+    pre{
+      margin-bottom: 0;
+    }
     margin-bottom: 0;
     tbody, tr, td, th{
       border-color: transparent;
