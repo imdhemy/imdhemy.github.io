@@ -144,3 +144,20 @@ hr {
 *, *:after, *:before {
   scroll-snap-type: none !important;
 }
+
+p.note {
+  background-color: lighten($nord6, 2);
+  border-top: 2px solid $nord9;
+  padding: 10px 10px 10px 46px;
+}
+
+p.note:before{
+  content: '';
+  background-image: url('/assets/img/alert-circle-outline.svg');
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  color: $nord9;
+  margin-left: -36px;
+  margin-right: 10px;
+}
