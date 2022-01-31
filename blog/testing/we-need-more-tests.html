@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.7.1 -->
+<title>We need more tests | imdhemy</title>
+<meta name="generator" content="Jekyll v4.2.1" />
+<meta property="og:title" content="We need more tests" />
+<meta name="author" content="Mohamad Eldhemy" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it." />
+<meta property="og:description" content="Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it." />
+<link rel="canonical" href="https://imdhemy.com/blog/testing/we-need-more-tests.html" />
+<meta property="og:url" content="https://imdhemy.com/blog/testing/we-need-more-tests.html" />
+<meta property="og:site_name" content="imdhemy" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-01-31T06:05:51+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="We need more tests" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Mohamad Eldhemy"},"description":"Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.","url":"https://imdhemy.com/blog/testing/we-need-more-tests.html","@type":"BlogPosting","headline":"We need more tests","dateModified":"2022-01-31T06:05:51+00:00","datePublished":"2022-01-31T06:05:51+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/testing/we-need-more-tests.html"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css?t=2022-01-31-11-47"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
+<body><div class="container mx-auto pt-7 pb-7">
+    <header class="flex flex-row">
+        <!-- Brand start-->
+        <div class="p-5">
+            <a href="/" class="flex justify-start items-center mr-3 hover:no-underline block">
+                <img class="w-5 h-5 lg:w-10 lg:h-10" src="/logo.png" alt="imdhemy">
+                <span class="font-bold text-xl lg:text-4xl text-black font-sans">imdhemy</span>
+            </a>
+        </div>
+        <!-- Brand End -->
+
+        <!-- Mobile Navigation Start -->
+        <div class="flex-auto flex justify-end p-5 lg:hidden">
+            <button id="nav-controller" class="focus:outline-none block">
+                <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
+            </button>
+            <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 hidden">
+                <div class="flex h-full justify-center p-10">
+                    <ul class="flex flex-col justify-center text-left p-0 m-0">
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/">Home</a></li>
+                        
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/blog">Blog</a></li>
+                        
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/about">About</a></li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation End -->
+
+        <!-- Desktop Navigation Start -->
+        <div class="hidden lg:block flex-auto flex p-5">
+            
+            
+            <ul class="flex justify-end text-left p-0 m-0">
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/">Home</a></li>
+                
+                
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item nav-item-active"><a href="/blog">Blog</a></li>
+                
+                
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/about">About</a></li>
+                
+                
+                
+            </ul>
+        </div>
+        <!-- Desktop Navigation End -->
+    </header>
+</div>
+<main class="container mx-auto lg:w-2/3" aria-label="Content">
+    <header class="container mx-auto p-5 text-center">
+    <h1 class="post-title p-name" itemprop="name headline">We need more tests</h1>
+    <p class="post-meta">
+        <time class="dt-published" datetime="2022-01-31T06:05:51+00:00" itemprop="datePublished">Jan 31, 2022
+        </time>
+        
+        • <span>testing</span>
+        
+    </p>
+</header>
+
+<article class="bg-white rounded-lg filter drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="p-5 post-content" itemprop="articleBody">
+        <p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi), my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.</p>
+
+<p>There’s a reason for optimism about your own code because you wrote it, it works, and you did your best following the best practices of clean code, but is that enough to merge and release this code? TBH, No!</p>
+
+<p>Moi doesn’t mean the quantity, but actually he meant the quality of tests we wrote to avoid the <a href="https://www.atlassian.com/agile/software-development/technical-debt">technical debt</a> as much as possible by having <a href="https://www.linkedin.com/feed/update/urn:li:activity:6886937179793223680?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A6886937179793223680%2C6888937049659854849%29">a strict definition of Done</a>. In this article, I’m discussing the metrics of code coverage, are they reliable enough? de we really need more tests? How to measure a test suite quality? Vamos!</p>
+
+<h2 id="what-is-the-goal-of-unit-testing">What is the goal of unit testing?</h2>
+
+<p>A simple question, yet one that must be addressed! The goal of unit testing is to allow <strong>sustainable growth</strong> of the software project. When you start a new project, you make progress so quickly, and get results with a little slaps on your keyboard. No bad architectural decisions have been made yet. No requirement changes or existing code to worry about. Actually, nothing is dragging you back. Eventually, the development speed slows down, and adding a new feature may break another.</p>
+
+<p>As per wikipedia, the idea that software eventually rots as it is changed is called <strong>Software entropy</strong>. Any code modification leads to an amount of disorder in your code base. Leaving entropy without proper care, such as constant cleaning and refactoring, the system becomes increasingly complex and disorganized.</p>
+
+<p>Software entropy is tied to the notion of change and has no meaning in a static system. If there is no intent to alter the system, we cannot speak of its entropy. One more idea to put in mind, when software entropy overwhelms a project, the project freezes!</p>
+
+<p>Tests act as a safety net. Tests help make sure the existing functionality works, even after you introduce new features or refactor the code to better fit new requirements. Besides, it helps have a well-designed software.</p>
+
+<h2 id="dont-just-throw-more-tests">Don’t just throw more tests</h2>
+
+<p>Not all tests are created equal. Some of them are valuable and contribute a lot to overall software quality. Others don’t. You can’t achieve the goal of unit testing by just throwing more tests at the project. Let’s discuss the <strong>QUANTITY</strong> aspect.</p>
+
+<p><strong>Coverage metrics</strong> are used to show how much source code tests execute. It gives you a percentage from <code class="language-plaintext highlighter-rouge">0%</code> (No source code executed) to <code class="language-plaintext highlighter-rouge">100%</code> (It covers all lines of code).</p>
+
+<p>If a metric shows that is there too little coverage in your code base, say, only <code class="language-plaintext highlighter-rouge">10%</code>. That’s a good indication that you are not testing enough. But the reverse isn’t true: even <code class="language-plaintext highlighter-rouge">100%</code> coverage isn’t a guarantee that you have a good-quality test suite. A test suite that provides high coverage can still be of poor quality.</p>
+
+<p>Consider the following example, using the code coverage as a metric.</p>
+
+<p><strong>Read the code comments:</strong></p>
+
+<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="n">bool</span> <span class="nf">isBig</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">)</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// Not covered with test</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="o">}</span>
+</pre></td></tr></tbody></table></code></pre></figure>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The following test calls the `isBig()` function. </span>
+<span class="c1">// The if condition evaluates to `false`, then it returns false.</span>
+<span class="c1">// This code executes (4) lines out of total (5) lines of code.</span>
+<span class="kd">public</span> <span class="kt">void</span> <span class="nf">Test</span><span class="o">()</span> <span class="o">{</span>
+    <span class="n">bool</span> <span class="n">actual</span> <span class="o">=</span> <span class="n">isBig</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
+    <span class="nc">Assertions</span><span class="o">.</span><span class="na">AssertFalse</span><span class="o">(</span><span class="n">actual</span><span class="o">);</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>With a simple calculation using the code coverage formula:</p>
+
+\[Code\ coverage = \frac{Lines\ of\ code\ executed}{Total\ number\ of\ lines}\]
+
+\[Code\ coverage = \frac{4}{5} = 0.8 = 80\%\]
+
+<p>Now, with the same test, what if we refactored our function to remove the unnecessary if condition:</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">bool</span> <span class="nf">isBig</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">;</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<p>When running our test again, it executes the full lines of code with <code class="language-plaintext highlighter-rouge">100%</code> coverage! The test still verifies the same number of possible outcomes and without any improvement to our test suite, the test coverage percentage raised from <code class="language-plaintext highlighter-rouge">80%</code> to <code class="language-plaintext highlighter-rouge">100%</code>.</p>
+
+<p class="note">
+Having a low test coverage is an indication of a bad test suite, but having a high number tells nothing about the <strong>QUALITY</strong> of the test suite.
+</p>
+
+<p>To enable sustainable project growth, you have to focus on high quality tests. Those are the only type of tests that are worth keeping in the test suite.</p>
+
+<h2 id="how-to-measure-a-test-suite-quality">How to measure a test suite quality?</h2>
+
+<p>The only reliable way to measure a test suite quality is to evaluate each test individually. The point is there is no automated way to see how good your test suite. You have to apply your personal judgement.</p>
+
+<p>The only point in having automated tests is if you constantly use them. All tests should be integrated into the development cycle, you should execute them on every change, even the smallest one.</p>
+
+<p>It’s important to direct your unit testing efforts to the most critical parts of the system and verify the others only briefly or indirectly. In most applications, the most important part is the part that contains the business logic (The Domain Model).</p>
+
+<h2 id="whats-next">What’s next?</h2>
+<p>The only way to achieve the goal of unit testing is to learn how to differentiate between a good and a bad test, and you should be able to refactor the test to make it more valuable.</p>
+
+<p>I’ll discuss testing more and more in the next articles. This series of articles are inspired by a list of books and courses including:</p>
+
+<ul>
+  <li>TDD Tutorial by Laracasts.</li>
+  <li>Unit testing Principles, Practices and Patterns.</li>
+  <li>Effective Unit Testing, a guide for java developers.</li>
+</ul>
+
+<p><strong>Manténganse al tanto</strong></p>
+
+    </div><a class="u-url" href="/blog/testing/we-need-more-tests.html" hidden></a>
+
+    <div class="lg:flex bg-sky-100 border-t-2 border-sky-300 justify-between p-4 text-lg rounded-br-lg rounded-bl-lg">
+        <div class="flex flex-col justify-center mb-4 lg:mb-0">
+            
+           <div class="text-center">
+               <p class="uppercase">Previous Post</p>
+               <a href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html">&larr;PHP Real-world use cases of singleton design pattern</a>
+           </div>
+            
+        </div>
+
+        <div class="flex flex-col justify-center">
+            
+        </div>
+
+    </div>
+</article>
+
+</main><footer class="bg-white">
+    <div class="container mx-auto lg:p-0 p-5">
+        <div class="flex flex-col justify-center pt-10 pb-10 text-lg">
+            <div class="flex-1 text-center">
+                <p>Let's get together</p>
+                <ul class="footer-social-links p-0 m-0">
+                    
+                    <li class="inline"><a href="https://twitter.com/imdhemy">Twitter</a></li>
+                    
+                    <li class="inline"><a href="https://github.com/imdhemy">Github</a></li>
+                    
+                    <li class="inline"><a href="https://linkedin.com/in/imdhemy">Linkedin</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="flex-1 text-center mt-10">
+                <p>&copy; 2021 - 2022 imdhemy.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://imdhemy.com/assets/js/script.js?v=2022-01-31-11-47"></script>
+</body>
+
+</html>
