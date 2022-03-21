@@ -68,3 +68,6 @@ Command Query Separation
 Discipline for Managing Side Effects
 Manage side effects within your code by controlling how and where they occur.  Write functions such that if they change state, they do not return values.  And if they return values, they do not change state.  For example, instead of returning error codes, throw exceptions to indicate a failed state change (such as a database update or user login)
 
+---
+These styles can be mixed. In my own coding style, I favor Inside-Out when possible. It helps build more pure code and reduces the coupling with Mocks and Stubs. Because Mocks and Stubs create more code coupling and can end up slowing down development productivity.
+
