@@ -22,4 +22,14 @@ Example: page 25
 customer purchase a product example.
 Success: dec. the inventory level.
 
+The Classical take
+It is not the code that needs to be tested in an isolated manner. Instead, unit tests themselves should be run in isolation from each other. [Parallel, Sequentially, any order]
+
+Dependencies: shared, private, out-of-process
+
+This take on the isolation entails a much more modest view on the use of mocks and other test doubles, You can still use them, but you normally do that for only those deps. that introduce a shared state between tests, not between classes under tests.
+
+++ Volatile dependency:
+- Requires additional setup and not installed on the machine. (Databases, APIs)
+- Non-deterministic behaviour, (Random number generator)
 
