@@ -33,3 +33,15 @@ This take on the isolation entails a much more modest view on the use of mocks a
 - Requires additional setup and not installed on the machine. (Databases, APIs)
 - Non-deterministic behaviour, (Random number generator)
 
+--- 
+- Value objects are immutable
+- They are language agnostic
+
+--- 
+
+Contrasting the classical and london schools of unit testing
+
+Instead of finding ways to test a large, complicated graph of interconnected classes, you should
+focus on not having such a graph of classes in the first place. More often than not, a large class
+graph is a result of a code design problem. 
+
