@@ -45,3 +45,11 @@ Instead of finding ways to test a large, complicated graph of interconnected cla
 focus on not having such a graph of classes in the first place. More often than not, a large class
 graph is a result of a code design problem. 
 
+---
+How to solve TDD problem with classical take.
+
+---
+End-to-End test
+verifies the system from the end-user point of view including all the external services or applications
+this app integrates with.
+
