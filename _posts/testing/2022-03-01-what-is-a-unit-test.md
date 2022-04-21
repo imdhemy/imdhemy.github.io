@@ -53,3 +53,18 @@ End-to-End test
 verifies the system from the end-user point of view including all the external services or applications
 this app integrates with.
 
+---
+“Programmer tests should be sensitive to behaviour changes and insensitive to structural changes. (…) If I care about the order of operations, I’ve designed the system wrong” — Kent Beck (the Detroit School)
+“If I have an object that has behaviour and I’m doing “Tell, Don’t Ask” then I can only test interactions.” — Steve Freeman (the London School)
+
+---
+It’s time to spend some time with your test code. Introduce common fixtures (factories, builders, object mothers) and reuse them across your tests. They should be expressed in the domain language and read well. You want them to tell you a story about how the system sticks together. Maybe you can not only simplify the test setup but the system itself?
+If it’s still too complex, perhaps your module is trying to do too much. Is there a problem with the design? Bring another pair of eyes and review it again.
+The quality of the test code is as important as the quality of the production code. It’s your documentation. Tests must be cheap to write, easy to read, simple to change.
+
+---
+
+Command Query Separation
+Discipline for Managing Side Effects
+Manage side effects within your code by controlling how and where they occur.  Write functions such that if they change state, they do not return values.  And if they return values, they do not change state.  For example, instead of returning error codes, throw exceptions to indicate a failed state change (such as a database update or user login)
+
