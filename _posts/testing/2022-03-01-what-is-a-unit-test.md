@@ -7,15 +7,19 @@ categories: testing
 
 In the previous article we answered the question of "[Do we need more tests?]({{ site.baseurl }}{% link _posts/testing/2022-01-18-we-need-more-tests.md %})". We came across the conclusion of what test quality matters more than quantity. 
 
-In this article, we are going to ...
+In this article, we are going to discuss the different takes of defining **what is a unit test**, as we already answered [Why do we need tests?]({{ site.baseurl }}{% link _posts/testing/2022-01-18-we-need-more-tests.md %}#what-is-the-goal-of-unit-testing).
 
+## Unit Test Definition
 
+As per wikipedia:
 
-Classical and London Schools of unit testing.
-Unit Test:
-- Verify a small piece of code. 
-- Do it quickly.
-- Do in an isolated manner. (London vs classic)
+> Unit tests are typically automated tests written and run by software developers to ensure that a section of an application (known as the "unit") meets its design and behaves as intended.
+
+For a unit test, it should have the following three attributes:
+
+- Verify a **small** piece of code. 
+- Does it **quickly**.
+- Does in an **isolated** manner.
 
 The London take
 If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
