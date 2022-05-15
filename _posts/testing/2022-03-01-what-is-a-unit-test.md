@@ -5,11 +5,17 @@ date: 2022-03-1T06:05:51.560Z
 categories: testing
 ---
 
+In the previous article we answered the question of "[Do we need more tests?]({{ site.baseurl }}{% link _posts/testing/2022-01-18-we-need-more-tests.md %})". We came across the conclusion of what test quality matters more than quantity. 
+
+In this article, we are going to ...
+
+
+
 Classical and London Schools of unit testing.
 Unit Test:
 - Verify a small piece of code. 
-- Does it quickly.
-- Does in an isolated manner. (London vs classic)
+- Do it quickly.
+- Do in an isolated manner. (London vs classic)
 
 The London take
 If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
