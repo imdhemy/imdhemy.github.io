@@ -11,17 +11,11 @@ In this article, we are going to discuss the different takes of defining **what 
 
 ## Unit Test Definition
 
-As per wikipedia:
+<p class="note">
+A unit test should verify a small piece of code in isolation.
+</p> 
 
-> Unit tests are typically automated tests written and run by software developers to ensure that a section of an application (known as the "unit") meets its design and behaves as intended.
-
-For a unit test, it should have the following three attributes:
-
-- Verify a **small** piece of code. 
-- Does it **quickly**.
-- Does in an **isolated** manner.
-
-The first two non-controversial. A small piece of code could be a single class or a single function. If your test suite's execution time is good enough to you, it means tests are quick enough. So what about running in an isolated manner?!
+A small piece of code is a single class or a single function, or whatever you can call a unit. A quick verification or a quick unit test is yet another non-controversial attribute of a unit test. If your test suite's execution time is good enough to you, it means tests are quick enough. The different takes starts with the meaning of isolation.
 
 The London take
 If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
