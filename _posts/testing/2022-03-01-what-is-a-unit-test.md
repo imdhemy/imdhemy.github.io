@@ -9,13 +9,13 @@ In the previous article we answered the question of "[Do we need more tests?]({{
 
 In this article, we are going to discuss the different takes of defining **what is a unit test**, as we already answered [Why do we need tests?]({{ site.baseurl }}{% link _posts/testing/2022-01-18-we-need-more-tests.md %}#what-is-the-goal-of-unit-testing).
 
-## Unit Test Definition
-
 <p class="note">
 A unit test should verify a small piece of code in isolation.
 </p> 
 
 A small piece of code is a single class or a single function, or whatever you can call a unit. A quick verification or a quick unit test is yet another non-controversial attribute of a unit test. If your test suite's execution time is good enough to you, it means tests are quick enough. The different takes starts with the meaning of isolation.
+
+When it comes to **isolation** there are two takes, the **London school** vs **Classic school**.
 
 The London take
 If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
