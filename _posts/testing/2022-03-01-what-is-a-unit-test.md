@@ -21,6 +21,8 @@ For a unit test, it should have the following three attributes:
 - Does it **quickly**.
 - Does in an **isolated** manner.
 
+The first two non-controversial. A small piece of code could be a single class or a single function. If your test suite's execution time is good enough to you, it means tests are quick enough. So what about running in an isolated manner?!
+
 The London take
 If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
 
