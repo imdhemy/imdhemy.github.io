@@ -17,47 +17,26 @@ A small piece of code is a single class or a single function, or whatever you ca
 
 When it comes to **isolation** there are two takes, the **London school** vs **Classic school**.
 
-The London take
-If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
+Explaining the two takes is beyond the scope of this article. So, Below is some external article that can give you a clear idea of differences between them. 
 
-PROS
-- u can easily find the error location if the test fails.
-- Splits the object graph. The class under test may depend on other classes that depends on other class and so on. Classes may even introduce a circular dependency.
+- [Test Driven Development Wars](https://medium.com/@adrianbooth/test-driven-development-wars-detroit-vs-london-classicist-vs-mockist-9956c78ae95f)
+- [Classical vs Mockist Testing](https://agilewarrior.wordpress.com/2015/04/18/classical-vs-mockist-testing/)
 
-Example: page 25
-customer purchase a product example.
-Success: dec. the inventory level.
+In summary, for the London (Mockist) take, If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
 
-The Classical take
-It is not the code that needs to be tested in an isolated manner. Instead, unit tests themselves should be run in isolation from each other. [Parallel, Sequentially, any order]
+But for the (Detroit) Classical take, It is not the code that needs to be tested in an isolated manner. Instead, unit tests themselves should be run in isolation from each other.
 
-Dependencies: shared, private, out-of-process
+## Which school should I follow?
 
-This take on the isolation entails a much more modest view on the use of mocks and other test doubles, You can still use them, but you normally do that for only those deps. that introduce a shared state between tests, not between classes under tests.
+**The following ideas are my taste of testing.** 
 
-++ Volatile dependency:
-- Requires additional setup and not installed on the machine. (Databases, APIs)
-- Non-deterministic behaviour, (Random number generator)
+For sure there are some advantages of the London take. For instance, you can easily find the error location if the test fails, as you already mocking all dependencies, so the error is in the unit under test. 
 
---- 
-- Value objects are immutable
-- They are language agnostic
+However, I believe that this style of writing mock-everything unit tests results in a fragile unit tests which does not reflect the real scenarios. Besides, it adds a new task on you shoulder as you should maintain and update all mocks when the real source code changes. Tests that use mocking are more closely linked to the code's implementation and thus are more likely to need maintenance if implementation details change.
 
---- 
+We should mock to our advantage, wherever it makes our tests more manageable. Below are good reasons to mock:
 
-Contrasting the classical and london schools of unit testing
 
-Instead of finding ways to test a large, complicated graph of interconnected classes, you should
-focus on not having such a graph of classes in the first place. More often than not, a large class
-graph is a result of a code design problem. 
-
----
-How to solve TDD problem with classical take.
-
----
-End-to-End test
-verifies the system from the end-user point of view including all the external services or applications
-this app integrates with.
 
 ---
 “Programmer tests should be sensitive to behaviour changes and insensitive to structural changes. (…) If I care about the order of operations, I’ve designed the system wrong” — Kent Beck (the Detroit School)
@@ -76,4 +55,3 @@ Manage side effects within your code by controlling how and where they occur.  W
 
 ---
 These styles can be mixed. In my own coding style, I favor Inside-Out when possible. It helps build more pure code and reduces the coupling with Mocks and Stubs. Because Mocks and Stubs create more code coupling and can end up slowing down development productivity.
-
