@@ -40,6 +40,8 @@ Bob Martin has suggested the following relationship among the different kinds of
 
 <img style="width: 40%; display: block; margin: auto" src="/assets/img/test-doubles.png"  alt="Test doubles"/>
 
+If I truly need a test double, I go to the highest level in the class hierarchy diagram above that will get the job done. In other words, don’t use a mock if a spy will do. Don’t use a spy if a stub will do, etc. This is because the lower you go in the class hierarchy of test doubles, the more knowledge duplication you are creating. (A test that uses a dummy only knows that a collaborator is used in the code under test. A test that uses a mock knows which method on the collaborator is used, how many times it is invoked, and the types of the parameters that are passed).
+
 ---
 “Programmer tests should be sensitive to behaviour changes and insensitive to structural changes. (…) If I care about the order of operations, I’ve designed the system wrong” — Kent Beck (the Detroit School)
 “If I have an object that has behaviour and I’m doing “Tell, Don’t Ask” then I can only test interactions.” — Steve Freeman (the London School)
