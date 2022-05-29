@@ -34,9 +34,11 @@ For sure there are some advantages of the London take. For instance, you can eas
 
 However, I believe that this style of writing mock-everything unit tests results in a fragile unit tests which does not reflect the real scenarios. Besides, it adds a new task on you shoulder as you should maintain and update all mocks when the real source code changes. Tests that use mocking are more closely linked to the code's implementation and thus are more likely to need maintenance if implementation details change.
 
-We should mock to our advantage, wherever it makes our tests more manageable. Below are good reasons to mock:
+It's good to mention that mocking is a sub-type of **Test doubles**, and understanding the notion of test doubles, gives you a good idea when and what to mock. We should mock to our advantage, wherever it makes our tests more manageable.
 
+Bob Martin has suggested the following relationship among the different kinds of test doubles:
 
+<img style="width: 40%; display: block; margin: auto" src="/assets/img/test-doubles.png"  alt="Test doubles"/>
 
 ---
 “Programmer tests should be sensitive to behaviour changes and insensitive to structural changes. (…) If I care about the order of operations, I’ve designed the system wrong” — Kent Beck (the Detroit School)
