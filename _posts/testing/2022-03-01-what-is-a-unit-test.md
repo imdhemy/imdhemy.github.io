@@ -5,7 +5,7 @@ date: 2022-03-1T06:05:51.560Z
 categories: testing
 ---
 
-In the previous article we answered the question of "[Do we need more tests?]({{ site.baseurl }}{% link _posts/testing/2022-01-18-we-need-more-tests.md %})". We came across the conclusion of what test quality matters more than quantity. 
+In the previous article we answered the question of "[Do we need more tests?]({{ site.baseurl }}{% link _posts/testing/2022-01-18-we-need-more-tests.md %})". We came across the conclusion of the test quality matters more than quantity. 
 
 In this article, we are going to discuss the different takes of defining **what is a unit test**, as we already answered [Why do we need tests?]({{ site.baseurl }}{% link _posts/testing/2022-01-18-we-need-more-tests.md %}#what-is-the-goal-of-unit-testing).
 
@@ -17,18 +17,14 @@ A small piece of code is a single class or a single function, or whatever you ca
 
 When it comes to **isolation** there are two takes, the **London school** vs **Classic school**.
 
-Explaining the two takes is beyond the scope of this article. So, Below is some external article that can give you a clear idea of differences between them. 
+Explaining the two takes is beyond the scope of this article. If this sounds new to you, you can check the following articles:
 
 - [Test Driven Development Wars](https://medium.com/@adrianbooth/test-driven-development-wars-detroit-vs-london-classicist-vs-mockist-9956c78ae95f)
 - [Classical vs Mockist Testing](https://agilewarrior.wordpress.com/2015/04/18/classical-vs-mockist-testing/)
 
-In summary, for the London (Mockist) take, If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
+**In summary**, for the London (Mockist) take, If a class has a dependency on another class, or several classes, you need to replace all such dependencies with test doubles. 
 
 But for the (Detroit) Classical take, It is not the code that needs to be tested in an isolated manner. Instead, unit tests themselves should be run in isolation from each other.
-
-## Which school should I follow?
-
-**The following ideas are my taste of testing.** 
 
 For sure there are some advantages of the London take. For instance, you can easily find the error location if the test fails, as you already mocking all dependencies, so the error is in the unit under test. 
 
