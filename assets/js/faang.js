@@ -18,7 +18,7 @@ const dailyChallenge = document.getElementById('faang-daily-challenge').getConte
 
 const days = getDates(new Date(Date.parse('2022-06-01')), new Date().addDays(30));
 
-const durations = [0, 0, 0, 0, 19, 42];
+const durations = [0, 0, 0, 0, 19, 42, 23];
 
 const dailyChallengeChart = new Chart(dailyChallenge, {
     type: 'line',
