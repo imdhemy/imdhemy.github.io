@@ -16,7 +16,10 @@ function getDates(startDate, stopDate) {
 
 const dailyChallenge = document.getElementById('faang-daily-challenge').getContext('2d');
 
-const days = getDates(new Date(Date.parse('2022-06-01')), new Date().addDays(30));
+const days = getDates(
+  new Date(Date.parse('2022-06-01')),
+  new Date(Date.parse('2022-06-30'))
+);
 
 const durations = [0, 0, 0, 0, 19, 42, 23, 5, 62, 67, 27];
 
