@@ -21,7 +21,7 @@ const days = getDates(
   new Date(Date.parse('2022-06-30'))
 );
 
-const durations = [0, 0, 0, 0, 19, 42, 23, 5, 62, 67, 27, 77];
+const durations = [0, 0, 0, 0, 19, 42, 23, 5, 62, 67, 27, 77, 21];
 
 const dailyChallengeChart = new Chart(dailyChallenge, {
     type: 'line',
