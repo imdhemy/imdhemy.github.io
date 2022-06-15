@@ -7,9 +7,9 @@ image: /assets/img/imdhemy.jpeg
 permalink: /about/
 ---
 
-I wasn't planning to become a Software Engineer. I was a medical student at one of the top medical schools in the middle east, [Kasr Alainy](https://en.wikipedia.org/wiki/Qasr_El_Eyni_Hospital).
+I wasn’t planning to become a Software Engineer. I was a medical student at one of the top medical schools in the middle east,  [Kasr Alainy](https://en.wikipedia.org/wiki/Qasr_El_Eyni_Hospital).
 
-In October. 2011 I started to study Computer science. I graduated in 2015 with a Bachelor's degree in computer science, and I was ranked the first in my class.
+In October 2011 I started to study Computer science. I graduated in 2015 with a Bachelor’s degree in computer science and was ranked the first in my class.
 
 It was a hard shift, especially in our oriental society, but I did it!
 
@@ -19,8 +19,10 @@ I'm the **creator and the maintainer** of the [Laravel in-app purchase](https://
 
 I'm also the **founder** of the [Piscibus](https://github.com/piscibus) open-source organization, where we create the e-creatures of the sea. Feel free to request joining us.
 
-On December, 9th 2020, my son gave birth. He is called **Mohaia**. Good to mention on that day I felt the real meaning of _"Wealth and sons are allurements of the life of this world"_. I wish to be a good father!
+On December, 9, 2020, my son was born. He is called Mohaia. Good to mention, on that day I felt the real meaning of _“Wealth and sons are allurements of the life of this world.”_.
 
-My story is to be continued.
+I wish to be a good father!
+
+My story is to be continued..
 
 ~ Dhemy!
