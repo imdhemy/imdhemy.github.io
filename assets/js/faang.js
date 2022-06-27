@@ -14,42 +14,52 @@ function getDates(startDate, stopDate) {
     return dateArray;
 }
 
-const dailyChallenge = document.getElementById('faang-daily-challenge').getContext('2d');
+fetch('assets/js/daily-challenge-data.json').
+  then(async function(res) {
+      const response = await res.json();
+      Object.keys(response).forEach(function(item){
+          const data = response[item];
+          item = item.split('_');
+          draw(item[0], item[1], item[2], item[3] + ' Daily Challenge' ,data);
+      });
+  });
 
-const days = getDates(
-  new Date(Date.parse('2022-06-01')),
-  new Date(Date.parse('2022-06-30'))
-);
-
-const durations = [0, 0, 0, 0, 19, 42, 23, 5, 62, 67, 27, 77, 21, 57, 99, 45, 125, 50, 29, 60, 15, 60, 71, 20, 30];
-
-const dailyChallengeChart = new Chart(dailyChallenge, {
-    type: 'line',
-    data: {
-        labels: days,
-        datasets: [{
-            label: 'June-22 Daily challenge',
-            data: durations,
-            borderColor: 'rgb(21, 155, 255)'
-        }],
-    },
-    options: {
-        scales: {
-            yAxes: {
-                title: {
-                    display: true,
-                    text: 'Minutes',
-                    font: {size: 16}
+function draw(startDate,endDate, id, label ,data) {
+    const days = getDates(
+      new Date(Date.parse(startDate)),
+      new Date(Date.parse(endDate))
+    );
+    
+    const dailyChallenge = document.getElementById(id).getContext('2d');
+    
+    new Chart(dailyChallenge, {
+        type: 'line',
+        data: {
+            labels: days,
+            datasets: [{
+                label: label,
+                data: data,
+                borderColor: 'rgb(21, 155, 255)'
+            }],
+        },
+        options: {
+            scales: {
+                yAxes: {
+                    title: {
+                        display: true,
+                        text: 'Minutes',
+                        font: {size: 16}
+                    },
+                    ticks: {precision: 0}
                 },
-                ticks: {precision: 0}
-            },
-            xAxes: {
-                title: {
-                    display: true,
-                    text: 'Date',
-                    font: {size: 16}
+                xAxes: {
+                    title: {
+                        display: true,
+                        text: 'Date',
+                        font: {size: 16}
+                    }
                 }
             }
-        }
-    },
-});
+        },
+    });
+}
