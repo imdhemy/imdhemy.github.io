@@ -138,3 +138,30 @@ $$ L.H.S = \frac{2k^3 + 9k^2 + 13k + 6}{6} $$
 $$ R.H.S =  \frac{2k^3 + 9k^2 + 13k + 6}{6}$$
 
 $$ R.H.S = L.H.S $$
+
+## Number Progressions
+A progression, which is also known as a sequence, is nothing but a pattern of numbers. For example, `3, 6, 9, 12` is a progression because there is a pattern observed where every number here is obtained by adding 3 to its previous number.
+
+There are four types of the most common progressions.
+
+### Arithmetic Progression
+Arithmetic Progression (AP) is a sequence of numbers where the difference between any two consecutive numbers is constant.
+
+$$ S = \frac{n(a + l)}{2} $$
+
+### Geometric Progression
+Geometric Progression (GP) is a sequence of numbers where the ratio between any two consecutive numbers is constant.
+
+$$ S = \frac{l\times k - a}{k - 1} $$
+
+### Harmonic Progression
+A series of numbers is said to be in harmonic sequence if the reciprocals (the inverse) of all the elements of the sequence form an arithmetic sequence.
+
+For example:
+$$ \sum_{x=1}^{n}{\frac{1}{x}} = 1 + \frac{1}{2} +  \frac{1}{3} + ... + \frac{1}{n}$$
+
+### Fibonacci Progression
+Fibonacci numbers form an interesting sequence of numbers in which each element is obtained by adding two preceding elements and the sequence starts with `0` and `1`. 
+
+Sequence is defined as, 
+$$ F_{0} = 0 $$ and $$ F_{1} = 1 $$ and $$ F_{n} = F_{n-1} + F+{n-2} $$
