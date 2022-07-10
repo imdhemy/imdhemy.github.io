@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-07-10T12:13:57+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">Math Notes about Sum Formulas</title><link href="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html" rel="alternate" type="text/html" title="Math Notes about Sum Formulas" /><published>2022-07-09T00:00:00+00:00</published><updated>2022-07-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas</id><content type="html" xml:base="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html"><![CDATA[<p>I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about <strong>Sum Formulas</strong>.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-07-10T14:12:03+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">Math Notes about Sum Formulas</title><link href="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html" rel="alternate" type="text/html" title="Math Notes about Sum Formulas" /><published>2022-07-09T00:00:00+00:00</published><updated>2022-07-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas</id><content type="html" xml:base="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html"><![CDATA[<p>I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about <strong>Sum Formulas</strong>.</p>
 
 <p class="note">
 Each sum of the form:
@@ -131,7 +131,34 @@ The equation is true for an arbitrary integer <code class="language-plaintext hi
 
 \[R.H.S =  \frac{2k^3 + 9k^2 + 13k + 6}{6}\]
 
-\[R.H.S = L.H.S\]]]></content><author><name>Mohamad Eldhemy</name></author><category term="DSA" /><summary type="html"><![CDATA[I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.]]></summary></entry><entry><title type="html">We need more tests</title><link href="https://imdhemy.com/blog/testing/we-need-more-tests.html" rel="alternate" type="text/html" title="We need more tests" /><published>2022-01-31T06:05:51+00:00</published><updated>2022-01-31T06:05:51+00:00</updated><id>https://imdhemy.com/blog/testing/we-need-more-tests</id><content type="html" xml:base="https://imdhemy.com/blog/testing/we-need-more-tests.html"><![CDATA[<p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi), my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.</p>
+\[R.H.S = L.H.S\]
+
+<h2 id="number-progressions">Number Progressions</h2>
+<p>A progression, which is also known as a sequence, is nothing but a pattern of numbers. For example, <code class="language-plaintext highlighter-rouge">3, 6, 9, 12</code> is a progression because there is a pattern observed where every number here is obtained by adding 3 to its previous number.</p>
+
+<p>There are four types of the most common progressions.</p>
+
+<h3 id="arithmetic-progression">Arithmetic Progression</h3>
+<p>Arithmetic Progression (AP) is a sequence of numbers where the difference between any two consecutive numbers is constant.</p>
+
+\[S = \frac{n(a + l)}{2}\]
+
+<h3 id="geometric-progression">Geometric Progression</h3>
+<p>Geometric Progression (GP) is a sequence of numbers where the ratio between any two consecutive numbers is constant.</p>
+
+\[S = \frac{l\times k - a}{k - 1}\]
+
+<h3 id="harmonic-progression">Harmonic Progression</h3>
+<p>A series of numbers is said to be in harmonic sequence if the reciprocals (the inverse) of all the elements of the sequence form an arithmetic sequence.</p>
+
+<p>For example:
+\(\sum_{x=1}^{n}{\frac{1}{x}} = 1 + \frac{1}{2} +  \frac{1}{3} + ... + \frac{1}{n}\)</p>
+
+<h3 id="fibonacci-progression">Fibonacci Progression</h3>
+<p>Fibonacci numbers form an interesting sequence of numbers in which each element is obtained by adding two preceding elements and the sequence starts with <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code>.</p>
+
+<p>Sequence is defined as, 
+\(F_{0} = 0\) and \(F_{1} = 1\) and \(F_{n} = F_{n-1} + F+{n-2}\)</p>]]></content><author><name>Mohamad Eldhemy</name></author><category term="DSA" /><summary type="html"><![CDATA[I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.]]></summary></entry><entry><title type="html">We need more tests</title><link href="https://imdhemy.com/blog/testing/we-need-more-tests.html" rel="alternate" type="text/html" title="We need more tests" /><published>2022-01-31T06:05:51+00:00</published><updated>2022-01-31T06:05:51+00:00</updated><id>https://imdhemy.com/blog/testing/we-need-more-tests</id><content type="html" xml:base="https://imdhemy.com/blog/testing/we-need-more-tests.html"><![CDATA[<p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi), my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.</p>
 
 <p>There’s a reason for optimism about your own code because you wrote it, it works, and you did your best following the best practices of clean code, but is that enough to merge and release this code? TBH, No!</p>
 
