@@ -113,23 +113,23 @@ $$ R.H.S = \frac{n(n+1)(2n+1)}{6} = \frac{(k+1)(k+2)(2k+3)}{6} $$
 
 So, we can ignore the `6` in the denominator from both sides for now:
 
-$$ \frac{L.H.S}{6} = k(k+1)(2k+1) + 6(k+1)^2 $$
+$$ {L.H.S}\times{6} = k(k+1)(2k+1) + 6(k+1)^2 $$
 
 $$ = (k^2 + k)(2k+1) + 6(k^2+2k+1) $$
 
 $$ = 2k^3 + k^2 + 2k^2 + k + 6k^2 + 12k + 6 $$
 
-$$ \frac{L.H.S}{6} = 2k^3 + 9k^2 + 13k + 6  $$
+$$ {L.H.S}\times{6} = 2k^3 + 9k^2 + 13k + 6  $$
 
 ---
 
-$$ \frac{R.H.S}{6} =  (k+1)(k+2)(2k+3) $$
+$$ {R.H.S}\times{6} =  (k+1)(k+2)(2k+3) $$
 
 $$ = (k^2 + 3k + 2)(2k+3) $$
 
 $$ = 2k^3 + 6k^2 + 3k^2 + 4k + 9k + 6 $$
 
-$$ \frac{R.H.S}{6} = 2k^3 + 9k^2 + 13k + 6 $$
+$$ {R.H.S}\times{6} = 2k^3 + 9k^2 + 13k + 6 $$
 
 ---
 
