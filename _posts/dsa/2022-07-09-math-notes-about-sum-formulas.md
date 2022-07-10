@@ -164,4 +164,4 @@ $$ \sum_{x=1}^{n}{\frac{1}{x}} = 1 + \frac{1}{2} +  \frac{1}{3} + ... + \frac{1}
 Fibonacci numbers form an interesting sequence of numbers in which each element is obtained by adding two preceding elements and the sequence starts with `0` and `1`. 
 
 Sequence is defined as, 
-$$ F_{0} = 0 $$ and $$ F_{1} = 1 $$ and $$ F_{n} = F_{n-1} + F+{n-2} $$
+$$ F_{0} = 0 $$ and $$ F_{1} = 1 $$ and $$ F_{n} = F_{n-1} + F_{n-2} $$
