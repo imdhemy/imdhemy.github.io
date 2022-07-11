@@ -20,7 +20,7 @@
 <script type="application/ld+json">
 {"author":{"@type":"Person","name":"Mohamad Eldhemy"},"description":"I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.","url":"https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html","@type":"BlogPosting","headline":"Math Notes about Sum Formulas","dateModified":"2022-07-09T00:00:00+00:00","datePublished":"2022-07-09T00:00:00+00:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css?t=2022-07-10-17-23"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
+<link rel="stylesheet" href="/assets/main.css?t=2022-07-11-06-36"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
 <body><div class="container mx-auto pt-7 pb-7">
     <header class="flex flex-row">
         <!-- Brand start-->
@@ -174,7 +174,7 @@ The equation is true for an arbitrary integer <code class="language-plaintext hi
 
 \[R.H.S = \frac{n(n + 1)}{2} =  \frac{(k+1)(K + 1 + 1)}{2}\]
 
-\[L.H.S = R.H.S\]
+\[L.H.S = R.H.S \#\]
 
 <h2 id="square-pyramidal-number">Square pyramidal number</h2>
 
@@ -239,7 +239,7 @@ The equation is true for an arbitrary integer <code class="language-plaintext hi
 
 \[R.H.S =  \frac{2k^3 + 9k^2 + 13k + 6}{6}\]
 
-\[R.H.S = L.H.S\]
+\[R.H.S = L.H.S \#\]
 
 <h2 id="number-progressions">Number Progressions</h2>
 <p>A progression, which is also known as a sequence, is nothing but a pattern of numbers. For example, <code class="language-plaintext highlighter-rouge">3, 6, 9, 12</code> is a progression because there is a pattern observed where every number here is obtained by adding 3 to its previous number.</p>
@@ -249,7 +249,57 @@ The equation is true for an arbitrary integer <code class="language-plaintext hi
 <h3 id="arithmetic-progression">Arithmetic Progression</h3>
 <p>Arithmetic Progression (AP) is a sequence of numbers where the difference between any two consecutive numbers is constant.</p>
 
-\[S = \frac{n(a + l)}{2}\]
+<p>For Example: <code class="language-plaintext highlighter-rouge">3, 7, 11, 15</code>, is an AP where the common difference is <code class="language-plaintext highlighter-rouge">4</code>.</p>
+
+<p>For an AP:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">a</code> is the first term.</li>
+  <li><code class="language-plaintext highlighter-rouge">l</code> is the last term.</li>
+  <li><code class="language-plaintext highlighter-rouge">d</code> is the common difference.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">n</code> term could be found as follows: \(a_{n} = a + (n - 1) d\)</li>
+  <li>We can find the <strong>sum</strong> as follows: \(S = \frac{n(a + l)}{2}\)</li>
+</ul>
+
+<p>Let’s proof this formula:</p>
+<p class="note">
+The sum of an arithmetic is 
+
+$$ S = \frac{n(a + l)}{2} $$
+</p>
+
+<p>Suppose \(a_{1}, a_{2}, a_{3}, ..., a_{n}\) be an arithmetic progression whose first term is <code class="language-plaintext highlighter-rouge">a</code> and the common difference is <code class="language-plaintext highlighter-rouge">d</code>.</p>
+
+<p>Then:</p>
+
+\[a_{1} = a\]
+
+\[a_{2} = a + d\]
+
+\[a_{3} = a + 2d\]
+
+\[a_{n} = a + (n - 1) d\]
+
+<hr />
+
+\[S_{n} = a + (a + d) + (a + 2d) + ... + \{a + (n - 3)d\} + \{a + (n - 2)d\} + \{a + (n - 1)d\} \;\;\;\;\;\;\;\; (i)\]
+
+<p>And with a simple trick of reversing the order:</p>
+
+\[S_{n} = \{a + (n - 1)d\} +  \{a + (n - 2)d\} + \{a + (n - 3)d\} + ... +  (a + 2d) + (a + d) + a  \;\;\;\;\;\;\;\; (ii)\]
+
+<p>by adding \((i)\) and \((ii)\)</p>
+
+\[2S_{n} = \{2a + (n-1)d\} + \{2a + (n-1)d\} + ... + \{2a + (n-1)d\}\]
+
+<hr />
+
+\[2S_{n} = n\{2a + (n-1)d\}\]
+
+\[2S_{n} = n\{a + a + (n-1)d\}\]
+
+\[2S_{n} = n(a + l)\]
+
+\[S_{n} = \frac{n(a+l)}{2} \#\]
 
 <h3 id="geometric-progression">Geometric Progression</h3>
 <p>Geometric Progression (GP) is a sequence of numbers where the ratio between any two consecutive numbers is constant.</p>
@@ -315,7 +365,7 @@ The equation is true for an arbitrary integer <code class="language-plaintext hi
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://imdhemy.com/assets/js/script.js?v=2022-07-10-17-23"></script>
+<script src="https://imdhemy.com/assets/js/script.js?v=2022-07-11-06-36"></script>
 </body>
 
 </html>
