@@ -72,7 +72,7 @@ For `n = k + 1`
 
 $$ R.H.S = \frac{n(n + 1)}{2} =  \frac{(k+1)(K + 1 + 1)}{2} $$
 
-$$ L.H.S = R.H.S $$
+$$ L.H.S = R.H.S \# $$
 
 ## Square pyramidal number
 
@@ -137,7 +137,7 @@ $$ L.H.S = \frac{2k^3 + 9k^2 + 13k + 6}{6} $$
     
 $$ R.H.S =  \frac{2k^3 + 9k^2 + 13k + 6}{6}$$
 
-$$ R.H.S = L.H.S $$
+$$ R.H.S = L.H.S \# $$
 
 ## Number Progressions
 A progression, which is also known as a sequence, is nothing but a pattern of numbers. For example, `3, 6, 9, 12` is a progression because there is a pattern observed where every number here is obtained by adding 3 to its previous number.
@@ -147,7 +147,55 @@ There are four types of the most common progressions.
 ### Arithmetic Progression
 Arithmetic Progression (AP) is a sequence of numbers where the difference between any two consecutive numbers is constant.
 
+For Example: `3, 7, 11, 15`, is an AP where the common difference is `4`. 
+
+For an AP:
+- `a` is the first term.
+- `l` is the last term.
+- `d` is the common difference.
+- The `n` term could be found as follows: $$ a_{n} = a + (n - 1) d $$
+- We can find the **sum** as follows: $$ S = \frac{n(a + l)}{2} $$
+
+Let's proof this formula:
+<p class="note">
+The sum of an arithmetic is 
+
 $$ S = \frac{n(a + l)}{2} $$
+</p>
+
+Suppose $$ a_{1}, a_{2}, a_{3}, ..., a_{n} $$ be an arithmetic progression whose first term is `a` and the common difference is `d`.
+
+Then:
+
+$$ a_{1} = a $$
+
+$$ a_{2} = a + d $$
+
+$$ a_{3} = a + 2d $$
+
+$$ a_{n} = a + (n - 1) d $$
+
+---
+
+$$ S_{n} = a + (a + d) + (a + 2d) + ... + \{a + (n - 3)d\} + \{a + (n - 2)d\} + \{a + (n - 1)d\} \;\;\;\;\;\;\;\; (i)$$
+
+And with a simple trick of reversing the order:
+
+$$ S_{n} = \{a + (n - 1)d\} +  \{a + (n - 2)d\} + \{a + (n - 3)d\} + ... +  (a + 2d) + (a + d) + a  \;\;\;\;\;\;\;\; (ii) $$
+
+by adding $$ (i) $$ and $$ (ii) $$
+
+$$ 2S_{n} = \{2a + (n-1)d\} + \{2a + (n-1)d\} + ... + \{2a + (n-1)d\} $$
+
+---
+
+$$ 2S_{n} = n\{2a + (n-1)d\} $$
+
+$$ 2S_{n} = n\{a + a + (n-1)d\} $$
+
+$$ 2S_{n} = n(a + l) $$
+
+$$ S_{n} = \frac{n(a+l)}{2} \# $$
 
 ### Geometric Progression
 Geometric Progression (GP) is a sequence of numbers where the ratio between any two consecutive numbers is constant.
