@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-07-11T06:36:04+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">Math Notes about Sum Formulas</title><link href="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html" rel="alternate" type="text/html" title="Math Notes about Sum Formulas" /><published>2022-07-09T00:00:00+00:00</published><updated>2022-07-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas</id><content type="html" xml:base="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html"><![CDATA[<p>I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about <strong>Sum Formulas</strong>.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-07-11T07:10:44+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">Math Notes about Sum Formulas</title><link href="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html" rel="alternate" type="text/html" title="Math Notes about Sum Formulas" /><published>2022-07-09T00:00:00+00:00</published><updated>2022-07-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas</id><content type="html" xml:base="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html"><![CDATA[<p>I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about <strong>Sum Formulas</strong>.</p>
 
 <p class="note">
 Each sum of the form:
@@ -180,6 +180,43 @@ $$ S = \frac{n(a + l)}{2} $$
 \[S_{n} = \{a + (n - 1)d\} +  \{a + (n - 2)d\} + \{a + (n - 3)d\} + ... +  (a + 2d) + (a + d) + a  \;\;\;\;\;\;\;\; (ii)\]
 
 <p>by adding \((i)\) and \((ii)\)</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Term (i)</th>
+      <th>Term (ii)</th>
+      <th>Sum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>a</td>
+      <td>\(a + (n - 1)d\)</td>
+      <td>\(2a + (n-1)d\)</td>
+    </tr>
+    <tr>
+      <td>a + d</td>
+      <td>\(a + (n - 2)d\)</td>
+      <td>\(2a + (n-1)d\)</td>
+    </tr>
+    <tr>
+      <td>a + 2d</td>
+      <td>\(a + (n - 3)d\)</td>
+      <td>\(2a + (n-1)d\)</td>
+    </tr>
+    <tr>
+      <td>…</td>
+      <td>…</td>
+      <td>…</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td> </td>
+      <td>\(2S_{n} = n\{2a + (n-1)d\}\)</td>
+    </tr>
+  </tbody>
+</table>
 
 \[2S_{n} = \{2a + (n-1)d\} + \{2a + (n-1)d\} + ... + \{2a + (n-1)d\}\]
 
