@@ -404,5 +404,6 @@ code{
 }
 
 mjx-container{
-  overflow: auto;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
