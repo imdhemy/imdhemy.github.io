@@ -4,7 +4,7 @@
   "description": "Personal blog!",
   "scripts": {
     "serve": "bundle exec jekyll serve --livereload --open",
-    "drafts": "bundle exec jekyll serve --livereload --drafts",
+    "drafts": "bundle exec jekyll serve --livereload --drafts --open",
     "doctor": "bundle exec jekyll doctor",
     "theme": "bundle info --path minima"
   },

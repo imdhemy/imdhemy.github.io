@@ -55,7 +55,6 @@ exclude:
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - zx/
-  - blog.mjs
   - yarn.lock
   - package.json
+  - blog.sh
