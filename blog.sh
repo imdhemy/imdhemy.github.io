@@ -26,14 +26,6 @@ file_name=$(date +%Y-%m-%d)-$slug.md
 # publish date example 2021-05-15T17:18:23.973Z
 publish_date=$(date +%Y-%m-%dT%H:%M:%S.%NZ)
 
-# Print arguments
-echo "----------------------------------------------------"
-echo "Creating new blog post with the following arguments:"
-echo "----------------------------------------------------"
-echo "Title: $title"
-echo "Category: $category"
-echo "Draft: $draft"
-
 # Get post stub contents from template and keep formatting
 contents="---
 layout: post
@@ -48,12 +40,21 @@ contents=$(echo "$contents" | sed "s/{{title}}/$title/g")
 contents=$(echo "$contents" | sed "s/{{category}}/$category/g")
 contents=$(echo "$contents" | sed "s/{{publish_date}}/$publish_date/g")
 
-
-## If draft is true, create a draft file in drafts folder
+# File path based on draft status
+file_path=""
 if [ "$draft" == true ]; then
-    mkdir -p ./_drafts/"$category"
-    echo "$contents" > ./_drafts/"$category"/"$file_name"
+    file_path="_drafts/$category/$file_name"
 else
-    mkdir -p ./_posts/"$category"
-    echo "$contents" > ./_posts/"$category"/"$file_name"
+    file_path="_posts/$category/$file_name"
 fi
+
+# Check if file exists
+if [ -f "$file_path" ]; then
+    echo "❌️File already exists"
+    exit 1
+fi
+
+# Create file and write contents
+echo "$contents" > "$file_path"
+
+echo "✅ Created file at $file_path"
