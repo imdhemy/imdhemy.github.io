@@ -40,12 +40,24 @@ contents=$(echo "$contents" | sed "s/{{title}}/$title/g")
 contents=$(echo "$contents" | sed "s/{{category}}/$category/g")
 contents=$(echo "$contents" | sed "s/{{publish_date}}/$publish_date/g")
 
+# File directory based on draft status
+if [ "$draft" == true ]; then
+    file_dir="_drafts/$category"
+else
+    file_dir="_posts/$category"
+fi
+
+# Create directory if it doesn't exist
+if [ ! -d "$file_dir" ]; then
+    mkdir -p "$file_dir"
+fi
+
 # File path based on draft status
 file_path=""
 if [ "$draft" == true ]; then
-    file_path="_drafts/$category/$file_name"
+    file_path="$file_dir/$file_name"
 else
-    file_path="_posts/$category/$file_name"
+    file_path="$file_dir/$category/$file_name"
 fi
 
 # Check if file exists
