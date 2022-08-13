@@ -16,4 +16,11 @@ Finally, I decided to write this article to explain refer to it in case I
 needed in next articles, at least it will be an internal reference.
 
 ## What is a unit test?
+You should already know about test automation. Given a piece of code, you 
+can write another piece of code that verifies the behavior of the first. The 
+second piece of code is called a unit test.
+
+<p class="note">
+A unit test should verify a small piece of code in isolation quickly.
+</p> 
 
