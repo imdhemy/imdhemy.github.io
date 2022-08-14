@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-08-14T10:02:33+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">What is a unit test</title><link href="https://imdhemy.com/blog/testing/what-is-a-unit-test.html" rel="alternate" type="text/html" title="What is a unit test" /><published>2022-08-13T17:21:35+00:00</published><updated>2022-08-13T17:21:35+00:00</updated><id>https://imdhemy.com/blog/testing/what-is-a-unit-test</id><content type="html" xml:base="https://imdhemy.com/blog/testing/what-is-a-unit-test.html"><![CDATA[<p>When I started writing this article few months ago, I got blocked by the 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-08-14T10:06:32+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">What is a unit test</title><link href="https://imdhemy.com/blog/testing/what-is-a-unit-test.html" rel="alternate" type="text/html" title="What is a unit test" /><published>2022-08-13T17:21:35+00:00</published><updated>2022-08-13T17:21:35+00:00</updated><id>https://imdhemy.com/blog/testing/what-is-a-unit-test</id><content type="html" xml:base="https://imdhemy.com/blog/testing/what-is-a-unit-test.html"><![CDATA[<p>When I started writing this article few months ago, I got blocked by the 
 idea of I’m going to write about something that everyone knows about and 
 everyone can google the topic and found a ton of articles about the same 
 basic topic. 
@@ -73,7 +73,7 @@ each other. The classes under test reside in the memory of the test runner,
 so that they can interact with each other without affecting the test results 
 either you run the tests in parallel or in sequence.</p>
 
-<p>But, there is a problem, Okay, they reside in the memory and not affecting 
+<p>There is a problem, Okay, they reside in the memory and not affecting 
 each other, but what about the shared states? For example, the database and 
 file system. Of course, changes in the database will affect the test results.
 For instance, one test could create a record in the database, and the other 
