@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-08-14T10:01:25+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">What is a unit test</title><link href="https://imdhemy.com/blog/testing/what-is-a-unit-test.html" rel="alternate" type="text/html" title="What is a unit test" /><published>2022-08-13T17:21:35+00:00</published><updated>2022-08-13T17:21:35+00:00</updated><id>https://imdhemy.com/blog/testing/what-is-a-unit-test</id><content type="html" xml:base="https://imdhemy.com/blog/testing/what-is-a-unit-test.html"><![CDATA[<p>When I started writing this article few months ago, I got blocked by the 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-08-14T10:02:33+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">What is a unit test</title><link href="https://imdhemy.com/blog/testing/what-is-a-unit-test.html" rel="alternate" type="text/html" title="What is a unit test" /><published>2022-08-13T17:21:35+00:00</published><updated>2022-08-13T17:21:35+00:00</updated><id>https://imdhemy.com/blog/testing/what-is-a-unit-test</id><content type="html" xml:base="https://imdhemy.com/blog/testing/what-is-a-unit-test.html"><![CDATA[<p>When I started writing this article few months ago, I got blocked by the 
 idea of I’m going to write about something that everyone knows about and 
 everyone can google the topic and found a ton of articles about the same 
 basic topic. 
@@ -29,9 +29,7 @@ you can call a unit. If your test suite’s execution time is good enough to
 you, it means tests are quick enough. No doubt, the first two 
 characteristics are non-controversial. The third one, isolation, is 
 controversial. When it comes to isolation, there are two takes, the Mockist 
-take and the Classicist take. Isolation means that the tests are 
-isolated from each other, and running them in parallel or in sequence does 
-not affect the result.</p>
+take and the Classicist take.</p>
 
 <h2 id="mockist-take-vs-classicist-take">Mockist take vs Classicist take</h2>
 <p>These two tribes are commonly referred to as the Detroit School of TDD 
