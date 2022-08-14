@@ -145,31 +145,26 @@ hr {
   scroll-snap-type: none !important;
 }
 
-p.note {
-  background-color: lighten($nord6, 2);
-  border-top: 2px solid $nord9;
-  padding: 10px 10px 10px 46px;
-  font-size: 1.2rem;
-}
-
-p.note:before{
-  content: '';
-  background-image: url('/assets/img/alert-circle-outline.svg');
+.note:before {
+  content: '!';
   display: inline-block;
   width: 20px;
   height: 20px;
   color: $nord9;
-  margin-left: -36px;
-  margin-right: 10px;
+  position: absolute;
+  top: -50px;
+  left: -5px;
+  font-size: 100px
 }
 
-.quote {
+.quote, .note {
   background-color: lighten($nord6, 2);
   border-radius: 0.5em;
   padding: 10px 10px 10px 46px;
   margin: 20px;
   font-size: 1.2rem;
   position: relative;
+  min-height: 70px;
 }
 
 .quote:before {
@@ -178,7 +173,7 @@ p.note:before{
   width: 20px;
   height: 20px;
   color: $nord9;
- position: absolute;
+  position: absolute;
   top: -50px;
   left: -5px;
   font-size: 100px;
