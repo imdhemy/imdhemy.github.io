@@ -104,24 +104,24 @@ only do that for the shared dependencies, or the out-of-process dependencies
 in case you need to test a specific behavior of the external service.
 
 ## Conclusion
-Let's conclude them in triplets:
+Let's conclude them in **triplets**:
 
-A unit test has three characteristics:
+**A unit test has three characteristics:**
 - Verifies a small piece of code.
 - Is quick to run.
 - Works in isolation.
 
-There are three types of dependencies:
+**There are three types of dependencies:**
 - Shared.
 - Private.
 - Out-of-process.
 
-There are three schools of TDD:
+**There are three schools of TDD:**
 - The Detroit School.
 - The London School.
 - The one that your manager told you to use.
 
-There are three reasons to use mocks:
+**There are three reasons to use mocks:**
 - Replacing the shared dependencies.
 - The non-deterministic behavior of the out-of-process dependencies.
 - To make tests faster. (Replacing DB calls for example.)
