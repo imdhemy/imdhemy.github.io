@@ -78,7 +78,7 @@ each other. The classes under test reside in the memory of the test runner,
 so that they can interact with each other without affecting the test results 
 either you run the tests in parallel or in sequence.
 
-But, there is a problem, Okay, they reside in the memory and not affecting 
+There is a problem, Okay, they reside in the memory and not affecting 
 each other, but what about the shared states? For example, the database and 
 file system. Of course, changes in the database will affect the test results.
 For instance, one test could create a record in the database, and the other 
