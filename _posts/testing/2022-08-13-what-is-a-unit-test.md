@@ -34,9 +34,7 @@ you can call a unit. If your test suite's execution time is good enough to
 you, it means tests are quick enough. No doubt, the first two 
 characteristics are non-controversial. The third one, isolation, is 
 controversial. When it comes to isolation, there are two takes, the Mockist 
-take and the Classicist take. Isolation means that the tests are 
-isolated from each other, and running them in parallel or in sequence does 
-not affect the result.
+take and the Classicist take.
 
 ## Mockist take vs Classicist take
 These two tribes are commonly referred to as the Detroit School of TDD 
