@@ -12,7 +12,7 @@ basic topic.
 Should I publish such an article? As I said, I got blocked by this idea, the 
 thing that stopped me from completing the series I started about [testing](/blog/testing/we-need-more-tests).
 
-Finally, I decided to write this article to explain refer to it in case I 
+Finally, I decided to write this article to refer to it in case I 
 needed in next articles, at least it will be an internal reference.
 
 ## What is a unit test?
