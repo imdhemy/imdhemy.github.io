@@ -34,7 +34,9 @@ you can call a unit. If your test suite's execution time is good enough to
 you, it means tests are quick enough. 
 
 <p class="note">
-A <i>unit</i> in unit testing is a unit of behaviour, not a unit of <i>code</i>.
+A <i>unit</i> in unit testing is a unit of behaviour, not a unit of 
+<i>code</i>. This behaviour can span across as many as several classes or as 
+a single method, but it should have a single entry point to trigger the behaviour.
 </p>
 
 No doubt, the first two characteristics are non-controversial. The third one, isolation, is 
