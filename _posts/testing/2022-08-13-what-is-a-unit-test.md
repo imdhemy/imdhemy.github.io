@@ -31,8 +31,13 @@ As you can see, a unit test has three characteristics:
 
 A small piece of code could be a function, a class, a method, or whatever 
 you can call a unit. If your test suite's execution time is good enough to 
-you, it means tests are quick enough. No doubt, the first two 
-characteristics are non-controversial. The third one, isolation, is 
+you, it means tests are quick enough. 
+
+<p class="note">
+A <i>unit</i> in unit testing is a unit of behaviour, not a unit of <i>code</i>.
+</p>
+
+No doubt, the first two characteristics are non-controversial. The third one, isolation, is 
 controversial. When it comes to isolation, there are two takes, the Mockist 
 take and the Classicist take.
 
