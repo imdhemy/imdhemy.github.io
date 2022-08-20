@@ -4,6 +4,12 @@ title: How to test Elasticsearch in PHP applications
 date: 2021-09-09T00:00:00.130Z
 categories: php
 ---
+<p class="note">
+Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. 
+This article is intended to v 7.x and lower. For v 8.0 you can use the <a href="https://github.
+com/imdhemy/es-testing-utils">Es Utils package</a>.
+</p>
+
 Currently, I'm working on the [Elasticsearch PHP Sugar package][1]. It's a wrapper over the low-level Elasticsearch client that adds [syntactic sugar][2] for PHP developers. I'll publish a blog post once I publish the first release.
 
 One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let's start with a short note about the Practical Test Pyramid.
