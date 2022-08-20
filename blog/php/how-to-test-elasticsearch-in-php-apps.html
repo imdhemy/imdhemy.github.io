@@ -8,8 +8,8 @@
 <meta property="og:title" content="How to test Elasticsearch in PHP applications" />
 <meta name="author" content="Mohamad Eldhemy" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release." />
-<meta property="og:description" content="Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release." />
+<meta name="description" content="Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. For v 8.0 you can use the Es Utils package." />
+<meta property="og:description" content="Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. For v 8.0 you can use the Es Utils package." />
 <link rel="canonical" href="https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html" />
 <meta property="og:url" content="https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html" />
 <meta property="og:site_name" content="imdhemy" />
@@ -18,9 +18,9 @@
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="How to test Elasticsearch in PHP applications" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Mohamad Eldhemy"},"dateModified":"2021-09-09T00:00:00+00:00","datePublished":"2021-09-09T00:00:00+00:00","description":"Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release.","headline":"How to test Elasticsearch in PHP applications","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"},"url":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Mohamad Eldhemy"},"dateModified":"2021-09-09T00:00:00+00:00","datePublished":"2021-09-09T00:00:00+00:00","description":"Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. For v 8.0 you can use the Es Utils package.","headline":"How to test Elasticsearch in PHP applications","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"},"url":"https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css?t=2022-08-15-11-57"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
+<link rel="stylesheet" href="/assets/main.css?t=2022-08-20-08-42"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /></head>
 <body><div class="container mx-auto pt-7 pb-7">
     <header class="flex flex-row">
         <!-- Brand start-->
@@ -106,7 +106,13 @@
 <article class="bg-white rounded-lg filter drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
 
     <div class="p-5 post-content" itemprop="articleBody">
-        <p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
+        <p class="note">
+Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. 
+This article is intended to v 7.x and lower. For v 8.0 you can use the <a href="https://github.
+com/imdhemy/es-testing-utils">Es Utils package</a>.
+</p>
+
+<p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
 
 <p>One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let’s start with a short note about the Practical Test Pyramid.</p>
 
@@ -362,7 +368,7 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://imdhemy.com/assets/js/script.js?v=2022-08-15-11-57"></script>
+<script src="https://imdhemy.com/assets/js/script.js?v=2022-08-20-08-42"></script>
 </body>
 
 </html>
