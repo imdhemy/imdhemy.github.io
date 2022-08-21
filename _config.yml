@@ -5,6 +5,7 @@ description: "I'm a software-artist. This is my inner voice."
 baseurl: ""
 url: "https://imdhemy.com"
 author: "Mohamad Eldhemy"
+google_analytics: G-WG1WZ488DX
 
 # Build settings
 theme: minima
