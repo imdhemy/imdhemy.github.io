@@ -252,15 +252,6 @@
   }
 }
 
-.adsense {
-  padding-left: $spacing-unit / 2;
-  padding-right: $spacing-unit / 2;
-}
-
-.vertical-90{
-  max-height: 90px;
-}
-
 // Hide ads on mobile
 @include media-query($on-palm) {
   .adsense {
