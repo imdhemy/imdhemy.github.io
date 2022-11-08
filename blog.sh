@@ -1,25 +1,41 @@
 #!/bin/bash -e
 
-# Validate arguments
-if [ $# -lt 2 ]; then
-    echo "Usage: <title> <category> [--draft|-d]"
-    exit 1
-fi
-
-# Get arguments
-title=$1
-
-# slug is the lowercase trimmed title with spaces replaced by dashes
-slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
-
-# slug is the second argument
-category=$2
-
-# Draft is boolean, so if it's not passed, it's false
 draft=false
-if [ "$3" == "--draft" ] || [ "$3" == "-d" ]; then
-    draft=true
+category="uncategorized"
+title=""
+
+while true; do
+  case "$1" in
+    -d | --draft ) draft=true; shift ;;
+    -c | --category ) category="$2"; shift 2 ;;
+    -t | --title ) title="$2"; shift 2 ;;
+    * ) break ;;
+  esac
+done
+
+# Title is required
+if [ -z "$title" ]; then
+  echo "Title is required"
+  exit 1
 fi
+
+# Show input and confirm
+echo "---------------------------"
+echo "Title: $title"
+echo "Category: $category"
+echo "Draft: $draft"
+echo "---------------------------"
+read -p "🙋Continue? (y/n) " -n 1 -r
+echo ""
+
+# Exit if not confirmed
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  echo "👋 Aborted"
+  exit 0
+fi
+
+# Create slug from the title
+slug=$(echo "$title" | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 
 # filename example : 2016-01-01-title.md
 file_name=$(date +%Y-%m-%d)-$slug.md
@@ -36,9 +52,9 @@ categories: {{category}}
 "
 
 # Replace placeholders in stub with actual values followed by newline
-contents=$(echo "$contents" | sed "s/{{title}}/$title/g")
-contents=$(echo "$contents" | sed "s/{{category}}/$category/g")
-contents=$(echo "$contents" | sed "s/{{publish_date}}/$publish_date/g")
+contents=${contents//\{\{title\}\}/$title}
+contents=${contents//\{\{publish_date\}\}/$publish_date}
+contents=${contents//\{\{category\}\}/$category}
 
 # File directory and path based on draft status
 if [ "$draft" == true ]; then
@@ -46,7 +62,7 @@ if [ "$draft" == true ]; then
     file_path="$file_dir/$file_name"
 else
     file_dir="_posts/$category"
-    file_path="$file_dir/$category/$file_name"
+    file_path="$file_dir/$file_name"
 fi
 
 # Create directory if it doesn't exist
