@@ -28,3 +28,13 @@ Let's map this to programming. The DUT will be **SUT** (System under test). The 
 Test fixture's state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable.
 </p>
 
+## Test file location
+
+There are two conventions for organizing the test files. The first one is to put the test files in the same directory as the source files. The second one is to put the test files in a separate directory. The first one is called **in-place** and the second one is called **out-of-place**.
+
+**In-place** tests are painless to fine, you see at a glance if a part of your application lacks tests. When you move the source (inevitable), you remember to move the test, When you rename the source (inevitable), you remember to rename the test. The downside is where to put integration tests, as they don't belong to any specific source file. It's ofren better to create an appropriate directory for them in the `tests` directory.
+
+**Out-of-place** tests have a natural home directoy `tests`. The directories and files in the `tests` directoy should mirror their corresponding source files. This way, you can easily integrate the tests with your IDE.
+
+I prefere the **out-of-place** convention, even if I have to remember to move or rename the test files to refelect the changes in the source files, but I'm not dogmatic about it. I'm open to change my mind if I find a good reason to do so. 
+
