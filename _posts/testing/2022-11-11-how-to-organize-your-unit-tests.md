@@ -61,7 +61,7 @@ ItShouldIlluminateTheLedAtLowLevelLight
 It_should_illuminate_the_led_at_low_level_light
 ```
 
-The snake case version is much easier to read, as it resebles the natural way of using spaces between words.
+The snake case version is much easier to read, as it resembles the natural way of using spaces between words.
 
 **So, what about the body of the test case?**
 
