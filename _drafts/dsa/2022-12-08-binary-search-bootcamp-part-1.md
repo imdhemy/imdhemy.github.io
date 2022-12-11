@@ -9,7 +9,11 @@ This post is not a tutorial on binary search. The internet if full of them. The 
 notes on how to approach binary search problems, and follows the technique of repeatedly practicing different
 problems on the same topic until you are comfortable with the topic.
 
-If you are not familiar with binary search, I recommend you this [video](https://www.youtube.com/watch?v=v9IWor4n0Ys)
+If you are not familiar with binary search, I recommend you the following resources:
+
+- [x] [Introduction to binary search](https://www.youtube.com/watch?v=v9IWor4n0Ys)
+- [x] [How binary search works](https://www.youtube.com/watch?v=JQhciTuD3E8)
+- [x] [Search Techniques - Binary Search (Arabic)](https://www.youtube.com/watch?v=2G7RzlxTNPo)
 
 ## Binary search implementation
 
@@ -82,3 +86,7 @@ public int binarysearch(int[] nums, int target){
 ```
 
 ## Binary search problems
+
+| Problem                                                           | Solution | Difficulty |
+|-------------------------------------------------------------------|----------|------------|
+| [704 Binary search](https://leetcode.com/problems/binary-search/) |          | Easy       |
