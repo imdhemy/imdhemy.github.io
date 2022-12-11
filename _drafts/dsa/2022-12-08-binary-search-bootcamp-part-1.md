@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Binary search bootcamp
+title: Binary search bootcamp [part - 1]
 date: 2022-12-08T15:31:10.NZ
 categories: dsa
 ---
@@ -9,14 +9,14 @@ This post is not a tutorial on binary search. The internet if full of them. The 
 notes on how to approach binary search problems, and follows the technique of repeatedly practicing different
 problems on the same topic until you are comfortable with the topic.
 
-If you are not familiar with binary search, I recommend you the
-this [video](https://www.youtube.com/watch?v=P3YID7liBug)
+If you are not familiar with binary search, I recommend you this [video](https://www.youtube.com/watch?v=v9IWor4n0Ys)
 
 ## Binary search implementation
 
-This section is added to give you a quick reference on how to implement binary search. Feel free to skip it if you are already familiar with binary search.
+This section is added to give you a quick reference on how to implement binary search. Feel free
+to [skip it](#binary-search-problems) if you are already familiar with binary search.
 
-### Recusive implementation
+### Recursive implementation
 
 ```java
 public int binarySearch(int[] nums, int target) {
@@ -62,7 +62,10 @@ public int binarySearch(int[] nums, int target) {
 
 ### Jumps Implementation
 
-I'm not sure about the name of this implementation. It's a variation of the recursive implementation and depends on making jumps of size `b` instead of dividing the array in half. The idea is to jump `b` elements at a time until the element at index `k + b` is greater than the target. Then we know that the target is in the range `[k, k + b]`. We can then perform a binary search on this range.
+I'm not sure about the name of this implementation. It's a variation of the recursive implementation and depends on
+making jumps of size `b` instead of dividing the array in half. The idea is to jump `b` elements at a time until the
+element at index `k + b` is greater than the target. Then we know that the target is in the range `[k, k + b]`. We can
+then perform a binary search on this range.
 
 ```java
 public int binarysearch(int[] nums, int target){
@@ -78,3 +81,4 @@ public int binarysearch(int[] nums, int target){
 }
 ```
 
+## Binary search problems
