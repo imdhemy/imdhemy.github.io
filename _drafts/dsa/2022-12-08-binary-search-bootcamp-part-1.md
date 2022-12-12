@@ -87,6 +87,8 @@ public int binarysearch(int[] nums, int target){
 
 ## Binary search problems
 
-| Problem                                                           | Solution | Difficulty |
-|-------------------------------------------------------------------|----------|------------|
-| [704 Binary search](https://leetcode.com/problems/binary-search/) |          | Easy       |
+| Problem                                                                            | Solution | Difficulty |
+|------------------------------------------------------------------------------------|----------|------------|
+| [704 Binary search](https://leetcode.com/problems/binary-search/)                  |          | Easy       |
+| [35 Search insert position](https://leetcode.com/problems/search-insert-position/) |          | Easy       |
+| [69 Sqrt(x)](https://leetcode.com/problems/sqrtx/)                                 |          | Easy       |
