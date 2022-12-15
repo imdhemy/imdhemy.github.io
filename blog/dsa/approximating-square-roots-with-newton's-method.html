@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Approximating square roots with Newton’s method | imdhemy</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="Approximating square roots with Newton’s method" />
+<meta name="author" content="Mohamad Eldhemy" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the desired accuracy is reached." />
+<meta property="og:description" content="Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the desired accuracy is reached." />
+<link rel="canonical" href="https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method.html" />
+<meta property="og:url" content="https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method.html" />
+<meta property="og:site_name" content="imdhemy" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-12-12T11:55:59+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Approximating square roots with Newton’s method" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Mohamad Eldhemy"},"dateModified":"2022-12-12T11:55:59+00:00","datePublished":"2022-12-12T11:55:59+00:00","description":"Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the desired accuracy is reached.","headline":"Approximating square roots with Newton’s method","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method.html"},"url":"https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css?t=2022-12-15-14-29"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /><!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WG1WZ488DX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WG1WZ488DX');
+</script>
+</head>
+<body><div class="container mx-auto pt-7 pb-7">
+    <header class="flex flex-row">
+        <!-- Brand start-->
+        <div class="p-5">
+            <a href="/" class="flex justify-start items-center mr-3 hover:no-underline block">
+                <img class="w-5 h-5 lg:w-10 lg:h-10" src="/logo.png" alt="imdhemy">
+                <span class="font-bold text-xl lg:text-4xl text-black font-sans">imdhemy</span>
+            </a>
+        </div>
+        <!-- Brand End -->
+
+        <!-- Mobile Navigation Start -->
+        <div class="flex-auto flex justify-end p-5 lg:hidden">
+            <button id="nav-controller" class="focus:outline-none block">
+                <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
+            </button>
+            <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 hidden">
+                <div class="flex h-full justify-center p-10">
+                    <ul class="flex flex-col justify-center text-left p-0 m-0">
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/">Home</a></li>
+                        
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/blog">Blog</a></li>
+                        
+                        
+                        
+                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/about">About</a></li>
+                        
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Navigation End -->
+
+        <!-- Desktop Navigation Start -->
+        <div class="hidden lg:block flex-auto flex p-5">
+            
+            
+            <ul class="flex justify-end text-left p-0 m-0">
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/">Home</a></li>
+                
+                
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item nav-item-active"><a href="/blog">Blog</a></li>
+                
+                
+                
+                
+                
+                
+                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/about">About</a></li>
+                
+                
+                
+            </ul>
+        </div>
+        <!-- Desktop Navigation End -->
+    </header>
+</div>
+<main class="container mx-auto lg:w-2/3" aria-label="Content">
+    <header class="container mx-auto p-5 text-center">
+    <h1 class="post-title p-name" itemprop="name headline">Approximating square roots with Newton&#39;s method</h1>
+    <p class="post-meta">
+        <time class="dt-published" datetime="2022-12-12T11:55:59+00:00" itemprop="datePublished">Dec 12, 2022
+        </time>
+        
+        • <span>dsa</span>
+        
+    </p>
+</header>
+
+<article class="bg-white rounded-lg filter drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <div class="p-5 post-content" itemprop="articleBody">
+        <p>Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to
+approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The
+x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the
+desired accuracy is reached.</p>
+
+<p>Let’s say we need to find the square root of a number <code class="language-plaintext highlighter-rouge">a</code>. The equation we need to solve is \(f(x) = x^2 - a = 0\).</p>
+
+<ol>
+  <li>
+    <p>We can start by drawing the curve of the function \(f(x)\) (Blue line in the figure below). The curve is a parabola
+,but it shows only one root, the positive root.</p>
+  </li>
+  <li>
+    <p>Then, we can start by choosing an initial guess \(x_n\) (Blue dashed line in the figure below). The tangent line at
+the point \(x_n\) is \(f'(x_n) = 2x_n\) (Red line in the figure below). The x-intercept of the tangent line is the
+next guess.</p>
+  </li>
+  <li>
+    <p>As you can see, the next guess \(x_{n+1}\) is closer to the root than the previous guess \(x_n\). The process can be
+repeated until the desired accuracy is reached.</p>
+  </li>
+</ol>
+
+<p><img src="/assets/img/Newton_iteration.png" alt="Newton Iteration" /></p>
+
+<p>So, we can approximate the square root of \(a\) by:</p>
+
+\[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]
+
+\[= x_n - \frac{x_n^2 - a}{2x_n}\]
+
+\[= \frac{1}{2} (x_n + \frac{a}{x_n})\]
+
+<p>We start with an initial guess \(x_0\) and then we iterate over the formula until we reach a desired accuracy. For
+each step, we can calculate the error \(\epsilon\) as:</p>
+
+\[\epsilon = \frac{|x_{n+1} - x_n|}{x_{n+1}}\]
+
+<p>For example, if the first guess is \(x_0 = 1\), and the new guess is \(x_1 = 1.5\), then the error is:</p>
+
+\[\epsilon = \frac{|1.5 - 1|}{1.5} = 0.333\]
+
+<p>The error value ranges between \(0\) and \(1\), and the smaller the error, the closer we are to the square root of
+\(a\). When the error equals \(0\), we have reached the square root of \(a\). We can also define an accepted error
+so that we stop iterating when the error is less than the accepted error.</p>
+
+<h2 id="example-1">Example (1)</h2>
+
+<p>Let’s find the square root of \(a = 9\) using Newton’s method. We start with an initial guess \(x_0 = 1\), and then we
+iterate over the formula until we reach a desired accuracy. This time, we will use an accepted error of \(0\). The
+following table shows the steps:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>\(n\)</th>
+      <th>\(x_n\)</th>
+      <th>\(x_{n+1}\)</th>
+      <th>\(\epsilon\)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>5</td>
+      <td>3.4</td>
+      <td>0.47</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>3.4</td>
+      <td>3.023</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>3.023</td>
+      <td>3.000091</td>
+      <td>0.0076</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>3.000091</td>
+      <td>3.000000092</td>
+      <td>0.00003</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>3.000000092</td>
+      <td>3.000000000</td>
+      <td>0.00000003</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>3</strong></td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As we can see, after the sixth step, the error is equal to \(0\), so we have reached the square root of \(9\).</p>
+
+<h2 id="example-2">Example (2)</h2>
+
+<p>Let’s find the square root of \(a = 16\) with an initial guess of \(x_0 = 1\) and an accepted error of \(0.1\).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>\(n\)</th>
+      <th>\(x_n\)</th>
+      <th>\(x_{n+1}\)</th>
+      <th>\(\epsilon\)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>8.5</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>8.5</td>
+      <td>5.04</td>
+      <td>0.69</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>5.04</td>
+      <td>4.0016</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>4.0016</strong></td>
+      <td>3.999904</td>
+      <td>0.00004</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After the third step, the error is less than the accepted error, so we stop iterating. The square root of \(16\) is
+\(4.0016\), which is close enough to the actual square root of \(16\) which is \(4\).</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The following code implements Newton’s method in Java:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewtonsMethod</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sqrt</span><span class="o">(</span><span class="kt">double</span> <span class="n">a</span><span class="o">,</span> <span class="kt">double</span> <span class="n">x0</span><span class="o">,</span> <span class="kt">double</span> <span class="n">epsilon</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">error</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        
+        <span class="k">while</span> <span class="o">(</span><span class="n">error</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">double</span> <span class="n">x1</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">/</span> <span class="n">x</span><span class="o">);</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">/</span> <span class="n">x1</span><span class="o">;</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="leetcode-problem">Leetcode problem</h2>
+
+<p>We can use Newton’s method to solve the <a href="https://leetcode.com/problems/sqrtx/">69. Sqrt(x)</a> problem on Leetcode.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mySqrt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.00000000000001</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="nc">NewtonsMethod</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x0</span><span class="o">,</span> <span class="n">epsilon</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">sqrt</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same problem can be solved using binary search:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mySqrt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+       <span class="kt">long</span> <span class="n">lo</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">x</span><span class="o">,</span> <span class="n">mid</span><span class="o">,</span> <span class="n">c</span><span class="o">;</span>
+
+       <span class="k">while</span> <span class="o">(</span><span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
+           <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">lo</span><span class="o">;</span>
+           <span class="n">c</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">*</span> <span class="n">mid</span><span class="o">;</span>
+
+           <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">c</span><span class="o">)</span> <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">mid</span><span class="o">;</span>
+           <span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+           <span class="k">else</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+       <span class="o">}</span>
+
+       <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">hi</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+    </div><a class="u-url" href="/blog/dsa/approximating-square-roots-with-newton's-method.html" hidden></a>
+
+    <div class="lg:flex bg-sky-100 border-t-2 border-sky-300 justify-between p-4 text-lg rounded-br-lg rounded-bl-lg">
+        <div class="flex flex-col justify-center mb-4 lg:mb-0">
+            
+           <div class="text-center">
+               <p class="uppercase">Previous Post</p>
+               <a href="/blog/testing/how-to-organize-your-unit-tests.html">&larr;How to organize your unit tests</a>
+           </div>
+            
+        </div>
+
+        <div class="flex flex-col justify-center">
+            
+        </div>
+
+    </div>
+</article>
+
+</main><footer class="bg-white">
+    <div class="container mx-auto lg:p-0 p-5">
+        <div class="flex flex-col justify-center pt-10 pb-10 text-lg">
+            <div class="flex-1 text-center">
+                <p>Let's get together</p>
+                <ul class="footer-social-links p-0 m-0">
+                    
+                    <li class="inline"><a href="https://twitter.com/imdhemy">Twitter</a></li>
+                    
+                    <li class="inline"><a href="https://github.com/imdhemy">Github</a></li>
+                    
+                    <li class="inline"><a href="https://linkedin.com/in/imdhemy">Linkedin</a></li>
+                    
+                </ul>
+            </div>
+
+            <div class="flex-1 text-center mt-10">
+                <p>&copy; 2021 - 2022 imdhemy.com</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+<script src="https://imdhemy.com/assets/js/script.js?v=2022-12-15-14-29"></script>
+</body>
+
+</html>

@@ -1,4 +1,209 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-11-13T15:12:19+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">How to organize your unit tests</title><link href="https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html" rel="alternate" type="text/html" title="How to organize your unit tests" /><published>2022-11-11T22:48:41+00:00</published><updated>2022-11-11T22:48:41+00:00</updated><id>https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests</id><content type="html" xml:base="https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html"><![CDATA[<p>One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the respiratory system which is known as <strong>mucociliary escalator</strong> and he said, to understand anything in medicine, you need to understand the idea behind the name, you need to understand the culture behind the name. Check the following image, it auto-moves the particles outside the lungs like an escalator.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2022-12-15T14:29:10+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">imdhemy</title><subtitle>I'm a software-artist. This is my inner voice.</subtitle><author><name>Mohamad Eldhemy</name></author><entry><title type="html">Approximating square roots with Newton’s method</title><link href="https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method.html" rel="alternate" type="text/html" title="Approximating square roots with Newton’s method" /><published>2022-12-12T11:55:59+00:00</published><updated>2022-12-12T11:55:59+00:00</updated><id>https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method</id><content type="html" xml:base="https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method.html"><![CDATA[<p>Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to
+approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The
+x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the
+desired accuracy is reached.</p>
+
+<p>Let’s say we need to find the square root of a number <code class="language-plaintext highlighter-rouge">a</code>. The equation we need to solve is \(f(x) = x^2 - a = 0\).</p>
+
+<ol>
+  <li>
+    <p>We can start by drawing the curve of the function \(f(x)\) (Blue line in the figure below). The curve is a parabola
+,but it shows only one root, the positive root.</p>
+  </li>
+  <li>
+    <p>Then, we can start by choosing an initial guess \(x_n\) (Blue dashed line in the figure below). The tangent line at
+the point \(x_n\) is \(f'(x_n) = 2x_n\) (Red line in the figure below). The x-intercept of the tangent line is the
+next guess.</p>
+  </li>
+  <li>
+    <p>As you can see, the next guess \(x_{n+1}\) is closer to the root than the previous guess \(x_n\). The process can be
+repeated until the desired accuracy is reached.</p>
+  </li>
+</ol>
+
+<p><img src="/assets/img/Newton_iteration.png" alt="Newton Iteration" /></p>
+
+<p>So, we can approximate the square root of \(a\) by:</p>
+
+\[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]
+
+\[= x_n - \frac{x_n^2 - a}{2x_n}\]
+
+\[= \frac{1}{2} (x_n + \frac{a}{x_n})\]
+
+<p>We start with an initial guess \(x_0\) and then we iterate over the formula until we reach a desired accuracy. For
+each step, we can calculate the error \(\epsilon\) as:</p>
+
+\[\epsilon = \frac{|x_{n+1} - x_n|}{x_{n+1}}\]
+
+<p>For example, if the first guess is \(x_0 = 1\), and the new guess is \(x_1 = 1.5\), then the error is:</p>
+
+\[\epsilon = \frac{|1.5 - 1|}{1.5} = 0.333\]
+
+<p>The error value ranges between \(0\) and \(1\), and the smaller the error, the closer we are to the square root of
+\(a\). When the error equals \(0\), we have reached the square root of \(a\). We can also define an accepted error
+so that we stop iterating when the error is less than the accepted error.</p>
+
+<h2 id="example-1">Example (1)</h2>
+
+<p>Let’s find the square root of \(a = 9\) using Newton’s method. We start with an initial guess \(x_0 = 1\), and then we
+iterate over the formula until we reach a desired accuracy. This time, we will use an accepted error of \(0\). The
+following table shows the steps:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>\(n\)</th>
+      <th>\(x_n\)</th>
+      <th>\(x_{n+1}\)</th>
+      <th>\(\epsilon\)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>5</td>
+      <td>0.8</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>5</td>
+      <td>3.4</td>
+      <td>0.47</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>3.4</td>
+      <td>3.023</td>
+      <td>0.12</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>3.023</td>
+      <td>3.000091</td>
+      <td>0.0076</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>3.000091</td>
+      <td>3.000000092</td>
+      <td>0.00003</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td>3.000000092</td>
+      <td>3.000000000</td>
+      <td>0.00000003</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><strong>3</strong></td>
+      <td>3</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>As we can see, after the sixth step, the error is equal to \(0\), so we have reached the square root of \(9\).</p>
+
+<h2 id="example-2">Example (2)</h2>
+
+<p>Let’s find the square root of \(a = 16\) with an initial guess of \(x_0 = 1\) and an accepted error of \(0.1\).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>\(n\)</th>
+      <th>\(x_n\)</th>
+      <th>\(x_{n+1}\)</th>
+      <th>\(\epsilon\)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>0</td>
+      <td>1</td>
+      <td>8.5</td>
+      <td>0.88</td>
+    </tr>
+    <tr>
+      <td>1</td>
+      <td>8.5</td>
+      <td>5.04</td>
+      <td>0.69</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>5.04</td>
+      <td>4.0016</td>
+      <td>0.26</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><strong>4.0016</strong></td>
+      <td>3.999904</td>
+      <td>0.00004</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>After the third step, the error is less than the accepted error, so we stop iterating. The square root of \(16\) is
+\(4.0016\), which is close enough to the actual square root of \(16\) which is \(4\).</p>
+
+<h2 id="implementation">Implementation</h2>
+
+<p>The following code implements Newton’s method in Java:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewtonsMethod</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sqrt</span><span class="o">(</span><span class="kt">double</span> <span class="n">a</span><span class="o">,</span> <span class="kt">double</span> <span class="n">x0</span><span class="o">,</span> <span class="kt">double</span> <span class="n">epsilon</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">error</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        
+        <span class="k">while</span> <span class="o">(</span><span class="n">error</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">double</span> <span class="n">x1</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">/</span> <span class="n">x</span><span class="o">);</span>
+            <span class="n">error</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">/</span> <span class="n">x1</span><span class="o">;</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="o">;</span>
+        <span class="o">}</span>
+        
+        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<h2 id="leetcode-problem">Leetcode problem</h2>
+
+<p>We can use Newton’s method to solve the <a href="https://leetcode.com/problems/sqrtx/">69. Sqrt(x)</a> problem on Leetcode.</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mySqrt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">double</span> <span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.00000000000001</span><span class="o">;</span>
+        <span class="kt">double</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="nc">NewtonsMethod</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x0</span><span class="o">,</span> <span class="n">epsilon</span><span class="o">);</span>
+        <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">sqrt</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>The same problem can be solved using binary search:</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mySqrt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+       <span class="kt">long</span> <span class="n">lo</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">x</span><span class="o">,</span> <span class="n">mid</span><span class="o">,</span> <span class="n">c</span><span class="o">;</span>
+
+       <span class="k">while</span> <span class="o">(</span><span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
+           <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">lo</span><span class="o">;</span>
+           <span class="n">c</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">*</span> <span class="n">mid</span><span class="o">;</span>
+
+           <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">c</span><span class="o">)</span> <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">mid</span><span class="o">;</span>
+           <span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+           <span class="k">else</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+       <span class="o">}</span>
+
+       <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">hi</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>]]></content><author><name>Mohamad Eldhemy</name></author><category term="dsa" /><summary type="html"><![CDATA[Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the desired accuracy is reached.]]></summary></entry><entry><title type="html">How to organize your unit tests</title><link href="https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html" rel="alternate" type="text/html" title="How to organize your unit tests" /><published>2022-11-11T22:48:41+00:00</published><updated>2022-11-11T22:48:41+00:00</updated><id>https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests</id><content type="html" xml:base="https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html"><![CDATA[<p>One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the respiratory system which is known as <strong>mucociliary escalator</strong> and he said, to understand anything in medicine, you need to understand the idea behind the name, you need to understand the culture behind the name. Check the following image, it auto-moves the particles outside the lungs like an escalator.</p>
 
 <p>We are not native English speakers, so this advice applies to us.</p>
 
