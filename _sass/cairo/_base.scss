@@ -9,7 +9,6 @@ dl, dd, ol, ul, figure {
 }
 
 
-
 /**
  * Basic styling
  */
@@ -29,7 +28,6 @@ body {
 }
 
 
-
 /**
  * Set `margin-bottom` to maintain vertical rhythm
  */
@@ -41,14 +39,12 @@ ul, ol, dl, figure,
 }
 
 
-
 /**
  * `main` element
  */
 main {
   display: block; /* Default value of `display` of `main` element is 'inline' in IE 11. */
 }
-
 
 
 /**
@@ -58,7 +54,6 @@ img {
   max-width: 100%;
   vertical-align: middle;
 }
-
 
 
 /**
@@ -71,7 +66,6 @@ figure > img {
 figcaption {
   font-size: $small-font-size;
 }
-
 
 
 /**
@@ -89,14 +83,12 @@ li {
 }
 
 
-
 /**
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
   font-weight: $base-font-weight;
 }
-
 
 
 /**
@@ -142,7 +134,6 @@ blockquote {
 }
 
 
-
 /**
  * Code formatting
  */
@@ -168,13 +159,12 @@ pre {
 }
 
 
-
 /**
  * Wrapper
  */
 .wrapper {
   max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit} * 2));
-  max-width:         calc(#{$content-width} - (#{$spacing-unit} * 2));
+  max-width: calc(#{$content-width} - (#{$spacing-unit} * 2));
   margin-right: auto;
   margin-left: auto;
   padding-right: $spacing-unit;
@@ -183,12 +173,11 @@ pre {
 
   @include media-query($on-laptop) {
     max-width: -webkit-calc(#{$content-width} - (#{$spacing-unit}));
-    max-width:         calc(#{$content-width} - (#{$spacing-unit}));
+    max-width: calc(#{$content-width} - (#{$spacing-unit}));
     padding-right: $spacing-unit / 2;
     padding-left: $spacing-unit / 2;
   }
 }
-
 
 
 /**
@@ -199,7 +188,6 @@ pre {
   display: table;
   clear: both;
 }
-
 
 
 /**
@@ -222,7 +210,6 @@ pre {
 }
 
 
-
 /**
  * Tables
  */
@@ -233,19 +220,23 @@ table {
   color: lighten($text-color, 18%);
   border-collapse: collapse;
   border: 1px solid $grey-color-light;
+
   tr {
     &:nth-child(even) {
       background-color: lighten($grey-color-light, 6%);
     }
   }
+
   th, td {
     padding: ($spacing-unit / 3) ($spacing-unit / 2);
   }
+
   th {
     background-color: lighten($grey-color-light, 3%);
     border: 1px solid darken($grey-color-light, 4%);
     border-bottom-color: darken($grey-color-light, 12%);
   }
+
   td {
     border: 1px solid $grey-color-light;
   }
@@ -256,10 +247,18 @@ textarea,
 button,
 select,
 a {
-  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .overflow-hidden {
   overflow: hidden;
 }
 
+// Make tables responsive
+table {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: none;
+}
