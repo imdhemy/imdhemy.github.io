@@ -5,44 +5,24 @@ date: 2022-12-12T11:55:59.NZ
 categories: dsa
 ---
 
-Newton's method is a way to approximate the square root of a number. It depends on Taylor series expansion of the
-function $$f(x) = x^2 - a$$ where $$a$$ is the number we want to find the square root of.
+Newton's method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to
+approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The
+x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the
+desired accuracy is reached.
 
-The Taylor series expansion of $$f(x)$$ is:
+Let's say we need to find the square root of a number `a`. The equation we need to solve is $$f(x) = x^2 - a = 0$$.
 
-$$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x - a)^n$$
+1. We can start by drawing the curve of the function $$f(x)$$ (Blue line in the figure below). The curve is a parabola
+   ,but it shows only one root, the positive root.
 
-And the terms of the series are:
+2. Then, we can start by choosing an initial guess $$x_n$$ (Blue dashed line in the figure below). The tangent line at
+   the point $$x_n$$ is $$f'(x_n) = 2x_n$$ (Red line in the figure below). The x-intercept of the tangent line is the
+   next guess.
 
-$$f(x) = f(a) + f'(a)(x - a) + \frac{f''(a)}{2!}(x - a)^2 + \frac{f'''(a)}{3!}(x - a)^3 + \cdots \frac{f^{(n)}(a)}{n!}(
-x - a)^n$$
+3. As you can see, the next guess $$x_{n+1}$$ is closer to the root than the previous guess $$x_n$$. The process can be
+   repeated until the desired accuracy is reached.
 
-Taylor series expansion is a way to approximate a function $$f(x)$$ by a polynomial of degree $$n$$ around a point
-$$a$$. The degree of the polynomial is the number of terms in the series. The higher the degree, the more accurate the
-approximation.
-
-The square root of $$a$$ is the value of $$x$$ that satisfies:
-
-$$sqrt(a) = x$$
-
-$$x^2 = a$$
-
-$$x^2 - a = 0$$
-
-$$f(x) = x^2 - a$$
-
----
-
-Newton applied this idea to find the square root of a number $$a$$ by approximating $$f(x)$$ by a polynomial of
-degree 2 around $$a$$:
-
-$$f(x) = f(a) + f'(a)(x - a) + \frac{f''(a)}{2!}(x - a)^2$$
-
-$$f(x) = 0 + 2a(x - a) + 0(x - a)^2$$
-
-$$f(x) = 2ax - a^2$$
-
----
+![Newton Iteration](/assets/img/Newton_iteration.png)
 
 So, we can approximate the square root of $$a$$ by:
 
@@ -71,15 +51,15 @@ Let's find the square root of $$a = 9$$ using Newton's method. We start with an 
 iterate over the formula until we reach a desired accuracy. This time, we will use an accepted error of $$0$$. The
 following table shows the steps:
 
-| $$n$$ | $$x_n$$         | $$x_{n+1}$$ | $$\epsilon$$ |
-|-------|-----------------|-------------|--------------|
-| 0     | 1               | 5           | 0.8          |
-| 1     | 5               | 3.4         | 0.47         |
-| 2     | 3.4             | 3.023       | 0.12         |
-| 3     | 3.023           | 3.000091    | 0.0076       |
-| 4     | 3.000091        | 3.000000092 | 0.00003      |
-| 5     | 3.000000092     | 3.000000000 | 0.00000003   |
-| 6     | __3.000000000__ | 3.000000000 | 0.00000000   |
+| $$n$$ | $$x_n$$     | $$x_{n+1}$$ | $$\epsilon$$ |
+|-------|-------------|-------------|--------------|
+| 0     | 1           | 5           | 0.8          |
+| 1     | 5           | 3.4         | 0.47         |
+| 2     | 3.4         | 3.023       | 0.12         |
+| 3     | 3.023       | 3.000091    | 0.0076       |
+| 4     | 3.000091    | 3.000000092 | 0.00003      |
+| 5     | 3.000000092 | 3.000000000 | 0.00000003   |
+| 6     | __3__       | 3           | 0            |
 
 As we can see, after the sixth step, the error is equal to $$0$$, so we have reached the square root of $$9$$.
 
@@ -133,4 +113,23 @@ class Solution {
 }
 ```
 
-The same problem can be solved using binary search, but it's a topic for another post.
+The same problem can be solved using binary search:
+
+```java
+class Solution {
+    public int mySqrt(int x) {
+       long lo = 0, hi = x, mid, c;
+
+       while (lo <= hi) {
+           mid = (hi - lo) / 2 + lo;
+           c = mid * mid;
+
+           if (x == c) return (int)mid;
+           if(x > c) lo = mid + 1;
+           else hi = mid - 1;
+       }
+
+       return (int)hi;
+    }
+}
+```
