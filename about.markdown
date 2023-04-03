@@ -1,12 +1,8 @@
 ---
-layout: about
+layout: page
 title: About
-author: Mohamad Eldhemy
-summary: I'm a software artist!
-image: /assets/img/imdhemy.jpeg
-permalink: /about/
+description: "Okay, you are here now. This is the about page, and you wanted to know more about the guy behind this space on the internet. Well, here you go."
 ---
-
 I wasn’t planning to become a Software Engineer. I was a medical student at one of the top medical schools in the middle east,  [Kasr Alainy](https://en.wikipedia.org/wiki/Qasr_El_Eyni_Hospital).
 
 In October 2011 I started to study Computer science. I graduated in 2015 with a Bachelor’s degree in computer science and was ranked the first in my class.

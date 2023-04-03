@@ -1,62 +1,136 @@
-# General settings
-title: 'imdhemy'
-email: imdhemy@gmail.com
-description: "I'm a software-artist. This is my inner voice."
-baseurl: ""
-url: "https://imdhemy.com"
-author: "Mohamad Eldhemy"
-google_analytics: G-WG1WZ488DX
+# -------------------------------------------------------------------------------------------------
+# Jekyll Configuration
+# -------------------------------------------------------------------------------------------------
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+#
+# If you need help with YAML syntax, here are some quick references for you:
+# https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
+# https://learnxinyminutes.com/docs/yaml/
+#
 
+# -------------------------------------------------------------------------------------------------
+# Site Settings
+# -------------------------------------------------------------------------------------------------
+title: Imdhemy
+email: your-email@example.com
+description: |
+  I'm a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+  Passionate about open source, blogging, and reading.
+github:
+  build_revision: "1.0.0"
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://imdhemy.com" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: imdhemy
+github_username:  imdhemy
+
+# -------------------------------------------------------------------------------------------------
 # Build settings
-theme: minima
-show_excerpts: false
+# -------------------------------------------------------------------------------------------------
+remote_theme: imdhemy/imdhemy-jekyll-theme
+
 plugins:
   - jekyll-feed
-  - jekyll-postcss-v2
+  - jekyll-remote-theme
+  - jekyll-paginate
+sass:
+  quiet_deps: true # Suppress deprecation warnings from Sass
+
+paginate: 7
+paginate_path: "/blog/page:num/"
+markdown: kramdown
 permalink: /blog/:categories/:title:output_ext
 
-nav:
-  - title: Home
-    path: /
+jekyll-archives:
+  enabled:
+    - categories
+    - tags
+  layout: "archive"
+  permalinks:
+    tag: '/tag/:name/'
+    category: '/category/:name/'
 
-  - title: Blog
-    path: /blog
+# -------------------------------------------------------------------------------------------------
+# Author
+# -------------------------------------------------------------------------------------------------
+author:
+  name: "Dhemy"
+  description: |
+    I'm a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+    Passionate about open source, blogging, and reading.
+  avatar: "theme/images/avatar.jpeg"
 
-  - title: About
-    path: /about
+# -------------------------------------------------------------------------------------------------
+# Navigation
+# -------------------------------------------------------------------------------------------------
+navigation:
+  - title: "Home"
+    url: "/"
+  - title: "Blog"
+    url: "/blog"
+  - title: "About"
+    url: "/about"
 
-# Cairo theme settings
-cairo:
-  social_links:
-    - title: Twitter
-      url: https://twitter.com/imdhemy
-    - title: Github
-      url: https://github.com/imdhemy
-    - title: Linkedin
-      url: https://linkedin.com/in/imdhemy
-  version: 1.0.0
+# -------------------------------------------------------------------------------------------------
+# Contributions
+# -------------------------------------------------------------------------------------------------
+contributions:
+  - name: "Laravel"
+    url: "https://laravel.com"
+    logo: "theme/images/laravel.png"
 
+  - name: "Spatie"
+    url: "https://spatie.be/open-source"
+    logo: "theme/images/spatie.png"
 
-# Exclude from processing.
-# The following items will not be processed, by default.
-# Any item listed under the `exclude:` key here will be automatically added to
-# the internal "default list".
+  - name: "Siklid"
+    url: "https://docs.siklid.io/"
+    logo: "theme/images/siklid.png"
 
-# Excluded items can be processed by explicitly listing the directories or
-# their entries' file path in the `include:` list.
-#
-exclude:
-  - .sass-cache/
-  - .jekyll-cache/
-  - gemfiles/
-  - Gemfile
-  - Gemfile.lock
-  - node_modules/
-  - vendor/bundle/
-  - vendor/cache/
-  - vendor/gems/
-  - vendor/ruby/
-  - yarn.lock
-  - package.json
-  - blog.sh
-  - _root/
+  - name: "Google Play Billing"
+    url: "https://github.com/imdhemy/google-play-billing"
+    logo: "theme/images/google-play-billing.png"
+
+  - name: "App Store IAP"
+    url: "https://github.com/imdhemy/appstore-iap"
+    logo: "theme/images/app-store-iap.png"
+
+  - name: "Laravel In-app Purchase"
+    url: "https://imdhemy.com/laravel-iap-docs/"
+    logo: "theme/images/liap.png"
+
+# -------------------------------------------------------------------------------------------------
+# Testimonials
+# -------------------------------------------------------------------------------------------------
+testimonials:
+  - name: "John Doe"
+    description: "Product Manager"
+    image: "https://randomuser.me/api/portraits/med/men/9.jpg"
+    content: |
+      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  - name: "Martha Stewart"
+    description: "Frontend Developer"
+    image: "https://randomuser.me/api/portraits/med/women/79.jpg"
+    content: |
+      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  - name: "Sandra Bullock"
+    description: "Product Manager"
+    image: "https://randomuser.me/api/portraits/med/women/21.jpg"
+    content: |
+      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+# -------------------------------------------------------------------------------------------------
+# Footer
+# -------------------------------------------------------------------------------------------------
+footer:
+  bg_image: "/images/theme/social.png"
+  social:
+    - icon: "logo-github"
+      url: "https://github.com/imdhemy"
+    - icon: "logo-twitter"
+      url: "https://twitter.com/imdhemy"
+    - icon: "logo-linkedin"
+      url: "https://www.linkedin.com/in/imdhemy/"
+    - icon: "logo-youtube"
+      url: "https://www.youtube.com/@imdhemy"

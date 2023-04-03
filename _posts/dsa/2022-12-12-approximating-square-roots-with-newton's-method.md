@@ -3,6 +3,7 @@ layout: post
 title: Approximating square roots with Newton's method
 date: 2022-12-12T11:55:59.NZ
 categories: dsa
+math: true
 ---
 
 Newton's method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to
