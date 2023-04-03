@@ -1,212 +1,435 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>imdhemy | I’m a software-artist. This is my inner voice.</title>
-<meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="imdhemy" />
-<meta name="author" content="Mohamad Eldhemy" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="I’m a software-artist. This is my inner voice." />
-<meta property="og:description" content="I’m a software-artist. This is my inner voice." />
-<link rel="canonical" href="https://imdhemy.com/" />
-<meta property="og:url" content="https://imdhemy.com/" />
-<meta property="og:site_name" content="imdhemy" />
-<meta property="og:type" content="website" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="imdhemy" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Mohamad Eldhemy"},"description":"I’m a software-artist. This is my inner voice.","headline":"imdhemy","name":"imdhemy","url":"https://imdhemy.com/"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css?t=2022-12-16-08-56"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /><!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WG1WZ488DX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WG1WZ488DX');
-</script>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Imdhemy</title>
+    <meta name="description"
+          content="I&#39;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. Passionate about open source, blogging, and reading.">
+    <link rel="canonical" href="https://imdhemy.com/">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
 </head>
-<body>
+<body class="min-h-screen">
+<div class="min-h-screen">
+    <header class="relative" id="main-header">
+    <div class="container mx-auto">
+        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+            <!-- begin logo -->
+            <div class="flex-auto">
+                <div>
+                    <a href="/" class="text-gray-900 text-3xl font-bold">
+                        Imdhemy
+                    </a>
+                </div>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="flex-auto">
+                <div class="flex justify-end lg:hidden">
+                    <button type="button">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                </div>
 
-<div class="container mx-auto pt-7 pb-7">
-    <header class="flex flex-row">
-        <!-- Brand start-->
-        <div class="p-5">
-            <a href="/" class="flex justify-start items-center mr-3 hover:no-underline block">
-                <img class="w-5 h-5 lg:w-10 lg:h-10" src="/logo.png" alt="imdhemy">
-                <span class="font-bold text-xl lg:text-4xl text-black font-sans">imdhemy</span>
-            </a>
-        </div>
-        <!-- Brand End -->
-
-        <!-- Mobile Navigation Start -->
-        <div class="flex-auto flex justify-end p-5 lg:hidden">
-            <button id="nav-controller" class="focus:outline-none block">
-                <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
-            </button>
-            <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 hidden">
-                <div class="flex h-full justify-center p-10">
-                    <ul class="flex flex-col justify-center text-left p-0 m-0">
+                <div class="hidden lg:flex justify-end">
+                    <ul class="flex items-center">
                         
+                        <li class="ml-10">
+                            <a href="/"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
                         
-                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/">Home</a></li>
+                        <li class="ml-10">
+                            <a href="/blog"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
                         
-                        
-                        
-                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/blog">Blog</a></li>
-                        
-                        
-                        
-                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/about">About</a></li>
-                        
+                        <li class="ml-10">
+                            <a href="/about"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
                         
                     </ul>
                 </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="-z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
+                <div class="ml-auto">
+                    <ul class="p-0 m-0 flex-column items-center">
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/blog"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/about"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main>
+        <section class="bg-white py-16">
+    <div class="container mx-auto">
+        <div class="flex flex-col items-center flex-wrap">
+            <div class="flex-1 px-8 max-w-2xl">
+                <div class="text-center mx-auto">
+                    <h1 class="text-3xl lg:text-6xl mb-8 lg:text-5xl font-bold">
+                        Hi, I'm <span class="text-blue-500">Dhemy</span>
+                    </h1>
+                    <p class="text-lg lg:text-2xl leading-8 lg:leading-10 text-gray-500">
+                        I'm a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+Passionate about open source, blogging, and reading.
+
+                    </p>
+                </div>
             </div>
         </div>
-        <!-- Mobile Navigation End -->
+    </div>
+</section>
 
-        <!-- Desktop Navigation Start -->
-        <div class="hidden lg:block flex-auto flex p-5">
-            
-            
-            <ul class="flex justify-end text-left p-0 m-0">
+
+
+<section class="mb-8">
+    <div class="container mx-auto">
+        <div class="p-5 max-w-screen-lg mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Contributions</h2>
+
+            <p class="text-center text-2xl text-gray-500 mb-8">I have contributed to some great projects</p>
+
+            <div class="grid gap-4 grid-cols-1 lg:grid-cols-3">
                 
+                <div class="py-5 flex items-center flex-col">
+                    <a href="https://laravel.com" class="block ease-linear">
+                        <img src="theme/images/laravel.png"
+                             class="h-8 block" alt="Laravel">
+                    </a>
+                </div>
                 
+                <div class="py-5 flex items-center flex-col">
+                    <a href="https://spatie.be/open-source" class="block ease-linear">
+                        <img src="theme/images/spatie.png"
+                             class="h-8 block" alt="Spatie">
+                    </a>
+                </div>
                 
+                <div class="py-5 flex items-center flex-col">
+                    <a href="https://docs.siklid.io/" class="block ease-linear">
+                        <img src="theme/images/siklid.png"
+                             class="h-8 block" alt="Siklid">
+                    </a>
+                </div>
                 
-                <li class="text-xl font-light mobile-nav-link-item nav-item nav-item-active"><a href="/">Home</a></li>
+                <div class="py-5 flex items-center flex-col">
+                    <a href="https://github.com/imdhemy/google-play-billing" class="block ease-linear">
+                        <img src="theme/images/google-play-billing.png"
+                             class="h-8 block" alt="Google Play Billing">
+                    </a>
+                </div>
                 
+                <div class="py-5 flex items-center flex-col">
+                    <a href="https://github.com/imdhemy/appstore-iap" class="block ease-linear">
+                        <img src="theme/images/app-store-iap.png"
+                             class="h-8 block" alt="App Store IAP">
+                    </a>
+                </div>
                 
+                <div class="py-5 flex items-center flex-col">
+                    <a href="https://imdhemy.com/laravel-iap-docs/" class="block ease-linear">
+                        <img src="theme/images/liap.png"
+                             class="h-8 block" alt="Laravel In-app Purchase">
+                    </a>
+                </div>
                 
-                
-                
-                
-                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/blog">Blog</a></li>
-                
-                
-                
-                
-                
-                
-                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/about">About</a></li>
-                
-                
-                
-            </ul>
+            </div>
         </div>
-        <!-- Desktop Navigation End -->
-    </header>
+    </div>
+</section>
+
+
+
+
+<section class="mb-8">
+    <div class="container mx-auto">
+        <div class="p-5 max-w-screen-lg mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-8">Testimonials</h2>
+            <div class="grid gap-5 grid-cols-1 lg:grid-cols-3">
+                
+                <!-- Item start -->
+                <div class="w-full">
+                    <div class="relative p-8 overflow-hidden bg-violet-100 rounded-3xl">
+                        <div class="relative z-1 flex items-center mb-8">
+                            <div class="relative w-[68px] h-[68px] mr-3 border-2 border-indigo-600 rounded-full">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover rounded-full select-none p-[2px]"
+                                     src="https://randomuser.me/api/portraits/med/men/9.jpg"
+                                     alt=""/>
+                            </div>
+                            <div>
+                                <h3 class="font-sans mb-1 text-lg font-bold">
+                                    <a href="#">John Doe</a>
+                                </h3>
+                                <p class="mb-0 text-sm text-gray-500">Product Manager</p>
+                            </div>
+                        </div>
+
+                        <p class="relative text-base mb-0 before:font-sans before:font-serif
+                        before:content-['\0022'] before:absolute before:top-[50px] before:-left-[10px] before:block before:text-[182px] before:opacity-10
+                            ">
+                            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+                        </p>
+                    </div>
+                </div>
+                <!-- Item end -->
+                
+                <!-- Item start -->
+                <div class="w-full">
+                    <div class="relative p-8 overflow-hidden bg-violet-100 rounded-3xl">
+                        <div class="relative z-1 flex items-center mb-8">
+                            <div class="relative w-[68px] h-[68px] mr-3 border-2 border-indigo-600 rounded-full">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover rounded-full select-none p-[2px]"
+                                     src="https://randomuser.me/api/portraits/med/women/79.jpg"
+                                     alt=""/>
+                            </div>
+                            <div>
+                                <h3 class="font-sans mb-1 text-lg font-bold">
+                                    <a href="#">Martha Stewart</a>
+                                </h3>
+                                <p class="mb-0 text-sm text-gray-500">Frontend Developer</p>
+                            </div>
+                        </div>
+
+                        <p class="relative text-base mb-0 before:font-sans before:font-serif
+                        before:content-['\0022'] before:absolute before:top-[50px] before:-left-[10px] before:block before:text-[182px] before:opacity-10
+                            ">
+                            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+                        </p>
+                    </div>
+                </div>
+                <!-- Item end -->
+                
+                <!-- Item start -->
+                <div class="w-full">
+                    <div class="relative p-8 overflow-hidden bg-violet-100 rounded-3xl">
+                        <div class="relative z-1 flex items-center mb-8">
+                            <div class="relative w-[68px] h-[68px] mr-3 border-2 border-indigo-600 rounded-full">
+                                <img class="absolute top-0 left-0 w-full h-full object-cover rounded-full select-none p-[2px]"
+                                     src="https://randomuser.me/api/portraits/med/women/21.jpg"
+                                     alt=""/>
+                            </div>
+                            <div>
+                                <h3 class="font-sans mb-1 text-lg font-bold">
+                                    <a href="#">Sandra Bullock</a>
+                                </h3>
+                                <p class="mb-0 text-sm text-gray-500">Product Manager</p>
+                            </div>
+                        </div>
+
+                        <p class="relative text-base mb-0 before:font-sans before:font-serif
+                        before:content-['\0022'] before:absolute before:top-[50px] before:-left-[10px] before:block before:text-[182px] before:opacity-10
+                            ">
+                            lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+                        </p>
+                    </div>
+                </div>
+                <!-- Item end -->
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="mb-8">
+    <div class="container mx-auto">
+        <div class="p-5">
+            <h2 class="text-3xl font-bold text-center mb-8">Latest Posts</h2>
+            <div class="max-w-screen-md mx-auto">
+                
+                <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+    <!-- thumbnail -->
+    
+    <!-- content -->
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+        <!-- title -->
+        <h2 class="text-3xl font-black mb-5 font-sans">
+            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+               href="/blog/dsa/approximating-square-roots-with-newton's-method.html">Approximating square roots with Newton's method</a>
+        </h2>
+        <!-- excerpt -->
+        <div class="text-gray-500 text-lg mb-0">
+            Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial...
+        </div>
+    </div>
+</article>
+
+                
+                <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+    <!-- thumbnail -->
+    
+    <!-- content -->
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+        <!-- title -->
+        <h2 class="text-3xl font-black mb-5 font-sans">
+            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+               href="/blog/testing/how-to-organize-your-unit-tests.html">How to organize your unit tests</a>
+        </h2>
+        <!-- excerpt -->
+        <div class="text-gray-500 text-lg mb-0">
+            One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the...
+        </div>
+    </div>
+</article>
+
+                
+                <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+    <!-- thumbnail -->
+    
+    <!-- content -->
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+        <!-- title -->
+        <h2 class="text-3xl font-black mb-5 font-sans">
+            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+               href="/blog/testing/what-is-a-unit-test.html">What is a unit test</a>
+        </h2>
+        <!-- excerpt -->
+        <div class="text-gray-500 text-lg mb-0">
+            When I started writing this article few months ago, I got blocked by the idea of I’m going to write...
+        </div>
+    </div>
+</article>
+
+                
+            </div>
+            <div class="mt-16 text-center">
+                <a href="/blog"
+                   class="py-4 px-6 bg-violet-700 text-lg font-semibold rounded-3xl text-white ease-in duration-300 hover:bg-violet-800">
+                    All Posts &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="mb-0 mt-24">
+    <div class="relative py-16">
+        <div class="max-w-screen-md mx-auto">
+            <div class="p-5 text-center">
+                <h3 class="text-white font-sans font-bold text-5xl">Dhemy</h3>
+                <div class="relative mb-5 py-10">
+                    <ul class="flex items-center justify-center flex-wrap m-0 p-0">
+                        
+                        <li class="mr-5">
+                            <a class="block bg-white relative w-[48px] h-[48px] rounded-full flex items-center justify-center ease-linear duration-300 hover:bg-indigo-600 hover:text-white"
+                               href="https://github.com/imdhemy">
+                                <ion-icon name="logo-github"></ion-icon>
+                            </a>
+                        </li>
+                        
+                        <li class="mr-5">
+                            <a class="block bg-white relative w-[48px] h-[48px] rounded-full flex items-center justify-center ease-linear duration-300 hover:bg-indigo-600 hover:text-white"
+                               href="https://twitter.com/imdhemy">
+                                <ion-icon name="logo-twitter"></ion-icon>
+                            </a>
+                        </li>
+                        
+                        <li class="mr-5">
+                            <a class="block bg-white relative w-[48px] h-[48px] rounded-full flex items-center justify-center ease-linear duration-300 hover:bg-indigo-600 hover:text-white"
+                               href="https://www.linkedin.com/in/imdhemy/">
+                                <ion-icon name="logo-linkedin"></ion-icon>
+                            </a>
+                        </li>
+                        
+                        <li class="mr-5">
+                            <a class="block bg-white relative w-[48px] h-[48px] rounded-full flex items-center justify-center ease-linear duration-300 hover:bg-indigo-600 hover:text-white"
+                               href="https://www.youtube.com/@imdhemy">
+                                <ion-icon name="logo-youtube"></ion-icon>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div class="text-xl text-white drop-shadow-md">
+                    <p>I'm a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+Passionate about open source, blogging, and reading.
+</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-social opacity-75 absolute top-0 left-0 w-full h-full bg-bottom bg-cover -z-10"></div>
+        <div class="absolute top-0 left-0 w-full h-full bg-black -z-20"></div>
+    </div>
+</section>
+
+
+    </main>
+    <section class="sticky top-[100vh]">
+    <div class="p-10">
+        <div class="max-w-screen-md mx-auto">
+            <p class="text-center">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2023 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
 </div>
 
 
-<!--Intro section-->
-<section class="p-5 pt-32 pb-32 flex justify-center container mx-auto">
-    <div class="align-middle text-center tracking-widest">
-        <p class="text-4xl font-light">I'm a software artist.</p>
-        <p class="text-4xl font-light">This is my inner voice!</p>
-    </div>
-</section>
-
-<!-- Welcome section -->
-<section class="bg-white">
-    <div class="container mx-auto lg:p-0 p-5">
-        <div class="lg:flex flex-auto pt-32 lg:pb-32">
-            <div class="tracking-widest flex flex-col justify-center">
-                <h2 class="text-5xl">Hi, I'm Dhemy</h2>
-                <p class="text-xl font-light">
-                    I'm a software engineer. I keep thinking about codes, and here I'm trying to express my inner voice!
-                </p>
-            </div>
-            <div class="flex justify-center pt-10 pb-10 lg:flex lg:justify-end lg:p-0">
-                <img class="lg:w-7/12 lg:h-7/12 w-full" src="/assets/img/imdhemy.jpeg" alt="Mohamad Eldhemy">
-            </div>
-        </div>
-    </div>
-</section>
-
-<!--Recent blog posts -->
-<section class="pt-16">
-    <div class="container mx-auto p-5 lg:p-0">
-        <h2 class="text-4xl lg:text-5xl tracking-widest pb-10">Recent Blog Posts</h2>
-    </div>
-    <div class="container mx-auto">
-        <div class="grid grid-col-1 lg:grid-cols-3 p-5 lg:p-0 lg:gap-7">
-            
-            <div class="mb-10">
-                
-                <h3 class="text-3xl home-post-title"><a href="/blog/dsa/approximating-square-roots-with-newton's-method.html">Approximating square roots with Newton's method</a></h3>
-                <div class="text-sm font-light text-gray-700 pb-5">
-                    Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then toapproxim...
-                </div>
-                <div>
-                  <p class="text-xs text-gray-400">12 December 2022</p>
-                </div>
-            </div>
-            
-            <div class="mb-10">
-                
-                <h3 class="text-3xl home-post-title"><a href="/blog/testing/how-to-organize-your-unit-tests.html">How to organize your unit tests</a></h3>
-                <div class="text-sm font-light text-gray-700 pb-5">
-                    One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing...
-                </div>
-                <div>
-                  <p class="text-xs text-gray-400">11 November 2022</p>
-                </div>
-            </div>
-            
-            <div class="mb-10">
-                
-                <h3 class="text-3xl home-post-title"><a href="/blog/testing/what-is-a-unit-test.html">What is a unit test</a></h3>
-                <div class="text-sm font-light text-gray-700 pb-5">
-                    When I started writing this article few months ago, I got blocked by the idea of I’m going to write about something that ever...
-                </div>
-                <div>
-                  <p class="text-xs text-gray-400">13 August 2022</p>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-
-<main class="page-content" aria-label="Content">
-    <div class="wrapper">
-        
-
-    </div>
-</main><footer class="bg-white">
-    <div class="container mx-auto lg:p-0 p-5">
-        <div class="flex flex-col justify-center pt-10 pb-10 text-lg">
-            <div class="flex-1 text-center">
-                <p>Let's get together</p>
-                <ul class="footer-social-links p-0 m-0">
-                    
-                    <li class="inline"><a href="https://twitter.com/imdhemy">Twitter</a></li>
-                    
-                    <li class="inline"><a href="https://github.com/imdhemy">Github</a></li>
-                    
-                    <li class="inline"><a href="https://linkedin.com/in/imdhemy">Linkedin</a></li>
-                    
-                </ul>
-            </div>
-
-            <div class="flex-1 text-center mt-10">
-                <p>&copy; 2021 - 2022 imdhemy.com</p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
-
+<!-- Ion icons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://imdhemy.com/assets/js/script.js?v=2022-12-16-08-56"></script>
-</body>
 
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
 </html>

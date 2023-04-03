@@ -1,0 +1,504 @@
+@import "tailwind.css";
+* {
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #4d41e0;
+  color: #fff;
+}
+
+::-moz-selection {
+  background: #4d41e0;
+  color: #fff;
+}
+
+#main-header ion-icon[name=menu-outline], #main-header ion-icon[name=close-outline] {
+  font-size: 3rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Noto Serif", Georgia, Cambria, Times New Roman, Times, serif;
+}
+
+.organization-logo {
+  filter: invert(51%) sepia(4%) saturate(1703%) hue-rotate(179deg) brightness(85%) contrast(89%);
+}
+
+.bg-social {
+  background-image: url(../images/social.png);
+}
+
+.content {
+  color: #333;
+}
+.content p {
+  margin-bottom: 1.5rem;
+}
+.content hr {
+  margin-bottom: 4rem;
+  margin-top: 4rem;
+}
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6 {
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-weight: 800;
+}
+.content h1 {
+  font-size: 2.5rem;
+}
+.content h2 {
+  font-size: 2rem;
+}
+.content h3 {
+  font-size: 1.75rem;
+}
+.content h4 {
+  font-size: 1.5rem;
+}
+.content h5 {
+  font-size: 1.25rem;
+}
+.content h6 {
+  font-size: 1rem;
+}
+.content ul, .content ol, .content dd {
+  margin-left: 1rem;
+  padding-left: 0.25rem;
+  margin-bottom: 1.5rem;
+}
+.content ol {
+  list-style-type: decimal;
+}
+.content ul {
+  list-style-type: disc;
+}
+.content ol li, .content ul li {
+  margin-bottom: 0.75rem;
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+.content a:link, .content a:visited {
+  text-decoration: underline;
+  text-decoration-color: #4d41e0;
+  transition: all 0.2s ease-in-out;
+}
+.content a:hover, .content a:active {
+  text-decoration: none;
+}
+.content strong {
+  font-weight: 500;
+  color: #000;
+}
+.content > table {
+  font-size: 0.9rem;
+  max-width: 100%;
+  overflow: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin-bottom: 1.5rem;
+}
+.content > table thead {
+  background: #f9f9f9;
+}
+.content > table th {
+  font-weight: 700;
+  border: 1px solid #eee;
+  padding: 0.5rem;
+  text-align: left;
+}
+.content > table td {
+  padding: 0.5rem;
+}
+.content > table tbody tr:nth-child(odd) {
+  background: #fff;
+}
+.content > table tbody tr:nth-child(odd) td {
+  border: 1px solid #f9f9f9;
+}
+.content > table tbody tr:nth-child(even) {
+  background: #f9f9f9;
+}
+.content > table tbody tr:nth-child(even) td {
+  border: 1px solid #eee;
+}
+.content img {
+  max-width: 100%;
+  height: auto;
+}
+.content iframe {
+  max-width: 100%;
+  margin-bottom: 1.5rem;
+}
+.content mjx-container {
+  max-width: 100%;
+  overflow: auto;
+}
+.content blockquote, .content div.note, .content div.tip, .content div.info, .content div.caution, .content div.danger {
+  position: relative;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+.content blockquote p:last-child, .content div.note p:last-child, .content div.tip p:last-child, .content div.info p:last-child, .content div.caution p:last-child, .content div.danger p:last-child {
+  margin-bottom: 0;
+}
+.content blockquote::before, .content div.note::before, .content div.tip::before, .content div.info::before, .content div.caution::before, .content div.danger::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.08;
+  border-radius: 1rem;
+}
+.content blockquote::after, .content div.note::after, .content div.tip::after, .content div.info::after, .content div.caution::after, .content div.danger::after {
+  font-family: "Noto Serif", Georgia, Cambria, Times New Roman, Times, serif;
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  z-index: 1;
+  font-size: 3rem;
+  line-height: 0;
+  color: #4d41e0;
+}
+.content blockquote::before {
+  background: #4d41e0;
+}
+.content blockquote::after {
+  content: '"';
+  font-style: italic;
+  font-size: 9rem;
+}
+.content div.note::before {
+  border: 1px solid #000;
+}
+.content div.note::after {
+  content: "!";
+  color: #000;
+}
+.content div.tip::before {
+  background: #4d41e0;
+}
+.content div.tip::after {
+  content: "!";
+}
+.content div.info::before {
+  background: #eef9fc;
+  border: 1px solid #4bb3d4;
+  opacity: 0.2;
+}
+.content div.info::after {
+  content: "!";
+  color: #4bb3d4;
+}
+.content div.caution::before {
+  background: #fff9e6;
+  border: 1px solid #f0c14b;
+  opacity: 0.2;
+}
+.content div.caution::after {
+  content: "!";
+  color: #f0c14b;
+}
+.content div.danger::before {
+  background: #ffe6e6;
+  border: 1px solid #e03e2d;
+  opacity: 0.2;
+}
+.content div.danger::after {
+  content: "!";
+  color: #e03e2d;
+}
+
+figure.highlight, div.highlight {
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+  background: #f9f9f9;
+  padding: 1rem;
+  max-width: 100%;
+  overflow: auto;
+  border-radius: 0.25rem;
+}
+
+code.language-plaintext {
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+  background: #f9f9f9;
+  padding: 0.3rem;
+  color: black;
+  border-radius: 0.25rem;
+}
+
+.highlight {
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.4rem;
+  /* Comment */
+  /* Error */
+  /* Keyword */
+  /* Operator */
+  /* Comment.Multiline */
+  /* Comment.Preproc */
+  /* Comment.Single */
+  /* Comment.Special */
+  /* Generic.Deleted */
+  /* Generic.Emph */
+  /* Generic.Error */
+  /* Generic.Heading */
+  /* Generic.Inserted */
+  /* Generic.Output */
+  /* Generic.Prompt */
+  /* Generic.Strong */
+  /* Generic.Subheading */
+  /* Generic.Traceback */
+  /* Keyword.Constant */
+  /* Keyword.Declaration */
+  /* Keyword.Namespace */
+  /* Keyword.Pseudo */
+  /* Keyword.Reserved */
+  /* Keyword.Type */
+  /* Literal.Number */
+  /* Literal.String */
+  /* Name.Attribute */
+  /* Name.Builtin */
+  /* Name.Class */
+  /* Name.Constant */
+  /* Name.Decorator */
+  /* Name.Entity */
+  /* Name.Exception */
+  /* Name.Function */
+  /* Name.Label */
+  /* Name.Namespace */
+  /* Name.Tag */
+  /* Name.Variable */
+  /* Operator.Word */
+  /* Text.Whitespace */
+  /* Literal.Number.Float */
+  /* Literal.Number.Hex */
+  /* Literal.Number.Integer */
+  /* Literal.Number.Oct */
+  /* Literal.String.Backtick */
+  /* Literal.String.Char */
+  /* Literal.String.Doc */
+  /* Literal.String.Double */
+  /* Literal.String.Escape */
+  /* Literal.String.Heredoc */
+  /* Literal.String.Interpol */
+  /* Literal.String.Other */
+  /* Literal.String.Regex */
+  /* Literal.String.Single */
+  /* Literal.String.Symbol */
+  /* Name.Builtin.Pseudo */
+  /* Name.Variable.Class */
+  /* Name.Variable.Global */
+  /* Name.Variable.Instance */
+  /* Literal.Number.Integer.Long */
+}
+.highlight .gutter {
+  float: left;
+  text-align: center;
+  min-width: 1.5rem;
+  padding-right: 0.5rem;
+  color: #999;
+  border-right: 1px solid #eaeaea;
+  margin-right: 0.5rem;
+}
+.highlight .hll {
+  background-color: #ffffcc;
+}
+.highlight .c {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+.highlight .k {
+  color: #000000;
+}
+.highlight .o {
+  color: #000000;
+}
+.highlight .cm {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cp {
+  color: #999999;
+  font-style: italic;
+}
+.highlight .c1 {
+  color: #999988;
+  font-style: italic;
+}
+.highlight .cs {
+  color: #999999;
+  font-style: italic;
+}
+.highlight .gd {
+  color: #000000;
+  background-color: #ffdddd;
+}
+.highlight .ge {
+  color: #000000;
+  font-style: italic;
+}
+.highlight .gr {
+  color: #aa0000;
+}
+.highlight .gh {
+  color: #999999;
+}
+.highlight .gi {
+  color: #000000;
+  background-color: #ddffdd;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+  font-weight: bold;
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .gt {
+  color: #aa0000;
+}
+.highlight .kc {
+  color: #000000;
+}
+.highlight .kd {
+  color: #000000;
+}
+.highlight .kn {
+  color: #000000;
+}
+.highlight .kp {
+  color: #000000;
+}
+.highlight .kr {
+  color: #000000;
+}
+.highlight .kt {
+  color: #445588;
+}
+.highlight .m {
+  color: #009999;
+}
+.highlight .s {
+  color: #d01040;
+}
+.highlight .na {
+  color: #008080;
+}
+.highlight .nb {
+  color: #0086B3;
+}
+.highlight .nc {
+  color: #445588;
+}
+.highlight .no {
+  color: #008080;
+}
+.highlight .nd {
+  color: #3c5d5d;
+}
+.highlight .ni {
+  color: #800080;
+}
+.highlight .ne {
+  color: #990000;
+}
+.highlight .nf {
+  color: #990000;
+}
+.highlight .nl {
+  color: #990000;
+}
+.highlight .nn {
+  color: #555555;
+}
+.highlight .nt {
+  color: #000080;
+}
+.highlight .nv {
+  color: #008080;
+}
+.highlight .ow {
+  color: #000000;
+}
+.highlight .w {
+  color: #bbbbbb;
+}
+.highlight .mf {
+  color: #009999;
+}
+.highlight .mh {
+  color: #009999;
+}
+.highlight .mi {
+  color: #009999;
+}
+.highlight .mo {
+  color: #009999;
+}
+.highlight .sb {
+  color: #d01040;
+}
+.highlight .sc {
+  color: #d01040;
+}
+.highlight .sd {
+  color: #d01040;
+}
+.highlight .s2 {
+  color: #d01040;
+}
+.highlight .se {
+  color: #d01040;
+}
+.highlight .sh {
+  color: #d01040;
+}
+.highlight .si {
+  color: #d01040;
+}
+.highlight .sx {
+  color: #d01040;
+}
+.highlight .sr {
+  color: #009926;
+}
+.highlight .s1 {
+  color: #d01040;
+}
+.highlight .ss {
+  color: #990073;
+}
+.highlight .bp {
+  color: #999999;
+}
+.highlight .vc {
+  color: #008080;
+}
+.highlight .vg {
+  color: #008080;
+}
+.highlight .vi {
+  color: #008080;
+}
+.highlight .il {
+  color: #009999;
+}
+
+/*# sourceMappingURL=main.css.map */

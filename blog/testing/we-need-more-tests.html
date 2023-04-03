@@ -1,121 +1,135 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>We need more tests | imdhemy</title>
-<meta name="generator" content="Jekyll v4.2.2" />
-<meta property="og:title" content="We need more tests" />
-<meta name="author" content="Mohamad Eldhemy" />
-<meta property="og:locale" content="en_US" />
-<meta name="description" content="Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it." />
-<meta property="og:description" content="Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it." />
-<link rel="canonical" href="https://imdhemy.com/blog/testing/we-need-more-tests.html" />
-<meta property="og:url" content="https://imdhemy.com/blog/testing/we-need-more-tests.html" />
-<meta property="og:site_name" content="imdhemy" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-01-31T06:05:51+00:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="We need more tests" />
-<script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Mohamad Eldhemy"},"dateModified":"2022-01-31T06:05:51+00:00","datePublished":"2022-01-31T06:05:51+00:00","description":"Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.","headline":"We need more tests","mainEntityOfPage":{"@type":"WebPage","@id":"https://imdhemy.com/blog/testing/we-need-more-tests.html"},"url":"https://imdhemy.com/blog/testing/we-need-more-tests.html"}</script>
-<!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css?t=2022-12-16-08-56"><link type="application/atom+xml" rel="alternate" href="https://imdhemy.com/feed.xml" title="imdhemy" /><!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WG1WZ488DX"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WG1WZ488DX');
-</script>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>We need more tests</title>
+    <meta name="description"
+          content="Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need mor...">
+    <link rel="canonical" href="https://imdhemy.com/blog/testing/we-need-more-tests.html">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
 </head>
-<body><div class="container mx-auto pt-7 pb-7">
-    <header class="flex flex-row">
-        <!-- Brand start-->
-        <div class="p-5">
-            <a href="/" class="flex justify-start items-center mr-3 hover:no-underline block">
-                <img class="w-5 h-5 lg:w-10 lg:h-10" src="/logo.png" alt="imdhemy">
-                <span class="font-bold text-xl lg:text-4xl text-black font-sans">imdhemy</span>
-            </a>
-        </div>
-        <!-- Brand End -->
+<body class="min-h-screen">
+<div class="min-h-screen">
+    <header class="relative" id="main-header">
+    <div class="container mx-auto">
+        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+            <!-- begin logo -->
+            <div class="flex-auto">
+                <div>
+                    <a href="/" class="text-gray-900 text-3xl font-bold">
+                        Imdhemy
+                    </a>
+                </div>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="flex-auto">
+                <div class="flex justify-end lg:hidden">
+                    <button type="button">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                </div>
 
-        <!-- Mobile Navigation Start -->
-        <div class="flex-auto flex justify-end p-5 lg:hidden">
-            <button id="nav-controller" class="focus:outline-none block">
-                <ion-icon class="text-4xl w-10 h-10 p-0 m-0" name="menu-outline"></ion-icon>
-            </button>
-            <div id="mobile-nav-menu" class="fixed bg-white right-0 bottom-0 left-0 hidden">
-                <div class="flex h-full justify-center p-10">
-                    <ul class="flex flex-col justify-center text-left p-0 m-0">
+                <div class="hidden lg:flex justify-end">
+                    <ul class="flex items-center">
                         
+                        <li class="ml-10">
+                            <a href="/"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
                         
-                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/">Home</a></li>
+                        <li class="ml-10">
+                            <a href="/blog"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
                         
-                        
-                        
-                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/blog">Blog</a></li>
-                        
-                        
-                        
-                        <li class="text-3xl font-light mobile-nav-link-item"><a href="/about">About</a></li>
-                        
+                        <li class="ml-10">
+                            <a href="/about"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
                         
                     </ul>
                 </div>
+                <!-- end right part -->
             </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="-z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
+                <div class="ml-auto">
+                    <ul class="p-0 m-0 flex-column items-center">
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/blog"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/about"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
         </div>
-        <!-- Mobile Navigation End -->
-
-        <!-- Desktop Navigation Start -->
-        <div class="hidden lg:block flex-auto flex p-5">
-            
-            
-            <ul class="flex justify-end text-left p-0 m-0">
-                
-                
-                
-                
-                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/">Home</a></li>
-                
-                
-                
-                
-                
-                
-                <li class="text-xl font-light mobile-nav-link-item nav-item nav-item-active"><a href="/blog">Blog</a></li>
-                
-                
-                
-                
-                
-                
-                <li class="text-xl font-light mobile-nav-link-item nav-item"><a href="/about">About</a></li>
-                
-                
-                
-            </ul>
-        </div>
-        <!-- Desktop Navigation End -->
-    </header>
-</div>
-<main class="container mx-auto lg:w-2/3" aria-label="Content">
-    <header class="container mx-auto p-5 text-center">
-    <h1 class="post-title p-name" itemprop="name headline">We need more tests</h1>
-    <p class="post-meta">
-        <time class="dt-published" datetime="2022-01-31T06:05:51+00:00" itemprop="datePublished">Jan 31, 2022
-        </time>
-        
-        • <span>testing</span>
-        
-    </p>
+    </div>
 </header>
 
-<article class="bg-white rounded-lg filter drop-shadow-md lg:ml-0 lg:mr-0 ml-5 mr-5 mb-20" itemscope itemtype="http://schema.org/BlogPosting">
+    <main>
+        <div class="max-w-screen-lg mx-auto bg-white p-5">
+    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">We need more tests</h1>
+</div>
 
-    <div class="p-5 post-content" itemprop="articleBody">
-        <p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi), my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.</p>
+<div class="max-w-screen-md mx-auto bg-white p-5">
+    <div class="flex justify-between flex-wrap my-2">
+        <div class="flex items-center mr-8">
+            <img src="/theme/images/avatar.jpeg" alt=""
+                 class="rounded-full w-10 h-10 mr-3 block"/>
+            <div>
+                <p class="text-gray-700 text-sm font-bold">Dhemy</p>
+                <p class="text-gray-500 text-xs">
+                    January 31, 2022 - 5 min read
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+    </div>
+
+    
+</div>
+
+
+<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+    <p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi), my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.</p>
 
 <p>There’s a reason for optimism about your own code because you wrote it, it works, and you did your best following the best practices of clean code, but is that enough to merge and release this code? TBH, No!</p>
 
@@ -204,59 +218,29 @@ Having a low test coverage is an indication of a bad test suite, but having a hi
 
 <p><strong>Manténganse al tanto</strong></p>
 
-    </div><a class="u-url" href="/blog/testing/we-need-more-tests.html" hidden></a>
+</div>
 
-    <div class="lg:flex bg-sky-100 border-t-2 border-sky-300 justify-between p-4 text-lg rounded-br-lg rounded-bl-lg">
-        <div class="flex flex-col justify-center mb-4 lg:mb-0">
-            
-           <div class="text-center">
-               <p class="uppercase">Previous Post</p>
-               <a href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html">&larr;PHP Real-world use cases of singleton design pattern</a>
-           </div>
-            
-        </div>
 
-        <div class="flex flex-col justify-center">
-            
-            <div class="text-center">
-                <p class="uppercase">Next Post</p>
-                <a class="next" href="/blog/dsa/math-notes-about-sum-formulas.html">Math Notes about Sum Formulas&rarr;</a>
-            </div>
-            
-        </div>
-
-    </div>
-</article>
-
-</main><footer class="bg-white">
-    <div class="container mx-auto lg:p-0 p-5">
-        <div class="flex flex-col justify-center pt-10 pb-10 text-lg">
-            <div class="flex-1 text-center">
-                <p>Let's get together</p>
-                <ul class="footer-social-links p-0 m-0">
-                    
-                    <li class="inline"><a href="https://twitter.com/imdhemy">Twitter</a></li>
-                    
-                    <li class="inline"><a href="https://github.com/imdhemy">Github</a></li>
-                    
-                    <li class="inline"><a href="https://linkedin.com/in/imdhemy">Linkedin</a></li>
-                    
-                </ul>
-            </div>
-
-            <div class="flex-1 text-center mt-10">
-                <p>&copy; 2021 - 2022 imdhemy.com</p>
-            </div>
+    </main>
+    <section class="sticky top-[100vh]">
+    <div class="p-10">
+        <div class="max-w-screen-md mx-auto">
+            <p class="text-center">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2023 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
         </div>
     </div>
-</footer>
+</section>
 
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js"></script>
+</div>
 
+
+<!-- Ion icons -->
 <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-<script src="https://imdhemy.com/assets/js/script.js?v=2022-12-16-08-56"></script>
-</body>
 
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
 </html>
