@@ -29,6 +29,10 @@ github_username:  imdhemy
 # Build settings
 # -------------------------------------------------------------------------------------------------
 remote_theme: imdhemy/imdhemy-jekyll-theme
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - bin/
 
 plugins:
   - jekyll-feed
