@@ -129,20 +129,29 @@
 
 
 <div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
-    <p class="note">
+    <div class="caution">
+<p>
 Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. 
 This article is intended to v 7.x and lower. For v 8.0 you can use the <a href="https://github.
 com/imdhemy/es-testing-utils">Es Utils package</a>.
 </p>
+</div>
 
-<p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
+<p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch
+client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
 
-<p>One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let’s start with a short note about the Practical Test Pyramid.</p>
+<p>One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service,
+you often need to simulate specific scenarios like returning a successful response, returning an error, or returning
+particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests
+for Elasticsearch in your PHP application. Let’s start with a short note about the Practical Test Pyramid.</p>
 
 <h3 id="practical-test-pyramid">Practical Test Pyramid</h3>
+
 <p><img src="/assets/img/test-pyramid.png" alt="Test Pyramid" /></p>
 
-<p>In his book <a href="https://www.goodreads.com/book/show/6707987-succeeding-with-agile"><em>Succeeding With Agile</em></a><em>,</em> Mike Cohn came up with the Test Pyramid concept. Test Pyramid tells you to think about different layers of testing. It also tells you how much testing to do on each layer. It consists of three layers from the bottom up:</p>
+<p>In his book <a href="https://www.goodreads.com/book/show/6707987-succeeding-with-agile"><em>Succeeding With Agile</em></a><em>,</em> Mike Cohn came up with the Test Pyramid concept. Test Pyramid tells you to
+think about different layers of testing. It also tells you how much testing to do on each layer. It consists of three
+layers from the bottom up:</p>
 
 <ul>
   <li>Unit Tests.</li>
@@ -158,7 +167,8 @@ com/imdhemy/es-testing-utils">Es Utils package</a>.
   <li>End to End Tests.</li>
 </ul>
 
-<p>As a rule of thumb, stick to the pyramid shape to come up with a healthy, fast, and maintainable test suite. Below is a list of tips to follow:</p>
+<p>As a rule of thumb, stick to the pyramid shape to come up with a healthy, fast, and maintainable test suite. Below is a
+list of tips to follow:</p>
 
 <ol>
   <li>Write tests with different granularity</li>
@@ -172,7 +182,8 @@ com/imdhemy/es-testing-utils">Es Utils package</a>.
 
 <h3 id="how-to-unit-test-elasticsearch-in-php">How to Unit Test Elasticsearch in PHP</h3>
 
-<p>Unit tests <a href="https://github.com/elastic/elasticsearch-php/pull/618#issuecomment-323816444">shouldn’t depend on a running cluster</a>, should be mocked out instead. To be more specific the client response should be mocked.</p>
+<p>Unit tests <a href="https://github.com/elastic/elasticsearch-php/pull/618#issuecomment-323816444">shouldn’t depend on a running cluster</a>, should be mocked out instead. To be more specific the client
+response should be mocked.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">GuzzleHttp\Ring\Client\MockHandler</span><span class="p">;</span>
 <span class="kn">use</span> <span class="nc">Elasticsearch\ClientBuilder</span><span class="p">;</span>
@@ -194,7 +205,9 @@ com/imdhemy/es-testing-utils">Es Utils package</a>.
 <span class="c1">// Do a request and you'll get back the 'body' response above</span>
 </code></pre></div></div>
 
-<p>The previous example is provided by the official package maintainers. Besides, I don’t like the idea of using JSON files, we may need to override some values or options during the runtime. This is why I created <a href="https://github.com/imdhemy/testing-es-in-php/tree/master/tests/Utils">these Utils</a> to be used as follows:</p>
+<p>The previous example is provided by the official package maintainers. Besides, I don’t like the idea of using JSON
+files, we may need to override some values or options during the runtime. This is why I created <a href="https://github.com/imdhemy/testing-es-in-php/tree/master/tests/Utils">these Utils</a> to be
+used as follows:</p>
 
 <hr />
 <p><strong>[UPDATE: 5 November 2021: 02:21 PM]</strong>
@@ -205,7 +218,8 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$handler</span> <span class="o">=</span> <span class="nc">MockHandler</span><span class="o">::</span><span class="nf">_mockTemplate_</span><span class="p">(</span><span class="s1">'index_document'</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>Just provide the template name to the <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Utils/MockHandler.php#L45">static method</a>, and it will do the rest for you. <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/fixtures/responses/index_document.php">The template</a> is a PHP file that returns an array representing the expected client response.</p>
+<p>Just provide the template name to the <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Utils/MockHandler.php#L45">static method</a>, and it will do the rest for you. <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/fixtures/responses/index_document.php">The template</a> is a PHP
+file that returns an array representing the expected client response.</p>
 
 <p><strong>Here is an example of a unit test</strong></p>
 
@@ -241,9 +255,18 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 
 <h3 id="how-to-add-integration-tests-to-elasticsearch-in-php">How to add Integration Tests to Elasticsearch in PHP</h3>
 
-<p>For this part, you don’t just need to run your application but also the component you’re integrating with, Elasticsearch in our case. To automate this process I’m going to use <a href="https://circleci.com/">CircleCI</a>. CircleCI integrates with GitHub and Bitbucket, in our example project we will use Github, but you can do the same on Bitbucket.</p>
+<div class="info">
+ Github actions, Bitbucket pipelines and other CI/CD tools could be used to start Elasticsearch to run integration tests.
+ The following example uses CircleCI, but it would be much better if you used the same tool you're using in your project
+without depending on a third-party service.
+</div>
 
-<p>Let’s create our configuration file. Don’t be worry if you didn’t use CircleCI before, all you need is to understand the following YAML file.</p>
+<p>For this part, you don’t just need to run your application but also the component you’re integrating with, Elasticsearch
+in our case. To automate this process I’m going to use <a href="https://circleci.com/">CircleCI</a>. CircleCI integrates with GitHub and Bitbucket, in
+our example project we will use Github, but you can do the same on Bitbucket.</p>
+
+<p>Let’s create our configuration file. Don’t be worry if you didn’t use CircleCI before, all you need is to understand the
+following YAML file.</p>
 
 <p>on <code class="language-plaintext highlighter-rouge">.circleci/config.yml</code></p>
 
@@ -287,13 +310,16 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 
 </code></pre></div></div>
 
-<p>I’m using docker images to build my application, <code class="language-plaintext highlighter-rouge">#1</code> for <strong>PHP8.0</strong> and <code class="language-plaintext highlighter-rouge">#2</code> for the <strong>Elasticsearch</strong> prebuild image. CircleCI provides other ways to start your machine, but docker 🐳 is super easy to use.</p>
+<p>I’m using docker images to build my application, <code class="language-plaintext highlighter-rouge">#1</code> for <strong>PHP8.0</strong> and <code class="language-plaintext highlighter-rouge">#2</code> for the <strong>Elasticsearch</strong> prebuild image.
+CircleCI provides other ways to start your machine, but docker 🐳 is super easy to use.</p>
 
 <p><code class="language-plaintext highlighter-rouge">#3</code> is the environment variables used for Elasticsearch configuration.</p>
 
-<p>Number <code class="language-plaintext highlighter-rouge">#4</code> shows the build job steps, but give more attention to <code class="language-plaintext highlighter-rouge">#5</code> which allows our test suites to wait for Elasticsearch to be ready. Finally, on <code class="language-plaintext highlighter-rouge">#6</code> we are using composer to run PHPUnit Tests.</p>
+<p>Number <code class="language-plaintext highlighter-rouge">#4</code> shows the build job steps, but give more attention to <code class="language-plaintext highlighter-rouge">#5</code> which allows our test suites to wait for
+Elasticsearch to be ready. Finally, on <code class="language-plaintext highlighter-rouge">#6</code> we are using composer to run PHPUnit Tests.</p>
 
-<p><strong>Let’s add the first integration test.</strong> For your local development, you can depend on the docker-compose to start Elasticsearch.</p>
+<p><strong>Let’s add the first integration test.</strong> For your local development, you can depend on the docker-compose to start
+Elasticsearch.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up -d
 </code></pre></div></div>
@@ -314,6 +340,7 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 <span class="p">}</span>
 
 </code></pre></div></div>
+
 <p><strong>Final steps:</strong></p>
 
 <p><img src="/assets/img/circle-ci-es-php-app.png" alt="CircleCi Dashboard" /></p>
@@ -326,7 +353,8 @@ I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-t
 
 <h3 id="summary">Summary</h3>
 
-<p>I have created a <a href="https://github.com/imdhemy/testing-es-in-php">repository of an example application</a>. You can clone it and start playing with code. It requires PHP.8 installed on your host machine. If you prefer PHP7, you can checkout to PHP7.3 branch.</p>
+<p>I have created a <a href="https://github.com/imdhemy/testing-es-in-php">repository of an example application</a>. You can clone it and start playing with code. It requires
+PHP.8 installed on your host machine. If you prefer PHP7, you can checkout to PHP7.3 branch.</p>
 
 <p>It would be better if completed the exercises I added for you.</p>
 
