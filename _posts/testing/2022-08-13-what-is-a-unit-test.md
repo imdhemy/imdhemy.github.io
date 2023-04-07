@@ -20,9 +20,9 @@ You should already know about test automation. Given a piece of code, you
 can write another piece of code that verifies the behavior of the first. The 
 second piece of code is called a unit test.
 
-<p class="note">
-A unit test should verify a small piece of code in isolation quickly.
-</p> 
+<div class="tip">
+    <p>A unit test should verify a small piece of code in isolation quickly.</p>
+</div>
 
 As you can see, a unit test has three characteristics:
 - Verifies a small piece of code.
@@ -33,11 +33,11 @@ A small piece of code could be a function, a class, a method, or whatever
 you can call a unit. If your test suite's execution time is good enough to 
 you, it means tests are quick enough. 
 
-<p class="note">
+<div class="tip">
 A <i>unit</i> in unit testing is a unit of behaviour, not a unit of 
 <i>code</i>. This behaviour can span across as many as several classes or as 
 a single method, but it should have a single entry point to trigger the behaviour.
-</p>
+</div>
 
 No doubt, the first two characteristics are non-controversial. The third one, isolation, is 
 controversial. When it comes to isolation, there are two takes, the Mockist 
@@ -67,15 +67,9 @@ the mockist test will not detect it, it depends on a non-updated mock. Tests
 should be sensitive to the behavior changes and insensitive to the 
 structural changes.
 
-<div class="quote">
-If I care about the order of operations, I've designed the system wrong. — 
-Kent Beck (the Detroit School).
-</div>
+> If I care about the order of operations, I've designed the system wrong. — **Kent Beck (the Detroit School).**
 
-<div class="quote">
-If I have an object that has behaviour, and I’m doing “Tell, Don’t Ask” then 
-I can only test interactions. — Steve Freeman (the London School)
-</div>
+> If I have an object that has behaviour, and I’m doing “Tell, Don’t Ask” then I can only test interactions. — **Steve Freeman (the London School)**
 
 ## When to mock vs when to use real dependencies
 Hopefully, it's clear now that I prefer the Classicist take. In the 
