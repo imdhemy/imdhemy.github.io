@@ -72,6 +72,7 @@ structural changes.
 > If I have an object that has behaviour, and I’m doing “Tell, Don’t Ask” then I can only test interactions. — **Steve Freeman (the London School)**
 
 ## When to mock vs when to use real dependencies
+
 Hopefully, it's clear now that I prefer the Classicist take. In the 
 classicist take, it's not the code that needs to be tested in an isolated 
 manner. Instead, the unit tests themselves should be run in isolation from 
