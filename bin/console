@@ -7,7 +7,7 @@ set -e
 # Start the application
 start() {
   echo "Starting the server..."
-  jekyll serve --watch --drafts
+  jekyll serve --watch --drafts --open
 }
 
 # Run the command or display the help
