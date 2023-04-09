@@ -23,7 +23,7 @@ github:
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://imdhemy.com" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: imdhemy
-github_username:  imdhemy
+github_username: imdhemy
 
 # -------------------------------------------------------------------------------------------------
 # Build settings
@@ -59,11 +59,11 @@ jekyll-archives:
 # Author
 # -------------------------------------------------------------------------------------------------
 author:
-  name: "Dhemy"
+  name: Dhemy
   description: |
     I'm a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
     Passionate about open source, blogging, and reading.
-  avatar: "theme/images/avatar.jpeg"
+  avatar: /theme/images/avatar.jpeg
 
 # -------------------------------------------------------------------------------------------------
 # Navigation
