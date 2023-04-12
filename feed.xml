@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-09T22:12:59+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-12T21:42:21+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
 </subtitle><author><name>Dhemy</name></author><entry><title type="html">Back to dark theme</title><link href="https://imdhemy.com/blog/generic/back-to-dark-theme.html" rel="alternate" type="text/html" title="Back to dark theme" /><published>2023-04-09T00:00:00+00:00</published><updated>2023-04-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/back-to-dark-theme</id><content type="html" xml:base="https://imdhemy.com/blog/generic/back-to-dark-theme.html"><![CDATA[<p>I always liked dark themes, but I came across
 this <a href="https://stitcher.io/blog/why-light-themes-are-better-according-to-science">blog post</a> by Brent, and I thought I’d
@@ -745,29 +745,50 @@ $$ S = \frac{n(a + l)}{2} $$
 <p>Fibonacci numbers form an interesting sequence of numbers in which each element is obtained by adding two preceding elements and the sequence starts with <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code>.</p>
 
 <p>Sequence is defined as, 
-\(F_{0} = 0\) and \(F_{1} = 1\) and \(F_{n} = F_{n-1} + F_{n-2}\)</p>]]></content><author><name>Dhemy</name></author><category term="DSA" /><summary type="html"><![CDATA[I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.]]></summary></entry><entry><title type="html">We need more tests</title><link href="https://imdhemy.com/blog/testing/we-need-more-tests.html" rel="alternate" type="text/html" title="We need more tests" /><published>2022-01-31T06:05:51+00:00</published><updated>2022-01-31T06:05:51+00:00</updated><id>https://imdhemy.com/blog/testing/we-need-more-tests</id><content type="html" xml:base="https://imdhemy.com/blog/testing/we-need-more-tests.html"><![CDATA[<p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi), my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.</p>
+\(F_{0} = 0\) and \(F_{1} = 1\) and \(F_{n} = F_{n-1} + F_{n-2}\)</p>]]></content><author><name>Dhemy</name></author><category term="DSA" /><summary type="html"><![CDATA[I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.]]></summary></entry><entry><title type="html">We need more tests</title><link href="https://imdhemy.com/blog/testing/we-need-more-tests.html" rel="alternate" type="text/html" title="We need more tests" /><published>2022-01-31T06:05:51+00:00</published><updated>2022-01-31T06:05:51+00:00</updated><id>https://imdhemy.com/blog/testing/we-need-more-tests</id><content type="html" xml:base="https://imdhemy.com/blog/testing/we-need-more-tests.html"><![CDATA[<p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi),
+my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke
+about Covid-19, but I believe he totally meant it.</p>
 
-<p>There’s a reason for optimism about your own code because you wrote it, it works, and you did your best following the best practices of clean code, but is that enough to merge and release this code? TBH, No!</p>
+<p>There’s a reason for optimism about your own code because you wrote it, it works, and you did your best following the
+best practices of clean code, but is that enough to merge and release this code? TBH, No!</p>
 
-<p>Moi doesn’t mean the quantity, but actually he meant the quality of tests we wrote to avoid the <a href="https://www.atlassian.com/agile/software-development/technical-debt">technical debt</a> as much as possible by having <a href="https://www.linkedin.com/feed/update/urn:li:activity:6886937179793223680?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A6886937179793223680%2C6888937049659854849%29">a strict definition of Done</a>. In this article, I’m discussing the metrics of code coverage, are they reliable enough? de we really need more tests? How to measure a test suite quality? Vamos!</p>
+<p>Moi doesn’t mean the quantity, but actually he meant the quality of tests we wrote to avoid
+the <a href="https://www.atlassian.com/agile/software-development/technical-debt">technical debt</a> as much as possible by
+having <a href="https://www.linkedin.com/feed/update/urn:li:activity:6886937179793223680?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A6886937179793223680%2C6888937049659854849%29">a strict definition of Done</a>.
+In this article, I’m discussing the metrics of code coverage, are they reliable enough? de we really need more tests?
+How to measure a test suite quality? Vamos!</p>
 
 <h2 id="what-is-the-goal-of-unit-testing">What is the goal of unit testing?</h2>
 
-<p>A simple question, yet one that must be addressed! The goal of unit testing is to allow <strong>sustainable growth</strong> of the software project. When you start a new project, you make progress so quickly, and get results with a little slaps on your keyboard. No bad architectural decisions have been made yet. No requirement changes or existing code to worry about. Actually, nothing is dragging you back. Eventually, the development speed slows down, and adding a new feature may break another.</p>
+<p>A simple question, yet one that must be addressed! The goal of unit testing is to allow <strong>sustainable growth</strong> of the
+software project. When you start a new project, you make progress so quickly, and get results with a little slaps on
+your keyboard. No bad architectural decisions have been made yet. No requirement changes or existing code to worry
+about. Actually, nothing is dragging you back. Eventually, the development speed slows down, and adding a new feature
+may break another.</p>
 
-<p>As per wikipedia, the idea that software eventually rots as it is changed is called <strong>Software entropy</strong>. Any code modification leads to an amount of disorder in your code base. Leaving entropy without proper care, such as constant cleaning and refactoring, the system becomes increasingly complex and disorganized.</p>
+<p>As per wikipedia, the idea that software eventually rots as it is changed is called <strong>Software entropy</strong>. Any code
+modification leads to an amount of disorder in your code base. Leaving entropy without proper care, such as constant
+cleaning and refactoring, the system becomes increasingly complex and disorganized.</p>
 
-<p>Software entropy is tied to the notion of change and has no meaning in a static system. If there is no intent to alter the system, we cannot speak of its entropy. One more idea to put in mind, when software entropy overwhelms a project, the project freezes!</p>
+<p>Software entropy is tied to the notion of change and has no meaning in a static system. If there is no intent to alter
+the system, we cannot speak of its entropy. One more idea to put in mind, when software entropy overwhelms a project,
+the project freezes!</p>
 
-<p>Tests act as a safety net. Tests help make sure the existing functionality works, even after you introduce new features or refactor the code to better fit new requirements. Besides, it helps have a well-designed software.</p>
+<p>Tests act as a safety net. Tests help make sure the existing functionality works, even after you introduce new features
+or refactor the code to better fit new requirements. Besides, it helps have a well-designed software.</p>
 
 <h2 id="dont-just-throw-more-tests">Don’t just throw more tests</h2>
 
-<p>Not all tests are created equal. Some of them are valuable and contribute a lot to overall software quality. Others don’t. You can’t achieve the goal of unit testing by just throwing more tests at the project. Let’s discuss the <strong>QUANTITY</strong> aspect.</p>
+<p>Not all tests are created equal. Some of them are valuable and contribute a lot to overall software quality. Others
+don’t. You can’t achieve the goal of unit testing by just throwing more tests at the project. Let’s discuss the *
+*QUANTITY** aspect.</p>
 
-<p><strong>Coverage metrics</strong> are used to show how much source code tests execute. It gives you a percentage from <code class="language-plaintext highlighter-rouge">0%</code> (No source code executed) to <code class="language-plaintext highlighter-rouge">100%</code> (It covers all lines of code).</p>
+<p><strong>Coverage metrics</strong> are used to show how much source code tests execute. It gives you a percentage from <code class="language-plaintext highlighter-rouge">0%</code> (No source
+code executed) to <code class="language-plaintext highlighter-rouge">100%</code> (It covers all lines of code).</p>
 
-<p>If a metric shows that is there too little coverage in your code base, say, only <code class="language-plaintext highlighter-rouge">10%</code>. That’s a good indication that you are not testing enough. But the reverse isn’t true: even <code class="language-plaintext highlighter-rouge">100%</code> coverage isn’t a guarantee that you have a good-quality test suite. A test suite that provides high coverage can still be of poor quality.</p>
+<p>If a metric shows that is there too little coverage in your code base, say, only <code class="language-plaintext highlighter-rouge">10%</code>. That’s a good indication that
+you are not testing enough. But the reverse isn’t true: even <code class="language-plaintext highlighter-rouge">100%</code> coverage isn’t a guarantee that you have a
+good-quality test suite. A test suite that provides high coverage can still be of poor quality.</p>
 
 <p>Consider the following example, using the code coverage as a metric.</p>
 
@@ -779,9 +800,9 @@ $$ S = \frac{n(a + l)}{2} $$
 4
 5
 </pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="n">bool</span> <span class="nf">isBig</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// Not covered with test</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+<span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">)</span>
+<span class="k">return</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// Not covered with test</span>
+<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
@@ -801,30 +822,42 @@ $$ S = \frac{n(a + l)}{2} $$
 \[Code\ coverage = \frac{4}{5} = 0.8 = 80\%\]
 
 <p>Now, with the same test, what if we refactored our function to remove the unnecessary if condition:</p>
+
 <div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">bool</span> <span class="nf">isBig</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
     <span class="k">return</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">;</span>
 <span class="o">}</span>
 </code></pre></div></div>
-<p>When running our test again, it executes the full lines of code with <code class="language-plaintext highlighter-rouge">100%</code> coverage! The test still verifies the same number of possible outcomes and without any improvement to our test suite, the test coverage percentage raised from <code class="language-plaintext highlighter-rouge">80%</code> to <code class="language-plaintext highlighter-rouge">100%</code>.</p>
+
+<p>When running our test again, it executes the full lines of code with <code class="language-plaintext highlighter-rouge">100%</code> coverage! The test still verifies the same
+number of possible outcomes and without any improvement to our test suite, the test coverage percentage raised
+from <code class="language-plaintext highlighter-rouge">80%</code> to <code class="language-plaintext highlighter-rouge">100%</code>.</p>
 
 <p class="note">
 Having a low test coverage is an indication of a bad test suite, but having a high number tells nothing about the <strong>QUALITY</strong> of the test suite.
 </p>
 
-<p>To enable sustainable project growth, you have to focus on high quality tests. Those are the only type of tests that are worth keeping in the test suite.</p>
+<p>To enable sustainable project growth, you have to focus on high quality tests. Those are the only type of tests that are
+worth keeping in the test suite.</p>
 
 <h2 id="how-to-measure-a-test-suite-quality">How to measure a test suite quality?</h2>
 
-<p>The only reliable way to measure a test suite quality is to evaluate each test individually. The point is there is no automated way to see how good your test suite. You have to apply your personal judgement.</p>
+<p>The only reliable way to measure a test suite quality is to evaluate each test individually. The point is there is no
+automated way to see how good your test suite. You have to apply your personal judgement.</p>
 
-<p>The only point in having automated tests is if you constantly use them. All tests should be integrated into the development cycle, you should execute them on every change, even the smallest one.</p>
+<p>The only point in having automated tests is if you constantly use them. All tests should be integrated into the
+development cycle, you should execute them on every change, even the smallest one.</p>
 
-<p>It’s important to direct your unit testing efforts to the most critical parts of the system and verify the others only briefly or indirectly. In most applications, the most important part is the part that contains the business logic (The Domain Model).</p>
+<p>It’s important to direct your unit testing efforts to the most critical parts of the system and verify the others only
+briefly or indirectly. In most applications, the most important part is the part that contains the business logic (The
+Domain Model).</p>
 
 <h2 id="whats-next">What’s next?</h2>
-<p>The only way to achieve the goal of unit testing is to learn how to differentiate between a good and a bad test, and you should be able to refactor the test to make it more valuable.</p>
 
-<p>I’ll discuss testing more and more in the next articles. This series of articles are inspired by a list of books and courses including:</p>
+<p>The only way to achieve the goal of unit testing is to learn how to differentiate between a good and a bad test, and you
+should be able to refactor the test to make it more valuable.</p>
+
+<p>I’ll discuss testing more and more in the next articles. This series of articles are inspired by a list of books and
+courses including:</p>
 
 <ul>
   <li>TDD Tutorial by Laracasts.</li>
