@@ -57,9 +57,9 @@ Consider the following example, using the code coverage as a metric.
 
 {% highlight java linenos %}
 public static bool isBig(int num) {
-if (num > 5)
-return true; // Not covered with test
-return false;
+    if (num > 5)
+        return true; // Not covered with test
+    return false;
 }
 {% endhighlight %}
 
