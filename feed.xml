@@ -1,6 +1,101 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-15T20:27:24+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-16T17:24:35+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Back to dark theme</title><link href="https://imdhemy.com/blog/generic/back-to-dark-theme.html" rel="alternate" type="text/html" title="Back to dark theme" /><published>2023-04-09T00:00:00+00:00</published><updated>2023-04-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/back-to-dark-theme</id><content type="html" xml:base="https://imdhemy.com/blog/generic/back-to-dark-theme.html"><![CDATA[<p>I always liked dark themes, but I came across
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Hidden Gems in Composer Every PHP Developer Should Know</title><link href="https://imdhemy.com/blog/php/hidden-gems-in-composer.html" rel="alternate" type="text/html" title="Hidden Gems in Composer Every PHP Developer Should Know" /><published>2023-04-16T00:00:00+00:00</published><updated>2023-04-16T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/hidden-gems-in-composer</id><content type="html" xml:base="https://imdhemy.com/blog/php/hidden-gems-in-composer.html"><![CDATA[<p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>
+
+<p>Composer is the most popular PHP dependency manager. I’ve heard about other package managers like <code class="language-plaintext highlighter-rouge">PEAR</code> &amp; <code class="language-plaintext highlighter-rouge">Phing</code>, but
+I’ve never used them. While many developers are familiar with basic Composer commands like <code class="language-plaintext highlighter-rouge">install</code>, <code class="language-plaintext highlighter-rouge">update</code>,
+and <code class="language-plaintext highlighter-rouge">require</code>, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this
+blog post, We’ll explore some of these hidden gems.</p>
+
+<h2 id="1-composer-bump--composer-audit">1. composer bump &amp; composer audit</h2>
+
+<p>Composer 4.2 added two new commands <code class="language-plaintext highlighter-rouge">composer bump</code> and <code class="language-plaintext highlighter-rouge">composer audit</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">composer bump</code> “bumps” the package version constraints listed in the composer.json file by increasing them to the
+latest version within the allowed constraints.</p>
+
+<p><code class="language-plaintext highlighter-rouge">composer audit</code>, scans the installed packages for reported security vulnerabilities. It exists with an error code if
+there are any packages installed with known security vulnerabilities.</p>
+
+<p>You can read more about them in the official <a href="https://php.watch/articles/composer-24">blog post</a>.</p>
+
+<h2 id="2-composer-outdated">2. composer outdated</h2>
+
+<p>Keeping your dependencies up-to-date is important for security and compatibility reasons. However, it can be
+time-consuming to manually check for updates to each package in your project. This is where <code class="language-plaintext highlighter-rouge">composer outdated</code> comes
+in. This command lists all the packages that have newer versions available, this comes with a color legend to help you
+determine which packages are recommended to update or just possible to update.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer outdated
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Color legend:
+- patch or minor release available - update recommended
+- major release available - update possible
+
+Direct dependencies required <span class="k">in </span>composer.json:
+blackfire/php-sdk                  v1.33.0            v1.35.0            Blackfire.io PHP SDK
+doctrine/annotations               1.14.3             2.0.1              Docblock Annotations Parser
+
+... Other packages are omitted <span class="k">for </span>brevity ...
+
+</code></pre></div></div>
+
+<h2 id="3-composer-show-latest">3. composer show –latest</h2>
+
+<p>Similar to composer outdated, <code class="language-plaintext highlighter-rouge">composer show --latest</code> shows you the latest version of each package that is available on
+the remote repository. This can be helpful for keeping track of the latest package versions and deciding when to update
+your project. The <code class="language-plaintext highlighter-rouge">composer show</code> command has a lot of other useful options that you can explore by running
+<code class="language-plaintext highlighter-rouge">composer show --help</code>.</p>
+
+<h2 id="4-composer-why--composer-why-not">4. composer why &amp; composer why-not</h2>
+
+<p>Sometimes, when you try to install a package with Composer, it fails due to dependency conflicts or other issues. In
+these situations, it can be difficult to determine why the package cannot be installed. This is where <code class="language-plaintext highlighter-rouge">composer why</code> and
+<code class="language-plaintext highlighter-rouge">composer why-not</code> come in.</p>
+
+<p><code class="language-plaintext highlighter-rouge">composer why</code> command tells you which other packages depend on a certain package. For example, you can run the
+following command to find out which packages depend on <code class="language-plaintext highlighter-rouge">vimeo/psalm</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer why vimeo/psalm
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">composer why-not</code> shows you a detailed explanation of why a package cannot be installed, including all the packages
+that are blocking it. This can be helpful for troubleshooting complex dependency issues. Specify a version constraint to
+verify whether upgrades can be performed in your project, and if not why not. See the following example to find out why
+PHPUnit 10 cannot be installed in your project:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer why-not phpunit/phpunit 10
+</code></pre></div></div>
+
+<h2 id="5-composer-with-dependencies">5. composer –with-dependencies</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">composer update</code>, <code class="language-plaintext highlighter-rouge">composer require</code>, and <code class="language-plaintext highlighter-rouge">composer remove</code> commands have a <code class="language-plaintext highlighter-rouge">--with-dependencies</code> and
+<code class="language-plaintext highlighter-rouge">--with-all-dependencies</code> option that can be used to update all the dependencies of a package. This can be useful when
+you want to update a package and all the packages that depend on it. For example, you can run the following command to
+update the <code class="language-plaintext highlighter-rouge">symfony/console</code> package and all the packages that depend on it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer update symfony/console <span class="nt">--with-dependencies</span>
+</code></pre></div></div>
+
+<p>There are shortcuts for these options, you can use <code class="language-plaintext highlighter-rouge">-W</code> and <code class="language-plaintext highlighter-rouge">-w</code> instead of <code class="language-plaintext highlighter-rouge">--with-dependencies</code> and
+<code class="language-plaintext highlighter-rouge">--with-all-dependencies</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--with-dependencies (-w)</code>: Update also dependencies of packages in the argument list, except those which are root
+requirements.</li>
+  <li><code class="language-plaintext highlighter-rouge">--with-all-dependencies (-W)</code>: Update also dependencies of packages in the argument list, including those which are
+root requirements.</li>
+</ul>
+
+<p>It’d be better to use the short versions as they work fine with different commands like <code class="language-plaintext highlighter-rouge">composer require</code> that has a
+<code class="language-plaintext highlighter-rouge">--update-with-dependencies (-w)</code> and <code class="language-plaintext highlighter-rouge">--update-with-all-dependencies (-W)</code> option.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Upgrading your dependencies can be a tedious task, but it’s important to keep your project up-to-date. Using the
+mentioned commands can help you resolve dependency issues and keep your project up-to-date. I hope you found this
+article useful.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Photo by Dayne Topkin on Unsplash]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Back to dark theme</title><link href="https://imdhemy.com/blog/generic/back-to-dark-theme.html" rel="alternate" type="text/html" title="Back to dark theme" /><published>2023-04-09T00:00:00+00:00</published><updated>2023-04-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/back-to-dark-theme</id><content type="html" xml:base="https://imdhemy.com/blog/generic/back-to-dark-theme.html"><![CDATA[<p>I always liked dark themes, but I came across
 this <a href="https://stitcher.io/blog/why-light-themes-are-better-according-to-science">blog post</a> by Brent, and I thought I’d
 give it a try. I installed the Light lite theme on my PHPStorm and WebStorm. In the beginning, it wasn’t comfortable,
 but I thought I just needed to get used to it and I could
@@ -1555,197 +1650,4 @@ PHP.8 installed on your host machine. If you prefer PHP7, you can checkout to PH
 <p><strong>Note:</strong> The previous example uses a parameterless <code class="language-plaintext highlighter-rouge">UserBuilder</code> constructor, but you should add the required attributes as parameters to confirm creating an object in a valid state.</p>
 
 <h2 id="summary">Summary</h2>
-<p>In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if much of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than the Fluent setters.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…).]]></summary></entry><entry><title type="html">Three advantages of using static factory methods in PHP</title><link href="https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html" rel="alternate" type="text/html" title="Three advantages of using static factory methods in PHP" /><published>2021-05-16T06:05:51+00:00</published><updated>2021-05-16T06:05:51+00:00</updated><id>https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/three-advantages-of-using-static-factory-methods-in-php.html"><![CDATA[<p>Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an <a href="https://github.com/briannesbitt/Carbon/blob/2.48.0/src/Carbon/Traits/Creator.php#L56:L97">example from the Carbon Library</a>.</p>
-
-<ul>
-  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is instance of the <code class="language-plaintext highlighter-rouge">DateTimeInterface</code>, it calls another private creator method <code class="language-plaintext highlighter-rouge">constructTimezoneFromDateTime</code>.</li>
-  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is a timestamp, it starts another journey with creator methods starting from <code class="language-plaintext highlighter-rouge">createFromTimestampUTC</code>.</li>
-  <li>If the <code class="language-plaintext highlighter-rouge">$time</code> is an empty string or is <code class="language-plaintext highlighter-rouge">"now"</code>, it creates a new object of the current time.</li>
-</ul>
-
-<p><strong>If PHP allows constructor overloading, we may have the following constructors:</strong></p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Carbon</span>
-<span class="p">{</span>   
-    <span class="cd">/**
-    * Carbon constructor.
-    */</span>
-    <span class="k">function</span> <span class="n">Carbon</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="c1">// construct with no params</span>
-    <span class="p">}</span>
-       
-     <span class="cd">/**
-     * Carbon constructor.
-     * @param Timestamp $timestamp
-     */</span>
-    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">Timestamp</span> <span class="nv">$timestamp</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">// construct using a timestamp param</span>
-    <span class="p">}</span>
-    
-    <span class="cd">/**
-    * Carbon constructor.
-    * @param DatetimeInterface $datetime
-    */</span>
-    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">DatetimeInterface</span> <span class="nv">$datetime</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">// construct from a DateTime</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-    * Carbon constructor.
-    * @param DateTimeInterface $dateTime
-    * @param DateTimeZone $timeZone
-    */</span>
-    <span class="k">function</span> <span class="n">Carbon</span><span class="p">(</span><span class="kt">DateTimeInterface</span> <span class="nv">$dateTime</span><span class="p">,</span> <span class="kt">DateTimeZone</span> <span class="nv">$timeZone</span><span class="p">)</span> 
-    <span class="p">{</span>
-        <span class="c1">// construct from a datetime &amp; timezone</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// Other constructors todo...</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>On instantiation, the debugger/interpreter will choose the proper constructor to use based on the parameter types, count, and order.</p>
-
-<p>Even If PHP was allowing constructor overloading, I’d go for another technique that should be a part of every programmer’s toolkit as Joshua Bloch mentioned in his book “<a href="https://www.goodreads.com/book/show/34927404-effective-java">Effective Java</a>”. A class can provide a public <em>static factory method</em>, which is simply a static method that returns an instance of the class.</p>
-
-<p>Let me show you another example from the Carbon Library:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$now</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">now</span><span class="p">();</span>
-<span class="nv">$tomorrow</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">tomorrow</span><span class="p">();</span>
-<span class="nv">$y2k</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">create</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span> <span class="c1">// year, month, day, hour, minute</span>
-<span class="nv">$fromDate</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromDate</span><span class="p">(</span><span class="nv">$year</span><span class="p">,</span> <span class="nv">$month</span><span class="p">,</span> <span class="nv">$day</span><span class="p">,</span> <span class="nv">$tz</span><span class="p">);</span>
-<span class="nv">$time</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromTimestamp</span><span class="p">(</span><span class="nb">time</span><span class="p">());</span>
-<span class="nv">$timeFromFormat</span> <span class="o">=</span> <span class="nc">Carbon</span><span class="o">::</span><span class="nf">createFromFormat</span><span class="p">(</span><span class="s1">'Y-m-d H'</span><span class="p">,</span> <span class="s1">'1990-09-07 22'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed!</p>
-
-<p>Another Good example is the <code class="language-plaintext highlighter-rouge">Request</code> <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php">class from Symfony</a>, which has a <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php#L258">long list of constructor params</a></p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$query</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$request</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$attributes</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$cookies</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$files</span> <span class="o">=</span> <span class="p">[],</span> <span class="kt">array</span> <span class="nv">$server</span> <span class="o">=</span> <span class="p">[],</span> <span class="nv">$content</span> <span class="o">=</span> <span class="kc">null</span><span class="p">){</span>
-<span class="c1">//</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>They provided a static factory method to instantiate this class <a href="https://github.com/symfony/http-foundation/blob/5.x/Request.php#L304">from globals</a>:</p>
-
-<p>You can check a fresh project of Symfony-5 to find the following line in <code class="language-plaintext highlighter-rouge">public/index.php</code></p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$request</span> <span class="o">=</span> <span class="nc">Request</span><span class="o">::</span><span class="nf">createFromGlobals</span><span class="p">();</span>
-</code></pre></div></div>
-
-<p>After this quite long introduction, let’s get into the topic. Here are three advantages to consider using static factory methods instead of constructors.</p>
-
-<h2 id="they-have-names">They have names</h2>
-<p>Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic-free constructors besides descriptive easy to remember static factory methods. Consider the following example:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Conversation</span>
-<span class="p">{</span>   
-    <span class="cd">/**
-    * Conversation constructor.
-    * @param ConversationType $type
-    * @param UserCollection $members
-    */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">ConversationType</span> <span class="nv">$type</span><span class="p">,</span> <span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">)</span> 
-    <span class="p">{</span>
-       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="nv">$type</span><span class="p">;</span>
-       <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">members</span> <span class="o">=</span> <span class="nv">$members</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="cd">/**
-    * creates a one-to-one conversation
-    * @param UserCollection $members
-    * @return static
-    */</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">oneToOne</span><span class="p">(</span><span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">):</span> <span class="kt">self</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="nc">ConversationType</span><span class="o">::</span><span class="nf">oneToOne</span><span class="p">(),</span> <span class="nv">$members</span><span class="p">);</span>
-    <span class="p">}</span>
-    
-    <span class="cd">/**
-    * creates a group conversation
-    * @param UserCollection $members
-     * @return static
-     */</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">group</span><span class="p">(</span><span class="kt">UserCollection</span> <span class="nv">$members</span><span class="p">):</span> <span class="kt">self</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="nc">ConversationType</span><span class="o">::</span><span class="nf">group</span><span class="p">(),</span> <span class="nv">$members</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>For more explanation, In a chat application, we have two types of conversations, a user can start a one-to-one conversation or a group conversation. The <code class="language-plaintext highlighter-rouge">Conversation</code> constructor accepts a <code class="language-plaintext highlighter-rouge">ConversationType</code> and <code class="language-plaintext highlighter-rouge">UserCollection</code> to instantiate a new conversation object. To make it easier for the client, we provided two static factory methods <code class="language-plaintext highlighter-rouge">oneToOne</code> and <code class="language-plaintext highlighter-rouge">group</code>.</p>
-
-<p>We can solve the same problem through <a href="https://en.wikipedia.org/wiki/Polymorphism_(computer_science)">polymorphism</a>. Polymorphism may be a good idea for a Conversation instantiation, but it’s not so good for a Value object class, the <code class="language-plaintext highlighter-rouge">ConversationType</code> for instance is a good example for this.</p>
-
-<h2 id="they-can-cache">They can cache</h2>
-<p>Unlike constructors, static factory methods are not required to create a new object each time they are invoked. Consider the Value object class <code class="language-plaintext highlighter-rouge">ConversationType</code> in the previous chat app example. Our chat application allows the user to list all his chat history, suppose the user has 10 conversations in his history, half of them are one-to-one conversations. In this case, if we used the ordinary constructors, we will end with five identical objects of type <code class="language-plaintext highlighter-rouge">ConversationType</code> for the five one-to-one conversations and another five identical objects for the group conversations.</p>
-
-<p>I agree they are lightweight objects, but in other scenarios and applications, we may overload our limited Memory! Back to our example, we only need two different objects of <code class="language-plaintext highlighter-rouge">ConversationType</code> at most!</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="kd">class</span> <span class="nc">ConversationType</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">const</span> <span class="no">ONE_TO_ONE</span> <span class="o">=</span> <span class="s1">'one_to_one'</span><span class="p">;</span>
-    <span class="k">public</span> <span class="k">const</span> <span class="no">GROUP</span> <span class="o">=</span> <span class="s1">'group'</span><span class="p">;</span>
-
-    <span class="k">private</span> <span class="k">static</span> <span class="kt">array</span> <span class="nv">$cache</span> <span class="o">=</span> <span class="p">[];</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$type</span><span class="p">;</span>
-
-    <span class="k">private</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$type</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">type</span> <span class="o">=</span> <span class="nv">$type</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">oneToOne</span><span class="p">():</span> <span class="kt">self</span>
-    <span class="p">{</span>
-        <span class="nv">$isCached</span> <span class="o">=</span> <span class="k">isset</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">]);</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$isCached</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">self</span><span class="o">::</span><span class="nf">cacheOneToOne</span><span class="p">();</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">];</span>
-    <span class="p">}</span>
-
-    <span class="k">private</span> <span class="k">static</span> <span class="k">function</span> <span class="n">cacheOneToOne</span><span class="p">():</span> <span class="kt">void</span>
-    <span class="p">{</span>
-        <span class="k">self</span><span class="o">::</span><span class="nv">$cache</span><span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">self</span><span class="p">(</span><span class="k">self</span><span class="o">::</span><span class="no">ONE_TO_ONE</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The ability of static factory methods to return the same object from repeated invocations allows classes to maintain strict control over what instances exist at any time. I suggest you check the rarely used within PHP applications <a href="https://refactoring.guru/design-patterns/flyweight">Flyweight</a> pattern after reading this article.</p>
-
-<h2 id="they-form-the-basis-of-service-provider-frameworks">They form the basis of Service provider frameworks</h2>
-
-<p>A service provider framework is a system in which providers implement a <em>service</em>, and the system makes the implementation available to clients, decoupling the clients from the implementation. There are three essential components in a service provider framework:</p>
-
-<ol>
-  <li>A service interface.</li>
-  <li>A provider registration API.</li>
-  <li>A service access API.</li>
-</ol>
-
-<p>Let’s have an example from our beloved framework, <a href="https://laravel.com/docs/8.x/providers">Laravel</a>, it’s official documentation states:</p>
-<blockquote>
-  <p>Service providers are the central place of all Laravel application bootstrapping. Your application, as well as all of Laravel’s core services, are bootstrapped via service providers.</p>
-</blockquote>
-
-<ol>
-  <li>Any Service should extend the abstract class <code class="language-plaintext highlighter-rouge">Illuminate\Support\ServiceProvider</code>. [<strong>Interface^</strong>]</li>
-  <li>All service providers are registered in the config/app.php configuration file. [<strong>Registration^</strong>]</li>
-  <li>First, the register method will be called on all providers, then, once all providers have been registered, the boot method will be called. [<strong>Access^</strong>]</li>
-</ol>
-
-<p>Service providers are responsible for bootstrapping all the framework’s various parts, such as the database, queue, validation, and routing components. Since it configures all the features offered by Laravel, it’s the essential component of your Laravel application.</p>
-
-<p>In a standard laravel request, Laravel bootstrap an <a href="https://github.com/laravel/laravel/blob/8.x/public/index.php#L47">Application instance</a>, which in turn invokes the <code class="language-plaintext highlighter-rouge">register</code> methods of the <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L177">base service providers</a> including:</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">Illuminate\Events\EventServiceProvider</code></li>
-  <li><code class="language-plaintext highlighter-rouge">Illuminate\Log\LogServiceProvider</code></li>
-  <li><code class="language-plaintext highlighter-rouge">Illuminate\Routing\RoutingServiceProvider</code></li>
-</ul>
-
-<p>In the same way, laravel allows you to add service providers as much as your application requires!</p>
-
-<h2 id="summary">Summary</h2>
-<p>In summary, static factory methods and public constructors both have their uses, and it pays to understand their relative merits. Firstly, think about the best fit <a href="https://refactoring.guru/design-patterns/creational-patterns">creational design pattern</a> to use, secondly consider using a static factory method, lastly, write clean logic free public constructors.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an example from the Carbon Library.]]></summary></entry></feed>
+<p>In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if much of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than the Fluent setters.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…).]]></summary></entry></feed>

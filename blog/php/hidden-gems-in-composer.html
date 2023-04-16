@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hidden Gems in Composer Every PHP Developer Should Know</title>
+    <meta name="description"
+          content="Photo by Dayne Topkin on Unsplash">
+    <link rel="canonical" href="https://imdhemy.com/blog/php/hidden-gems-in-composer.html">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+</head>
+<body class="min-h-screen">
+<div class="min-h-screen">
+    <header class="relative" id="main-header">
+    <div class="container mx-auto">
+        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+            <!-- begin logo -->
+            <div class="flex-auto">
+                <div>
+                    <a href="/" class="text-gray-900 text-3xl font-bold">
+                        Imdhemy
+                    </a>
+                </div>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="flex-auto">
+                <div class="flex justify-end lg:hidden">
+                    <button type="button">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                </div>
+
+                <div class="hidden lg:flex justify-end">
+                    <ul class="flex items-center">
+                        
+                        <li class="ml-10">
+                            <a href="/"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/blog"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/about"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="-z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
+                <div class="ml-auto">
+                    <ul class="p-0 m-0 flex-column items-center">
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/blog"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/about"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="max-w-screen-lg mx-auto bg-white p-5">
+    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">Hidden Gems in Composer Every PHP Developer Should Know</h1>
+</div>
+
+<div class="max-w-screen-md mx-auto bg-white p-5">
+    <div class="flex justify-between flex-wrap my-2">
+        <div class="flex items-center mr-8">
+            <img src="/theme/images/avatar.jpeg" alt=""
+                 class="rounded-full w-10 h-10 mr-3 block"/>
+            <div>
+                <p class="text-gray-700 text-sm font-bold">Dhemy</p>
+                <p class="text-gray-500 text-xs">
+                    April 16, 2023 - 3 min read
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+    </div>
+
+    
+    <div class="relative overflow-hidden">
+        <img src="/assets/img/glass-on-music-notes.jpeg"
+             alt="Hidden Gems in Composer Every PHP Developer Should Know"
+             class="w-full h-auto rounded"/>
+    </div>
+    
+</div>
+
+
+<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+    <p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>
+
+<p>Composer is the most popular PHP dependency manager. I’ve heard about other package managers like <code class="language-plaintext highlighter-rouge">PEAR</code> &amp; <code class="language-plaintext highlighter-rouge">Phing</code>, but
+I’ve never used them. While many developers are familiar with basic Composer commands like <code class="language-plaintext highlighter-rouge">install</code>, <code class="language-plaintext highlighter-rouge">update</code>,
+and <code class="language-plaintext highlighter-rouge">require</code>, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this
+blog post, We’ll explore some of these hidden gems.</p>
+
+<h2 id="1-composer-bump--composer-audit">1. composer bump &amp; composer audit</h2>
+
+<p>Composer 4.2 added two new commands <code class="language-plaintext highlighter-rouge">composer bump</code> and <code class="language-plaintext highlighter-rouge">composer audit</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">composer bump</code> “bumps” the package version constraints listed in the composer.json file by increasing them to the
+latest version within the allowed constraints.</p>
+
+<p><code class="language-plaintext highlighter-rouge">composer audit</code>, scans the installed packages for reported security vulnerabilities. It exists with an error code if
+there are any packages installed with known security vulnerabilities.</p>
+
+<p>You can read more about them in the official <a href="https://php.watch/articles/composer-24">blog post</a>.</p>
+
+<h2 id="2-composer-outdated">2. composer outdated</h2>
+
+<p>Keeping your dependencies up-to-date is important for security and compatibility reasons. However, it can be
+time-consuming to manually check for updates to each package in your project. This is where <code class="language-plaintext highlighter-rouge">composer outdated</code> comes
+in. This command lists all the packages that have newer versions available, this comes with a color legend to help you
+determine which packages are recommended to update or just possible to update.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer outdated
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Color legend:
+- patch or minor release available - update recommended
+- major release available - update possible
+
+Direct dependencies required <span class="k">in </span>composer.json:
+blackfire/php-sdk                  v1.33.0            v1.35.0            Blackfire.io PHP SDK
+doctrine/annotations               1.14.3             2.0.1              Docblock Annotations Parser
+
+... Other packages are omitted <span class="k">for </span>brevity ...
+
+</code></pre></div></div>
+
+<h2 id="3-composer-show-latest">3. composer show –latest</h2>
+
+<p>Similar to composer outdated, <code class="language-plaintext highlighter-rouge">composer show --latest</code> shows you the latest version of each package that is available on
+the remote repository. This can be helpful for keeping track of the latest package versions and deciding when to update
+your project. The <code class="language-plaintext highlighter-rouge">composer show</code> command has a lot of other useful options that you can explore by running
+<code class="language-plaintext highlighter-rouge">composer show --help</code>.</p>
+
+<h2 id="4-composer-why--composer-why-not">4. composer why &amp; composer why-not</h2>
+
+<p>Sometimes, when you try to install a package with Composer, it fails due to dependency conflicts or other issues. In
+these situations, it can be difficult to determine why the package cannot be installed. This is where <code class="language-plaintext highlighter-rouge">composer why</code> and
+<code class="language-plaintext highlighter-rouge">composer why-not</code> come in.</p>
+
+<p><code class="language-plaintext highlighter-rouge">composer why</code> command tells you which other packages depend on a certain package. For example, you can run the
+following command to find out which packages depend on <code class="language-plaintext highlighter-rouge">vimeo/psalm</code>:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer why vimeo/psalm
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">composer why-not</code> shows you a detailed explanation of why a package cannot be installed, including all the packages
+that are blocking it. This can be helpful for troubleshooting complex dependency issues. Specify a version constraint to
+verify whether upgrades can be performed in your project, and if not why not. See the following example to find out why
+PHPUnit 10 cannot be installed in your project:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer why-not phpunit/phpunit 10
+</code></pre></div></div>
+
+<h2 id="5-composer-with-dependencies">5. composer –with-dependencies</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">composer update</code>, <code class="language-plaintext highlighter-rouge">composer require</code>, and <code class="language-plaintext highlighter-rouge">composer remove</code> commands have a <code class="language-plaintext highlighter-rouge">--with-dependencies</code> and
+<code class="language-plaintext highlighter-rouge">--with-all-dependencies</code> option that can be used to update all the dependencies of a package. This can be useful when
+you want to update a package and all the packages that depend on it. For example, you can run the following command to
+update the <code class="language-plaintext highlighter-rouge">symfony/console</code> package and all the packages that depend on it:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer update symfony/console <span class="nt">--with-dependencies</span>
+</code></pre></div></div>
+
+<p>There are shortcuts for these options, you can use <code class="language-plaintext highlighter-rouge">-W</code> and <code class="language-plaintext highlighter-rouge">-w</code> instead of <code class="language-plaintext highlighter-rouge">--with-dependencies</code> and
+<code class="language-plaintext highlighter-rouge">--with-all-dependencies</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">--with-dependencies (-w)</code>: Update also dependencies of packages in the argument list, except those which are root
+requirements.</li>
+  <li><code class="language-plaintext highlighter-rouge">--with-all-dependencies (-W)</code>: Update also dependencies of packages in the argument list, including those which are
+root requirements.</li>
+</ul>
+
+<p>It’d be better to use the short versions as they work fine with different commands like <code class="language-plaintext highlighter-rouge">composer require</code> that has a
+<code class="language-plaintext highlighter-rouge">--update-with-dependencies (-w)</code> and <code class="language-plaintext highlighter-rouge">--update-with-all-dependencies (-W)</code> option.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Upgrading your dependencies can be a tedious task, but it’s important to keep your project up-to-date. Using the
+mentioned commands can help you resolve dependency issues and keep your project up-to-date. I hope you found this
+article useful.</p>
+
+</div>
+
+
+    </main>
+    <section class="sticky top-[100vh]">
+    <div class="p-10">
+        <div class="max-w-screen-md mx-auto">
+            <p class="text-center">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2023 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+
+<!-- Ion icons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>
