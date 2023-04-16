@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-16T17:24:35+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-16T19:22:10+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
 </subtitle><author><name>Dhemy</name></author><entry><title type="html">Hidden Gems in Composer Every PHP Developer Should Know</title><link href="https://imdhemy.com/blog/php/hidden-gems-in-composer.html" rel="alternate" type="text/html" title="Hidden Gems in Composer Every PHP Developer Should Know" /><published>2023-04-16T00:00:00+00:00</published><updated>2023-04-16T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/hidden-gems-in-composer</id><content type="html" xml:base="https://imdhemy.com/blog/php/hidden-gems-in-composer.html"><![CDATA[<p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>
 
@@ -9,7 +9,7 @@ blog post, We’ll explore some of these hidden gems.</p>
 
 <h2 id="1-composer-bump--composer-audit">1. composer bump &amp; composer audit</h2>
 
-<p>Composer 4.2 added two new commands <code class="language-plaintext highlighter-rouge">composer bump</code> and <code class="language-plaintext highlighter-rouge">composer audit</code>.</p>
+<p>Composer 2.4 added two new commands <code class="language-plaintext highlighter-rouge">composer bump</code> and <code class="language-plaintext highlighter-rouge">composer audit</code>.</p>
 
 <p><code class="language-plaintext highlighter-rouge">composer bump</code> “bumps” the package version constraints listed in the composer.json file by increasing them to the
 latest version within the allowed constraints.</p>
