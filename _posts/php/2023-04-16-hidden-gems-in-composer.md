@@ -14,7 +14,7 @@ blog post, We'll explore some of these hidden gems.
 
 ## 1. composer bump & composer audit
 
-Composer 4.2 added two new commands `composer bump` and `composer audit`.
+Composer 2.4 added two new commands `composer bump` and `composer audit`.
 
 `composer bump` "bumps" the package version constraints listed in the composer.json file by increasing them to the
 latest version within the allowed constraints.
