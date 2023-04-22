@@ -5,8 +5,6 @@ categories: [ php ]
 image: /assets/img/glass-on-music-notes.jpeg
 ---
 
-<small>Photo by [Dayne Topkin](https://unsplash.com/@dtopkin1) on [Unsplash](https://unsplash.com)</small>
-
 Composer is the most popular PHP dependency manager. I've heard about other package managers like `PEAR` & `Phing`, but
 I've never used them. While many developers are familiar with basic Composer commands like `install`, `update`,
 and `require`, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this
@@ -104,3 +102,5 @@ It'd be better to use the short versions as they work fine with different comman
 Upgrading your dependencies can be a tedious task, but it's important to keep your project up-to-date. Using the
 mentioned commands can help you resolve dependency issues and keep your project up-to-date. I hope you found this
 article useful.
+
+<small>Photo by [Dayne Topkin](https://unsplash.com/@dtopkin1) on [Unsplash](https://unsplash.com)</small>
