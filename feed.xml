@@ -1,8 +1,41 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-16T19:22:10+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2023-04-22T19:46:35+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Hidden Gems in Composer Every PHP Developer Should Know</title><link href="https://imdhemy.com/blog/php/hidden-gems-in-composer.html" rel="alternate" type="text/html" title="Hidden Gems in Composer Every PHP Developer Should Know" /><published>2023-04-16T00:00:00+00:00</published><updated>2023-04-16T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/hidden-gems-in-composer</id><content type="html" xml:base="https://imdhemy.com/blog/php/hidden-gems-in-composer.html"><![CDATA[<p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">From Code to German: My First Steps Towards Learning a New Language</title><link href="https://imdhemy.com/blog/germany/from-code-to-german.html" rel="alternate" type="text/html" title="From Code to German: My First Steps Towards Learning a New Language" /><published>2023-04-22T00:00:00+00:00</published><updated>2023-04-22T00:00:00+00:00</updated><id>https://imdhemy.com/blog/germany/from-code-to-german</id><content type="html" xml:base="https://imdhemy.com/blog/germany/from-code-to-german.html"><![CDATA[<p>For years, I have been dedicated to writing code every day and contributing to various
+projects. <a href="https://github.com/imdhemy">My GitHub account</a> showcases my commitment and hard work. Since I moved
+from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I
+couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and
+focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source
+projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for
+open source projects.</p>
 
-<p>Composer is the most popular PHP dependency manager. I’ve heard about other package managers like <code class="language-plaintext highlighter-rouge">PEAR</code> &amp; <code class="language-plaintext highlighter-rouge">Phing</code>, but
+<p>As an expat in a foreign country, learning the local language is vital not only for practical purposes but also for
+understanding the culture better. I have tried learning a new language in the past, particularly Turkish, but I failed
+to do so. However, I have faith that German is different, and my background in English, which has some similarities with
+German, may give me an edge.</p>
+
+<p>To begin my language learning journey, I set a goal to finish one lesson per week from
+the <a href="https://www.hueber.de/menschen">Menschen book</a>, a popular German language textbook for adults and young adults
+designed according to the latest findings in educational psychology as they describe it.</p>
+
+<p>I already tried some applications like Duolingo and Babbel, but I didn’t like them. I prefer a more structured approach
+to learning a new language. I want to learn the language in a way similar to how I learned English which I learned from
+the “Hello” series of books.</p>
+
+<p>I’ve just completed my first lesson, and it feels like a great accomplishment. The first lesson introduced me to the
+basics of the German language, such as the alphabet, how to ask about names, how say “how are you” and so on.</p>
+
+<p>In addition to the book, I planned to practice speaking German for 10 minutes every day. My first attempt was
+challenging, I couldn’t pronounce correctly, and I was quite nervous. I’m not sure if I will be able to do it every day,
+but I will try my best.</p>
+
+<p>Learning a new language is challenging, and I’ve already encountered some difficulties, particularly with the
+pronunciation of some German words. However, I’m optimistic that with persistence and hard work, I’ll be able to master
+the language.</p>
+
+<p>In conclusion, I believe that taking the first step towards learning a new language is always the hardest, but it’s also
+the most important. If you’re thinking of learning a new language, don’t be afraid to start, even if it’s just for ten
+minutes a day. You’ll be amazed at how much progress you can make with consistent effort. Believe me, I did the same
+with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll be able to do the same with German.</p>]]></content><author><name>Dhemy</name></author><category term="germany" /><summary type="html"><![CDATA[For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Since I moved from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for open source projects.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hidden Gems in Composer Every PHP Developer Should Know</title><link href="https://imdhemy.com/blog/php/hidden-gems-in-composer.html" rel="alternate" type="text/html" title="Hidden Gems in Composer Every PHP Developer Should Know" /><published>2023-04-16T00:00:00+00:00</published><updated>2023-04-16T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/hidden-gems-in-composer</id><content type="html" xml:base="https://imdhemy.com/blog/php/hidden-gems-in-composer.html"><![CDATA[<p>Composer is the most popular PHP dependency manager. I’ve heard about other package managers like <code class="language-plaintext highlighter-rouge">PEAR</code> &amp; <code class="language-plaintext highlighter-rouge">Phing</code>, but
 I’ve never used them. While many developers are familiar with basic Composer commands like <code class="language-plaintext highlighter-rouge">install</code>, <code class="language-plaintext highlighter-rouge">update</code>,
 and <code class="language-plaintext highlighter-rouge">require</code>, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this
 blog post, We’ll explore some of these hidden gems.</p>
@@ -95,7 +128,9 @@ root requirements.</li>
 
 <p>Upgrading your dependencies can be a tedious task, but it’s important to keep your project up-to-date. Using the
 mentioned commands can help you resolve dependency issues and keep your project up-to-date. I hope you found this
-article useful.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Photo by Dayne Topkin on Unsplash]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Back to dark theme</title><link href="https://imdhemy.com/blog/generic/back-to-dark-theme.html" rel="alternate" type="text/html" title="Back to dark theme" /><published>2023-04-09T00:00:00+00:00</published><updated>2023-04-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/back-to-dark-theme</id><content type="html" xml:base="https://imdhemy.com/blog/generic/back-to-dark-theme.html"><![CDATA[<p>I always liked dark themes, but I came across
+article useful.</p>
+
+<p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Composer is the most popular PHP dependency manager. I’ve heard about other package managers like PEAR &amp; Phing, but I’ve never used them. While many developers are familiar with basic Composer commands like install, update, and require, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this blog post, We’ll explore some of these hidden gems.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Back to dark theme</title><link href="https://imdhemy.com/blog/generic/back-to-dark-theme.html" rel="alternate" type="text/html" title="Back to dark theme" /><published>2023-04-09T00:00:00+00:00</published><updated>2023-04-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/back-to-dark-theme</id><content type="html" xml:base="https://imdhemy.com/blog/generic/back-to-dark-theme.html"><![CDATA[<p>I always liked dark themes, but I came across
 this <a href="https://stitcher.io/blog/why-light-themes-are-better-according-to-science">blog post</a> by Brent, and I thought I’d
 give it a try. I installed the Light lite theme on my PHPStorm and WebStorm. In the beginning, it wasn’t comfortable,
 but I thought I just needed to get used to it and I could
@@ -1332,322 +1367,4 @@ PHP.8 installed on your host machine. If you prefer PHP7, you can checkout to PH
   <li>Exercise No.3: <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Integration/SearchEngineTest.php#L35">Add an integration test for searching for a keyword.</a></li>
 </ul>
 
-<p>Feel free to make a PR of your answers.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. For v 8.0 you can use the Es Utils package.]]></summary></entry><entry><title type="html">Why you need a builder to create your entities and models</title><link href="https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html" rel="alternate" type="text/html" title="Why you need a builder to create your entities and models" /><published>2021-06-02T00:01:38+00:00</published><updated>2021-06-02T00:01:38+00:00</updated><id>https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models</id><content type="html" xml:base="https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html"><![CDATA[<p><a href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html">Static factories</a> and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a <strong>User</strong> on a social network platform. This class has only three required fields (<code class="language-plaintext highlighter-rouge">$name</code>, <code class="language-plaintext highlighter-rouge">$email</code> &amp; <code class="language-plaintext highlighter-rouge">$password</code>) and a bunch of optional fields with default values, for instance: (<code class="language-plaintext highlighter-rouge">$address</code>, <code class="language-plaintext highlighter-rouge">$avatar</code>, <code class="language-plaintext highlighter-rouge">$gender</code>, <code class="language-plaintext highlighter-rouge">$emailVerifiedAt</code>, etc…).</p>
-
-<p><em><strong>As a side note:</strong> this is not my preferred way to design a user entity, but this is only here for purpose of clarifying the situation of having a long parameter list.</em></p>
-
-<p>Starting from here, I’ll explore the practices I previously did or noticed in other developers’ code.</p>
-
-<h2 id="the-laravel-models-taste">The Laravel models taste</h2>
-<p>Laravel models provide two methods to create a model instance, the most popular <code class="language-plaintext highlighter-rouge">create</code> method and the less popular <code class="language-plaintext highlighter-rouge">make</code> method. Both methods are not implemented in the base <code class="language-plaintext highlighter-rouge">Model</code> class. But Laravel defines a <code class="language-plaintext highlighter-rouge">__call()</code> and <code class="language-plaintext highlighter-rouge">__callStatic()</code> methods, it goes handled through them. <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Database/Eloquent/Model.php#L1952">Those methods forward the call to a query builder!</a></p>
-
-<p>Finally, we have a model class that has no properties, a parameterless constructor! Everything is injected magically into the class.</p>
-
-<p>The Model class looks like the following snippet:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span> <span class="kd">extends</span> <span class="nc">Model</span>
-<span class="p">{</span>
-    <span class="c1">//</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>The client code be like:</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">::</span><span class="nf">create</span><span class="p">([</span>
-    <span class="s1">'name'</span> <span class="o">=&gt;</span> <span class="s1">'John Doe'</span><span class="p">,</span>
-    <span class="s1">'email'</span> <span class="o">=&gt;</span> <span class="s1">'john@example.com'</span><span class="p">,</span>
-    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="nv">$passwordHash</span>
-<span class="p">]);</span>
-</code></pre></div></div>
-<p><strong>IMHO, this is not so good due to the following reasons!</strong></p>
-
-<ul>
-  <li>Sooner or later, you’ll end up with a model with <strong>an invalid state</strong> or any <a href="https://www.php.net/manual/en/language.oop5.overloading.php#119407">kind of unexpected behavior</a>.</li>
-  <li>The model <strong>has no properties</strong> and even more if you defined the properties to solve this problem the code will break!</li>
-  <li>All properties are treated as public properties which means <strong>no encapsulation</strong> at all!</li>
-  <li>Your <strong>IDE doesn’t understand</strong> that!</li>
-  <li>You need to <strong>check your schema</strong> in a repeated manner to remember the properties and their types.</li>
-  <li>Feel free to add more problems to this list…</li>
-</ul>
-
-<h2 id="a-factory-that-accepts-an-array-of-attributes">A factory that accepts an array of attributes</h2>
-<p>Another technique I noticed some developers use is to provide a factory that receives an array of attributes, then starts a series of <code class="language-plaintext highlighter-rouge">isset</code> calls accompanied by a call to a setter method!</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span> <span class="kd">extends</span> <span class="nc">Entity</span>
-<span class="p">{</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$name</span><span class="p">;</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">;</span>
-    
-    <span class="c1">// and so on ...</span>
-    
-    <span class="k">public</span> <span class="k">function</span> <span class="n">setName</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="k">public</span> <span class="k">function</span> <span class="n">setEmail</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// ... </span>
-    
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">create</span><span class="p">(</span><span class="kt">array</span> <span class="nv">$attributes</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$obj</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">();</span>
-        
-        <span class="k">if</span><span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]))</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]);</span>
-        <span class="k">if</span><span class="p">(</span><span class="k">isset</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]))</span> <span class="nv">$obj</span><span class="o">-&gt;</span><span class="nf">setEmail</span><span class="p">(</span><span class="nv">$attributes</span><span class="p">[</span><span class="s1">'email'</span><span class="p">]);</span>
-        <span class="c1">// ... Pew Pew Pew</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Just imagine repeating this to cover all the class properties!</p>
-
-<ul>
-  <li>With <strong>parameterless constructors</strong>, you need to handle the required params yourself!</li>
-  <li>Again, have entities with <strong>an invalid state</strong>!</li>
-  <li><strong>Hard to read</strong>, hard to maintain code.</li>
-  <li>Your <strong>IDE doesn’t understand</strong> that!</li>
-</ul>
-
-<h2 id="telescoping-constructor">Telescoping constructor</h2>
-<p>Telescoping constructor means to provide a constructor with only the required parameters, another with a single optional parameter, a third with two optional parameters, and so on.</p>
-
-<p>Since PHP doesn’t allow constructor overloading, PHP developers started to provide a constructor with a full list of properties starting with the required params.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span>
-<span class="p">{</span>
-    <span class="c1">// .. </span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">,</span> <span class="kt">string</span> <span class="nv">$password</span><span class="p">,</span> <span class="kt">int</span> <span class="nv">$foo</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="kt">int</span> <span class="nv">$bar</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="kt">?Address</span> <span class="nv">$address</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span> <span class="kt">?File</span> <span class="nv">$avatar</span><span class="o">=</span><span class="kc">null</span><span class="p">,</span> <span class="kt">?DateTime</span> <span class="nv">$createdAt</span><span class="o">=</span><span class="kc">null</span><span class="p">)</span>
-    <span class="p">{</span>
-       <span class="c1">// ..</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p>When you want to create an instance, you can pass the shortest list of parameters you want to set. Typically, this constructor invocation will require many parameters that you don’t want to set, but you are forced to pass a value for them.</p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">(</span><span class="s1">'John Doe'</span><span class="p">,</span> <span class="s1">'john@example.com'</span><span class="p">,</span> <span class="nv">$passwordHash</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nv">$avatar</span><span class="p">);</span>
-</code></pre></div></div>
-<p>In this case, we’re forced to pass <code class="language-plaintext highlighter-rouge">5, 12, null</code> values which are the default values since the avatar comes after them in order!</p>
-
-<p>The telescoping constructor work, but it is hard to write client code when there are many parameters, and harder still to read it. The reader is left wondering what all those values mean and must carefully count parameters to find out. Umm, what if he swapped the <code class="language-plaintext highlighter-rouge">12</code> and <code class="language-plaintext highlighter-rouge">50</code> since having the same data type, the code won’t break, but it’s an invalid state again!</p>
-
-<h2 id="fluent-setters">Fluent Setters</h2>
-<p>Fluent Setters is the PHP way to imitate the <a href="https://en.wikipedia.org/wiki/JavaBeans">JavaBeans</a> Pattern In which you call a parameterless constructor followed by call to setter methods. It’s called fluent because all setter methods return the object instance allowing you to call them in chains.</p>
-
-<p>This pattern has none of the disadvantages of the telescoping constructor pattern. It makes it easy to create instances, and easy to read the resulting code:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">();</span>
-<span class="nv">$user</span><span class="o">-&gt;</span><span class="nf">setName</span><span class="p">(</span><span class="s1">'John Doe'</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="nf">setEmail</span><span class="p">(</span><span class="s1">'john@example.com'</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="nf">setPassword</span><span class="p">(</span><span class="nv">$passwordHash</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="nf">setAddress</span><span class="p">(</span><span class="s1">'Via Lactea'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Unfortunately, the Fluent setters pattern has the following disadvantages:</p>
-<ul>
-  <li>A class with a parameterless constructor is subject to being instantiated in <strong>an invalid state</strong>.</li>
-  <li>Having to create setters for every property leads to an immense quantity of <strong>boilerplate code</strong>.</li>
-</ul>
-
-<h2 id="using-a-builder-is-a-good-solution">Using a builder is a good solution!</h2>
-<p>We can use a form of the <a href="https://refactoring.guru/design-patterns/builder">Builder Pattern</a> which combines the safety of the telescoping constructors and the readability of the fluent setters. Instead of creating the desired object directly, the client calls a static factory method with all the required parameters and gets an object of the builder class which provides setter-like methods for other optional methods. Finally, the client calls a parameterless <code class="language-plaintext highlighter-rouge">build</code> method to get an instance of the required class. Let me show you an example:</p>
-
-<p><strong>I prefer to start with The Client Code:</strong></p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cd">/**
- * @test
- */</span>
-<span class="k">public</span> <span class="k">function</span> <span class="n">test_builder_can_create_user</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nv">$user</span> <span class="o">=</span> <span class="nc">User</span><span class="o">::</span><span class="nf">builder</span><span class="p">()</span>
-        <span class="o">-&gt;</span><span class="nf">name</span><span class="p">(</span><span class="s1">'John Doe'</span><span class="p">)</span>
-        <span class="o">-&gt;</span><span class="nf">email</span><span class="p">(</span><span class="s1">'john@example.com'</span><span class="p">)</span>
-        <span class="o">-&gt;</span><span class="nf">address</span><span class="p">(</span><span class="s1">'Via Lactea'</span><span class="p">)</span>
-        <span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="nc">User</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="nv">$user</span><span class="p">);</span>
-    <span class="c1">// More assertions...</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p><strong>Then the Entity class:</strong></p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">User</span>
-<span class="p">{</span>
-    <span class="cd">/**
-     * @var string
-     */</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$name</span><span class="p">;</span>
-
-    <span class="cd">/**
-     * @var string
-     */</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">;</span>
-
-    <span class="cd">/**
-     * @var string
-     */</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$address</span><span class="p">;</span>
-    
-    <span class="c1">//More attributes...</span>
-    <span class="c1">//...</span>
-
-    <span class="cd">/**
-     * You can use one of the following options for the constructor:
-     * 1. Parameterless constructor &amp; add a static factory method that accepts the UserBuilder as a param
-     * 2. A constructor that accepts the UserBuilder as a param.
-     * User constructor.
-     * @param \App\UserBuilder $builder
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="kt">UserBuilder</span> <span class="nv">$builder</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">getName</span><span class="p">();</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">getEmail</span><span class="p">();</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">getAddress</span><span class="p">();</span>
-        <span class="c1">// .. Set other attributes</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return \App\UserBuilder
-     */</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">builder</span><span class="p">():</span> <span class="kt">UserBuilder</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nc">UserBuilder</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return string
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @param string $name
-     * @return User
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">setName</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">):</span> <span class="kt">User</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return string
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">getEmail</span><span class="p">():</span> <span class="kt">string</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @param string $email
-     * @return User
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">setEmail</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">):</span> <span class="kt">User</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return string
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">getAddress</span><span class="p">():</span> <span class="kt">string</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @param string $address
-     * @return User
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">setAddress</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$address</span><span class="p">):</span> <span class="kt">User</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span> <span class="o">=</span> <span class="nv">$address</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-<p><strong>Finally, the Builder class:</strong></p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">UserBuilder</span>
-<span class="p">{</span>
-    <span class="cd">/**
-     * @var string
-     */</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$name</span><span class="p">;</span>
-
-    <span class="cd">/**
-     * @var string
-     */</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$email</span><span class="p">;</span>
-
-    <span class="cd">/**
-     * @var string
-     */</span>
-    <span class="k">private</span> <span class="kt">string</span> <span class="nv">$address</span><span class="p">;</span>
-
-    <span class="cd">/**
-     * @param string $name
-     * @return $this
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">name</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$name</span><span class="p">):</span> <span class="kt">self</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">=</span> <span class="nv">$name</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @param string $email
-     * @return $this
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">email</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$email</span><span class="p">):</span> <span class="kt">self</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span> <span class="o">=</span> <span class="nv">$email</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @param string $address
-     * @return $this
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">address</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$address</span><span class="p">):</span> <span class="kt">self</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span> <span class="o">=</span> <span class="nv">$address</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return string
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">getName</span><span class="p">():</span> <span class="kt">string</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">name</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return string
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">getEmail</span><span class="p">():</span> <span class="kt">string</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">email</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return string
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">getAddress</span><span class="p">():</span> <span class="kt">string</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">address</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return \App\User
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">build</span><span class="p">():</span> <span class="kt">User</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="nc">User</span><span class="p">(</span><span class="nv">$this</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p><strong>Note:</strong> The previous example uses a parameterless <code class="language-plaintext highlighter-rouge">UserBuilder</code> constructor, but you should add the required attributes as parameters to confirm creating an object in a valid state.</p>
-
-<h2 id="summary">Summary</h2>
-<p>In summary, the Builder pattern is a good choice when designing classes whose constructors or static factories would have more than a handful of parameters, especially if much of the parameters are optional or of identical type. Client code is much easier to read and write with builders than with telescoping constructors, and builders are much safer than the Fluent setters.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…).]]></summary></entry></feed>
+<p>Feel free to make a PR of your answers.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. For v 8.0 you can use the Es Utils package.]]></summary></entry></feed>
