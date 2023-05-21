@@ -1,1 +1,5 @@
-console.log('Hello World!');
+const burgerMenu = require('./burger-menu');
+
+(() => {
+  burgerMenu.init();
+})();
