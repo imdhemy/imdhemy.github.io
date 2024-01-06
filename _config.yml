@@ -108,23 +108,25 @@ contributions:
 # Testimonials
 # -------------------------------------------------------------------------------------------------
 testimonials:
-  - name: "John Doe"
-    description: "Product Manager"
-    image: "https://randomuser.me/api/portraits/med/men/9.jpg"
+  - name: "Dogan Aydin"
+    description: "TurkNet CTO"
+    image: "theme/images/testimonials/dogan-aydin.jpg"
     content: |
-      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Endorsing Dhemy for his exceptional coding skills and commitment to best practices. 
+      With an R&D engineer mindset and meticulous approach to code structure, I highly recommend Dhemy to any company.
 
-  - name: "Martha Stewart"
-    description: "Frontend Developer"
-    image: "https://randomuser.me/api/portraits/med/women/79.jpg"
+  - name: "Obada Qawwas"
+    description: "Frontend Tech Lead at Valtech"
+    image: "theme/images/testimonials/obada-qawwas.jpg"
     content: |
-      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Dhemy is one of the best among all people I have ever met and is a loyal colleague who understands complex matters. 
+      He is a strong and goal-oriented team player; with every problem, there was a solution. Highly recommended.
 
-  - name: "Sandra Bullock"
-    description: "Product Manager"
-    image: "https://randomuser.me/api/portraits/med/women/21.jpg"
+  - name: "Abdelrahman Waziry"
+    description: "Solutions Architect at TurnDigital"
+    image: "theme/images/testimonials/abdelrahman-waziry.jpg"
     content: |
-      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Dhemy, an exceptional and innovative talent, consistently displays unwavering commitment and dedication in our collaborative projects, setting a stellar example for the ideal programmer.
 
 # -------------------------------------------------------------------------------------------------
 # Footer
