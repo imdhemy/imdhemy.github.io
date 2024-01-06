@@ -82,47 +82,51 @@ navigation:
 contributions:
   - name: "Laravel"
     url: "https://laravel.com"
-    logo: "theme/images/laravel.png"
+    logo: "theme/images/contributions/laravel.png"
 
   - name: "Spatie"
     url: "https://spatie.be/open-source"
-    logo: "theme/images/spatie.png"
+    logo: "theme/images/contributions/spatie.png"
 
   - name: "Siklid"
     url: "https://docs.siklid.io/"
-    logo: "theme/images/siklid.png"
+    logo: "theme/images/contributions/siklid.png"
 
   - name: "Google Play Billing"
     url: "https://github.com/imdhemy/google-play-billing"
-    logo: "theme/images/google-play-billing.png"
+    logo: "theme/images/contributions/google-play-billing.png"
 
   - name: "App Store IAP"
     url: "https://github.com/imdhemy/appstore-iap"
-    logo: "theme/images/app-store-iap.png"
+    logo: "theme/images/contributions/app-store-iap.png"
 
   - name: "Laravel In-app Purchase"
     url: "https://imdhemy.com/laravel-iap-docs/"
-    logo: "theme/images/liap.png"
+    logo: "theme/images/contributions/liap.png"
 
 # -------------------------------------------------------------------------------------------------
 # Testimonials
 # -------------------------------------------------------------------------------------------------
 testimonials:
-  - name: "John Doe"
-    description: "Product Manager"
-    image: "https://randomuser.me/api/portraits/med/men/9.jpg"
+  - name: "Dogan Aydin"
+    description: "TurkNet CTO"
+    image: "theme/images/testimonials/dogan-aydin.jpg"
     content: |
-      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  - name: "Martha Stewart"
-    description: "Frontend Developer"
-    image: "https://randomuser.me/api/portraits/med/women/79.jpg"
+      Endorsing Dhemy for his exceptional coding skills and commitment to best practices. 
+      With an R&D engineer mindset and meticulous approach to code structure, I highly recommend Dhemy to any company.
+
+  - name: "Obada Qawwas"
+    description: "Frontend Tech Lead at Valtech"
+    image: "theme/images/testimonials/obada-qawwas.jpg"
     content: |
-      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-  - name: "Sandra Bullock"
-    description: "Product Manager"
-    image: "https://randomuser.me/api/portraits/med/women/21.jpg"
+      Dhemy is one of the best among all people I have ever met and is a loyal colleague who understands complex matters. 
+      He is a strong and goal-oriented team player; with every problem, there was a solution. Highly recommended.
+
+  - name: "Abdelrahman Waziry"
+    description: "Solutions Architect at TurnDigital"
+    image: "theme/images/testimonials/abdelrahman-waziry.jpg"
     content: |
-      lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Dhemy, an exceptional and innovative talent, consistently displays unwavering commitment and dedication in our collaborative projects, setting a stellar example for the ideal programmer.
 
 # -------------------------------------------------------------------------------------------------
 # Footer
