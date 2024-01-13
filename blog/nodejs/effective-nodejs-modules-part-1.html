@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Effective Node.js Modules - Part 1: Basic Syntax</title>
+    <meta name="description"
+          content="Do you know what is the difference between the following two code snippets?">
+    <link rel="canonical" href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+</head>
+<body class="min-h-screen">
+<div class="min-h-screen">
+    <header class="relative" id="main-header">
+    <div class="container mx-auto">
+        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+            <!-- begin logo -->
+            <div class="flex-auto">
+                <div>
+                    <a href="/" class="text-gray-900 text-3xl font-bold">
+                        Imdhemy
+                    </a>
+                </div>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="flex-auto">
+                <div class="flex justify-end lg:hidden">
+                    <button type="button" class="menu-toggle" data-target="#mobile-nav">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                </div>
+
+                <div class="hidden lg:flex justify-end">
+                    <ul class="flex items-center">
+                        
+                        <li class="ml-10">
+                            <a href="/"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/blog"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/about"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="menu -z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
+                <div class="ml-auto">
+                    <ul class="p-0 m-0 flex-column items-center">
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/blog"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/about"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="max-w-screen-lg mx-auto bg-white p-5">
+    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">Effective Node.js Modules - Part 1: Basic Syntax</h1>
+</div>
+
+<div class="max-w-screen-md mx-auto bg-white p-5">
+    <div class="flex justify-between flex-wrap my-2">
+        <div class="flex items-center mr-8">
+            <img src="/theme/images/avatar.jpeg" alt=""
+                 class="rounded-full w-10 h-10 mr-3 block"/>
+            <div>
+                <p class="text-gray-700 text-sm font-bold">Dhemy</p>
+                <p class="text-gray-500 text-xs">
+                    January 7, 2024 - 9 min read
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+    </div>
+
+    
+    <div class="relative overflow-hidden">
+        <img src="/assets/img/dog-laptop-code-bed.jpeg"
+             alt="Effective Node.js Modules - Part 1: Basic Syntax"
+             class="w-full h-auto rounded"/>
+    </div>
+    
+</div>
+
+
+<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+    <p>Do you know what is the difference between the following two code snippets?</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And this one:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Both of them import the <code class="language-plaintext highlighter-rouge">app</code> and <code class="language-plaintext highlighter-rouge">connection</code> from the <code class="language-plaintext highlighter-rouge">config</code> module, but the first one is using the <strong>CommonJS</strong> (
+CJS) module system, and the second one is using the <strong>ECMAScript</strong> (ES) module system.</p>
+
+<p>Modules allow you to split your code into small units, that can be reused and tested independently. They are also the
+main way to enforce information hiding by exposing (exporting) only the public API of the module.</p>
+
+<p>In this series of posts, we will talk about how to use modules effectively in your Node.js applications. By the end of
+this series, you should be able to make pragmatic decisions about how to use modules effectively in your Node.js
+applications.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>📋</th>
+      <th>Posts in this series</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Basic Syntax</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Javascript was introduced in 1995 as a scripting language for browsers. It was not designed to be used as a server
+language. Browsers should keep an eye on the security of the user and the system, so they need to limit the access of
+the Javascript code to the system resources. The nature of the Javascript and the browser environment allowed the use
+of the <code class="language-plaintext highlighter-rouge">script</code> tag to load Javascript code didn’t help the developers to write modular code. Developers used multiple <code class="language-plaintext highlighter-rouge">script</code>
+tags to load the Javascript code in the right order.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"foo.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bar.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"baz.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>When Node.js was introduced in 2009 as a server-side Javascript runtime, it came with full access to the underlying
+system resources. This allowed providing the CommonJS module system to allow developers to write modular code and
+organize their applications into small reusable units.</p>
+
+<h3 id="cjs-commonjs-module-system">CJS: CommonJS module system</h3>
+
+<p>The CJS module system is the default module system of Node.js. <strong>CJS</strong> uses <code class="language-plaintext highlighter-rouge">require</code> to import modules
+and <code class="language-plaintext highlighter-rouge">module.exports</code>or <code class="language-plaintext highlighter-rouge">exports</code> to export modules. <code class="language-plaintext highlighter-rouge">exports</code> is a reference to <code class="language-plaintext highlighter-rouge">module.exports</code>, so you can use either
+of them to export modules as follows:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Is the same as:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">require</code> function returns the exported value of the module.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="c1">// { app: { name: 'Awesome App', port: 3000 } }</span>
+</code></pre></div></div>
+
+<p>You can also use the <code class="language-plaintext highlighter-rouge">require</code> function to import a single module from a file that exports multiple modules.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="c1">// { host: 'localhost', port: 27017 }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="c1">// ReferenceError: app is not defined</span>
+</code></pre></div></div>
+
+<p>The CJS allows you to conditionally import modules using the <code class="language-plaintext highlighter-rouge">require</code> function. This is useful when you want to load
+modules based on a specific condition.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nx">logger</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./silent-logger</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="esm-ecmascript-module-system">ESM: ECMAScript module system</h3>
+
+<div class="tip">
+   <p>
+If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
+</p>
+</div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
+<span class="p">{</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>ECMAScript modules (ESM) are the standard official module system of Javascript. It was introduced in 2015 as part of
+the ES6 specification. It was introduced with the goal of narrowing the gap between the browser and the server when
+it comes to the module system. It was added to Node.js on <code class="language-plaintext highlighter-rouge">v8.5.0</code> as an experimental feature. By <code class="language-plaintext highlighter-rouge">v13.2.0</code>, loading
+ESM modules became available without any command-line flags.</p>
+
+<p>ESM uses <code class="language-plaintext highlighter-rouge">export</code> to export modules and <code class="language-plaintext highlighter-rouge">import</code> to import modules.</p>
+
+<div class="tip">
+    <p>ESM uses `export` in the singular format not `exports` like CJS.</p>
+</div>
+
+<p>The following example shows how to export a function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
+<span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The following example shows how to import that function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span> <span class="c1">// File extension is required to import relative modules</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
+</code></pre></div></div>
+
+<p>You can also export a default module using the <code class="language-plaintext highlighter-rouge">export default</code> syntax. This is useful when you want to export a single
+module from a file. Exporting a default module doesn’t prevent you from exporting other modules from the same file.</p>
+
+<p>The following example shows how to export a default module:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The following example shows how to import that function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+<span class="k">import</span> <span class="nx">sum</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
+</code></pre></div></div>
+
+<p>The following example shows a mixed export of a default module and other modules:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calculator.mjs</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you imported the default module, then you have access to the <code class="language-plaintext highlighter-rouge">calculate</code> function which is the default export of
+the module. You can also give it any name you want.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">myCalculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">myCalculator</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+
+<span class="nx">myCalculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// TypeError: myCalculator.sum is not a function</span>
+</code></pre></div></div>
+
+<p>If you imported the module using the <code class="language-plaintext highlighter-rouge">import * as</code> syntax, then you have access to all the exported modules. The <code class="language-plaintext highlighter-rouge">import * as</code>
+imports all the exported modules in a single object.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">calculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="k">default</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>As you already noticed, using something like <code class="language-plaintext highlighter-rouge">calculator.default</code> is not very convenient. You can get the same
+result by the following readable syntax:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">calculate</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">calculate</code> is our custom name for the default export of the module, the other modules are imported using their
+original names. You can also use the <code class="language-plaintext highlighter-rouge">as</code> keyword to rename the imported modules.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span> <span class="k">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">calculate</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>The ESM modules doesn’t support conditionally importing modules. All the imports should be at the top of the file.</p>
+
+<div class="danger">
+    <p>The following code will throw a SyntaxError: </p>
+</div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.mjs</span><span class="dl">'</span>
+
+<span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this post, we talked about the basic syntax of the CJS and ESM modules. We talked about how to import and export
+modules using both module systems. We didn’t cover all the details, but we covered the basics that you need to know to
+differentiate between the two module systems.</p>
+
+<p><sub>
+Image: <a href="https://unsplash.com/photos/a-dog-lays-on-a-bed-next-to-a-laptop-IGfoMhQhtwo">Photo by Jorge Rosal on Unsplash</a></sub></p>
+
+</div>
+
+
+    </main>
+    <section class="sticky top-[100vh]">
+    <div class="p-10">
+        <div class="max-w-screen-md mx-auto">
+            <p class="text-center">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2024 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+
+<!-- Ion icons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>

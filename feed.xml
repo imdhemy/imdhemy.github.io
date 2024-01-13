@@ -1,6 +1,281 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-01-06T10:52:08+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-01-13T20:23:58+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">From Code to German: My First Steps Towards Learning a New Language</title><link href="https://imdhemy.com/blog/germany/from-code-to-german.html" rel="alternate" type="text/html" title="From Code to German: My First Steps Towards Learning a New Language" /><published>2023-04-22T00:00:00+00:00</published><updated>2023-04-22T00:00:00+00:00</updated><id>https://imdhemy.com/blog/germany/from-code-to-german</id><content type="html" xml:base="https://imdhemy.com/blog/germany/from-code-to-german.html"><![CDATA[<p>For years, I have been dedicated to writing code every day and contributing to various
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Effective Node.js Modules - Part 1: Basic Syntax</title><link href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 1: Basic Syntax" /><published>2024-01-07T00:00:00+00:00</published><updated>2024-01-07T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html"><![CDATA[<p>Do you know what is the difference between the following two code snippets?</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>And this one:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Both of them import the <code class="language-plaintext highlighter-rouge">app</code> and <code class="language-plaintext highlighter-rouge">connection</code> from the <code class="language-plaintext highlighter-rouge">config</code> module, but the first one is using the <strong>CommonJS</strong> (
+CJS) module system, and the second one is using the <strong>ECMAScript</strong> (ES) module system.</p>
+
+<p>Modules allow you to split your code into small units, that can be reused and tested independently. They are also the
+main way to enforce information hiding by exposing (exporting) only the public API of the module.</p>
+
+<p>In this series of posts, we will talk about how to use modules effectively in your Node.js applications. By the end of
+this series, you should be able to make pragmatic decisions about how to use modules effectively in your Node.js
+applications.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>📋</th>
+      <th>Posts in this series</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Basic Syntax</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>…</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Javascript was introduced in 1995 as a scripting language for browsers. It was not designed to be used as a server
+language. Browsers should keep an eye on the security of the user and the system, so they need to limit the access of
+the Javascript code to the system resources. The nature of the Javascript and the browser environment allowed the use
+of the <code class="language-plaintext highlighter-rouge">script</code> tag to load Javascript code didn’t help the developers to write modular code. Developers used multiple <code class="language-plaintext highlighter-rouge">script</code>
+tags to load the Javascript code in the right order.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"foo.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bar.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"baz.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div></div>
+
+<p>When Node.js was introduced in 2009 as a server-side Javascript runtime, it came with full access to the underlying
+system resources. This allowed providing the CommonJS module system to allow developers to write modular code and
+organize their applications into small reusable units.</p>
+
+<h3 id="cjs-commonjs-module-system">CJS: CommonJS module system</h3>
+
+<p>The CJS module system is the default module system of Node.js. <strong>CJS</strong> uses <code class="language-plaintext highlighter-rouge">require</code> to import modules
+and <code class="language-plaintext highlighter-rouge">module.exports</code>or <code class="language-plaintext highlighter-rouge">exports</code> to export modules. <code class="language-plaintext highlighter-rouge">exports</code> is a reference to <code class="language-plaintext highlighter-rouge">module.exports</code>, so you can use either
+of them to export modules as follows:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Is the same as:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">require</code> function returns the exported value of the module.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="c1">// { app: { name: 'Awesome App', port: 3000 } }</span>
+</code></pre></div></div>
+
+<p>You can also use the <code class="language-plaintext highlighter-rouge">require</code> function to import a single module from a file that exports multiple modules.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+  <span class="p">},</span>
+  <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost</span><span class="dl">'</span><span class="p">,</span>
+    <span class="na">port</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+<span class="kd">const</span> <span class="p">{</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="c1">// { host: 'localhost', port: 27017 }</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="c1">// ReferenceError: app is not defined</span>
+</code></pre></div></div>
+
+<p>The CJS allows you to conditionally import modules using the <code class="language-plaintext highlighter-rouge">require</code> function. This is useful when you want to load
+modules based on a specific condition.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="kd">let</span> <span class="nx">logger</span>
+<span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./silent-logger</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger</span><span class="dl">'</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="esm-ecmascript-module-system">ESM: ECMAScript module system</h3>
+
+<div class="tip">
+   <p>
+If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
+</p>
+</div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
+<span class="p">{</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>ECMAScript modules (ESM) are the standard official module system of Javascript. It was introduced in 2015 as part of
+the ES6 specification. It was introduced with the goal of narrowing the gap between the browser and the server when
+it comes to the module system. It was added to Node.js on <code class="language-plaintext highlighter-rouge">v8.5.0</code> as an experimental feature. By <code class="language-plaintext highlighter-rouge">v13.2.0</code>, loading
+ESM modules became available without any command-line flags.</p>
+
+<p>ESM uses <code class="language-plaintext highlighter-rouge">export</code> to export modules and <code class="language-plaintext highlighter-rouge">import</code> to import modules.</p>
+
+<div class="tip">
+    <p>ESM uses `export` in the singular format not `exports` like CJS.</p>
+</div>
+
+<p>The following example shows how to export a function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
+<span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span>
+</code></pre></div></div>
+
+<p>The following example shows how to import that function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span> <span class="c1">// File extension is required to import relative modules</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
+</code></pre></div></div>
+
+<p>You can also export a default module using the <code class="language-plaintext highlighter-rouge">export default</code> syntax. This is useful when you want to export a single
+module from a file. Exporting a default module doesn’t prevent you from exporting other modules from the same file.</p>
+
+<p>The following example shows how to export a default module:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The following example shows how to import that function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+<span class="k">import</span> <span class="nx">sum</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
+</code></pre></div></div>
+
+<p>The following example shows a mixed export of a default module and other modules:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calculator.mjs</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
+<span class="p">}</span>
+
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>If you imported the default module, then you have access to the <code class="language-plaintext highlighter-rouge">calculate</code> function which is the default export of
+the module. You can also give it any name you want.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">myCalculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">myCalculator</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+
+<span class="nx">myCalculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// TypeError: myCalculator.sum is not a function</span>
+</code></pre></div></div>
+
+<p>If you imported the module using the <code class="language-plaintext highlighter-rouge">import * as</code> syntax, then you have access to all the exported modules. The <code class="language-plaintext highlighter-rouge">import * as</code>
+imports all the exported modules in a single object.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">calculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="k">default</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>As you already noticed, using something like <code class="language-plaintext highlighter-rouge">calculator.default</code> is not very convenient. You can get the same
+result by the following readable syntax:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">calculate</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">calculate</code> is our custom name for the default export of the module, the other modules are imported using their
+original names. You can also use the <code class="language-plaintext highlighter-rouge">as</code> keyword to rename the imported modules.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span> <span class="k">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">calculate</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>The ESM modules doesn’t support conditionally importing modules. All the imports should be at the top of the file.</p>
+
+<div class="danger">
+    <p>The following code will throw a SyntaxError: </p>
+</div>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
+
+<span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.mjs</span><span class="dl">'</span>
+
+<span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this post, we talked about the basic syntax of the CJS and ESM modules. We talked about how to import and export
+modules using both module systems. We didn’t cover all the details, but we covered the basics that you need to know to
+differentiate between the two module systems.</p>
+
+<p><sub>
+Image: <a href="https://unsplash.com/photos/a-dog-lays-on-a-bed-next-to-a-laptop-IGfoMhQhtwo">Photo by Jorge Rosal on Unsplash</a></sub></p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[Do you know what is the difference between the following two code snippets?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">From Code to German: My First Steps Towards Learning a New Language</title><link href="https://imdhemy.com/blog/germany/from-code-to-german.html" rel="alternate" type="text/html" title="From Code to German: My First Steps Towards Learning a New Language" /><published>2023-04-22T00:00:00+00:00</published><updated>2023-04-22T00:00:00+00:00</updated><id>https://imdhemy.com/blog/germany/from-code-to-german</id><content type="html" xml:base="https://imdhemy.com/blog/germany/from-code-to-german.html"><![CDATA[<p>For years, I have been dedicated to writing code every day and contributing to various
 projects. <a href="https://github.com/imdhemy">My GitHub account</a> showcases my commitment and hard work. Since I moved
 from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I
 couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and
@@ -1132,239 +1407,4 @@ courses including:</p>
 
 <p>I’d prefer to assign the responsibility of ensuring having only one object to another Class or helper or at least do the same as Laravel developers did, and I’d also avoid hiding the constructor.</p>
 
-<p>It’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.]]></summary></entry><entry><title type="html">How to test Elasticsearch in PHP applications</title><link href="https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html" rel="alternate" type="text/html" title="How to test Elasticsearch in PHP applications" /><published>2021-09-09T00:00:00+00:00</published><updated>2021-09-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps</id><content type="html" xml:base="https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html"><![CDATA[<div class="caution">
-<p>
-Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. 
-This article is intended to v 7.x and lower. For v 8.0 you can use the <a href="https://github.
-com/imdhemy/es-testing-utils">Es Utils package</a>.
-</p>
-</div>
-
-<p>Currently, I’m working on the <a href="https://github.com/imdhemy/elasticsearch-php-sugar">Elasticsearch PHP Sugar package</a>. It’s a wrapper over the low-level Elasticsearch
-client that adds <a href="https://en.wikipedia.org/wiki/Syntactic_sugar">syntactic sugar</a> for PHP developers. I’ll publish a blog post once I publish the first release.</p>
-
-<p>One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service,
-you often need to simulate specific scenarios like returning a successful response, returning an error, or returning
-particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests
-for Elasticsearch in your PHP application. Let’s start with a short note about the Practical Test Pyramid.</p>
-
-<h3 id="practical-test-pyramid">Practical Test Pyramid</h3>
-
-<p><img src="/assets/img/test-pyramid.png" alt="Test Pyramid" /></p>
-
-<p>In his book <a href="https://www.goodreads.com/book/show/6707987-succeeding-with-agile"><em>Succeeding With Agile</em></a><em>,</em> Mike Cohn came up with the Test Pyramid concept. Test Pyramid tells you to
-think about different layers of testing. It also tells you how much testing to do on each layer. It consists of three
-layers from the bottom up:</p>
-
-<ul>
-  <li>Unit Tests.</li>
-  <li>Service Tests.</li>
-  <li>UI Tests.</li>
-</ul>
-
-<p>The names introduced by Mike Cohn are confusing, at least for me. I’ll go for different naming for each testing layer:</p>
-
-<ul>
-  <li>Unit Tests. It’s the same 😅</li>
-  <li>Integration Tests.</li>
-  <li>End to End Tests.</li>
-</ul>
-
-<p>As a rule of thumb, stick to the pyramid shape to come up with a healthy, fast, and maintainable test suite. Below is a
-list of tips to follow:</p>
-
-<ol>
-  <li>Write tests with different granularity</li>
-  <li>The more high-level you get the fewer tests you should have</li>
-  <li>Write <em>lots</em> of small and fast <em>unit tests</em>.</li>
-  <li>Write <em>some</em> more coarse-grained tests.</li>
-  <li>Write <em>very few</em> high-level tests that test your application from end to end.</li>
-</ol>
-
-<p>In this blog post, I will cover only the first two types of the Test Pyramid. Unit and Integration Tests.</p>
-
-<h3 id="how-to-unit-test-elasticsearch-in-php">How to Unit Test Elasticsearch in PHP</h3>
-
-<p>Unit tests <a href="https://github.com/elastic/elasticsearch-php/pull/618#issuecomment-323816444">shouldn’t depend on a running cluster</a>, should be mocked out instead. To be more specific the client
-response should be mocked.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">use</span> <span class="nc">GuzzleHttp\Ring\Client\MockHandler</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nc">Elasticsearch\ClientBuilder</span><span class="p">;</span>
-
-<span class="c1">// The connection class requires 'body' to be a file stream handle</span>
-<span class="c1">// Depending on what kind of request you do, you may need to set more values here</span>
-<span class="nv">$handler</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MockHandler</span><span class="p">([</span>
-  <span class="s1">'status'</span> <span class="o">=&gt;</span> <span class="mi">200</span><span class="p">,</span>
-  <span class="s1">'transfer_stats'</span> <span class="o">=&gt;</span> <span class="p">[</span>
-     <span class="s1">'total_time'</span> <span class="o">=&gt;</span> <span class="mi">100</span>
-  <span class="p">],</span>
-  <span class="s1">'body'</span> <span class="o">=&gt;</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'somefile.json'</span><span class="p">),</span>
-  <span class="s1">'effective_url'</span> <span class="o">=&gt;</span> <span class="s1">'localhost'</span>
-<span class="p">]);</span>
-<span class="nv">$builder</span> <span class="o">=</span> <span class="nc">ClientBuilder</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
-<span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">setHosts</span><span class="p">([</span><span class="s1">'somehost'</span><span class="p">]);</span>
-<span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">setHandler</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
-<span class="nv">$client</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
-<span class="c1">// Do a request and you'll get back the 'body' response above</span>
-</code></pre></div></div>
-
-<p>The previous example is provided by the official package maintainers. Besides, I don’t like the idea of using JSON
-files, we may need to override some values or options during the runtime. This is why I created <a href="https://github.com/imdhemy/testing-es-in-php/tree/master/tests/Utils">these Utils</a> to be
-used as follows:</p>
-
-<hr />
-<p><strong>[UPDATE: 5 November 2021: 02:21 PM]</strong>
-I published a PHP package with enhanced <a href="https://github.com/imdhemy/es-testing-utils">Utils to test Elasticsearch</a>. You can use composer to install it.</p>
-
-<hr />
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$handler</span> <span class="o">=</span> <span class="nc">MockHandler</span><span class="o">::</span><span class="nf">_mockTemplate_</span><span class="p">(</span><span class="s1">'index_document'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>Just provide the template name to the <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Utils/MockHandler.php#L45">static method</a>, and it will do the rest for you. <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/fixtures/responses/index_document.php">The template</a> is a PHP
-file that returns an array representing the expected client response.</p>
-
-<p><strong>Here is an example of a unit test</strong></p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ElasticSearchEngineTest</span> <span class="kd">extends</span> <span class="nc">UnitTestCase</span>
-<span class="p">{</span>
-    <span class="cd">/**
-     * @test
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">test_it_can_index_a_document</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$handler</span> <span class="o">=</span> <span class="nc">MockHandler</span><span class="o">::</span><span class="nf">mockTemplate</span><span class="p">(</span><span class="s1">'index_document'</span><span class="p">);</span>
-
-        <span class="nv">$builder</span> <span class="o">=</span> <span class="nc">ClientBuilder</span><span class="o">::</span><span class="nf">create</span><span class="p">();</span>
-        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">setHandler</span><span class="p">(</span><span class="nv">$handler</span><span class="p">);</span>
-        <span class="nv">$client</span> <span class="o">=</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
-
-
-        <span class="nv">$elasticSearchEngine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ElasticSearchEngine</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
-        <span class="nv">$document</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">'author'</span> <span class="o">=&gt;</span> <span class="s1">'Albert Einstein'</span><span class="p">,</span>
-            <span class="s1">'quote'</span> <span class="o">=&gt;</span> <span class="s1">'I have no special talents. I am only passionately curious.'</span><span class="p">,</span>
-        <span class="p">];</span>
-
-        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$elasticSearchEngine</span><span class="o">-&gt;</span><span class="nf">index</span><span class="p">(</span><span class="s1">'quotes_index'</span><span class="p">,</span> <span class="nv">$document</span><span class="p">);</span>
-
-        <span class="nv">$expectedResponse</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">getTemplate</span><span class="p">(</span><span class="s1">'index_document'</span><span class="p">);</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nv">$expectedResponse</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>As simple as that 🚀</p>
-
-<h3 id="how-to-add-integration-tests-to-elasticsearch-in-php">How to add Integration Tests to Elasticsearch in PHP</h3>
-
-<div class="info">
- Github actions, Bitbucket pipelines and other CI/CD tools could be used to start Elasticsearch to run integration tests.
- The following example uses CircleCI, but it would be much better if you used the same tool you're using in your project
-without depending on a third-party service.
-</div>
-
-<p>For this part, you don’t just need to run your application but also the component you’re integrating with, Elasticsearch
-in our case. To automate this process I’m going to use <a href="https://circleci.com/">CircleCI</a>. CircleCI integrates with GitHub and Bitbucket, in
-our example project we will use Github, but you can do the same on Bitbucket.</p>
-
-<p>Let’s create our configuration file. Don’t be worry if you didn’t use CircleCI before, all you need is to understand the
-following YAML file.</p>
-
-<p>on <code class="language-plaintext highlighter-rouge">.circleci/config.yml</code></p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># PHP8.0 &amp; ES7.14.0 CircleCI 2.0 configuration file</span>
-<span class="c1">#</span>
-<span class="na">version</span><span class="pi">:</span> <span class="m">2</span>
-<span class="na">jobs</span><span class="pi">:</span>
-  <span class="na">build</span><span class="pi">:</span>
-    <span class="na">docker</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">circleci/php:8.0.10-cli</span> <span class="c1">#1</span>
-      <span class="pi">-</span> <span class="na">image</span><span class="pi">:</span> <span class="s">docker.elastic.co/elasticsearch/elasticsearch:7.14.0</span> <span class="c1">#2</span>
-        <span class="na">environment</span><span class="pi">:</span> <span class="c1">#3</span>
-          <span class="pi">-</span> <span class="na">transport.host</span><span class="pi">:</span> <span class="s">localhost</span>
-          <span class="pi">-</span> <span class="na">network.host</span><span class="pi">:</span> <span class="s">127.0.0.1</span>
-          <span class="pi">-</span> <span class="na">http.port</span><span class="pi">:</span> <span class="m">9200</span>
-          <span class="pi">-</span> <span class="na">cluster.name</span><span class="pi">:</span> <span class="s">es-cluster</span>
-          <span class="pi">-</span> <span class="na">discovery.type</span><span class="pi">:</span> <span class="s">single-node</span>
-          <span class="pi">-</span> <span class="na">xpack.security.enabled</span><span class="pi">:</span> <span class="kc">false</span>
-          <span class="pi">-</span> <span class="na">ES_JAVA_OPTS</span><span class="pi">:</span> <span class="s2">"</span><span class="s">-Xms256m</span><span class="nv"> </span><span class="s">-Xmx256m"</span>
-    <span class="na">steps</span><span class="pi">:</span> <span class="c1">#4</span>
-      <span class="pi">-</span> <span class="s">checkout</span>
-
-      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">sudo apt update</span>
-
-      <span class="c1"># Download and cache dependencies</span>
-      <span class="pi">-</span> <span class="na">restore_cache</span><span class="pi">:</span>
-          <span class="na">keys</span><span class="pi">:</span>
-            <span class="c1"># "composer.lock" can be used if it is committed to the repo</span>
-            <span class="pi">-</span> <span class="s">v1-dependencies-{{ checksum "composer.json" }}</span>
-            <span class="c1"># fallback to using the latest cache if no exact match is found</span>
-            <span class="pi">-</span> <span class="s">v1-dependencies-</span>
-
-      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">composer install -n --prefer-dist</span>
-
-      <span class="c1"># Wait for ES startup</span>
-      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="c1">#5</span>
-          <span class="na">name</span><span class="pi">:</span> <span class="s">Waiting for Elasticsearch</span>
-          <span class="na">command</span><span class="pi">:</span> <span class="s">dockerize --wait http://localhost:9200 -timeout 1m</span>
-      <span class="c1"># run tests with phpunit</span>
-      <span class="pi">-</span> <span class="na">run</span><span class="pi">:</span> <span class="s">composer test</span> <span class="c1">#6</span>
-
-</code></pre></div></div>
-
-<p>I’m using docker images to build my application, <code class="language-plaintext highlighter-rouge">#1</code> for <strong>PHP8.0</strong> and <code class="language-plaintext highlighter-rouge">#2</code> for the <strong>Elasticsearch</strong> prebuild image.
-CircleCI provides other ways to start your machine, but docker 🐳 is super easy to use.</p>
-
-<p><code class="language-plaintext highlighter-rouge">#3</code> is the environment variables used for Elasticsearch configuration.</p>
-
-<p>Number <code class="language-plaintext highlighter-rouge">#4</code> shows the build job steps, but give more attention to <code class="language-plaintext highlighter-rouge">#5</code> which allows our test suites to wait for
-Elasticsearch to be ready. Finally, on <code class="language-plaintext highlighter-rouge">#6</code> we are using composer to run PHPUnit Tests.</p>
-
-<p><strong>Let’s add the first integration test.</strong> For your local development, you can depend on the docker-compose to start
-Elasticsearch.</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose up -d
-</code></pre></div></div>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">SearchEngineTest</span> <span class="kd">extends</span> <span class="nc">TestCase</span>
-<span class="p">{</span>
-    <span class="cd">/**
-     * @test
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">test_get_client_info</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$client</span> <span class="o">=</span> <span class="nc">ClientBuilder</span><span class="o">::</span><span class="nf">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">build</span><span class="p">();</span>
-        <span class="nv">$searchEngine</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ElasticSearchEngine</span><span class="p">(</span><span class="nv">$client</span><span class="p">);</span>
-        <span class="nv">$info</span> <span class="o">=</span> <span class="nv">$searchEngine</span><span class="o">-&gt;</span><span class="nf">info</span><span class="p">();</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertArrayHasKey</span><span class="p">(</span><span class="s1">'tagline'</span><span class="p">,</span> <span class="nv">$info</span><span class="p">);</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="s1">'You Know, for Search'</span><span class="p">,</span> <span class="nv">$info</span><span class="p">[</span><span class="s1">'tagline'</span><span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<p><strong>Final steps:</strong></p>
-
-<p><img src="/assets/img/circle-ci-es-php-app.png" alt="CircleCi Dashboard" /></p>
-
-<ul>
-  <li>Push your code to GitHub.</li>
-  <li><a href="https://app.circleci.com/">Give CircleCI access</a> to this repository.</li>
-  <li>And watch your integration tests running. 🚀 🔥</li>
-</ul>
-
-<h3 id="summary">Summary</h3>
-
-<p>I have created a <a href="https://github.com/imdhemy/testing-es-in-php">repository of an example application</a>. You can clone it and start playing with code. It requires
-PHP.8 installed on your host machine. If you prefer PHP7, you can checkout to PHP7.3 branch.</p>
-
-<p>It would be better if completed the exercises I added for you.</p>
-
-<ul>
-  <li>Exercise No.1: <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Unit/ElasticSearchEngineTest.php#L39">Add a unit test for search by a keyword.</a></li>
-  <li>Exercise No.2: <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Integration/SearchEngineTest.php#L26">Add an integration test for indexing a document.</a></li>
-  <li>Exercise No.3: <a href="https://github.com/imdhemy/testing-es-in-php/blob/master/tests/Integration/SearchEngineTest.php#L35">Add an integration test for searching for a keyword.</a></li>
-</ul>
-
-<p>Feel free to make a PR of your answers.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. For v 8.0 you can use the Es Utils package.]]></summary></entry></feed>
+<p>It’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.]]></summary></entry></feed>
