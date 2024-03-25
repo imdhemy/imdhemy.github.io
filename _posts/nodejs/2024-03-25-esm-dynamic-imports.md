@@ -55,7 +55,7 @@ Here is the content of the `main.js` file:
 const languages = ['en', 'de', 'ar'];
 const defaultLanguage = 'en';
 
-let language = process.argv[2] || defaultLanguage;
+const language = process.argv[2] || defaultLanguage;
 
 if (!languages.includes(language)) {
   console.error(`Unsupported language: ${language}`);
