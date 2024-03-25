@@ -8,13 +8,13 @@ image: /assets/img/dog-laptop-code-bed.jpeg
 Do you know what is the difference between the following two code snippets?
 
 ```js
-const { app, connection } = require('./config');
+const {app, connection} = require('./config');
 ```
 
 And this one:
 
 ```js
-import { app, connection } from './config.js';
+import {app, connection} from './config.js';
 ```
 
 Both of them import the `app` and `connection` from the `config` module, but the first one is using the **CommonJS** (
@@ -27,15 +27,16 @@ In this series of posts, we will talk about how to use modules effectively in yo
 this series, you should be able to make pragmatic decisions about how to use modules effectively in your Node.js
 applications.
 
-| 📋 | Posts in this series |
-|----|----------------------|
-| 1  | Basic Syntax         |
-| 2  | ...                  |
+| 📋 | Posts in this series                                                    |
+|----|-------------------------------------------------------------------------|
+| 1  | Basic Syntax                                                            |
+| 2  | [Dynamic imports]({% post_url nodejs/2024-03-25-esm-dynamic-imports %}) |
 
 Javascript was introduced in 1995 as a scripting language for browsers. It was not designed to be used as a server
 language. Browsers should keep an eye on the security of the user and the system, so they need to limit the access of
 the Javascript code to the system resources. The nature of the Javascript and the browser environment allowed the use
-of the `script` tag to load Javascript code didn't help the developers to write modular code. Developers used multiple `script`
+of the `script` tag to load Javascript code didn't help the developers to write modular code. Developers used
+multiple `script`
 tags to load the Javascript code in the right order.
 
 ```html
@@ -104,7 +105,7 @@ module.exports = {
 
 ```js
 // main.js
-const { connection } = require('./config.js')
+const {connection} = require('./config.js')
 
 console.log(connection) // { host: 'localhost', port: 27017 }
 console.log(app) // ReferenceError: app is not defined
@@ -136,7 +137,9 @@ If you want to use ESM modules, you need to set the "type" to module "module" in
 ```js
 // package.json
 {
-  "type": "module"
+  "type"
+:
+  "module"
 }
 ```
 
@@ -155,18 +158,18 @@ The following example shows how to export a function:
 
 ```js
 // sum.mjs
-function sum (a, b) {
+function sum(a, b) {
   return a + b
 }
 
-export { sum }
+export {sum}
 ```
 
 The following example shows how to import that function:
 
 ```js
 // app.mjs
-import { sum } from './sum.mjs' // File extension is required to import relative modules
+import {sum} from './sum.mjs' // File extension is required to import relative modules
 
 console.log(sum(7, 9)) // 16
 ```
@@ -178,7 +181,7 @@ The following example shows how to export a default module:
 
 ```js
 // sum.mjs
-export default function sum (a, b) {
+export default function sum(a, b) {
   return a + b
 }
 ```
@@ -196,15 +199,15 @@ The following example shows a mixed export of a default module and other modules
 
 ```js
 // calculator.mjs
-export function sum (a, b) {
+export function sum(a, b) {
   return a + b
 }
 
-export function subtract (a, b) {
+export function subtract(a, b) {
   return a - b
 }
 
-export default function calculate (input) {
+export default function calculate(input) {
   // a magic function that takes a string input like "1 + 2" and returns the result
 }
 ```
@@ -222,7 +225,8 @@ console.log(myCalculator('1 + 2')) // 3
 myCalculator.sum(1, 2) // TypeError: myCalculator.sum is not a function
 ```
 
-If you imported the module using the `import * as` syntax, then you have access to all the exported modules. The `import * as`
+If you imported the module using the `import * as` syntax, then you have access to all the exported modules.
+The `import * as`
 imports all the exported modules in a single object.
 
 ```js
@@ -241,7 +245,7 @@ result by the following readable syntax:
 ```js
 // app.mjs
 
-import calculate, { sum, subtract } from './calculator.mjs'
+import calculate, {sum, subtract} from './calculator.mjs'
 
 console.log(sum(1, 2)) // 3
 console.log(subtract(1, 2)) // -1
@@ -254,7 +258,7 @@ original names. You can also use the `as` keyword to rename the imported modules
 ```js
 // app.mjs
 
-import calculate, { sum as add, subtract } from './calculator.mjs'
+import calculate, {sum as add, subtract} from './calculator.mjs'
 
 console.log(add(1, 2)) // 3
 console.log(subtract(1, 2)) // -1
@@ -273,9 +277,15 @@ The ESM modules doesn't support conditionally importing modules. All the imports
 import config from './config.mjs'
 
 if (config.app.env === 'test') {
-  import logger from './silent-logger.mjs'
+import
+  logger
+  from
+  './silent-logger.mjs'
 } else {
-  import logger from './logger.mjs'
+import
+  logger
+  from
+  './logger.mjs'
 }
 ```
 
