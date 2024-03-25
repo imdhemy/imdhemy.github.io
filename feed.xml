@@ -1,13 +1,81 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-01-14T09:57:14+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-03-25T13:50:50+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Effective Node.js Modules - Part 1: Basic Syntax</title><link href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 1: Basic Syntax" /><published>2024-01-07T00:00:00+00:00</published><updated>2024-01-07T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html"><![CDATA[<p>Do you know what is the difference between the following two code snippets?</p>
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Effective Node.js Modules - Part 2: ESM dynamic imports</title><link href="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 2: ESM dynamic imports" /><published>2024-03-25T00:00:00+00:00</published><updated>2024-03-25T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/esm-dynamic-imports</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html"><![CDATA[<p>One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use
+<code class="language-plaintext highlighter-rouge">require</code> to import modules anywhere in your code, but in ESM you can only use <code class="language-plaintext highlighter-rouge">import</code> at the top level of your code.
+What if you want to import a module dynamically in ESM?</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
+<p>In this post, we will create a simple <code class="language-plaintext highlighter-rouge">Hello world!</code> application that uses dynamic imports to greet the user in
+different languages. If you don’t know how to enable ESM in Node.js, check the
+<a href="/blog/nodejs/effective-nodejs-modules-part-1.html">previous post</a>.</p>
+
+<p>Below is the directory structure of our application:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+├── main.js
+├── package.json
+└── translations
+    ├── ar.js
+    ├── de.js
+    └── en.js
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">translations</code> directory contains three files: <code class="language-plaintext highlighter-rouge">en.js</code>, <code class="language-plaintext highlighter-rouge">de.js</code>, and <code class="language-plaintext highlighter-rouge">ar.js</code>. Each file exports constants that
+represent the greeting message in a specific language. Here are the contents of the files:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// translations/en.js</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">GREETING</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hello world!</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// translations/ar.js</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">GREETING</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">مرحبا بالعالم!</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// translations/de.js</span>
+<span class="k">export</span> <span class="kd">const</span> <span class="nx">GREETING</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hallo Welt!</span><span class="dl">'</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">main.js</code> file is the entry point of our application. It gets the user’s preferred language from the command
+line then imports the corresponding translation module dynamically if it exists.</p>
+
+<p>Here is the content of the <code class="language-plaintext highlighter-rouge">main.js</code> file:</p>
+
+<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
+<span class="kd">const</span> <span class="nx">languages</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">en</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">de</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ar</span><span class="dl">'</span><span class="p">];</span>
+<span class="kd">const</span> <span class="nx">defaultLanguage</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">en</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">language</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">||</span> <span class="nx">defaultLanguage</span><span class="p">;</span>
+
+<span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">languages</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="nx">language</span><span class="p">))</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s2">`Unsupported language: </span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+  <span class="nx">process</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Get advantage of top-level await</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">GREETING</span><span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="k">import</span><span class="p">(</span><span class="s2">`./translations/</span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">.js`</span><span class="p">);</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">GREETING</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>To run the application, execute the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node main.js de
+</code></pre></div></div>
+
+<p>In the <code class="language-plaintext highlighter-rouge">main.js</code> we used the <code class="language-plaintext highlighter-rouge">import()</code> expression, commonly called dynamic import. This expression will be evaluated
+at runtime, and the module will be loaded asynchronously. The <code class="language-plaintext highlighter-rouge">await</code> keyword is used to wait for the module to be
+loaded before continuing the execution.</p>
+
+<div class="tip">
+Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.
+</div>
+
+<p>That’s it! You have learned how to use dynamic imports in ESM modules.</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use require to import modules anywhere in your code, but in ESM you can only use import at the top level of your code. What if you want to import a module dynamically in ESM?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-running.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-running.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Effective Node.js Modules - Part 1: Basic Syntax</title><link href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 1: Basic Syntax" /><published>2024-01-07T00:00:00+00:00</published><updated>2024-01-07T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html"><![CDATA[<p>Do you know what is the difference between the following two code snippets?</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>And this one:</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>Both of them import the <code class="language-plaintext highlighter-rouge">app</code> and <code class="language-plaintext highlighter-rouge">connection</code> from the <code class="language-plaintext highlighter-rouge">config</code> module, but the first one is using the <strong>CommonJS</strong> (
@@ -34,7 +102,7 @@ applications.</p>
     </tr>
     <tr>
       <td>2</td>
-      <td>…</td>
+      <td><a href="/blog/nodejs/esm-dynamic-imports.html">Dynamic imports</a></td>
     </tr>
   </tbody>
 </table>
@@ -42,7 +110,8 @@ applications.</p>
 <p>Javascript was introduced in 1995 as a scripting language for browsers. It was not designed to be used as a server
 language. Browsers should keep an eye on the security of the user and the system, so they need to limit the access of
 the Javascript code to the system resources. The nature of the Javascript and the browser environment allowed the use
-of the <code class="language-plaintext highlighter-rouge">script</code> tag to load Javascript code didn’t help the developers to write modular code. Developers used multiple <code class="language-plaintext highlighter-rouge">script</code>
+of the <code class="language-plaintext highlighter-rouge">script</code> tag to load Javascript code didn’t help the developers to write modular code. Developers used
+multiple <code class="language-plaintext highlighter-rouge">script</code>
 tags to load the Javascript code in the right order.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -105,7 +174,7 @@ of them to export modules as follows:</p>
 </code></pre></div></div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
-<span class="kd">const</span> <span class="p">{</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="c1">// { host: 'localhost', port: 27017 }</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="c1">// ReferenceError: app is not defined</span>
@@ -135,7 +204,9 @@ If you want to use ESM modules, you need to set the "type" to module "module" in
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
 <span class="p">{</span>
-  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span>
+<span class="p">:</span>
+  <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -153,17 +224,17 @@ ESM modules became available without any command-line flags.</p>
 <p>The following example shows how to export a function:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
-<span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
-<span class="k">export</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span>
+<span class="k">export</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span>
 </code></pre></div></div>
 
 <p>The following example shows how to import that function:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span> <span class="c1">// File extension is required to import relative modules</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span> <span class="c1">// File extension is required to import relative modules</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
 </code></pre></div></div>
@@ -174,7 +245,7 @@ module from a file. Exporting a default module doesn’t prevent you from export
 <p>The following example shows how to export a default module:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
-<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -190,15 +261,15 @@ module from a file. Exporting a default module doesn’t prevent you from export
 <p>The following example shows a mixed export of a default module and other modules:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calculator.mjs</span>
-<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
 <span class="p">}</span>
 
-<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -215,7 +286,8 @@ the module. You can also give it any name you want.</p>
 <span class="nx">myCalculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// TypeError: myCalculator.sum is not a function</span>
 </code></pre></div></div>
 
-<p>If you imported the module using the <code class="language-plaintext highlighter-rouge">import * as</code> syntax, then you have access to all the exported modules. The <code class="language-plaintext highlighter-rouge">import * as</code>
+<p>If you imported the module using the <code class="language-plaintext highlighter-rouge">import * as</code> syntax, then you have access to all the exported modules.
+The <code class="language-plaintext highlighter-rouge">import * as</code>
 imports all the exported modules in a single object.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
@@ -232,7 +304,7 @@ result by the following readable syntax:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
 
-<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
@@ -244,7 +316,7 @@ original names. You can also use the <code class="language-plaintext highlighter
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
 
-<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span> <span class="k">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span> <span class="k">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
@@ -262,9 +334,15 @@ original names. You can also use the <code class="language-plaintext highlighter
 <span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.mjs</span><span class="dl">'</span>
 
 <span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
+<span class="k">import</span>
+  <span class="nx">logger</span>
+  <span class="k">from</span>
+  <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
+<span class="k">import</span>
+  <span class="nx">logger</span>
+  <span class="k">from</span>
+  <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -1270,141 +1348,4 @@ courses including:</p>
   <li>Effective Unit Testing, a guide for java developers.</li>
 </ul>
 
-<p><strong>Manténganse al tanto</strong></p>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.]]></summary></entry><entry><title type="html">PHP Real-world use cases of singleton design pattern</title><link href="https://imdhemy.com/blog/php/real-world-use-cases-of-sinlgeton-in-php.html" rel="alternate" type="text/html" title="PHP Real-world use cases of singleton design pattern" /><published>2021-12-30T12:45:00+00:00</published><updated>2021-12-30T12:45:00+00:00</updated><id>https://imdhemy.com/blog/php/real-world-use-cases-of-sinlgeton-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/real-world-use-cases-of-sinlgeton-in-php.html"><![CDATA[<p>The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.</p>
-
-<p><strong>The singleton pattern is responsible for:</strong></p>
-<ul>
-  <li>Creating an instance of its class.</li>
-  <li>Ensures that a class has just a single instance.</li>
-</ul>
-
-<p>This obviously violates the Single Responsibility Principle, as the pattern solves two problems at the same time.</p>
-
-<p>In the following lines, I’ll start by explaining <strong>how to implement a singleton</strong>, then I’ll discuss how <strong>Laravel Container</strong> uses the singleton pattern, Finally, show you how the Local Adapter within <strong>Flysystem</strong> PHP package uses the same concept to manipulate files.</p>
-
-<h2 id="how-to-implement-a-singleton">How to implement a singleton</h2>
-<p>The Singleton class declares the static method <code class="language-plaintext highlighter-rouge">getInstance</code> that returns the same instance of its class. To do so, we declare a static private property that holds the instance. By checking its value we can decide whether to create a new instance or return the already instantiated one. The Singleton <code class="language-plaintext highlighter-rouge">constructor</code> should be hidden from the client code. Calling the <code class="language-plaintext highlighter-rouge">getInstance</code> method should be the only way to create an instance of the Singleton class. Cloning the object should be prevented as well.</p>
-
-<p><strong>I start by writing tests…</strong></p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//SingletonTest.php
-<span class="cp">&lt;?php</span>
-
-<span class="kn">namespace</span> <span class="nn">Tests</span><span class="p">;</span>
-
-<span class="kn">use</span> <span class="nc">Com\Imdhemy\Singleton</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nc">Error</span><span class="p">;</span>
-
-<span class="kd">class</span> <span class="nc">SingletonTest</span> <span class="kd">extends</span> <span class="nc">TestCase</span>
-<span class="p">{</span>
-    <span class="cd">/**
-     * @test
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">it_can_be_instantiated_by_a_static_factory_method</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$instance</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertInstanceOf</span><span class="p">(</span><span class="nc">Singleton</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="nv">$instance</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @test
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">it_must_return_the_same_instance_every_time</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$firstCall</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
-        <span class="nv">$secondCall</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
-
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertSame</span><span class="p">(</span><span class="nv">$firstCall</span><span class="p">,</span> <span class="nv">$secondCall</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @test
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">it_should_not_be_instantiated_through_a_constructor</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">Error</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
-        <span class="k">new</span> <span class="nc">Singleton</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @test
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">it_should_not_be_cloned</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">expectException</span><span class="p">(</span><span class="nc">Error</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
-        <span class="nv">$instance</span> <span class="o">=</span> <span class="nc">Singleton</span><span class="o">::</span><span class="nf">getInstance</span><span class="p">();</span>
-        <span class="k">clone</span> <span class="nv">$instance</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></div></div>
-
-<p><strong>And here is the Singleton class code…</strong></p>
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//Singleton.php
-<span class="cp">&lt;?php</span>
-
-<span class="kn">namespace</span> <span class="nn">Com\Imdhemy</span><span class="p">;</span>
-
-<span class="kd">class</span> <span class="nc">Singleton</span>
-<span class="p">{</span>
-    <span class="cd">/**
-     * @var Singleton|null
-     */</span>
-    <span class="k">private</span> <span class="k">static</span> <span class="kt">?Singleton</span> <span class="nv">$instance</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-
-    <span class="cd">/**
-     * Singleton constructor
-     */</span>
-    <span class="k">private</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="c1">//</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * Prevents Cloning
-     */</span>
-    <span class="k">private</span> <span class="k">function</span> <span class="n">__clone</span><span class="p">():</span> <span class="kt">void</span>
-    <span class="p">{</span>
-        <span class="c1">//</span>
-    <span class="p">}</span>
-
-    <span class="cd">/**
-     * @return Singleton
-     */</span>
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="n">getInstance</span><span class="p">():</span> <span class="kt">Singleton</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="k">static</span><span class="o">::</span><span class="nv">$instance</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">static</span><span class="o">::</span><span class="nv">$instance</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">static</span><span class="p">();</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="k">static</span><span class="o">::</span><span class="nv">$instance</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="why-laravel-container-is-a-special-singleton-class">Why Laravel Container is a special singleton class</h2>
-<p>If you checked the <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L29">Laravel source code</a>, you will find that the <code class="language-plaintext highlighter-rouge">Application</code> class extends the <code class="language-plaintext highlighter-rouge">Container</code> class. The latter is a special singleton implementation. It makes sense to have a single instance of the application within your application.</p>
-
-<p>You can easily find the <code class="language-plaintext highlighter-rouge">getInstance</code> <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Container/Container.php#L1382-L1389">method on the Container class</a>, but if you checked the container constructor, you <strong>will not</strong> find a private constructor. This is why I’m saying that the Laravel Container is a special singleton. It’s implemented in a way that gains the pros of a Singleton and avoids the cons.</p>
-
-<p>Laravel developers are smart enough to realize that <em>it’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance</em>.</p>
-
-<h2 id="a-single-instance-of-a-file-counts-as-a-singleton">A single instance of a file counts as a singleton</h2>
-
-<p>The term Singleton comes from mathematics. In mathematics, a Singleton, also known as a unit set, is a set with exactly one element. For example, the set <code class="language-plaintext highlighter-rouge">{M}</code> is a singleton containing the element <code class="language-plaintext highlighter-rouge">M</code>.</p>
-
-<p>Let’s imagine the situation when a particular part of your application code is manipulating the contents of a local file, and another part is updating the same file simultaneously! For instance, the first one is adding to the file, and the other one is removing lines from there! Definitely, this will result in inconsistent file contents.</p>
-
-<p>As a solution, we need to ensure having a single instance of the file resource on our application during manipulation. Actually this is not a singleton class implementation, but it still implies the mathematics definition of a singleton.</p>
-
-<p>The wonderful <a href="https://github.com/thephpleague/flysystem">Flysystem</a> PHP package provides one interface to interact with many types of filesystems.</p>
-
-<p>Flysystem ships with a default adapter, which is the Local adapter. By default, this adapter <a href="https://github.com/thephpleague/flysystem/blob/2.x/src/Local/LocalFilesystemAdapter.php#L87">uses a lock</a> during writes and updates.</p>
-
-<h2 id="summary">Summary</h2>
-
-<p>Singleton is a creational design pattern, which ensures that only one object of its kind exists and provides a single point of access to it for any other code.</p>
-
-<p>I’d prefer to assign the responsibility of ensuring having only one object to another Class or helper or at least do the same as Laravel developers did, and I’d also avoid hiding the constructor.</p>
-
-<p>It’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.]]></summary></entry></feed>
+<p><strong>Manténganse al tanto</strong></p>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.]]></summary></entry></feed>

@@ -150,6 +150,8 @@
         <img src="/assets/img/dog-laptop-code-bed.jpeg"
              alt="Effective Node.js Modules - Part 1: Basic Syntax"
              class="w-full h-auto rounded"/>
+        <!-- Image source -->
+        
     </div>
     
 </div>
@@ -158,12 +160,12 @@
 <div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
     <p>Do you know what is the difference between the following two code snippets?</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
 </code></pre></div></div>
 
 <p>And this one:</p>
 
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">;</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div></div>
 
 <p>Both of them import the <code class="language-plaintext highlighter-rouge">app</code> and <code class="language-plaintext highlighter-rouge">connection</code> from the <code class="language-plaintext highlighter-rouge">config</code> module, but the first one is using the <strong>CommonJS</strong> (
@@ -190,7 +192,7 @@ applications.</p>
     </tr>
     <tr>
       <td>2</td>
-      <td>…</td>
+      <td><a href="/blog/nodejs/esm-dynamic-imports.html">Dynamic imports</a></td>
     </tr>
   </tbody>
 </table>
@@ -198,7 +200,8 @@ applications.</p>
 <p>Javascript was introduced in 1995 as a scripting language for browsers. It was not designed to be used as a server
 language. Browsers should keep an eye on the security of the user and the system, so they need to limit the access of
 the Javascript code to the system resources. The nature of the Javascript and the browser environment allowed the use
-of the <code class="language-plaintext highlighter-rouge">script</code> tag to load Javascript code didn’t help the developers to write modular code. Developers used multiple <code class="language-plaintext highlighter-rouge">script</code>
+of the <code class="language-plaintext highlighter-rouge">script</code> tag to load Javascript code didn’t help the developers to write modular code. Developers used
+multiple <code class="language-plaintext highlighter-rouge">script</code>
 tags to load the Javascript code in the right order.</p>
 
 <div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
@@ -261,7 +264,7 @@ of them to export modules as follows:</p>
 </code></pre></div></div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
-<span class="kd">const</span> <span class="p">{</span> <span class="nx">connection</span> <span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
+<span class="kd">const</span> <span class="p">{</span><span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="c1">// { host: 'localhost', port: 27017 }</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="c1">// ReferenceError: app is not defined</span>
@@ -291,7 +294,9 @@ If you want to use ESM modules, you need to set the "type" to module "module" in
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
 <span class="p">{</span>
-  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
+  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span>
+<span class="p">:</span>
+  <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -309,17 +314,17 @@ ESM modules became available without any command-line flags.</p>
 <p>The following example shows how to export a function:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
-<span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
-<span class="k">export</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span>
+<span class="k">export</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span>
 </code></pre></div></div>
 
 <p>The following example shows how to import that function:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-<span class="k">import</span> <span class="p">{</span> <span class="nx">sum</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span> <span class="c1">// File extension is required to import relative modules</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span> <span class="c1">// File extension is required to import relative modules</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
 </code></pre></div></div>
@@ -330,7 +335,7 @@ module from a file. Exporting a default module doesn’t prevent you from export
 <p>The following example shows how to export a default module:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
-<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -346,15 +351,15 @@ module from a file. Exporting a default module doesn’t prevent you from export
 <p>The following example shows a mixed export of a default module and other modules:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calculator.mjs</span>
-<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
-<span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
 <span class="p">}</span>
 
-<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span> <span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
+<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
   <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
 <span class="p">}</span>
 </code></pre></div></div>
@@ -371,7 +376,8 @@ the module. You can also give it any name you want.</p>
 <span class="nx">myCalculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// TypeError: myCalculator.sum is not a function</span>
 </code></pre></div></div>
 
-<p>If you imported the module using the <code class="language-plaintext highlighter-rouge">import * as</code> syntax, then you have access to all the exported modules. The <code class="language-plaintext highlighter-rouge">import * as</code>
+<p>If you imported the module using the <code class="language-plaintext highlighter-rouge">import * as</code> syntax, then you have access to all the exported modules.
+The <code class="language-plaintext highlighter-rouge">import * as</code>
 imports all the exported modules in a single object.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
@@ -388,7 +394,7 @@ result by the following readable syntax:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
 
-<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
@@ -400,7 +406,7 @@ original names. You can also use the <code class="language-plaintext highlighter
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
 
-<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span> <span class="nx">sum</span> <span class="k">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span> <span class="k">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
@@ -418,9 +424,15 @@ original names. You can also use the <code class="language-plaintext highlighter
 <span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.mjs</span><span class="dl">'</span>
 
 <span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
+<span class="k">import</span>
+  <span class="nx">logger</span>
+  <span class="k">from</span>
+  <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="k">import</span> <span class="nx">logger</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
+<span class="k">import</span>
+  <span class="nx">logger</span>
+  <span class="k">from</span>
+  <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
