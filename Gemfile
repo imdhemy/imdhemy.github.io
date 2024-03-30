@@ -25,6 +25,9 @@ gem "minima", "~> 2.5"
 #
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.17"
+  gem "jekyll-paginate", "~> 1.1"
+  gem "jekyll-archives", "~> 2.2"
+  gem "jekyll-sitemap", "~> 1.4"
 end
 
 # ------------------------------------------------------------------------------
@@ -46,7 +49,3 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 #
 
 gem "jekyll-remote-theme", "~> 0.4.3"
-
-gem "jekyll-paginate", "~> 1.1"
-
-gem "jekyll-archives", "~> 2.2"

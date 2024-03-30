@@ -33,11 +33,13 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - bin/
+  - _drafts
 
 plugins:
   - jekyll-feed
   - jekyll-remote-theme
   - jekyll-paginate
+  - jekyll-sitemap
 sass:
   quiet_deps: true # Suppress deprecation warnings from Sass
 
