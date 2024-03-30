@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://imdhemy.com/sitemap.xml
