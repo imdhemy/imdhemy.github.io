@@ -1,6 +1,119 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-03-30T12:14:00+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-03-30T20:56:48+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Effective Node.js Modules - Part 2: ESM dynamic imports</title><link href="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 2: ESM dynamic imports" /><published>2024-03-25T00:00:00+00:00</published><updated>2024-03-25T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/esm-dynamic-imports</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html"><![CDATA[<p>One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">The pipeline ate my code</title><link href="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html" rel="alternate" type="text/html" title="The pipeline ate my code" /><published>2024-03-30T00:00:00+00:00</published><updated>2024-03-30T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/the-pipeline-ate-my-code</id><content type="html" xml:base="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html"><![CDATA[<p>I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are
+always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m
+kidding, of course. My pipelines are just like yours. They fail, and they fail a lot.</p>
+
+<p>Imagine working with a team member who exudes confidence at every turn, is self-centered, and repeatedly stumbles over
+the simplest tasks. Welcome to the puzzling world of the <strong>Dunning-Kruger Effect</strong> <em>where the less you know, the more
+you think you know, leaving you with a false sense of confidence.</em> This does not only affect your ability to learn and
+grow, but it also affects the team’s productivity and morale leaving behind a trail of stressed-out and unsatisfied team
+members.</p>
+
+<p>In this article, we’ll shine a light on the challenges posed by such colleagues and explore strategies for mitigating
+their impact on team productivity and morale.</p>
+
+<h2 id="understanding-the-dunning-kruger-effect">Understanding the Dunning-Kruger Effect</h2>
+
+<p>Let’s start by understanding
+the <a href="https://www.semanticscholar.
+org/paper/Unskilled-and-unaware-of-it%3A-how-difficulties-in-to-Kruger-Dunning
+/f2c80eef3585e0569e93ace0b9770cf76c8ebabc?p2df">Dunning-Kruger Effect</a>. Imagine you are learning to play a musical instrument, and in your
+mind, you are the next Beethoven. The reality? You sound more like a cat walking on a piano.</p>
+
+<p>That’s the Dunning-Kruger Effect in action. It’s the tendency of individuals with limited knowledge or skills to
+over-inflate their own abilities. They are unable to recognize their incompetence, leading them to believe they are
+better than they actually are.</p>
+
+<p>When you are in the presence of a colleague who is a victim of the Dunning-Kruger Effect, you might notice the following
+traits:</p>
+
+<ol>
+  <li><strong>Inability to accept feedback</strong>: They are resistant to feedback and often dismiss it.</li>
+  <li><strong>Lack of self-awareness</strong>: They are unable to recognize their own incompetence.</li>
+  <li><strong>Inability to collaborate</strong>: They are unable to work effectively with others.</li>
+  <li><strong>Inability to take responsibility</strong>: They are unable to take responsibility for their actions.</li>
+  <li><strong>Inability to adapt</strong>: They are unable to adapt to new situations.</li>
+  <li><strong>Inability to communicate</strong>: They are unable to communicate effectively.</li>
+</ol>
+
+<p>Responsibility isn’t just about ticking off boxes on a to-do list—it’s about understanding the bigger picture and how
+your role fits into the grand scheme of things. It’s about being accountable for your actions and the impact they have
+on the team’s success. In a software development setting, this means knowing your tasks inside out, collaborating
+effectively with your peers, and owning up to your mistakes when things don’t go as planned. After all, a chain is only
+as strong as its weakest link, and in a team environment, everyone’s contribution matters.</p>
+
+<h2 id="impact-on-team-dynamics">Impact on Team Dynamics</h2>
+
+<p>The Dunning-Kruger Effect can have a significant impact on team dynamics. When a team member is blinded by their
+overconfidence, taking over tasks she is not qualified for without regard for collaboration nor feedback. This
+misplaced confidence not only hinders her progress but also creates a friction within the team. Others are left
+picking up the pieces, feeling frustrated and demotivated by the lack of accountability and miss-communication.</p>
+
+<p>In a team environment, trust and collaboration are the cornerstones of success. When one team member fails to pull their
+weight, it creates a ripple effect that can lead to missed deadlines, poor-quality work, and strained relationships.
+The result? A fractured team struggling to stay afloat in a sea of discord.</p>
+
+<h2 id="navigating-stress-and-frustration">Navigating Stress and Frustration</h2>
+
+<p>As we come face to face with the challenges posed by the Dunning-Kruger team member, it’s essential to raise
+awareness about the cost it takes on individual stress level. Being in a constant state of frustration, trying to
+navigate the maze of misplaced confidence and lack of accountability, can take a toll on one’s mental health and
+well-being. Their refusal to accept feedback and collaborate effectively can lead to a toxic work environment where
+team members feel undervalued and unappreciated.</p>
+
+<p>Navigating stress and frustration in such an environment requires patience, resilience, and a healthy dose of
+self-care. Take a step back, breathe, and remind yourself that you’re doing the best you can in a challenging situation.
+Seek support from trusted colleagues and mentors, and don’t hesitate to communicate your concerns with your team leader.
+Together, we can weather the storm and emerge stronger on the other side.</p>
+
+<p>It’s not that easy to talk openly about such issues, but it’s essential to address them before they escalate. It’s
+the responsibility of the team leader to create a safe space where team members can voice their concerns without fear of
+being judged or dismissed. The open and honest communication is the key to resolving conflicts.</p>
+
+<h2 id="promoting-self-awareness-and-accountability">Promoting Self-Awareness and Accountability</h2>
+
+<p>It’s important to promote self-awareness and accountability within the team. One of the effective ways for doing so is
+encourage regular self-reflection. Encourage team members to take a step back and evaluate their performance
+objectively, identifying areas for improvement and acknowledging their own shortcomings.</p>
+
+<p>Additionally, it’s essential to foster a culture of open feedback and constructive criticism. This will help team
+members to recognize the blind spots and work towards addressing them.</p>
+
+<p>Accountability goes hand in hand with self-awareness. It’s about taking ownership of one’s actions and their impact on
+the team’s success. Encourage team members to take responsibility for their mistakes and learn from them. This will not
+only help them grow professionally but also foster a sense of trust and collaboration within the team. By fostering a
+culture of transparency and accountability, we create an environment where continuous learning and improvement thrive.</p>
+
+<h2 id="addressing-the-root-cause">Addressing the Root Cause</h2>
+
+<p>Digging beneath the surface, uncovering the deep-rooted causes of this behavior is crucial to examine what give rise to
+the Dunning-Kruger Effect within the team. Is it a lack of training and development opportunities? Is it a lack of
+feedback and mentorship? Is it a lack of recognition and appreciation? By identifying the underlying causes, we can take
+proactive steps to address them and create a supportive work environment where team
+members can thrive.</p>
+
+<h2 id="creating-a-supportive-work-environment">Creating a Supportive Work Environment</h2>
+
+<p>Sometimes, our empathy towards our colleagues who are struggling with the Dunning-Kruger Effect or any other challenges
+can affect our responsibility towards the other team members who are affected by their behavior. It’s essential to
+strike a balance between empathy and accountability. Supportive work environment is not meant only for those who are
+misplacing their confidence but also for those who are affected by their behavior.</p>
+
+<p>On the other hand, embracing a culture of humility and continuous learning can help mitigate the issue. This
+means recognizing that we all have areas where we can improve and that seeking assistance is not a sign of weakness, but
+rather a demonstration of self-awareness and maturity. In a supportive work environment, team members are empowered to
+share their challenges openly, knowing that their colleagues will offer support and guidance without judgment.</p>
+
+<h2 id="conclusion-balancing-empathy-and-accountability">Conclusion: Balancing Empathy and Accountability</h2>
+
+<p>In the dynamic landscape of software development, navigating the challenges posed by the Dunning-Kruger Effect
+requires a delicate balance of empathy, accountability, and continuous learning. By fostering a supportive work
+environment where humility, openness, and collaboration are championed, we can mitigate the impact of overconfidence,
+empower team members to thrive, and build stronger, more resilient teams capable of overcoming any obstacle.</p>
+
+<p>Helping a team member who struggles does not mean to forget about the other team members, they also need your support.
+It’s about striking a balance between empathy and accountability.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m kidding, of course. My pipelines are just like yours. They fail, and they fail a lot.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/plumbers.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/plumbers.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Effective Node.js Modules - Part 2: ESM dynamic imports</title><link href="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 2: ESM dynamic imports" /><published>2024-03-25T00:00:00+00:00</published><updated>2024-03-25T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/esm-dynamic-imports</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html"><![CDATA[<p>One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use
 <code class="language-plaintext highlighter-rouge">require</code> to import modules anywhere in your code, but in ESM you can only use <code class="language-plaintext highlighter-rouge">import</code> at the top level of your code.
 What if you want to import a module dynamically in ESM?</p>
 
@@ -1228,124 +1341,4 @@ $$ S = \frac{n(a + l)}{2} $$
 <p>Fibonacci numbers form an interesting sequence of numbers in which each element is obtained by adding two preceding elements and the sequence starts with <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code>.</p>
 
 <p>Sequence is defined as, 
-\(F_{0} = 0\) and \(F_{1} = 1\) and \(F_{n} = F_{n-1} + F_{n-2}\)</p>]]></content><author><name>Dhemy</name></author><category term="DSA" /><summary type="html"><![CDATA[I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.]]></summary></entry><entry><title type="html">We need more tests</title><link href="https://imdhemy.com/blog/testing/we-need-more-tests.html" rel="alternate" type="text/html" title="We need more tests" /><published>2022-01-31T06:05:51+00:00</published><updated>2022-01-31T06:05:51+00:00</updated><id>https://imdhemy.com/blog/testing/we-need-more-tests</id><content type="html" xml:base="https://imdhemy.com/blog/testing/we-need-more-tests.html"><![CDATA[<p>Well, It’s not about Coronavirus pandemic this time 😷. <a href="https://moisesbm.wordpress.com/">Moisés Belchín Martínez</a> (Moi),
-my awesome ex-CTO, keeps repeating these words in every PR <strong>“We need more tests”</strong>. Sometimes it appears as a joke
-about Covid-19, but I believe he totally meant it.</p>
-
-<p>There’s a reason for optimism about your own code because you wrote it, it works, and you did your best following the
-best practices of clean code, but is that enough to merge and release this code? TBH, No!</p>
-
-<p>Moi doesn’t mean the quantity, but actually he meant the quality of tests we wrote to avoid
-the <a href="https://www.atlassian.com/agile/software-development/technical-debt">technical debt</a> as much as possible by
-having <a href="https://www.linkedin.com/feed/update/urn:li:activity:6886937179793223680?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A6886937179793223680%2C6888937049659854849%29">a strict definition of Done</a>.
-In this article, I’m discussing the metrics of code coverage, are they reliable enough? de we really need more tests?
-How to measure a test suite quality? Vamos!</p>
-
-<h2 id="what-is-the-goal-of-unit-testing">What is the goal of unit testing?</h2>
-
-<p>A simple question, yet one that must be addressed! The goal of unit testing is to allow <strong>sustainable growth</strong> of the
-software project. When you start a new project, you make progress so quickly, and get results with a little slaps on
-your keyboard. No bad architectural decisions have been made yet. No requirement changes or existing code to worry
-about. Actually, nothing is dragging you back. Eventually, the development speed slows down, and adding a new feature
-may break another.</p>
-
-<p>As per wikipedia, the idea that software eventually rots as it is changed is called <strong>Software entropy</strong>. Any code
-modification leads to an amount of disorder in your code base. Leaving entropy without proper care, such as constant
-cleaning and refactoring, the system becomes increasingly complex and disorganized.</p>
-
-<p>Software entropy is tied to the notion of change and has no meaning in a static system. If there is no intent to alter
-the system, we cannot speak of its entropy. One more idea to put in mind, when software entropy overwhelms a project,
-the project freezes!</p>
-
-<p>Tests act as a safety net. Tests help make sure the existing functionality works, even after you introduce new features
-or refactor the code to better fit new requirements. Besides, it helps have a well-designed software.</p>
-
-<h2 id="dont-just-throw-more-tests">Don’t just throw more tests</h2>
-
-<p>Not all tests are created equal. Some of them are valuable and contribute a lot to overall software quality. Others
-don’t. You can’t achieve the goal of unit testing by just throwing more tests at the project. Let’s discuss the *
-*QUANTITY** aspect.</p>
-
-<p><strong>Coverage metrics</strong> are used to show how much source code tests execute. It gives you a percentage from <code class="language-plaintext highlighter-rouge">0%</code> (No source
-code executed) to <code class="language-plaintext highlighter-rouge">100%</code> (It covers all lines of code).</p>
-
-<p>If a metric shows that is there too little coverage in your code base, say, only <code class="language-plaintext highlighter-rouge">10%</code>. That’s a good indication that
-you are not testing enough. But the reverse isn’t true: even <code class="language-plaintext highlighter-rouge">100%</code> coverage isn’t a guarantee that you have a
-good-quality test suite. A test suite that provides high coverage can still be of poor quality.</p>
-
-<p>Consider the following example, using the code coverage as a metric.</p>
-
-<p><strong>Read the code comments:</strong></p>
-
-<figure class="highlight"><pre><code class="language-java" data-lang="java"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="code"><pre><span class="kd">public</span> <span class="kd">static</span> <span class="n">bool</span> <span class="nf">isBig</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">)</span>
-        <span class="k">return</span> <span class="kc">true</span><span class="o">;</span> <span class="c1">// Not covered with test</span>
-    <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span>
-</pre></td></tr></tbody></table></code></pre></figure>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// The following test calls the `isBig()` function. </span>
-<span class="c1">// The if condition evaluates to `false`, then it returns false.</span>
-<span class="c1">// This code executes (4) lines out of total (5) lines of code.</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">Test</span><span class="o">()</span> <span class="o">{</span>
-    <span class="n">bool</span> <span class="n">actual</span> <span class="o">=</span> <span class="n">isBig</span><span class="o">(</span><span class="mi">3</span><span class="o">);</span>
-    <span class="nc">Assertions</span><span class="o">.</span><span class="na">AssertFalse</span><span class="o">(</span><span class="n">actual</span><span class="o">);</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>With a simple calculation using the code coverage formula:</p>
-
-\[Code\ coverage = \frac{Lines\ of\ code\ executed}{Total\ number\ of\ lines}\]
-
-\[Code\ coverage = \frac{4}{5} = 0.8 = 80\%\]
-
-<p>Now, with the same test, what if we refactored our function to remove the unnecessary if condition:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">static</span> <span class="n">bool</span> <span class="nf">isBig</span><span class="o">(</span><span class="kt">int</span> <span class="n">num</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>When running our test again, it executes the full lines of code with <code class="language-plaintext highlighter-rouge">100%</code> coverage! The test still verifies the same
-number of possible outcomes and without any improvement to our test suite, the test coverage percentage raised
-from <code class="language-plaintext highlighter-rouge">80%</code> to <code class="language-plaintext highlighter-rouge">100%</code>.</p>
-
-<p class="note">
-Having a low test coverage is an indication of a bad test suite, but having a high number tells nothing about the <strong>QUALITY</strong> of the test suite.
-</p>
-
-<p>To enable sustainable project growth, you have to focus on high quality tests. Those are the only type of tests that are
-worth keeping in the test suite.</p>
-
-<h2 id="how-to-measure-a-test-suite-quality">How to measure a test suite quality?</h2>
-
-<p>The only reliable way to measure a test suite quality is to evaluate each test individually. The point is there is no
-automated way to see how good your test suite. You have to apply your personal judgement.</p>
-
-<p>The only point in having automated tests is if you constantly use them. All tests should be integrated into the
-development cycle, you should execute them on every change, even the smallest one.</p>
-
-<p>It’s important to direct your unit testing efforts to the most critical parts of the system and verify the others only
-briefly or indirectly. In most applications, the most important part is the part that contains the business logic (The
-Domain Model).</p>
-
-<h2 id="whats-next">What’s next?</h2>
-
-<p>The only way to achieve the goal of unit testing is to learn how to differentiate between a good and a bad test, and you
-should be able to refactor the test to make it more valuable.</p>
-
-<p>I’ll discuss testing more and more in the next articles. This series of articles are inspired by a list of books and
-courses including:</p>
-
-<ul>
-  <li>TDD Tutorial by Laracasts.</li>
-  <li>Unit testing Principles, Practices and Patterns.</li>
-  <li>Effective Unit Testing, a guide for java developers.</li>
-</ul>
-
-<p><strong>Manténganse al tanto</strong></p>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it.]]></summary></entry></feed>
+\(F_{0} = 0\) and \(F_{1} = 1\) and \(F_{n} = F_{n-1} + F_{n-2}\)</p>]]></content><author><name>Dhemy</name></author><category term="DSA" /><summary type="html"><![CDATA[I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.]]></summary></entry></feed>
