@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>What Symfony developers should know before using Voters</title>
+    <meta name="description"
+          content="Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...">
+    <link rel="canonical" href="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+    <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
+    
+    
+
+    
+    <!-- Facebook Meta Tags -->
+<meta property="og:title" content="What Symfony developers should know before using Voters">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://imdhemy.com/assets/img/voting.webp">
+<meta property="og:url" content="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html">
+<meta property="og:description"
+      content="Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...">
+<meta property="og:site_name" content="Imdhemy">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Symfony developers should know before using Voters">
+<meta name="twitter:description"
+      content="Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...">
+<meta name="twitter:image" content="https://imdhemy.com/assets/img/voting.webp">
+
+
+    
+
+</head>
+<body class="min-h-screen">
+<div class="min-h-screen">
+    <header class="relative" id="main-header">
+    <div class="container mx-auto">
+        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+            <!-- begin logo -->
+            <div class="flex-auto">
+                <div>
+                    <a href="/" class="text-gray-900 text-3xl font-bold">
+                        Imdhemy
+                    </a>
+                </div>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="flex-auto">
+                <div class="flex justify-end lg:hidden">
+                    <button type="button" class="menu-toggle" data-target="#mobile-nav">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                </div>
+
+                <div class="hidden lg:flex justify-end">
+                    <ul class="flex items-center">
+                        
+                        <li class="ml-10">
+                            <a href="/"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/blog"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/about"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="menu -z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
+                <div class="ml-auto">
+                    <ul class="p-0 m-0 flex-column items-center">
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/blog"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/about"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="max-w-screen-lg mx-auto bg-white p-5">
+    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">What Symfony developers should know before using Voters</h1>
+</div>
+
+<div class="max-w-screen-md mx-auto bg-white p-5">
+    <div class="flex justify-between flex-wrap my-2">
+        <div class="flex items-center mr-8">
+            <img src="/theme/images/avatar.jpeg" alt=""
+                 class="rounded-full w-10 h-10 mr-3 block"/>
+            <div>
+                <p class="text-gray-700 text-sm font-bold">Dhemy</p>
+                <p class="text-gray-500 text-xs">
+                    April 2, 2024 - 5 min read
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+    </div>
+
+    
+    <div class="relative overflow-hidden">
+        <img src="/assets/img/voting.webp"
+             alt="What Symfony developers should know before using Voters"
+             class="w-full h-auto rounded"/>
+        <!-- Image source -->
+        
+        <div class="bg-white text-xs text-gray-500 px-2 py-1">
+            Image source: Shutterstock
+        </div>
+        
+    </div>
+    
+</div>
+
+
+<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+    <p>Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then
+reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you
+should know before using voters.</p>
+
+<h2 id="permissions-should-be-linked-to-a-user">Permissions should be linked to a user</h2>
+
+<p>In Symfony, permissions are always linked to a user object. If you need to secure parts of your application, you
+need to create a user object that implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>.</p>
+
+<div class="tip">
+
+Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system
+
+</div>
+
+<p>Some applications have an external SSO system that provides user information through an access token. Even in this case,
+you should not depend directly on the access token to check permissions. Instead, you should create a user object that
+implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>. If you opt out of this approach, you will lose many benefits that you get from
+Symfony’s security system.</p>
+
+<h2 id="security-user-interface">Security User Interface</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">UserInterface</code> provided by
+the <a href="https://github.com/symfony/symfony/blob/923c4efa1df53e351aa52be1907191977cbf980f/src/Symfony/Component/Security/Core/User/UserInterface.php#L31">Symfony security component</a>
+helps you to make sure that your user object has all the necessary methods to work with Symfony’s security system
+regardless of how you load or create the user object, e.g., from a database, an API, or a Token.</p>
+
+<div class="tip">
+
+The security user interface is the contract between your user object and Symfony's security system.
+
+</div>
+
+<p>Let’s take a look at the <code class="language-plaintext highlighter-rouge">UserInterface</code>:</p>
+
+<p>The first method is <code class="language-plaintext highlighter-rouge">getRoles()</code>. The name of the method is self-explanatory, it should return an array of roles for the
+user. We will cover roles in the next section.</p>
+
+<p>The second method is <code class="language-plaintext highlighter-rouge">eraseCredentials()</code>. This method is designed to clear any sensitive data that the user object
+might be holding at any given point. For instance, clearing the plain text password after the user is authenticated.</p>
+
+<p>The last method is <code class="language-plaintext highlighter-rouge">getUserIdentifier()</code>. This method should return the <strong>Public representation</strong> of a user e.g.,
+the <code class="language-plaintext highlighter-rouge">username</code>. This method can be used by the user providers which helps you to get many benefits, like <a href="https://symfony.com/doc/current/security.html#fetching-the-user-from-a-service">fetching
+the user object in your
+service</a>, <a href="https://symfony.com/doc/current/security/impersonating_user.html">impersonating a user</a>,
+etc.</p>
+
+<h2 id="user-roles">User Roles</h2>
+
+<p>When a user is authenticated, Symfony calls the <code class="language-plaintext highlighter-rouge">getRoles()</code> method on the user object to determine the roles of the
+user. It doesn’t matter how the roles are stored in the database or how they are generated. The only thing that matters
+is that every role must start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix - otherwise, things won’t work as expected. You will use these
+roles to grant access to specific parts of your application.</p>
+
+<div class="tip">
+
+All roles should start with the `ROLE_` prefix. This is a requirement of Symfony's security system.
+
+</div>
+
+<p>Symfony provides a role hierarchy system out of the box. Instead of assigning multiple roles to a user, you can
+configure a role hierarchy. This way, you can assign a single role to a user, and Symfony will automatically grant
+access to all the roles in the hierarchy.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+
+  <span class="na">role_hierarchy</span><span class="pi">:</span>
+    <span class="na">ROLE_MODERATOR</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
+    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_MODERATOR</span>
+    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_ADMIN</span>
+
+</code></pre></div></div>
+
+<p>Using the above configuration, if a user has the <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role, Symfony will automatically grant access to
+<code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code>, <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code>, and <code class="language-plaintext highlighter-rouge">ROLE_USER</code>. This is illustrated as follows:</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role inherits the <code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code> role, which inherits the <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code> role, which inherits
+the <code class="language-plaintext highlighter-rouge">ROLE_USER</code> role. It’s worth noting that a role can inherit multiple roles.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+
+  <span class="na">role_hierarchy</span><span class="pi">:</span>
+    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
+    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">ROLE_ADMIN</span><span class="pi">,</span> <span class="nv">ROLE_ALLOWED_TO_SWITCH</span> <span class="pi">]</span>
+</code></pre></div></div>
+
+<p>For role hierarchy to work, do not use <code class="language-plaintext highlighter-rouge">$user-&gt;getRoles()</code> manually, instead you should always depend on the
+<code class="language-plaintext highlighter-rouge">isGranted()</code> or <code class="language-plaintext highlighter-rouge">denyAccessUnlessGranted()</code> methods provided by the <code class="language-plaintext highlighter-rouge">AuthorizationCheckerInterface</code>.</p>
+
+<div class="tip">
+
+Let symfony does the heavy lifting for you. Always use the security methods to check for roles.
+
+</div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// BAD - $user-&gt;getRoles() will not know about the role hierarchy
+<span class="gd">- $hasAccess = in_array('ROLE_ADMIN', $user-&gt;getRoles());
+</span><span class="err">
+</span>// GOOD - use of the normal security methods
+<span class="gi">+ $hasAccess = $this-&gt;isGranted('ROLE_ADMIN');
++ $this-&gt;denyAccessUnlessGranted('ROLE_ADMIN');
+</span><span class="err">
+</span></code></pre></div></div>
+
+<h2 id="decision-strategy">Decision Strategy</h2>
+
+<p>When you start using voters, Symfony will ask each voter to vote on the access decision. There are three decisions
+that a voter can make, like any other voting system:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code>: The voter grants access to the resource.</li>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code>: The voter denies access to the resource.</li>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code>: The voter abstains from voting.</li>
+</ol>
+
+<p>Normally, only one voter will vote at any given time, and all the rest will <code class="language-plaintext highlighter-rouge">abstain</code>. However, if you want to
+change this behavior, you need to know about the <code class="language-plaintext highlighter-rouge">decision_strategy</code> configuration.</p>
+
+<div class="tip">
+It's always good to keep the default `decision_strategy` and design your voters accordingly. A resource oriented
+voter should only vote on the resource it is designed for.
+</div>
+
+<p>Suppose you have a feature that requires a user to be part of a group and is older than 18 years. You have two separate
+voters to check these conditions. The following table will help you understand different decision strategies:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Decision Strategy</th>
+      <th>Description</th>
+      <th>Voter 1</th>
+      <th>Voter 2</th>
+      <th>Voter 3</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>affirmative (default)</td>
+      <td>This grants access as soon as there is one voter granting access</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+    <tr>
+      <td>consensus</td>
+      <td>This grants access if there are more voters granting access than denying. In case of a tie the decision is based on the allow_if_equal_granted_denied config option (defaulting to true);</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+    <tr>
+      <td>unanimous</td>
+      <td>This only grants access if there is no voter denying access.</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+    </tr>
+    <tr>
+      <td>priority</td>
+      <td>This grants or denies access by the first voter that does not abstain, based on their service priority</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Back to our example, if you want to grant access only if both voters grant access, you should use the <code class="language-plaintext highlighter-rouge">unanimous</code>
+decision strategy.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="na">access_decision_manager</span><span class="pi">:</span>
+    <span class="na">strategy</span><span class="pi">:</span> <span class="s">unanimous</span>
+    <span class="na">allow_if_all_abstain</span><span class="pi">:</span> <span class="kc">false</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this post, we covered some of the basics of Symfony’s security system that you should know before using voters.
+understanding them will help you make the most out of Symfony’s security system. You should always consult the Symfony
+documentation for the most up-to-date information and best practices. In the next article, we will cover how to create
+a custom voter and how to use it in your application.</p>
+
+</div>
+
+
+    </main>
+    <section class="sticky top-[100vh]">
+    <div class="p-10">
+        <div class="max-w-screen-md mx-auto">
+            <p class="text-center">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2024 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+
+<!-- Ion icons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>

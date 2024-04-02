@@ -1,6 +1,198 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-03-30T20:56:48+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-04-02T14:36:56+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">The pipeline ate my code</title><link href="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html" rel="alternate" type="text/html" title="The pipeline ate my code" /><published>2024-03-30T00:00:00+00:00</published><updated>2024-03-30T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/the-pipeline-ate-my-code</id><content type="html" xml:base="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html"><![CDATA[<p>I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">What Symfony developers should know before using Voters</title><link href="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html" rel="alternate" type="text/html" title="What Symfony developers should know before using Voters" /><published>2024-04-02T00:00:00+00:00</published><updated>2024-04-02T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters</id><content type="html" xml:base="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html"><![CDATA[<p>Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then
+reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you
+should know before using voters.</p>
+
+<h2 id="permissions-should-be-linked-to-a-user">Permissions should be linked to a user</h2>
+
+<p>In Symfony, permissions are always linked to a user object. If you need to secure parts of your application, you
+need to create a user object that implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>.</p>
+
+<div class="tip">
+
+Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system
+
+</div>
+
+<p>Some applications have an external SSO system that provides user information through an access token. Even in this case,
+you should not depend directly on the access token to check permissions. Instead, you should create a user object that
+implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>. If you opt out of this approach, you will lose many benefits that you get from
+Symfony’s security system.</p>
+
+<h2 id="security-user-interface">Security User Interface</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">UserInterface</code> provided by
+the <a href="https://github.com/symfony/symfony/blob/923c4efa1df53e351aa52be1907191977cbf980f/src/Symfony/Component/Security/Core/User/UserInterface.php#L31">Symfony security component</a>
+helps you to make sure that your user object has all the necessary methods to work with Symfony’s security system
+regardless of how you load or create the user object, e.g., from a database, an API, or a Token.</p>
+
+<div class="tip">
+
+The security user interface is the contract between your user object and Symfony's security system.
+
+</div>
+
+<p>Let’s take a look at the <code class="language-plaintext highlighter-rouge">UserInterface</code>:</p>
+
+<p>The first method is <code class="language-plaintext highlighter-rouge">getRoles()</code>. The name of the method is self-explanatory, it should return an array of roles for the
+user. We will cover roles in the next section.</p>
+
+<p>The second method is <code class="language-plaintext highlighter-rouge">eraseCredentials()</code>. This method is designed to clear any sensitive data that the user object
+might be holding at any given point. For instance, clearing the plain text password after the user is authenticated.</p>
+
+<p>The last method is <code class="language-plaintext highlighter-rouge">getUserIdentifier()</code>. This method should return the <strong>Public representation</strong> of a user e.g.,
+the <code class="language-plaintext highlighter-rouge">username</code>. This method can be used by the user providers which helps you to get many benefits, like <a href="https://symfony.com/doc/current/security.html#fetching-the-user-from-a-service">fetching
+the user object in your
+service</a>, <a href="https://symfony.com/doc/current/security/impersonating_user.html">impersonating a user</a>,
+etc.</p>
+
+<h2 id="user-roles">User Roles</h2>
+
+<p>When a user is authenticated, Symfony calls the <code class="language-plaintext highlighter-rouge">getRoles()</code> method on the user object to determine the roles of the
+user. It doesn’t matter how the roles are stored in the database or how they are generated. The only thing that matters
+is that every role must start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix - otherwise, things won’t work as expected. You will use these
+roles to grant access to specific parts of your application.</p>
+
+<div class="tip">
+
+All roles should start with the `ROLE_` prefix. This is a requirement of Symfony's security system.
+
+</div>
+
+<p>Symfony provides a role hierarchy system out of the box. Instead of assigning multiple roles to a user, you can
+configure a role hierarchy. This way, you can assign a single role to a user, and Symfony will automatically grant
+access to all the roles in the hierarchy.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+
+  <span class="na">role_hierarchy</span><span class="pi">:</span>
+    <span class="na">ROLE_MODERATOR</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
+    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_MODERATOR</span>
+    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_ADMIN</span>
+
+</code></pre></div></div>
+
+<p>Using the above configuration, if a user has the <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role, Symfony will automatically grant access to
+<code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code>, <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code>, and <code class="language-plaintext highlighter-rouge">ROLE_USER</code>. This is illustrated as follows:</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role inherits the <code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code> role, which inherits the <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code> role, which inherits
+the <code class="language-plaintext highlighter-rouge">ROLE_USER</code> role. It’s worth noting that a role can inherit multiple roles.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+
+  <span class="na">role_hierarchy</span><span class="pi">:</span>
+    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
+    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">ROLE_ADMIN</span><span class="pi">,</span> <span class="nv">ROLE_ALLOWED_TO_SWITCH</span> <span class="pi">]</span>
+</code></pre></div></div>
+
+<p>For role hierarchy to work, do not use <code class="language-plaintext highlighter-rouge">$user-&gt;getRoles()</code> manually, instead you should always depend on the
+<code class="language-plaintext highlighter-rouge">isGranted()</code> or <code class="language-plaintext highlighter-rouge">denyAccessUnlessGranted()</code> methods provided by the <code class="language-plaintext highlighter-rouge">AuthorizationCheckerInterface</code>.</p>
+
+<div class="tip">
+
+Let symfony does the heavy lifting for you. Always use the security methods to check for roles.
+
+</div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// BAD - $user-&gt;getRoles() will not know about the role hierarchy
+<span class="gd">- $hasAccess = in_array('ROLE_ADMIN', $user-&gt;getRoles());
+</span><span class="err">
+</span>// GOOD - use of the normal security methods
+<span class="gi">+ $hasAccess = $this-&gt;isGranted('ROLE_ADMIN');
++ $this-&gt;denyAccessUnlessGranted('ROLE_ADMIN');
+</span><span class="err">
+</span></code></pre></div></div>
+
+<h2 id="decision-strategy">Decision Strategy</h2>
+
+<p>When you start using voters, Symfony will ask each voter to vote on the access decision. There are three decisions
+that a voter can make, like any other voting system:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code>: The voter grants access to the resource.</li>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code>: The voter denies access to the resource.</li>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code>: The voter abstains from voting.</li>
+</ol>
+
+<p>Normally, only one voter will vote at any given time, and all the rest will <code class="language-plaintext highlighter-rouge">abstain</code>. However, if you want to
+change this behavior, you need to know about the <code class="language-plaintext highlighter-rouge">decision_strategy</code> configuration.</p>
+
+<div class="tip">
+It's always good to keep the default `decision_strategy` and design your voters accordingly. A resource oriented
+voter should only vote on the resource it is designed for.
+</div>
+
+<p>Suppose you have a feature that requires a user to be part of a group and is older than 18 years. You have two separate
+voters to check these conditions. The following table will help you understand different decision strategies:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Decision Strategy</th>
+      <th>Description</th>
+      <th>Voter 1</th>
+      <th>Voter 2</th>
+      <th>Voter 3</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>affirmative (default)</td>
+      <td>This grants access as soon as there is one voter granting access</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+    <tr>
+      <td>consensus</td>
+      <td>This grants access if there are more voters granting access than denying. In case of a tie the decision is based on the allow_if_equal_granted_denied config option (defaulting to true);</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+    <tr>
+      <td>unanimous</td>
+      <td>This only grants access if there is no voter denying access.</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+    </tr>
+    <tr>
+      <td>priority</td>
+      <td>This grants or denies access by the first voter that does not abstain, based on their service priority</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Back to our example, if you want to grant access only if both voters grant access, you should use the <code class="language-plaintext highlighter-rouge">unanimous</code>
+decision strategy.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="na">access_decision_manager</span><span class="pi">:</span>
+    <span class="na">strategy</span><span class="pi">:</span> <span class="s">unanimous</span>
+    <span class="na">allow_if_all_abstain</span><span class="pi">:</span> <span class="kc">false</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this post, we covered some of the basics of Symfony’s security system that you should know before using voters.
+understanding them will help you make the most out of Symfony’s security system. You should always consult the Symfony
+documentation for the most up-to-date information and best practices. In the next article, we will cover how to create
+a custom voter and how to use it in your application.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you should know before using voters.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/voting.webp" /><media:content medium="image" url="https://imdhemy.com/assets/img/voting.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The pipeline ate my code</title><link href="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html" rel="alternate" type="text/html" title="The pipeline ate my code" /><published>2024-03-30T00:00:00+00:00</published><updated>2024-03-30T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/the-pipeline-ate-my-code</id><content type="html" xml:base="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html"><![CDATA[<p>I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are
 always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m
 kidding, of course. My pipelines are just like yours. They fail, and they fail a lot.</p>
 
@@ -1094,251 +1286,4 @@ in case you need to test a specific behavior of the external service.</p>
   <li>Replacing the shared dependencies.</li>
   <li>The non-deterministic behavior of the out-of-process dependencies.</li>
   <li>To make tests faster. (Replacing DB calls for example.)</li>
-</ul>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[When I started writing this article few months ago, I got blocked by the idea of I’m going to write about something that everyone knows about and everyone can google the topic and found a ton of articles about the same basic topic. Should I publish such an article? As I said, I got blocked by this idea, the thing that stopped me from completing the series I started about testing.]]></summary></entry><entry><title type="html">Math Notes about Sum Formulas</title><link href="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html" rel="alternate" type="text/html" title="Math Notes about Sum Formulas" /><published>2022-07-09T00:00:00+00:00</published><updated>2022-07-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas</id><content type="html" xml:base="https://imdhemy.com/blog/dsa/math-notes-about-sum-formulas.html"><![CDATA[<p>I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about <strong>Sum Formulas</strong>.</p>
-
-<p class="note">
-Each sum of the form:
-
-$$ \sum_{x=1}^{n} x^{k} = 1^{k} + 2^{k} + 3^{k} + .. + n^{k} $$
-
-where k is a positive integer, has a closed-form formula that is a polynomial of degree (k + 1).
-</p>
-
-<p><strong>Triangular number</strong></p>
-
-\[\sum_{x=1}^{n} x = 1 + 2 + 3 + ... + n = \frac{n (n + 1)}{2}\]
-
-<p><strong>Square pyramidal number</strong></p>
-
-\[\sum_{x=1}^{n} x^{2} = 1^{2} + 2^{2} + 3^{2} + ... + n^{2} = \frac{n (n + 1) (2n + 1)}{6}\]
-
-<p>There is a general formula for such sums, called <a href="https://en.wikipedia.org/wiki/Faulhaber%27s_formula">Faulhaber’s Formula</a>.</p>
-
-<p>In the next lines, I’ll use mathematical induction to proof the Triangular number and the Square pyramidal number formulas.</p>
-
-<h2 id="triangular-number">Triangular number.</h2>
-
-<p class="note">
-$$ \sum_{x=1}^{n} x = 1 + 2 + 3 + ... + n = \frac{n (n + 1)}{2} $$
-</p>
-
-<p><strong>Base step:</strong> Base case, for n = 1</p>
-
-\[L.H.S = 1\]
-
-\[R.H.S =  \frac{n (n + 1)}{2} = \frac{1 ( 1 + 1)}{2} = \frac{2}{2} = 1\]
-
-\[L.H.S = R.H.S = 1\]
-
-<hr />
-
-<p><strong>Inductive hypothesis Step</strong>
-The equation is true for an arbitrary integer <code class="language-plaintext highlighter-rouge">k</code></p>
-
-\[1 + 2 + 3 + ... + k = \frac{k(k+1)}{2}\]
-
-<hr />
-
-<p><strong>Induction Step</strong></p>
-
-<p>Based on the <strong>inductive hypothesis</strong>, let’s proof the equation if true for <code class="language-plaintext highlighter-rouge">n = k + 1</code></p>
-
-\[L.H.S = 1 + 2 + 3 ... + k + k + 1\]
-
-\[= \frac{k(k+1)}{2} + (k + 1)\]
-
-\[= \frac{k(k+1)}{2} + \frac{2(k + 1)}{2}\]
-
-\[= \frac{k^2 + k + 2k + 2}{2}\]
-
-\[= \frac{k^2 + 3k + 2}{2}\]
-
-\[= \frac{(k+1)(k+2)}{2}\]
-
-\[= \frac{(k + 1)(k+1+1)}{2}\]
-
-<hr />
-<p>For <code class="language-plaintext highlighter-rouge">n = k + 1</code></p>
-
-\[R.H.S = \frac{n(n + 1)}{2} =  \frac{(k+1)(K + 1 + 1)}{2}\]
-
-\[L.H.S = R.H.S \#\]
-
-<h2 id="square-pyramidal-number">Square pyramidal number</h2>
-
-<p class="note">
-$$ \sum_{x=1}^{n} x^{2} = 1^{2} + 2^{2} + 3^{2} + ... + n^{2} = \frac{n (n + 1) (2n + 1)}{6} $$
-</p>
-
-<p><strong>Base step:</strong> Base case, for n = 1</p>
-
-\[L.H.S = 1^2 = 1\]
-
-\[R.H.S = \frac{1(1+1)(2 \times 1 + 1)}{6} = \frac{2 \times 3}{6} = 1\]
-
-\[L.H.S = R.H.S\]
-
-<hr />
-
-<p><strong>Inductive hypothesis Step</strong>
-The equation is true for an arbitrary integer <code class="language-plaintext highlighter-rouge">k</code></p>
-
-\[1^2 + 2^2 + 3^2 + ... + k^2 = \frac{k(k+1)(2k+1)}{6}\]
-
-<hr />
-
-<p><strong>Induction Step</strong></p>
-
-<p>Based on the <strong>inductive hypothesis</strong>, let’s proof the equation if true for <code class="language-plaintext highlighter-rouge">n = k + 1</code></p>
-
-\[L.H.S = 1^2 + 2^2 + 3^2 + ... + k^2 + (k+1)^2\]
-
-\[= \frac{k(k+1)(2k+1)}{6} + (k+1)^2\]
-
-\[= \frac{k(k+1)(2k+1)}{6} + \frac{6(k+1)^2}{6}\]
-
-<p>Given the R.H.S:</p>
-
-\[R.H.S = \frac{n(n+1)(2n+1)}{6} = \frac{(k+1)(k+2)(2k+3)}{6}\]
-
-<p>So, we can ignore the <code class="language-plaintext highlighter-rouge">6</code> in the denominator from both sides for now:</p>
-
-\[{L.H.S}\times{6} = k(k+1)(2k+1) + 6(k+1)^2\]
-
-\[= (k^2 + k)(2k+1) + 6(k^2+2k+1)\]
-
-\[= 2k^3 + k^2 + 2k^2 + k + 6k^2 + 12k + 6\]
-
-\[{L.H.S}\times{6} = 2k^3 + 9k^2 + 13k + 6\]
-
-<hr />
-
-\[{R.H.S}\times{6} =  (k+1)(k+2)(2k+3)\]
-
-\[= (k^2 + 3k + 2)(2k+3)\]
-
-\[= 2k^3 + 6k^2 + 3k^2 + 4k + 9k + 6\]
-
-\[{R.H.S}\times{6} = 2k^3 + 9k^2 + 13k + 6\]
-
-<hr />
-
-\[L.H.S = \frac{2k^3 + 9k^2 + 13k + 6}{6}\]
-
-\[R.H.S =  \frac{2k^3 + 9k^2 + 13k + 6}{6}\]
-
-\[R.H.S = L.H.S \#\]
-
-<h2 id="number-progressions">Number Progressions</h2>
-<p>A progression, which is also known as a sequence, is nothing but a pattern of numbers. For example, <code class="language-plaintext highlighter-rouge">3, 6, 9, 12</code> is a progression because there is a pattern observed where every number here is obtained by adding 3 to its previous number.</p>
-
-<p>There are four types of the most common progressions.</p>
-
-<h3 id="arithmetic-progression">Arithmetic Progression</h3>
-<p>Arithmetic Progression (AP) is a sequence of numbers where the difference between any two consecutive numbers is constant.</p>
-
-<p>For Example: <code class="language-plaintext highlighter-rouge">3, 7, 11, 15</code>, is an AP where the common difference is <code class="language-plaintext highlighter-rouge">4</code>.</p>
-
-<p>For an AP:</p>
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">a</code> is the first term.</li>
-  <li><code class="language-plaintext highlighter-rouge">l</code> is the last term.</li>
-  <li><code class="language-plaintext highlighter-rouge">d</code> is the common difference.</li>
-  <li>The <code class="language-plaintext highlighter-rouge">n</code> term could be found as follows: \(a_{n} = a + (n - 1) d\)</li>
-  <li>We can find the <strong>sum</strong> as follows: \(S = \frac{n(a + l)}{2}\)</li>
-</ul>
-
-<p>Let’s proof this formula:</p>
-<p class="note">
-The sum of an arithmetic is 
-
-$$ S = \frac{n(a + l)}{2} $$
-</p>
-
-<p>Suppose \(a_{1}, a_{2}, a_{3}, ..., a_{n}\) be an arithmetic progression whose first term is <code class="language-plaintext highlighter-rouge">a</code> and the common difference is <code class="language-plaintext highlighter-rouge">d</code>.</p>
-
-<p>Then:</p>
-
-\[a_{1} = a\]
-
-\[a_{2} = a + d\]
-
-\[a_{3} = a + 2d\]
-
-\[a_{n} = a + (n - 1) d\]
-
-<hr />
-
-\[S_{n} = a + (a + d) + (a + 2d) + ... + \{a + (n - 3)d\} + \{a + (n - 2)d\} + \{a + (n - 1)d\} \;\;\;\;\;\;\;\; (i)\]
-
-<p>And with a simple trick of reversing the order:</p>
-
-\[S_{n} = \{a + (n - 1)d\} +  \{a + (n - 2)d\} + \{a + (n - 3)d\} + ... +  (a + 2d) + (a + d) + a  \;\;\;\;\;\;\;\; (ii)\]
-
-<p>by adding \((i)\) and \((ii)\)</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Term (i)</th>
-      <th>Term (ii)</th>
-      <th>Sum</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>a</td>
-      <td>\(a + (n - 1)d\)</td>
-      <td>\(2a + (n-1)d\)</td>
-    </tr>
-    <tr>
-      <td>a + d</td>
-      <td>\(a + (n - 2)d\)</td>
-      <td>\(2a + (n-1)d\)</td>
-    </tr>
-    <tr>
-      <td>a + 2d</td>
-      <td>\(a + (n - 3)d\)</td>
-      <td>\(2a + (n-1)d\)</td>
-    </tr>
-    <tr>
-      <td>…</td>
-      <td>…</td>
-      <td>…</td>
-    </tr>
-    <tr>
-      <td> </td>
-      <td> </td>
-      <td>\(2S_{n} = n\{2a + (n-1)d\}\)</td>
-    </tr>
-  </tbody>
-</table>
-
-\[2S_{n} = \{2a + (n-1)d\} + \{2a + (n-1)d\} + ... + \{2a + (n-1)d\}\]
-
-<hr />
-
-\[2S_{n} = n\{2a + (n-1)d\}\]
-
-\[2S_{n} = n\{a + a + (n-1)d\}\]
-
-\[2S_{n} = n(a + l)\]
-
-\[S_{n} = \frac{n(a+l)}{2} \#\]
-
-<h3 id="geometric-progression">Geometric Progression</h3>
-<p>Geometric Progression (GP) is a sequence of numbers where the ratio between any two consecutive numbers is constant.</p>
-
-\[S = \frac{l\times k - a}{k - 1}\]
-
-<h3 id="harmonic-progression">Harmonic Progression</h3>
-<p>A series of numbers is said to be in harmonic sequence if the reciprocals (the inverse) of all the elements of the sequence form an arithmetic sequence.</p>
-
-<p>For example:
-\(\sum_{x=1}^{n}{\frac{1}{x}} = 1 + \frac{1}{2} +  \frac{1}{3} + ... + \frac{1}{n}\)</p>
-
-<h3 id="fibonacci-progression">Fibonacci Progression</h3>
-<p>Fibonacci numbers form an interesting sequence of numbers in which each element is obtained by adding two preceding elements and the sequence starts with <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code>.</p>
-
-<p>Sequence is defined as, 
-\(F_{0} = 0\) and \(F_{1} = 1\) and \(F_{n} = F_{n-1} + F_{n-2}\)</p>]]></content><author><name>Dhemy</name></author><category term="DSA" /><summary type="html"><![CDATA[I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas.]]></summary></entry></feed>
+</ul>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[When I started writing this article few months ago, I got blocked by the idea of I’m going to write about something that everyone knows about and everyone can google the topic and found a ton of articles about the same basic topic. Should I publish such an article? As I said, I got blocked by this idea, the thing that stopped me from completing the series I started about testing.]]></summary></entry></feed>
