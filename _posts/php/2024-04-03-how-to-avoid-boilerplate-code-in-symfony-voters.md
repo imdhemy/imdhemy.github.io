@@ -268,20 +268,20 @@ namespace App\Controller;
 
 use App\Domain\Entity\Post;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use App\Foundation\Security\CanDoVoter;
+use App\Acme\Post\PostVoter;
 
 final class PostController extends AbstractController
 {
     public function show(Post $post): Response
     {
-        $this->denyAccessUnlessGranted(CanDoVoter::GET, $post);
+        $this->denyAccessUnlessGranted(PostVoter::GET, $post);
         
         // The logic to show the post
     }
     
     public function update(Post $post): Response
     {
-        $this->denyAccessUnlessGranted(CanDoVoter::UPDATE, $post);
+        $this->denyAccessUnlessGranted(PostVoter::UPDATE, $post);
         
         // The logic to update the post
     }
@@ -317,7 +317,7 @@ final class PostVoterTest extends TestCase
        $sut = new PostVoter();
        
        // Act
-       $actual = $sut->vote($token, $post, [CanDoVoter::GET]);
+       $actual = $sut->vote($token, $post, [PostVoter::GET]);
        
        // Assert
        $this->assertEquals(Voter::ACCESS_GRANTED, $actual);
