@@ -1,6 +1,332 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-04-02T14:36:56+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-04-03T13:13:21+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">What Symfony developers should know before using Voters</title><link href="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html" rel="alternate" type="text/html" title="What Symfony developers should know before using Voters" /><published>2024-04-02T00:00:00+00:00</published><updated>2024-04-02T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters</id><content type="html" xml:base="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html"><![CDATA[<p>Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">How to avoid boilerplate code in Symfony Voters</title><link href="https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html" rel="alternate" type="text/html" title="How to avoid boilerplate code in Symfony Voters" /><published>2024-04-03T00:00:00+00:00</published><updated>2024-04-03T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters</id><content type="html" xml:base="https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html"><![CDATA[<p>Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have
+been multiple trials to improve the way we write voters, one of them was by introducing the <code class="language-plaintext highlighter-rouge">AbstractVoter</code> class in
+<a href="https://symfony.com/blog/new-in-symfony-2-6-simpler-security-voters">Symfony 2.6</a>. Later on, it was deprecated in
+<a href="https://symfony.com/blog/new-in-symfony-2-8-simpler-security-voters">Symfony 2.8</a> to be removed in v3.0 with the
+introduction of the <code class="language-plaintext highlighter-rouge">Voter</code>class. The continuous improvement didn’t stop there, and I believe it will not.</p>
+
+<p>In this post, I will contribute to the trials of improving the way we write voters by introducing the <code class="language-plaintext highlighter-rouge">CanDoVoter</code>.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>Suppose the logic to decide whether a user can <code class="language-plaintext highlighter-rouge">view</code> or <code class="language-plaintext highlighter-rouge">edit</code> a <code class="language-plaintext highlighter-rouge">Post</code> object is pretty complex. For example, a User
+can always edit or view a Post they created. And if a Post is marked as “public”, anyone can view it. We can write
+a <code class="language-plaintext highlighter-rouge">PostVoter</code> to handle this logic.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//src/Acme/Post/PostVoter.php</span>
+<span class="kn">namespace</span> <span class="nn">App\Acme\Post</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Post</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">PostVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>   
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="p">[</span><span class="s1">'get'</span><span class="p">,</span> <span class="s1">'update'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$subject</span> <span class="k">instanceof</span> <span class="nc">Post</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span> <span class="k">instanceof</span> <span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// This means if the user is not logged in, they can't view or edit the post</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$subject</span><span class="p">;</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="nv">$post</span> <span class="k">instanceof</span> <span class="nc">Post</span><span class="p">);</span>
+        
+        <span class="c1">// The user can always edit or view a post they created</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$user</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">getAuthor</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// If the post is public, anyone can view it</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$attribute</span> <span class="o">===</span> <span class="s1">'get'</span> <span class="o">&amp;&amp;</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">isPublic</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// otherwise, the user can't view or edit the post</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, suppose we have another entity, <code class="language-plaintext highlighter-rouge">Comment</code>, and we need to write a <code class="language-plaintext highlighter-rouge">CommentVoter</code> to handle the logic of whether
+a user can perform some actions on a <code class="language-plaintext highlighter-rouge">Comment</code> object. We will end up repeating a similar code in <code class="language-plaintext highlighter-rouge">supports()</code> and
+the beginning of <code class="language-plaintext highlighter-rouge">voteOnAttribute()</code> methods till we get the <code class="language-plaintext highlighter-rouge">user</code> and <code class="language-plaintext highlighter-rouge">subject</code> objects.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//src/Acme/Comment/CommentVoter.php</span>
+
+<span class="kn">namespace</span> <span class="nn">App\Acme\Comment</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Comment</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">CommentVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="p">[</span><span class="s1">'get'</span><span class="p">,</span> <span class="s1">'update'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$subject</span> <span class="k">instanceof</span> <span class="nc">Comment</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span> <span class="k">instanceof</span> <span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$comment</span> <span class="o">=</span> <span class="nv">$subject</span><span class="p">;</span>
+
+        <span class="c1">// Do the logic here</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="avoiding-the-repeated-code-in-the-supports">Avoiding the repeated code in the supports()</h2>
+
+<p>The first step is to avoid the repeated code in the <code class="language-plaintext highlighter-rouge">supports()</code> method. The <code class="language-plaintext highlighter-rouge">supports()</code> method goal is to check if the
+voter supports the given attribute and subject. We can extract them to configuration properties.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Foundation\Security</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">CanDoVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string[] the attributes that this voter supports
+     */</span>
+    <span class="k">protected</span> <span class="kt">array</span> <span class="nv">$supportedAttributes</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @var class-string the subject that this voter supports
+     */</span>
+    <span class="k">protected</span> <span class="kt">string</span> <span class="nv">$supportedClass</span><span class="p">;</span>
+    
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedAttributes</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">is_a</span><span class="p">(</span><span class="nv">$subject</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedClass</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="avoiding-the-repeated-code-in-the-voteonattribute">Avoiding the repeated code in the voteOnAttribute()</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">voteOnAttribute()</code> should perform the actual voting logic to decide whether the user can perform the given
+attribute on the given subject. To do so, we need to get the <code class="language-plaintext highlighter-rouge">user</code> and <code class="language-plaintext highlighter-rouge">subject</code> objects. We can extract this code
+as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Foundation\Security</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">CanDoVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>
+    <span class="c1">// The supports() method is removed for brevity</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$method</span> <span class="o">=</span> <span class="s1">'can'</span><span class="mf">.</span><span class="nb">ucfirst</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">);</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$vote</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$method</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">);</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="nb">is_bool</span><span class="p">(</span><span class="nv">$vote</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$vote</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Based on the <code class="language-plaintext highlighter-rouge">voteOnAttribute()</code> implementation, we need to define a method for each supported attribute. The method
+name should be <code class="language-plaintext highlighter-rouge">can</code> followed by the attribute name with the first letter capitalized. For example, if the supported
+attributes are <code class="language-plaintext highlighter-rouge">['get', 'update']</code>, we should define <code class="language-plaintext highlighter-rouge">canGet()</code> and <code class="language-plaintext highlighter-rouge">canUpdate()</code> methods. The <code class="language-plaintext highlighter-rouge">user</code> is passed as the
+first argument, and the <code class="language-plaintext highlighter-rouge">subject</code> is passed as the second argument.</p>
+
+<h2 id="introducing-the-candovoter">Introducing the CanDoVoter</h2>
+
+<p>A final version of the <code class="language-plaintext highlighter-rouge">CanDoVoter</code> class is as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Foundation\Security</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">CanDoVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>   
+    <span class="k">public</span> <span class="k">const</span> <span class="no">LIST</span> <span class="o">=</span> <span class="s1">'list'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">GET</span> <span class="o">=</span> <span class="s1">'get'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">CREATE</span> <span class="o">=</span> <span class="s1">'create'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">UPDATE</span> <span class="o">=</span> <span class="s1">'update'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">DELETE</span> <span class="o">=</span> <span class="s1">'delete'</span><span class="p">;</span>
+    
+    <span class="k">protected</span> <span class="kt">array</span> <span class="nv">$supportedAttributes</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">protected</span> <span class="kt">string</span> <span class="nv">$supportedClass</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedAttributes</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">is_a</span><span class="p">(</span><span class="nv">$subject</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedClass</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$method</span> <span class="o">=</span> <span class="s1">'can'</span><span class="mf">.</span><span class="nb">ucfirst</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">);</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$vote</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$method</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">);</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="nb">is_bool</span><span class="p">(</span><span class="nv">$vote</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$vote</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="using-the-candovoter">Using the CanDoVoter</h2>
+
+<p>Now, we can use the <code class="language-plaintext highlighter-rouge">CanDoVoter</code> to write the <code class="language-plaintext highlighter-rouge">PostVoter</code> as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Acme\Post</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Post</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Foundation\Security\CanDoVoter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">PostVoter</span> <span class="kd">extends</span> <span class="nc">CanDoVoter</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="kt">array</span> <span class="nv">$supportedAttributes</span> <span class="o">=</span> <span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">GET</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="no">UPDATE</span><span class="p">];</span>
+    <span class="k">protected</span> <span class="kt">string</span> <span class="nv">$supportedClass</span> <span class="o">=</span> <span class="nc">Post</span><span class="o">::</span><span class="n">class</span><span class="p">;</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">canGet</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>   
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">isPublic</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">getAuthor</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">private</span> <span class="k">function</span> <span class="n">canUpdate</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$user</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">getAuthor</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And in your controller, you can use the voter as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Controller</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Post</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Foundation\Security\CanDoVoter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">PostController</span> <span class="kd">extends</span> <span class="nc">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">show</span><span class="p">(</span><span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">CanDoVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+        
+        <span class="c1">// The logic to show the post</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="n">update</span><span class="p">(</span><span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">CanDoVoter</span><span class="o">::</span><span class="no">UPDATE</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+        
+        <span class="c1">// The logic to update the post</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="testing-the-candovoter">Testing the canDoVoter</h2>
+
+<p>We have discussed before <a href="/blog/testing/how-to-organize-your-unit-tests.html">how to organize our unit tests</a>.
+It’s a good practice to write unit tests that document your business logic, and testing the interface is the way to go.
+That means you should write your tests against the <code class="language-plaintext highlighter-rouge">vote()</code> method not the <code class="language-plaintext highlighter-rouge">can*()</code> methods. The <code class="language-plaintext highlighter-rouge">can*()</code> methods
+should be private methods, and you should not test them directly.</p>
+
+<div class="tip">
+
+Always test the public interface of your classes. In this case, the public interface is the `vote()` method.
+
+</div>
+
+<p>Below is an example of how to test the <code class="language-plaintext highlighter-rouge">PostVoter</code>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="kd">class</span> <span class="nc">PostVoterTest</span> <span class="kd">extends</span> <span class="nc">TestCase</span>
+<span class="p">{</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="n">any_user_can_view_a_public_post</span><span class="p">():</span> <span class="kt">void</span> 
+   <span class="p">{</span>
+       <span class="c1">// Arrange</span>
+       <span class="nv">$post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Post</span><span class="p">();</span>
+       <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">setPublic</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+       <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">();</span>
+       <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">createMock</span><span class="p">(</span><span class="nc">TokenInterface</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+       <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">method</span><span class="p">(</span><span class="s1">'getUser'</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">willReturn</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+       <span class="nv">$sut</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PostVoter</span><span class="p">();</span>
+       
+       <span class="c1">// Act</span>
+       <span class="nv">$actual</span> <span class="o">=</span> <span class="nv">$sut</span><span class="o">-&gt;</span><span class="nf">vote</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$post</span><span class="p">,</span> <span class="p">[</span><span class="nc">CanDoVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">]);</span>
+       
+       <span class="c1">// Assert</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nc">Voter</span><span class="o">::</span><span class="no">ACCESS_GRANTED</span><span class="p">,</span> <span class="nv">$actual</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Avoid test names like: <code class="language-plaintext highlighter-rouge">it_should_fail_when_the_user_is_not_the_author()</code>. Instead, use test names that describe the
+behavior of the system under test.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">- it_should_fail_when_the_user_is_not_the_author()
+</span><span class="err">
+</span><span class="gi">+ only_the_author_can_update_the_post()
++ only_the_author_can_view_a_private_post()
++ any_user_can_view_a_public_post()
+</span></code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>In this post, we have introduced a new way to write Symfony voters with less boilerplate code, the <code class="language-plaintext highlighter-rouge">CanDoVoter</code>. The
+<code class="language-plaintext highlighter-rouge">CanDoVoter</code> class is an abstract class that you can extend to write your voters. Improving the way we write voters
+will make our codebase more maintainable and easier to read. I hope you find this post helpful, and I would love to
+hear your feedback.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way we write voters, one of them was by introducing the AbstractVoter class in Symfony 2.6. Later on, it was deprecated in Symfony 2.8 to be removed in v3.0 with the introduction of the Voterclass. The continuous improvement didn’t stop there, and I believe it will not.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/vote.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/vote.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">What Symfony developers should know before using Voters</title><link href="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html" rel="alternate" type="text/html" title="What Symfony developers should know before using Voters" /><published>2024-04-02T00:00:00+00:00</published><updated>2024-04-02T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters</id><content type="html" xml:base="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html"><![CDATA[<p>Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then
 reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you
 should know before using voters.</p>
 
@@ -1153,137 +1479,4 @@ used in the test suite.</p>
 <p>In this post, we talked about the location of test files, <strong>in-place</strong> or <strong>out-of-place</strong>. We also talked about using
 plain English to name the test methods and separating words by underscores. The <code class="language-plaintext highlighter-rouge">Given-When-Then</code>
 or <code class="language-plaintext highlighter-rouge">Arrange-Act-Assert</code> is a great way to structure test cases. Do you remember what is a fixture? how to use them? and
-the anti-patterns of the <code class="language-plaintext highlighter-rouge">Given</code> section.</p>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the respiratory system which is known as mucociliary escalator and he said, to understand anything in medicine, you need to understand the idea behind the name, you need to understand the culture behind the name. Check the following image, it auto-moves the particles outside the lungs like an escalator.]]></summary></entry><entry><title type="html">What is a unit test</title><link href="https://imdhemy.com/blog/testing/what-is-a-unit-test.html" rel="alternate" type="text/html" title="What is a unit test" /><published>2022-08-13T17:21:35+00:00</published><updated>2022-08-13T17:21:35+00:00</updated><id>https://imdhemy.com/blog/testing/what-is-a-unit-test</id><content type="html" xml:base="https://imdhemy.com/blog/testing/what-is-a-unit-test.html"><![CDATA[<p>When I started writing this article few months ago, I got blocked by the 
-idea of I’m going to write about something that everyone knows about and 
-everyone can google the topic and found a ton of articles about the same 
-basic topic. 
-Should I publish such an article? As I said, I got blocked by this idea, the 
-thing that stopped me from completing the series I started about <a href="/blog/testing/we-need-more-tests">testing</a>.</p>
-
-<p>Finally, I decided to write this article to refer to it in case I 
-needed in next articles, at least it will be an internal reference.</p>
-
-<h2 id="what-is-a-unit-test">What is a unit test?</h2>
-<p>You should already know about test automation. Given a piece of code, you 
-can write another piece of code that verifies the behavior of the first. The 
-second piece of code is called a unit test.</p>
-
-<div class="tip">
-    <p>A unit test should verify a small piece of code in isolation quickly.</p>
-</div>
-
-<p>As you can see, a unit test has three characteristics:</p>
-<ul>
-  <li>Verifies a small piece of code.</li>
-  <li>Is quick to run.</li>
-  <li>Works in isolation.</li>
-</ul>
-
-<p>A small piece of code could be a function, a class, a method, or whatever 
-you can call a unit. If your test suite’s execution time is good enough to 
-you, it means tests are quick enough.</p>
-
-<div class="tip">
-A <i>unit</i> in unit testing is a unit of behaviour, not a unit of 
-<i>code</i>. This behaviour can span across as many as several classes or as 
-a single method, but it should have a single entry point to trigger the behaviour.
-</div>
-
-<p>No doubt, the first two characteristics are non-controversial. The third one, isolation, is 
-controversial. When it comes to isolation, there are two takes, the Mockist 
-take and the Classicist take.</p>
-
-<h2 id="mockist-take-vs-classicist-take">Mockist take vs Classicist take</h2>
-<p>These two tribes are commonly referred to as the Detroit School of TDD 
-(Classicist) and the London School of TDD (Mockist). A key difference 
-between them is how they treat the dependencies of the code under test.</p>
-
-<p>For the Mockist take, if a class has a dependency on another class or 
-service, it is mocked or doubled. This means that isolation here is code 
-isolation. But for the Classicist take, if a class has a dependency, the 
-dependency should be used as it. It is not the code that needs to be 
-isolated during testing. Instead, unit tests themselves should run in 
-isolation from each other.</p>
-
-<p>I believe that the style of mocking everything results in a fragile, hard to 
-refactor code base. It does not reflect the real scenario, besides, it 
-burdens your shoulders with maintaining the mocks when the real source code
-changes. I’m not completely opposed to mocking, but we should mock to our 
-advantage, wherever it makes our tests more manageable.</p>
-
-<p>Another problem with the Mockist take is detecting changes in other services 
-they are integrated with. For example, if a dependency behaviour changed, 
-the mockist test will not detect it, it depends on a non-updated mock. Tests 
-should be sensitive to the behavior changes and insensitive to the 
-structural changes.</p>
-
-<blockquote>
-  <p>If I care about the order of operations, I’ve designed the system wrong. — <strong>Kent Beck (the Detroit School).</strong></p>
-</blockquote>
-
-<blockquote>
-  <p>If I have an object that has behaviour, and I’m doing “Tell, Don’t Ask” then I can only test interactions. — <strong>Steve Freeman (the London School)</strong></p>
-</blockquote>
-
-<h2 id="when-to-mock-vs-when-to-use-real-dependencies">When to mock vs when to use real dependencies</h2>
-
-<p>Hopefully, it’s clear now that I prefer the Classicist take. In the 
-classicist take, it’s not the code that needs to be tested in an isolated 
-manner. Instead, the unit tests themselves should be run in isolation from 
-each other. The classes under test reside in the memory of the test runner, 
-so that they can interact with each other without affecting the test results 
-either you run the tests in parallel or in sequence.</p>
-
-<p>There is a problem, Okay, they reside in the memory and not affecting 
-each other, but what about the shared states? For example, the database and 
-file system. Of course, changes in the database will affect the test results.
-For instance, one test could create a record in the database, and the other 
-test could delete the record as a part of its setup. If you run them in 
-parallel, the first test will fail, not because the code is broken, but 
-because it is not isolated.</p>
-
-<p>Let’s look at three different types of dependencies: the <strong>shared</strong>, the <strong>private</strong> 
-and the <strong>out-of-process</strong>. The shared dependencies are the ones that are 
-shared across the test suite, for example, a static field, a database record,
-and the file system.</p>
-
-<p>The private dependencies are the ones that are not shared at all, for 
-example a private field, or a function parameter.</p>
-
-<p>The out-of-process dependencies are the ones that are the ones that run 
-outside the application’s execution context. For example an external API.</p>
-
-<p>Given the above, Classist take still can use mocks and test doubles, but 
-only do that for the shared dependencies, or the out-of-process dependencies 
-in case you need to test a specific behavior of the external service.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-<p>Let’s conclude them in <strong>triplets</strong>:</p>
-
-<p><strong>A unit test has three characteristics:</strong></p>
-<ul>
-  <li>Verifies a small piece of code.</li>
-  <li>Is quick to run.</li>
-  <li>Works in isolation.</li>
-</ul>
-
-<p><strong>There are three types of dependencies:</strong></p>
-<ul>
-  <li>Shared.</li>
-  <li>Private.</li>
-  <li>Out-of-process.</li>
-</ul>
-
-<p><strong>There are three schools of TDD:</strong></p>
-<ul>
-  <li>The Detroit School.</li>
-  <li>The London School.</li>
-  <li>The one that your manager told you to use.</li>
-</ul>
-
-<p><strong>There are three reasons to use mocks:</strong></p>
-<ul>
-  <li>Replacing the shared dependencies.</li>
-  <li>The non-deterministic behavior of the out-of-process dependencies.</li>
-  <li>To make tests faster. (Replacing DB calls for example.)</li>
-</ul>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[When I started writing this article few months ago, I got blocked by the idea of I’m going to write about something that everyone knows about and everyone can google the topic and found a ton of articles about the same basic topic. Should I publish such an article? As I said, I got blocked by this idea, the thing that stopped me from completing the series I started about testing.]]></summary></entry></feed>
+the anti-patterns of the <code class="language-plaintext highlighter-rouge">Given</code> section.</p>]]></content><author><name>Dhemy</name></author><category term="testing" /><summary type="html"><![CDATA[One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the respiratory system which is known as mucociliary escalator and he said, to understand anything in medicine, you need to understand the idea behind the name, you need to understand the culture behind the name. Check the following image, it auto-moves the particles outside the lungs like an escalator.]]></summary></entry></feed>
