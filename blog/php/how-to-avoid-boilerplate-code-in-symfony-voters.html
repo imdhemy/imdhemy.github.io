@@ -420,20 +420,20 @@ first argument, and the <code class="language-plaintext highlighter-rouge">subje
 
 <span class="kn">use</span> <span class="nc">App\Domain\Entity\Post</span><span class="p">;</span>
 <span class="kn">use</span> <span class="nc">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nc">App\Foundation\Security\CanDoVoter</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Acme\Post\PostVoter</span><span class="p">;</span>
 
 <span class="k">final</span> <span class="kd">class</span> <span class="nc">PostController</span> <span class="kd">extends</span> <span class="nc">AbstractController</span>
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="n">show</span><span class="p">(</span><span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">Response</span>
     <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">CanDoVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">PostVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
         
         <span class="c1">// The logic to show the post</span>
     <span class="p">}</span>
     
     <span class="k">public</span> <span class="k">function</span> <span class="n">update</span><span class="p">(</span><span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">Response</span>
     <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">CanDoVoter</span><span class="o">::</span><span class="no">UPDATE</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">PostVoter</span><span class="o">::</span><span class="no">UPDATE</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
         
         <span class="c1">// The logic to update the post</span>
     <span class="p">}</span>
@@ -468,7 +468,7 @@ Always test the public interface of your classes. In this case, the public inter
        <span class="nv">$sut</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PostVoter</span><span class="p">();</span>
        
        <span class="c1">// Act</span>
-       <span class="nv">$actual</span> <span class="o">=</span> <span class="nv">$sut</span><span class="o">-&gt;</span><span class="nf">vote</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$post</span><span class="p">,</span> <span class="p">[</span><span class="nc">CanDoVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">]);</span>
+       <span class="nv">$actual</span> <span class="o">=</span> <span class="nv">$sut</span><span class="o">-&gt;</span><span class="nf">vote</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$post</span><span class="p">,</span> <span class="p">[</span><span class="nc">PostVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">]);</span>
        
        <span class="c1">// Assert</span>
        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nc">Voter</span><span class="o">::</span><span class="no">ACCESS_GRANTED</span><span class="p">,</span> <span class="nv">$actual</span><span class="p">);</span>
@@ -487,6 +487,9 @@ behavior of the system under test.</p>
 </span></code></pre></div></div>
 
 <h2 id="conclusion">Conclusion</h2>
+
+<p>You can have the <code class="language-plaintext highlighter-rouge">CanDoVoter</code> and much more out-of the box by using
+the <a href="https://github.com/symblaze/security-bundle">Symblaze Security Bundle</a>.</p>
 
 <p>In this post, we have introduced a new way to write Symfony voters with less boilerplate code, the <code class="language-plaintext highlighter-rouge">CanDoVoter</code>. The
 <code class="language-plaintext highlighter-rouge">CanDoVoter</code> class is an abstract class that you can extend to write your voters. Improving the way we write voters
