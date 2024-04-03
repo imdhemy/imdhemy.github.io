@@ -338,6 +338,9 @@ behavior of the system under test.
 
 ## Conclusion
 
+You can have the `CanDoVoter` and much more out-of the box by using
+the [Symblaze Security Bundle](https://github.com/symblaze/security-bundle).
+
 In this post, we have introduced a new way to write Symfony voters with less boilerplate code, the `CanDoVoter`. The
 `CanDoVoter` class is an abstract class that you can extend to write your voters. Improving the way we write voters
 will make our codebase more maintainable and easier to read. I hope you find this post helpful, and I would love to
