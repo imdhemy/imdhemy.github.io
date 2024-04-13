@@ -47,7 +47,7 @@ sass:
 paginate: 7
 paginate_path: "/blog/page:num/"
 markdown: kramdown
-permalink: /blog/:categories/:title:output_ext
+permalink: /blog/:categories/:title:output_ext/
 
 jekyll-archives:
   enabled:
