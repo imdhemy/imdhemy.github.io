@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-04-15T12:37:45+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-04-15T12:46:47+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
 </subtitle><author><name>Dhemy</name></author><entry><title type="html">Singleton Design Pattern in Laravel</title><link href="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/" rel="alternate" type="text/html" title="Singleton Design Pattern in Laravel" /><published>2024-04-15T06:05:51+00:00</published><updated>2024-04-15T06:05:51+00:00</updated><id>https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel</id><content type="html" xml:base="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/"><![CDATA[<p>Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”.
 But they landed on my <a href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html/">PHP Real-world use cases of singleton design pattern</a> post. So I decided to make them happy with a dedicated post
@@ -9,9 +9,9 @@ real-world use cases. If you are not familiar with this pattern, you can check i
 
 <h2 id="why-would-you-use-singleton-design-pattern">Why would you use Singleton Design Pattern?</h2>
 
-<p>A perfect use case for the Singleton is a Logger class. You want to log some information in your application, and you
-want to use the same instance of the Logger class everywhere in you application. It’s impossible to depend on
-the <code class="language-plaintext highlighter-rouge">constructors</code> to get the same instance of the Logger, that’s where the Singleton Design Pattern comes in.</p>
+<p>A perfect use case for the Singleton is a FileSystem class. You want to perform file operations in your application, and
+you want to use the same instance of the FileSystem class everywhere in your application. It’s impossible to depend on
+the constructors to get the same instance of the FileSystem, that’s where the Singleton Design Pattern comes in.</p>
 
 <p>It may look unnecessary to use the Singleton Design pattern in PHP because each request is a new instance of the
 application and all instances are destroyed after the request is done. But you get more benefits from it using it in

@@ -183,9 +183,9 @@ real-world use cases. If you are not familiar with this pattern, you can check i
 
 <h2 id="why-would-you-use-singleton-design-pattern">Why would you use Singleton Design Pattern?</h2>
 
-<p>A perfect use case for the Singleton is a Logger class. You want to log some information in your application, and you
-want to use the same instance of the Logger class everywhere in you application. It’s impossible to depend on
-the <code class="language-plaintext highlighter-rouge">constructors</code> to get the same instance of the Logger, that’s where the Singleton Design Pattern comes in.</p>
+<p>A perfect use case for the Singleton is a FileSystem class. You want to perform file operations in your application, and
+you want to use the same instance of the FileSystem class everywhere in your application. It’s impossible to depend on
+the constructors to get the same instance of the FileSystem, that’s where the Singleton Design Pattern comes in.</p>
 
 <p>It may look unnecessary to use the Singleton Design pattern in PHP because each request is a new instance of the
 application and all instances are destroyed after the request is done. But you get more benefits from it using it in
