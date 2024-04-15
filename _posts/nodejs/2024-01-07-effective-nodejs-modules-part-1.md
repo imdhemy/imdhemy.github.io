@@ -59,10 +59,10 @@ of them to export modules as follows:
 ```js
 // config.js
 module.exports = {
-  app: {
-    name: 'Awesome App',
-    port: 3000,
-  }
+    app: {
+        name: 'Awesome App',
+        port: 3000,
+    }
 }
 ```
 
@@ -71,10 +71,10 @@ Is the same as:
 ```js
 // config.js
 exports.foo = {
-  app: {
-    name: 'Awesome App',
-    port: 3000,
-  }
+    app: {
+        name: 'Awesome App',
+        port: 3000,
+    }
 }
 ```
 
@@ -92,14 +92,14 @@ You can also use the `require` function to import a single module from a file th
 ```js
 // config.js
 module.exports = {
-  app: {
-    name: 'Awesome App',
-    port: 3000,
-  },
-  connection: {
-    host: 'localhost',
-    port: 27017,
-  }
+    app: {
+        name: 'Awesome App',
+        port: 3000,
+    },
+    connection: {
+        host: 'localhost',
+        port: 27017,
+    }
 }
 ```
 
@@ -120,15 +120,15 @@ const config = require('./config')
 
 let logger
 if (config.app.env === 'test') {
-  logger = require('./silent-logger')
+    logger = require('./silent-logger')
 } else {
-  logger = require('./logger')
+    logger = require('./logger')
 }
 ```
 
 ### ESM: ECMAScript module system
 
-<div class="tip">
+<div class="tip" markdown="1">
    <p>
 If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
 </p>
@@ -137,9 +137,9 @@ If you want to use ESM modules, you need to set the "type" to module "module" in
 ```js
 // package.json
 {
-  "type"
+    "type"
 :
-  "module"
+    "module"
 }
 ```
 
@@ -150,7 +150,7 @@ ESM modules became available without any command-line flags.
 
 ESM uses `export` to export modules and `import` to import modules.
 
-<div class="tip">
+<div class="tip" markdown="1">
     <p>ESM uses `export` in the singular format not `exports` like CJS.</p>
 </div>
 
@@ -159,7 +159,7 @@ The following example shows how to export a function:
 ```js
 // sum.mjs
 function sum(a, b) {
-  return a + b
+    return a + b
 }
 
 export {sum}
@@ -182,7 +182,7 @@ The following example shows how to export a default module:
 ```js
 // sum.mjs
 export default function sum(a, b) {
-  return a + b
+    return a + b
 }
 ```
 
@@ -200,15 +200,15 @@ The following example shows a mixed export of a default module and other modules
 ```js
 // calculator.mjs
 export function sum(a, b) {
-  return a + b
+    return a + b
 }
 
 export function subtract(a, b) {
-  return a - b
+    return a - b
 }
 
 export default function calculate(input) {
-  // a magic function that takes a string input like "1 + 2" and returns the result
+    // a magic function that takes a string input like "1 + 2" and returns the result
 }
 ```
 
@@ -267,7 +267,7 @@ console.log(calculate('1 + 2')) // 3
 
 The ESM modules doesn't support conditionally importing modules. All the imports should be at the top of the file.
 
-<div class="danger">
+<div class="danger" markdown="1">
     <p>The following code will throw a SyntaxError: </p>
 </div>
 
@@ -278,14 +278,14 @@ import config from './config.mjs'
 
 if (config.app.env === 'test') {
 import
-  logger
-  from
-  './silent-logger.mjs'
+    logger
+    from
+    './silent-logger.mjs'
 } else {
 import
-  logger
-  from
-  './logger.mjs'
+    logger
+    from
+    './logger.mjs'
 }
 ```
 

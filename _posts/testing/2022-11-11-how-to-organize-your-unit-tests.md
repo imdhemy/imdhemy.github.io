@@ -34,7 +34,7 @@ Let's map this to programming. The DUT will be **SUT** (System under test). The 
 could be a dependency or an argument passed to the SUT. It can also be data in the database or a file in the file
 system.
 
-<div class=tip>
+<div class=tip markdown="1">
 The test fixture's state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable.
 </div>
 
@@ -100,7 +100,7 @@ should end by creating the SUT instance in the initial state.
 As far as I know, all xUnit frameworks provide a `setup` method to do the preparations. Even though this is not the
 place to put the `Given` section.
 
-<div class=tip>
+<div class=tip markdown="1">
 The `setup` method is not the place to put the `Given` section. The `setup` method is for the preparations that are common to all test cases. The `Given` section is for the preparations that are specific to the test case.
 </div>
 

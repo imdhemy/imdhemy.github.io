@@ -15,7 +15,7 @@ should know before using voters.
 In Symfony, permissions are always linked to a user object. If you need to secure parts of your application, you
 need to create a user object that implements the `UserInterface`.
 
-<div class="tip">
+<div class="tip" markdown="1">
 
 Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system
 
@@ -33,7 +33,7 @@ the [Symfony security component](https://github.com/symfony/symfony/blob/923c4ef
 helps you to make sure that your user object has all the necessary methods to work with Symfony's security system
 regardless of how you load or create the user object, e.g., from a database, an API, or a Token.
 
-<div class="tip">
+<div class="tip" markdown="1">
 
 The security user interface is the contract between your user object and Symfony's security system.
 
@@ -60,7 +60,7 @@ user. It doesn't matter how the roles are stored in the database or how they are
 is that every role must start with the `ROLE_` prefix - otherwise, things won't work as expected. You will use these
 roles to grant access to specific parts of your application.
 
-<div class="tip">
+<div class="tip" markdown="1">
 
 All roles should start with the `ROLE_` prefix. This is a requirement of Symfony's security system.
 
@@ -101,7 +101,7 @@ security:
 For role hierarchy to work, do not use `$user->getRoles()` manually, instead you should always depend on the
 `isGranted()` or `denyAccessUnlessGranted()` methods provided by the `AuthorizationCheckerInterface`.
 
-<div class="tip">
+<div class="tip" markdown="1">
 
 Let symfony does the heavy lifting for you. Always use the security methods to check for roles.
 
@@ -129,7 +129,7 @@ that a voter can make, like any other voting system:
 Normally, only one voter will vote at any given time, and all the rest will `abstain`. However, if you want to
 change this behavior, you need to know about the `decision_strategy` configuration.
 
-<div class="tip">
+<div class="tip" markdown="1">
 It's always good to keep the default `decision_strategy` and design your voters accordingly. A resource oriented
 voter should only vote on the resource it is designed for.
 </div>

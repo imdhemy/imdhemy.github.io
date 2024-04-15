@@ -23,7 +23,7 @@ You should already know about test automation. Given a piece of code, you
 can write another piece of code that verifies the behavior of the first. The
 second piece of code is called a unit test.
 
-<div class="tip">
+<div class="tip" markdown="1">
     <p>A unit test should verify a small piece of code in isolation quickly.</p>
 </div>
 
@@ -37,7 +37,7 @@ A small piece of code could be a function, a class, a method, or whatever
 you can call a unit. If your test suite's execution time is good enough to
 you, it means tests are quick enough.
 
-<div class="tip">
+<div class="tip" markdown="1">
 A <i>unit</i> in unit testing is a unit of behaviour, not a unit of 
 <i>code</i>. This behaviour can span across as many as several classes or as 
 a single method, but it should have a single entry point to trigger the behaviour.

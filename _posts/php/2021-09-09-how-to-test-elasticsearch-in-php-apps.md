@@ -4,7 +4,8 @@ title: How to test Elasticsearch in PHP applications
 date: 2021-09-09T00:00:00.130Z
 categories: php
 ---
-<div class="caution">
+
+<div class="caution" markdown="1">
 <p>
 Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. 
 This article is intended to v 7.x and lower. For v 8.0 you can use the <a href="https://github.
@@ -127,7 +128,7 @@ As simple as that 🚀
 
 ### How to add Integration Tests to Elasticsearch in PHP
 
-<div class="info">
+<div class="info" markdown="1">
  Github actions, Bitbucket pipelines and other CI/CD tools could be used to start Elasticsearch to run integration tests.
  The following example uses CircleCI, but it would be much better if you used the same tool you're using in your project
 without depending on a third-party service.

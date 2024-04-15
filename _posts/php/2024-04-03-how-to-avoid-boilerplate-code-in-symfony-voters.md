@@ -295,7 +295,7 @@ It's a good practice to write unit tests that document your business logic, and 
 That means you should write your tests against the `vote()` method not the `can*()` methods. The `can*()` methods
 should be private methods, and you should not test them directly.
 
-<div class="tip">
+<div class="tip" markdown="1">
 
 Always test the public interface of your classes. In this case, the public interface is the `vote()` method.
 
@@ -345,4 +345,3 @@ In this post, we have introduced a new way to write Symfony voters with less boi
 `CanDoVoter` class is an abstract class that you can extend to write your voters. Improving the way we write voters
 will make our codebase more maintainable and easier to read. I hope you find this post helpful, and I would love to
 hear your feedback.
-

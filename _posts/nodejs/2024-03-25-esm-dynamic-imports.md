@@ -58,8 +58,8 @@ const defaultLanguage = 'en';
 const language = process.argv[2] || defaultLanguage;
 
 if (!languages.includes(language)) {
-  console.error(`Unsupported language: ${language}`);
-  process.exit(1);
+    console.error(`Unsupported language: ${language}`);
+    process.exit(1);
 }
 
 // Get advantage of top-level await
@@ -77,7 +77,7 @@ In the `main.js` we used the `import()` expression, commonly called dynamic impo
 at runtime, and the module will be loaded asynchronously. The `await` keyword is used to wait for the module to be
 loaded before continuing the execution.
 
-<div class="tip">
+<div class="tip" markdown="1">
 Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.
 </div>
 
