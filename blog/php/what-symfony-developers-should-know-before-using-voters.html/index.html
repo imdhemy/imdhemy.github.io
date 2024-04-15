@@ -8,6 +8,15 @@
     <title>What Symfony developers should know before using Voters</title>
     <meta name="description"
           content="Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">What Symfony developers should know before using Voters</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">What Symfony developers should know before using Voters</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -164,7 +173,7 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <p>Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then
 reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you
 should know before using voters.</p>
@@ -176,7 +185,7 @@ need to create a user object that implements the <code class="language-plaintext
 
 <div class="tip">
 
-Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system
+  <p>Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system</p>
 
 </div>
 
@@ -194,7 +203,7 @@ regardless of how you load or create the user object, e.g., from a database, an 
 
 <div class="tip">
 
-The security user interface is the contract between your user object and Symfony's security system.
+  <p>The security user interface is the contract between your user object and Symfony’s security system.</p>
 
 </div>
 
@@ -221,7 +230,7 @@ roles to grant access to specific parts of your application.</p>
 
 <div class="tip">
 
-All roles should start with the `ROLE_` prefix. This is a requirement of Symfony's security system.
+  <p>All roles should start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix. This is a requirement of Symfony’s security system.</p>
 
 </div>
 
@@ -260,7 +269,7 @@ the <code class="language-plaintext highlighter-rouge">ROLE_USER</code> role. It
 
 <div class="tip">
 
-Let symfony does the heavy lifting for you. Always use the security methods to check for roles.
+  <p>Let symfony does the heavy lifting for you. Always use the security methods to check for roles.</p>
 
 </div>
 
@@ -288,8 +297,8 @@ that a voter can make, like any other voting system:</p>
 change this behavior, you need to know about the <code class="language-plaintext highlighter-rouge">decision_strategy</code> configuration.</p>
 
 <div class="tip">
-It's always good to keep the default `decision_strategy` and design your voters accordingly. A resource oriented
-voter should only vote on the resource it is designed for.
+  <p>It’s always good to keep the default <code class="language-plaintext highlighter-rouge">decision_strategy</code> and design your voters accordingly. A resource oriented
+voter should only vote on the resource it is designed for.</p>
 </div>
 
 <p>Suppose you have a feature that requires a user to be part of a group and is older than 18 years. You have two separate

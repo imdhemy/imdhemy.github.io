@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-04-13T21:11:31+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-04-15T11:04:56+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
 </subtitle><author><name>Dhemy</name></author><entry><title type="html">How to avoid boilerplate code in Symfony Voters</title><link href="https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html/" rel="alternate" type="text/html" title="How to avoid boilerplate code in Symfony Voters" /><published>2024-04-03T00:00:00+00:00</published><updated>2024-04-03T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters</id><content type="html" xml:base="https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html/"><![CDATA[<p>Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have
 been multiple trials to improve the way we write voters, one of them was by introducing the <code class="language-plaintext highlighter-rouge">AbstractVoter</code> class in
@@ -284,7 +284,7 @@ should be private methods, and you should not test them directly.</p>
 
 <div class="tip">
 
-Always test the public interface of your classes. In this case, the public interface is the `vote()` method.
+  <p>Always test the public interface of your classes. In this case, the public interface is the <code class="language-plaintext highlighter-rouge">vote()</code> method.</p>
 
 </div>
 
@@ -340,7 +340,7 @@ need to create a user object that implements the <code class="language-plaintext
 
 <div class="tip">
 
-Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system
+  <p>Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system</p>
 
 </div>
 
@@ -358,7 +358,7 @@ regardless of how you load or create the user object, e.g., from a database, an 
 
 <div class="tip">
 
-The security user interface is the contract between your user object and Symfony's security system.
+  <p>The security user interface is the contract between your user object and Symfony’s security system.</p>
 
 </div>
 
@@ -385,7 +385,7 @@ roles to grant access to specific parts of your application.</p>
 
 <div class="tip">
 
-All roles should start with the `ROLE_` prefix. This is a requirement of Symfony's security system.
+  <p>All roles should start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix. This is a requirement of Symfony’s security system.</p>
 
 </div>
 
@@ -424,7 +424,7 @@ the <code class="language-plaintext highlighter-rouge">ROLE_USER</code> role. It
 
 <div class="tip">
 
-Let symfony does the heavy lifting for you. Always use the security methods to check for roles.
+  <p>Let symfony does the heavy lifting for you. Always use the security methods to check for roles.</p>
 
 </div>
 
@@ -452,8 +452,8 @@ that a voter can make, like any other voting system:</p>
 change this behavior, you need to know about the <code class="language-plaintext highlighter-rouge">decision_strategy</code> configuration.</p>
 
 <div class="tip">
-It's always good to keep the default `decision_strategy` and design your voters accordingly. A resource oriented
-voter should only vote on the resource it is designed for.
+  <p>It’s always good to keep the default <code class="language-plaintext highlighter-rouge">decision_strategy</code> and design your voters accordingly. A resource oriented
+voter should only vote on the resource it is designed for.</p>
 </div>
 
 <p>Suppose you have a feature that requires a user to be part of a group and is older than 18 years. You have two separate
@@ -680,8 +680,8 @@ line then imports the corresponding translation module dynamically if it exists.
 <span class="kd">const</span> <span class="nx">language</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">||</span> <span class="nx">defaultLanguage</span><span class="p">;</span>
 
 <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">languages</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="nx">language</span><span class="p">))</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s2">`Unsupported language: </span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-  <span class="nx">process</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s2">`Unsupported language: </span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// Get advantage of top-level await</span>
@@ -699,7 +699,7 @@ at runtime, and the module will be loaded asynchronously. The <code class="langu
 loaded before continuing the execution.</p>
 
 <div class="tip">
-Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.
+  <p>Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.</p>
 </div>
 
 <p>That’s it! You have learned how to use dynamic imports in ESM modules.</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use require to import modules anywhere in your code, but in ESM you can only use import at the top level of your code. What if you want to import a module dynamically in ESM?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-running.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-running.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Effective Node.js Modules - Part 1: Basic Syntax</title><link href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html/" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 1: Basic Syntax" /><published>2024-01-07T00:00:00+00:00</published><updated>2024-01-07T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html/"><![CDATA[<p>Do you know what is the difference between the following two code snippets?</p>
@@ -766,10 +766,10 @@ of them to export modules as follows:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-  <span class="p">}</span>
+    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -777,10 +777,10 @@ of them to export modules as follows:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
 <span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-  <span class="p">}</span>
+    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -796,14 +796,14 @@ of them to export modules as follows:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-  <span class="p">},</span>
-  <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
-  <span class="p">}</span>
+    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -822,25 +822,25 @@ modules based on a specific condition.</p>
 
 <span class="kd">let</span> <span class="nx">logger</span>
 <span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./silent-logger</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./silent-logger</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="esm-ecmascript-module-system">ESM: ECMAScript module system</h3>
 
 <div class="tip">
-   <p>
+  <p>
 If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
 </p>
 </div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
 <span class="p">{</span>
-  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span>
+    <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span>
 <span class="p">:</span>
-  <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
+    <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -852,14 +852,15 @@ ESM modules became available without any command-line flags.</p>
 <p>ESM uses <code class="language-plaintext highlighter-rouge">export</code> to export modules and <code class="language-plaintext highlighter-rouge">import</code> to import modules.</p>
 
 <div class="tip">
-    <p>ESM uses `export` in the singular format not `exports` like CJS.</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;ESM uses `export` in the singular format not `exports` like CJS.&lt;/p&gt;
+</code></pre></div>  </div>
 </div>
 
 <p>The following example shows how to export a function:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
 <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span>
@@ -880,7 +881,7 @@ module from a file. Exporting a default module doesn’t prevent you from export
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
 <span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -896,15 +897,15 @@ module from a file. Exporting a default module doesn’t prevent you from export
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calculator.mjs</span>
 <span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
+    <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -960,7 +961,8 @@ original names. You can also use the <code class="language-plaintext highlighter
 <p>The ESM modules doesn’t support conditionally importing modules. All the imports should be at the top of the file.</p>
 
 <div class="danger">
-    <p>The following code will throw a SyntaxError: </p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;The following code will throw a SyntaxError: &lt;/p&gt;
+</code></pre></div>  </div>
 </div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
@@ -969,14 +971,14 @@ original names. You can also use the <code class="language-plaintext highlighter
 
 <span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
 <span class="k">import</span>
-  <span class="nx">logger</span>
-  <span class="k">from</span>
-  <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
+    <span class="nx">logger</span>
+    <span class="k">from</span>
+    <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 <span class="k">import</span>
-  <span class="nx">logger</span>
-  <span class="k">from</span>
-  <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
+    <span class="nx">logger</span>
+    <span class="k">from</span>
+    <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -1364,7 +1366,7 @@ could be a dependency or an argument passed to the SUT. It can also be data in t
 system.</p>
 
 <div class="tip">
-The test fixture's state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable.
+  <p>The test fixture’s state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable.</p>
 </div>
 
 <h2 id="test-file-location">Test file location</h2>
@@ -1428,7 +1430,7 @@ should end by creating the SUT instance in the initial state.</p>
 place to put the <code class="language-plaintext highlighter-rouge">Given</code> section.</p>
 
 <div class="tip">
-The `setup` method is not the place to put the `Given` section. The `setup` method is for the preparations that are common to all test cases. The `Given` section is for the preparations that are specific to the test case.
+  <p>The <code class="language-plaintext highlighter-rouge">setup</code> method is not the place to put the <code class="language-plaintext highlighter-rouge">Given</code> section. The <code class="language-plaintext highlighter-rouge">setup</code> method is for the preparations that are common to all test cases. The <code class="language-plaintext highlighter-rouge">Given</code> section is for the preparations that are specific to the test case.</p>
 </div>
 
 <p>Putting the <code class="language-plaintext highlighter-rouge">Given</code> section in the <code class="language-plaintext highlighter-rouge">setup</code> method is not a good idea, because it makes the test case less readable, and

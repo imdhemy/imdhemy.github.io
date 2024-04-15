@@ -8,6 +8,15 @@
     <title>How to avoid boilerplate code in Symfony Voters</title>
     <meta name="description"
           content="Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way ...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">How to avoid boilerplate code in Symfony Voters</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">How to avoid boilerplate code in Symfony Voters</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -164,7 +173,7 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <p>Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have
 been multiple trials to improve the way we write voters, one of them was by introducing the <code class="language-plaintext highlighter-rouge">AbstractVoter</code> class in
 <a href="https://symfony.com/blog/new-in-symfony-2-6-simpler-security-voters">Symfony 2.6</a>. Later on, it was deprecated in
@@ -449,7 +458,7 @@ should be private methods, and you should not test them directly.</p>
 
 <div class="tip">
 
-Always test the public interface of your classes. In this case, the public interface is the `vote()` method.
+  <p>Always test the public interface of your classes. In this case, the public interface is the <code class="language-plaintext highlighter-rouge">vote()</code> method.</p>
 
 </div>
 
@@ -495,7 +504,6 @@ the <a href="https://github.com/symblaze/security-bundle">Symblaze Security Bund
 <code class="language-plaintext highlighter-rouge">CanDoVoter</code> class is an abstract class that you can extend to write your voters. Improving the way we write voters
 will make our codebase more maintainable and easier to read. I hope you find this post helpful, and I would love to
 hear your feedback.</p>
-
 
 </div>
 

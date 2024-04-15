@@ -8,6 +8,15 @@
     <title>What is a unit test</title>
     <meta name="description"
           content="When I started writing this article few months ago, I got blocked by the idea of I’m going to write about something that everyone knows about and everyone ca...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/testing/what-is-a-unit-test.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">What is a unit test</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">What is a unit test</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -152,7 +161,7 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <p>When I started writing this article few months ago, I got blocked by the
 idea of I’m going to write about something that everyone knows about and
 everyone can google the topic and found a ton of articles about the same
@@ -170,7 +179,8 @@ can write another piece of code that verifies the behavior of the first. The
 second piece of code is called a unit test.</p>
 
 <div class="tip">
-    <p>A unit test should verify a small piece of code in isolation quickly.</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;A unit test should verify a small piece of code in isolation quickly.&lt;/p&gt;
+</code></pre></div>  </div>
 </div>
 
 <p>As you can see, a unit test has three characteristics:</p>
@@ -186,9 +196,9 @@ you can call a unit. If your test suite’s execution time is good enough to
 you, it means tests are quick enough.</p>
 
 <div class="tip">
-A <i>unit</i> in unit testing is a unit of behaviour, not a unit of 
+  <p>A <i>unit</i> in unit testing is a unit of behaviour, not a unit of 
 <i>code</i>. This behaviour can span across as many as several classes or as 
-a single method, but it should have a single entry point to trigger the behaviour.
+a single method, but it should have a single entry point to trigger the behaviour.</p>
 </div>
 
 <p>No doubt, the first two characteristics are non-controversial. The third one, isolation, is

@@ -8,6 +8,15 @@
     <title>Why you need a builder to create your entities and models</title>
     <meta name="description"
           content="Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">Why you need a builder to create your entities and models</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">Why you need a builder to create your entities and models</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -152,7 +161,7 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <p><a href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html/">Static factories</a> and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a <strong>User</strong> on a social network platform. This class has only three required fields (<code class="language-plaintext highlighter-rouge">$name</code>, <code class="language-plaintext highlighter-rouge">$email</code> &amp; <code class="language-plaintext highlighter-rouge">$password</code>) and a bunch of optional fields with default values, for instance: (<code class="language-plaintext highlighter-rouge">$address</code>, <code class="language-plaintext highlighter-rouge">$avatar</code>, <code class="language-plaintext highlighter-rouge">$gender</code>, <code class="language-plaintext highlighter-rouge">$emailVerifiedAt</code>, etc…).</p>
 
 <p><em><strong>As a side note:</strong> this is not my preferred way to design a user entity, but this is only here for purpose of clarifying the situation of having a long parameter list.</em></p>

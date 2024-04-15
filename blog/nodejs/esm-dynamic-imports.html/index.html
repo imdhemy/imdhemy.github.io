@@ -8,6 +8,15 @@
     <title>Effective Node.js Modules - Part 2: ESM dynamic imports</title>
     <meta name="description"
           content="One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use require to import modules anywhere in your...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">Effective Node.js Modules - Part 2: ESM dynamic imports</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">Effective Node.js Modules - Part 2: ESM dynamic imports</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -164,7 +173,7 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <p>One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use
 <code class="language-plaintext highlighter-rouge">require</code> to import modules anywhere in your code, but in ESM you can only use <code class="language-plaintext highlighter-rouge">import</code> at the top level of your code.
 What if you want to import a module dynamically in ESM?</p>
@@ -211,8 +220,8 @@ line then imports the corresponding translation module dynamically if it exists.
 <span class="kd">const</span> <span class="nx">language</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">||</span> <span class="nx">defaultLanguage</span><span class="p">;</span>
 
 <span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">languages</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="nx">language</span><span class="p">))</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s2">`Unsupported language: </span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-  <span class="nx">process</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s2">`Unsupported language: </span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
 
 <span class="c1">// Get advantage of top-level await</span>
@@ -230,7 +239,7 @@ at runtime, and the module will be loaded asynchronously. The <code class="langu
 loaded before continuing the execution.</p>
 
 <div class="tip">
-Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.
+  <p>Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.</p>
 </div>
 
 <p>That’s it! You have learned how to use dynamic imports in ESM modules.</p>

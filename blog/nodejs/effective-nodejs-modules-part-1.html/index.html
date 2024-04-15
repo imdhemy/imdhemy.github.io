@@ -8,6 +8,15 @@
     <title>Effective Node.js Modules - Part 1: Basic Syntax</title>
     <meta name="description"
           content="Do you know what is the difference between the following two code snippets?">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">Effective Node.js Modules - Part 1: Basic Syntax</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">Effective Node.js Modules - Part 1: Basic Syntax</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -160,7 +169,7 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <p>Do you know what is the difference between the following two code snippets?</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
@@ -225,10 +234,10 @@ of them to export modules as follows:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-  <span class="p">}</span>
+    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -236,10 +245,10 @@ of them to export modules as follows:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
 <span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-  <span class="p">}</span>
+    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -255,14 +264,14 @@ of them to export modules as follows:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
 <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-  <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-  <span class="p">},</span>
-  <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
-    <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost</span><span class="dl">'</span><span class="p">,</span>
-    <span class="na">port</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
-  <span class="p">}</span>
+    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">port</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -281,25 +290,25 @@ modules based on a specific condition.</p>
 
 <span class="kd">let</span> <span class="nx">logger</span>
 <span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./silent-logger</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./silent-logger</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-  <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger</span><span class="dl">'</span><span class="p">)</span>
+    <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger</span><span class="dl">'</span><span class="p">)</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="esm-ecmascript-module-system">ESM: ECMAScript module system</h3>
 
 <div class="tip">
-   <p>
+  <p>
 If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
 </p>
 </div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
 <span class="p">{</span>
-  <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span>
+    <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span>
 <span class="p">:</span>
-  <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
+    <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -311,14 +320,15 @@ ESM modules became available without any command-line flags.</p>
 <p>ESM uses <code class="language-plaintext highlighter-rouge">export</code> to export modules and <code class="language-plaintext highlighter-rouge">import</code> to import modules.</p>
 
 <div class="tip">
-    <p>ESM uses `export` in the singular format not `exports` like CJS.</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;ESM uses `export` in the singular format not `exports` like CJS.&lt;/p&gt;
+</code></pre></div>  </div>
 </div>
 
 <p>The following example shows how to export a function:</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
 <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span>
@@ -339,7 +349,7 @@ module from a file. Exporting a default module doesn’t prevent you from export
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
 <span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -355,15 +365,15 @@ module from a file. Exporting a default module doesn’t prevent you from export
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calculator.mjs</span>
 <span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
+    <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
 <span class="p">}</span>
 
 <span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
-  <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
+    <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
@@ -419,7 +429,8 @@ original names. You can also use the <code class="language-plaintext highlighter
 <p>The ESM modules doesn’t support conditionally importing modules. All the imports should be at the top of the file.</p>
 
 <div class="danger">
-    <p>The following code will throw a SyntaxError: </p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;The following code will throw a SyntaxError: &lt;/p&gt;
+</code></pre></div>  </div>
 </div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
@@ -428,14 +439,14 @@ original names. You can also use the <code class="language-plaintext highlighter
 
 <span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
 <span class="k">import</span>
-  <span class="nx">logger</span>
-  <span class="k">from</span>
-  <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
+    <span class="nx">logger</span>
+    <span class="k">from</span>
+    <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 <span class="k">import</span>
-  <span class="nx">logger</span>
-  <span class="k">from</span>
-  <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
+    <span class="nx">logger</span>
+    <span class="k">from</span>
+    <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
 <span class="p">}</span>
 </code></pre></div></div>
 

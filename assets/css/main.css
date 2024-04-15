@@ -45,24 +45,25 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 2rem;
   margin-top: 2rem;
   font-weight: 800;
+  line-height: 1.5;
 }
 .content h1 {
-  font-size: 2.5rem;
-}
-.content h2 {
   font-size: 2rem;
 }
-.content h3 {
+.content h2 {
   font-size: 1.75rem;
 }
-.content h4 {
+.content h3 {
   font-size: 1.5rem;
 }
-.content h5 {
+.content h4 {
   font-size: 1.25rem;
 }
-.content h6 {
+.content h5 {
   font-size: 1rem;
+}
+.content h6 {
+  font-size: 0.9rem;
 }
 .content ul, .content ol, .content dd {
   margin-left: 1rem;
@@ -93,24 +94,32 @@ h1, h2, h3, h4, h5, h6 {
   color: #000;
 }
 .content > table {
-  font-size: 0.9rem;
+  box-sizing: border-box;
   max-width: 100%;
+  font-size: 0.9rem;
   overflow: auto;
-  border-collapse: collapse;
   border-spacing: 0;
   margin-bottom: 1.5rem;
+  display: block;
 }
 .content > table thead {
-  background: #f9f9f9;
+  background: #f8fafc;
+  font-size: 1.1em;
+  color: #94a3b8;
+  display: table-header-group;
+  vertical-align: middle;
+  unicode-bidi: isolate;
 }
 .content > table th {
-  font-weight: 700;
+  font-weight: 500;
   border: 1px solid #eee;
   padding: 0.5rem;
   text-align: left;
+  white-space: nowrap;
 }
 .content > table td {
   padding: 0.5rem;
+  white-space: nowrap;
 }
 .content > table tbody tr:nth-child(odd) {
   background: #fff;
@@ -119,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
   border: 1px solid #f9f9f9;
 }
 .content > table tbody tr:nth-child(even) {
-  background: #f9f9f9;
+  background: #f8fafc;
 }
 .content > table tbody tr:nth-child(even) td {
   border: 1px solid #eee;
@@ -156,6 +165,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   opacity: 0.08;
   border-radius: 1rem;
+  pointer-events: none;
 }
 .content blockquote::after, .content div.note::after, .content div.tip::after, .content div.info::after, .content div.caution::after, .content div.danger::after {
   font-family: "Noto Serif", Georgia, Cambria, Times New Roman, Times, serif;
@@ -166,6 +176,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 3rem;
   line-height: 0;
   color: #4d41e0;
+  pointer-events: none;
 }
 .content blockquote::before {
   background: #4d41e0;

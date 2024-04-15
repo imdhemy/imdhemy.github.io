@@ -8,6 +8,15 @@
     <title>How to test Elasticsearch in PHP applications</title>
     <meta name="description"
           content="Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. ...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/php/how-to-test-elasticsearch-in-php-apps.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">How to test Elasticsearch in PHP applications</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">How to test Elasticsearch in PHP applications</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -152,9 +161,9 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <div class="caution">
-<p>
+  <p>
 Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. 
 This article is intended to v 7.x and lower. For v 8.0 you can use the <a href="https://github.
 com/imdhemy/es-testing-utils">Es Utils package</a>.
@@ -280,9 +289,9 @@ file that returns an array representing the expected client response.</p>
 <h3 id="how-to-add-integration-tests-to-elasticsearch-in-php">How to add Integration Tests to Elasticsearch in PHP</h3>
 
 <div class="info">
- Github actions, Bitbucket pipelines and other CI/CD tools could be used to start Elasticsearch to run integration tests.
- The following example uses CircleCI, but it would be much better if you used the same tool you're using in your project
-without depending on a third-party service.
+  <p>Github actions, Bitbucket pipelines and other CI/CD tools could be used to start Elasticsearch to run integration tests.
+ The following example uses CircleCI, but it would be much better if you used the same tool you’re using in your project
+without depending on a third-party service.</p>
 </div>
 
 <p>For this part, you don’t just need to run your application but also the component you’re integrating with, Elasticsearch

@@ -8,6 +8,15 @@
     <title>How to organize your unit tests</title>
     <meta name="description"
           content="One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
     <link rel="canonical" href="https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
@@ -123,7 +132,7 @@
 
     <main>
         <div class="max-w-screen-lg mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-7xl post-title">How to organize your unit tests</h1>
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">How to organize your unit tests</h1>
 </div>
 
 <div class="max-w-screen-md mx-auto bg-white p-5">
@@ -152,7 +161,7 @@
 </div>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5 text-xl content">
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
     <p>One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the
 self-clearing mechanism of the airways in the respiratory system which is known as <strong>mucociliary escalator</strong> and he
 said, to understand anything in medicine, you need to understand the idea behind the name, you need to understand the
@@ -183,7 +192,7 @@ could be a dependency or an argument passed to the SUT. It can also be data in t
 system.</p>
 
 <div class="tip">
-The test fixture's state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable.
+  <p>The test fixture’s state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable.</p>
 </div>
 
 <h2 id="test-file-location">Test file location</h2>
@@ -247,7 +256,7 @@ should end by creating the SUT instance in the initial state.</p>
 place to put the <code class="language-plaintext highlighter-rouge">Given</code> section.</p>
 
 <div class="tip">
-The `setup` method is not the place to put the `Given` section. The `setup` method is for the preparations that are common to all test cases. The `Given` section is for the preparations that are specific to the test case.
+  <p>The <code class="language-plaintext highlighter-rouge">setup</code> method is not the place to put the <code class="language-plaintext highlighter-rouge">Given</code> section. The <code class="language-plaintext highlighter-rouge">setup</code> method is for the preparations that are common to all test cases. The <code class="language-plaintext highlighter-rouge">Given</code> section is for the preparations that are specific to the test case.</p>
 </div>
 
 <p>Putting the <code class="language-plaintext highlighter-rouge">Given</code> section in the <code class="language-plaintext highlighter-rouge">setup</code> method is not a good idea, because it makes the test case less readable, and
