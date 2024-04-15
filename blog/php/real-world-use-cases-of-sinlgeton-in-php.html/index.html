@@ -131,7 +131,7 @@
 </header>
 
     <main>
-        <div class="max-w-screen-lg mx-auto bg-white p-5">
+        <div class="max-w-screen-md mx-auto bg-white p-5">
     <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">PHP Real-world use cases of singleton design pattern</h1>
 </div>
 
@@ -143,7 +143,7 @@
             <div>
                 <p class="text-gray-700 text-sm font-bold">Dhemy</p>
                 <p class="text-gray-500 text-xs">
-                    December 30, 2021 - 4 min read
+                    December 30, 2021 - 5 min read
                 </p>
             </div>
         </div>
@@ -162,9 +162,12 @@
 
 
 <div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
-    <p>The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file.</p>
+    <p>The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers
+consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to
+control access to some shared resources, database connection which is an expensive resource or a file.</p>
 
 <p><strong>The singleton pattern is responsible for:</strong></p>
+
 <ul>
   <li>Creating an instance of its class.</li>
   <li>Ensures that a class has just a single instance.</li>
@@ -172,10 +175,17 @@
 
 <p>This obviously violates the Single Responsibility Principle, as the pattern solves two problems at the same time.</p>
 
-<p>In the following lines, I’ll start by explaining <strong>how to implement a singleton</strong>, then I’ll discuss how <strong>Laravel Container</strong> uses the singleton pattern, Finally, show you how the Local Adapter within <strong>Flysystem</strong> PHP package uses the same concept to manipulate files.</p>
+<p>In the following lines, I’ll start by explaining <strong>how to implement a singleton</strong>, then I’ll discuss how <strong>Laravel
+Container</strong> uses the singleton pattern, Finally, show you how the Local Adapter within <strong>Flysystem</strong> PHP package uses
+the same concept to manipulate files.</p>
 
 <h2 id="how-to-implement-a-singleton">How to implement a singleton</h2>
-<p>The Singleton class declares the static method <code class="language-plaintext highlighter-rouge">getInstance</code> that returns the same instance of its class. To do so, we declare a static private property that holds the instance. By checking its value we can decide whether to create a new instance or return the already instantiated one. The Singleton <code class="language-plaintext highlighter-rouge">constructor</code> should be hidden from the client code. Calling the <code class="language-plaintext highlighter-rouge">getInstance</code> method should be the only way to create an instance of the Singleton class. Cloning the object should be prevented as well.</p>
+
+<p>The Singleton class declares the static method <code class="language-plaintext highlighter-rouge">getInstance</code> that returns the same instance of its class. To do so, we
+declare a static private property that holds the instance. By checking its value we can decide whether to create a new
+instance or return the already instantiated one. The Singleton <code class="language-plaintext highlighter-rouge">constructor</code> should be hidden from the client code.
+Calling the <code class="language-plaintext highlighter-rouge">getInstance</code> method should be the only way to create an instance of the Singleton class. Cloning the object
+should be prevented as well.</p>
 
 <p><strong>I start by writing tests…</strong></p>
 
@@ -232,6 +242,7 @@
 </code></pre></div></div>
 
 <p><strong>And here is the Singleton class code…</strong></p>
+
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//Singleton.php
 <span class="cp">&lt;?php</span>
 
@@ -275,31 +286,54 @@
 </code></pre></div></div>
 
 <h2 id="why-laravel-container-is-a-special-singleton-class">Why Laravel Container is a special singleton class</h2>
-<p>If you checked the <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L29">Laravel source code</a>, you will find that the <code class="language-plaintext highlighter-rouge">Application</code> class extends the <code class="language-plaintext highlighter-rouge">Container</code> class. The latter is a special singleton implementation. It makes sense to have a single instance of the application within your application.</p>
 
-<p>You can easily find the <code class="language-plaintext highlighter-rouge">getInstance</code> <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Container/Container.php#L1382-L1389">method on the Container class</a>, but if you checked the container constructor, you <strong>will not</strong> find a private constructor. This is why I’m saying that the Laravel Container is a special singleton. It’s implemented in a way that gains the pros of a Singleton and avoids the cons.</p>
+<div class="info">
+  <p>If you are looking for <code class="language-plaintext highlighter-rouge">Singleton Design Pattern in Laravel</code> and Google sent you here, you can check my dedicated post about <a href="/blog/php/singleton-design-pattern-in-laravel.html/">Singleton Design Pattern in Laravel</a>.</p>
+</div>
 
-<p>Laravel developers are smart enough to realize that <em>it’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance</em>.</p>
+<p>If you checked
+the <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Foundation/Application.php#L29">Laravel source code</a>,
+you will find that the <code class="language-plaintext highlighter-rouge">Application</code> class extends the <code class="language-plaintext highlighter-rouge">Container</code> class. The latter is a special singleton
+implementation. It makes sense to have a single instance of the application within your application.</p>
+
+<p>You can easily find
+the <code class="language-plaintext highlighter-rouge">getInstance</code> <a href="https://github.com/laravel/framework/blob/8.x/src/Illuminate/Container/Container.php#L1382-L1389">method on the Container class</a>,
+but if you checked the container constructor, you <strong>will not</strong> find a private constructor. This is why I’m saying that
+the Laravel Container is a special singleton. It’s implemented in a way that gains the pros of a Singleton and avoids
+the cons.</p>
+
+<p>Laravel developers are smart enough to realize that <em>it’s completely fine to have a single object within your
+application, but it’s not fine to make it impossible to make a second instance</em>.</p>
 
 <h2 id="a-single-instance-of-a-file-counts-as-a-singleton">A single instance of a file counts as a singleton</h2>
 
-<p>The term Singleton comes from mathematics. In mathematics, a Singleton, also known as a unit set, is a set with exactly one element. For example, the set <code class="language-plaintext highlighter-rouge">{M}</code> is a singleton containing the element <code class="language-plaintext highlighter-rouge">M</code>.</p>
+<p>The term Singleton comes from mathematics. In mathematics, a Singleton, also known as a unit set, is a set with exactly
+one element. For example, the set <code class="language-plaintext highlighter-rouge">{M}</code> is a singleton containing the element <code class="language-plaintext highlighter-rouge">M</code>.</p>
 
-<p>Let’s imagine the situation when a particular part of your application code is manipulating the contents of a local file, and another part is updating the same file simultaneously! For instance, the first one is adding to the file, and the other one is removing lines from there! Definitely, this will result in inconsistent file contents.</p>
+<p>Let’s imagine the situation when a particular part of your application code is manipulating the contents of a local
+file, and another part is updating the same file simultaneously! For instance, the first one is adding to the file, and
+the other one is removing lines from there! Definitely, this will result in inconsistent file contents.</p>
 
-<p>As a solution, we need to ensure having a single instance of the file resource on our application during manipulation. Actually this is not a singleton class implementation, but it still implies the mathematics definition of a singleton.</p>
+<p>As a solution, we need to ensure having a single instance of the file resource on our application during manipulation.
+Actually this is not a singleton class implementation, but it still implies the mathematics definition of a singleton.</p>
 
-<p>The wonderful <a href="https://github.com/thephpleague/flysystem">Flysystem</a> PHP package provides one interface to interact with many types of filesystems.</p>
+<p>The wonderful <a href="https://github.com/thephpleague/flysystem">Flysystem</a> PHP package provides one interface to interact with
+many types of filesystems.</p>
 
-<p>Flysystem ships with a default adapter, which is the Local adapter. By default, this adapter <a href="https://github.com/thephpleague/flysystem/blob/2.x/src/Local/LocalFilesystemAdapter.php#L87">uses a lock</a> during writes and updates.</p>
+<p>Flysystem ships with a default adapter, which is the Local adapter. By default, this
+adapter <a href="https://github.com/thephpleague/flysystem/blob/2.x/src/Local/LocalFilesystemAdapter.php#L87">uses a lock</a>
+during writes and updates.</p>
 
 <h2 id="summary">Summary</h2>
 
-<p>Singleton is a creational design pattern, which ensures that only one object of its kind exists and provides a single point of access to it for any other code.</p>
+<p>Singleton is a creational design pattern, which ensures that only one object of its kind exists and provides a single
+point of access to it for any other code.</p>
 
-<p>I’d prefer to assign the responsibility of ensuring having only one object to another Class or helper or at least do the same as Laravel developers did, and I’d also avoid hiding the constructor.</p>
+<p>I’d prefer to assign the responsibility of ensuring having only one object to another Class or helper or at least do the
+same as Laravel developers did, and I’d also avoid hiding the constructor.</p>
 
-<p>It’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance.</p>
+<p>It’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a
+second instance.</p>
 
 </div>
 

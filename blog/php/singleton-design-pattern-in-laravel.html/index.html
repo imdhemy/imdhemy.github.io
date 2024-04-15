@@ -1,0 +1,355 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Singleton Design Pattern in Laravel</title>
+    <meta name="description"
+          content="Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”. But they landed on my PHP Real-world us...">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet">
+
+    <link rel="canonical" href="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+    <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
+    
+    
+
+    
+    <!-- Facebook Meta Tags -->
+<meta property="og:title" content="Singleton Design Pattern in Laravel">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://imdhemy.com">
+<meta property="og:url" content="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/">
+<meta property="og:description"
+      content="Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”. But they landed on my PHP Real-world us...">
+<meta property="og:site_name" content="Imdhemy">
+
+<!-- Twitter Meta Tags -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Singleton Design Pattern in Laravel">
+<meta name="twitter:description"
+      content="Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”. But they landed on my PHP Real-world us...">
+<meta name="twitter:image" content="https://imdhemy.com">
+
+
+    
+
+</head>
+<body class="min-h-screen">
+<div class="min-h-screen">
+    <header class="relative" id="main-header">
+    <div class="container mx-auto">
+        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+            <!-- begin logo -->
+            <div class="flex-auto">
+                <div>
+                    <a href="/" class="text-gray-900 text-3xl font-bold">
+                        Imdhemy
+                    </a>
+                </div>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="flex-auto">
+                <div class="flex justify-end lg:hidden">
+                    <button type="button" class="menu-toggle" data-target="#mobile-nav">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </button>
+                </div>
+
+                <div class="hidden lg:flex justify-end">
+                    <ul class="flex items-center">
+                        
+                        <li class="ml-10">
+                            <a href="/"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/blog"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="ml-10">
+                            <a href="/about"
+                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="menu -z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
+                <div class="ml-auto">
+                    <ul class="p-0 m-0 flex-column items-center">
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Home
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/blog"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        <li class="block flex-1 w-full m-0">
+                            <a href="/about"
+                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main>
+        <div class="max-w-screen-md mx-auto bg-white p-5">
+    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">Singleton Design Pattern in Laravel</h1>
+</div>
+
+<div class="max-w-screen-md mx-auto bg-white p-5">
+    <div class="flex justify-between flex-wrap my-2">
+        <div class="flex items-center mr-8">
+            <img src="/theme/images/avatar.jpeg" alt=""
+                 class="rounded-full w-10 h-10 mr-3 block"/>
+            <div>
+                <p class="text-gray-700 text-sm font-bold">Dhemy</p>
+                <p class="text-gray-500 text-xs">
+                    April 15, 2024 - 5 min read
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        
+        <div class="flex mb-5">
+    
+</div>
+
+    </div>
+
+    
+</div>
+
+
+<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
+    <p>Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”.
+But they landed on my <a href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html/">PHP Real-world use cases of singleton design pattern</a> post. So I decided to make them happy with a dedicated post
+about Singleton Design Pattern in Laravel.</p>
+
+<p>In the mentioned post, I explained the Singleton Design Pattern in PHP, how to implement it, how to test it, and some
+real-world use cases. If you are not familiar with this pattern, you can check it out.</p>
+
+<h2 id="why-would-you-use-singleton-design-pattern">Why would you use Singleton Design Pattern?</h2>
+
+<p>A perfect use case for the Singleton is a Logger class. You want to log some information in your application, and you
+want to use the same instance of the Logger class everywhere in you application. It’s impossible to depend on
+the <code class="language-plaintext highlighter-rouge">constructors</code> to get the same instance of the Logger, that’s where the Singleton Design Pattern comes in.</p>
+
+<p>It may look unnecessary to use the Singleton Design pattern in PHP because each request is a new instance of the
+application and all instances are destroyed after the request is done. But you get more benefits from it using it in
+something like a Queue worker or a Laravel Octane server.</p>
+
+<h2 id="some-laravel-binding-basics">Some Laravel Binding basics</h2>
+
+<p>Before we create our Laravel Singleton, let’s understand some Laravel binding basics. The Laravel service container is a
+powerful tool for managing class dependencies and performing dependency injection. Binding is the process of defining
+how the container should resolve a class or an interface. Most of the time you don’t need to instruct the container how
+to resolve your dependencies, but sometimes you do.</p>
+
+<p>To bind a class into the container, you can use the <code class="language-plaintext highlighter-rouge">bind()</code> method inside one of the service providers. The following
+example binds a <code class="language-plaintext highlighter-rouge">Foo</code> class. We can use the <code class="language-plaintext highlighter-rouge">\App\Providers\AppServiceProvider</code> for this.</p>
+
+<p>Let’s assume we have a <code class="language-plaintext highlighter-rouge">Foo</code> class that can tell us when it was created.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="k">declare</span><span class="p">(</span><span class="n">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="kn">namespace</span> <span class="nn">App</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="k">readonly</span> <span class="kd">class</span> <span class="nc">Foo</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="k">public</span> <span class="kt">int</span> <span class="nv">$createdAt</span><span class="p">)</span>
+    <span class="p">{</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now we can bind the <code class="language-plaintext highlighter-rouge">Foo</code> class to the container.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">namespace</span> <span class="nn">App\Providers</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Foo</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Illuminate\Support\ServiceProvider</span><span class="p">;</span>
+
+<span class="kd">class</span> <span class="nc">AppServiceProvider</span> <span class="kd">extends</span> <span class="nc">ServiceProvider</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * Register any application services.
+     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">register</span><span class="p">():</span> <span class="kt">void</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">app</span><span class="o">-&gt;</span><span class="nf">bind</span><span class="p">(</span><span class="nc">Foo</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="k">new</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">time</span><span class="p">());</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="c1">// .. other methods</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now we can resolve the <code class="language-plaintext highlighter-rouge">Foo</code> class from the container.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="kn">use</span> <span class="nc">App\Foo</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+
+<span class="nc">Route</span><span class="o">::</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Foo</span> <span class="nv">$foo</span><span class="p">)</span> <span class="p">{</span>
+   <span class="k">return</span> <span class="nv">$foo</span><span class="o">-&gt;</span><span class="n">createdAt</span><span class="p">;</span>
+<span class="p">});</span>
+
+</code></pre></div></div>
+
+<p>Now if you visited your home page, you can see the timestamp when the <code class="language-plaintext highlighter-rouge">Foo</code> class was created, Something like this</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1713182568
+</code></pre></div></div>
+
+<h2 id="binding-a-singleton">Binding a Singleton</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">singleton</code> method binds a class or interface into the container that should only be resolved one time. Once a
+singleton binding is resolved, the same object instance will be returned on subsequent calls into the container. To see
+it in action, let’s change our <code class="language-plaintext highlighter-rouge">Foo</code> example to a Singleton.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// app/Providers/AppServiceProvider.php
+<span class="err">
+</span>    public function register(): void
+    {   
+<span class="gd">-       $this-&gt;app-&gt;bind(Foo::class, function () {
+</span><span class="gi">+       $this-&gt;app-&gt;singleton(Foo::class, function () {
+</span>            return new Foo(time());
+        });
+    }
+<span class="err">
+</span></code></pre></div></div>
+
+<p>Now, let’s create two instances of the <code class="language-plaintext highlighter-rouge">Foo</code> class in our route.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="c1">// routes/web.php</span>
+
+<span class="kn">use</span> <span class="nc">App\Foo</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Illuminate\Support\Facades\Route</span><span class="p">;</span>
+
+<span class="nc">Route</span><span class="o">::</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+  <span class="nv">$firstCall</span> <span class="o">=</span> <span class="nf">app</span><span class="p">(</span><span class="nc">Foo</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+
+  <span class="c1">// Simulate a delay</span>
+  <span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+
+  <span class="nv">$secondCall</span> <span class="o">=</span> <span class="nf">app</span><span class="p">(</span><span class="nc">Foo</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+
+  <span class="k">return</span> <span class="nf">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">json</span><span class="p">([</span>
+        <span class="s1">'first_call'</span> <span class="o">=&gt;</span> <span class="nv">$firstCall</span><span class="o">-&gt;</span><span class="n">createdAt</span><span class="p">,</span>
+        <span class="s1">'second_call'</span> <span class="o">=&gt;</span> <span class="nv">$secondCall</span><span class="o">-&gt;</span><span class="n">createdAt</span><span class="p">,</span>
+        <span class="s1">'is_same_instance'</span> <span class="o">=&gt;</span> <span class="nv">$firstCall</span> <span class="o">===</span> <span class="nv">$secondCall</span><span class="p">,</span>
+    <span class="p">]);</span>
+<span class="p">});</span>
+</code></pre></div></div>
+
+<p>The response should be something like this</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"first_call"</span><span class="p">:</span><span class="w"> </span><span class="mi">1713183052</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"second_call"</span><span class="p">:</span><span class="w"> </span><span class="mi">1713183052</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"is_same_instance"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>As you can see, the <code class="language-plaintext highlighter-rouge">first_call</code> and <code class="language-plaintext highlighter-rouge">second_call</code> are the same, and the <code class="language-plaintext highlighter-rouge">is_same_instance</code> is <code class="language-plaintext highlighter-rouge">true</code>. Try to replace
+the <code class="language-plaintext highlighter-rouge">singleton</code> with <code class="language-plaintext highlighter-rouge">bind</code> and see the difference.</p>
+
+<h2 id="two-types-of-singletons-binding-in-laravel">Two types of Singletons binding in Laravel</h2>
+
+<p>We have already tried the <code class="language-plaintext highlighter-rouge">singleton()</code> method, but there is another way to bind a Singleton in Laravel. The Scoped
+Bindings. The <code class="language-plaintext highlighter-rouge">scoped()</code> method binds a class or interface into the container that should only be resolved one time
+within a given Laravel request / job lifecycle. While this method is similar to the singleton method, instances
+registered using the scoped method will be flushed whenever the Laravel application starts a new “lifecycle”, such as
+when a Laravel Octane worker processes a new request or when a Laravel queue worker processes a new job:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// app/Providers/AppServiceProvider.php
+<span class="err">
+</span>    public function register(): void
+    {   
+<span class="gd">-       $this-&gt;app-&gt;singleton(Foo::class, function () {
+</span><span class="gi">+       $this-&gt;app-&gt;scoped(Foo::class, function () {
+</span>            return new Foo(time());
+        });
+    }
+<span class="err">
+</span></code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>Laravel offers two types of Singleton bindings, the <code class="language-plaintext highlighter-rouge">singleton()</code> and the <code class="language-plaintext highlighter-rouge">scoped()</code>, each with its own use cases and
+lifecycle.</p>
+
+</div>
+
+
+    </main>
+    <section class="sticky top-[100vh]">
+    <div class="p-10">
+        <div class="max-w-screen-md mx-auto">
+            <p class="text-center">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2024 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+
+<!-- Ion icons -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>
