@@ -395,7 +395,7 @@ imports all the exported modules in a single object.</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
 
-<span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">calculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+<span class="k">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">calculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
@@ -419,7 +419,7 @@ original names. You can also use the <code class="language-plaintext highlighter
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
 
-<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span> <span class="k">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
+<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span> <span class="nx">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
 <span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
