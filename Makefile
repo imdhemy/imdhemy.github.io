@@ -10,3 +10,8 @@ endef
 start:
 	$(call toast,$(COLOR_INFO),"Starting server...")
 	jekyll serve --livereload --drafts --open
+
+reinstall:
+	$(call toast,$(COLOR_INFO),"Reinstalling dependencies...")
+	bundle exec gem uninstall -aIx
+	bundle install
