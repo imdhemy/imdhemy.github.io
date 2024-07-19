@@ -131,7 +131,7 @@ class Singleton
 ## Why Laravel Container is a special singleton class
 
 <div class="info" markdown="1">
-If you are looking for `Singleton Design Pattern in Laravel` and Google sent you here, you can check my dedicated post about [Singleton Design Pattern in Laravel]({% post_url 2024-04-15-singleton-design-pattern-in-laravel %}).
+If you are looking for `Singleton Design Pattern in Laravel` and Google sent you here, you can check my dedicated post about [Singleton Design Pattern in Laravel]({% post_url php/2024-04-15-singleton-design-pattern-in-laravel %}).
 </div>
 
 If you checked

@@ -9,7 +9,7 @@ image_source: https://unsplash.com/photos/white-and-blue-labeled-carton-jmRikC7H
 
 Google search console told me that I got some visits from people searching for "Singleton Design Pattern in Laravel".
 But they landed on my [PHP Real-world use cases of singleton design pattern]({% post_url
-2021-12-30-real-world-use-cases-of-sinlgeton-in-php %}) post. So I decided to make them happy with a dedicated post
+php/2021-12-30-real-world-use-cases-of-sinlgeton-in-php %}) post. So I decided to make them happy with a dedicated post
 about Singleton Design Pattern in Laravel.
 
 In the mentioned post, I explained the Singleton Design Pattern in PHP, how to implement it, how to test it, and some

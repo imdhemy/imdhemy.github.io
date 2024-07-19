@@ -290,7 +290,8 @@ final class PostController extends AbstractController
 
 ## Testing the canDoVoter
 
-We have discussed before [how to organize our unit tests]({% post_url 2022-11-11-how-to-organize-your-unit-tests %}).
+We have discussed before [how to organize our unit tests]({% post_url
+testing/2022-11-11-how-to-organize-your-unit-tests %}).
 It's a good practice to write unit tests that document your business logic, and testing the interface is the way to go.
 That means you should write your tests against the `vote()` method not the `can*()` methods. The `can*()` methods
 should be private methods, and you should not test them directly.
