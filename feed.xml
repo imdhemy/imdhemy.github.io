@@ -1,6 +1,183 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-07-19T04:55:14+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-07-19T08:58:04+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Singleton Design Pattern in Laravel</title><link href="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/" rel="alternate" type="text/html" title="Singleton Design Pattern in Laravel" /><published>2024-04-15T06:05:51+00:00</published><updated>2024-04-15T06:05:51+00:00</updated><id>https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel</id><content type="html" xml:base="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/"><![CDATA[<p>Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”.
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Better alternatives to empty() in PHP</title><link href="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/" rel="alternate" type="text/html" title="Better alternatives to empty() in PHP" /><published>2024-07-19T00:00:00+00:00</published><updated>2024-07-19T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/"><![CDATA[<p>I’m working on a weekend project: a <a href="https://github.com/symblaze/mare-scan">static code analysis tool</a> for PHP, just
+because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the <code class="language-plaintext highlighter-rouge">empty()</code>
+function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a
+bad idea. In this blog post, I’ll share why we should stop using <code class="language-plaintext highlighter-rouge">empty()</code> and look at better alternatives.</p>
+
+<h2 id="what-does-empty-do">What does <code class="language-plaintext highlighter-rouge">empty()</code> do?</h2>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="n">mixed</span> <span class="nv">$var</span><span class="p">)</span><span class="o">:</span> <span class="n">bool</span>
+</code></pre></div></div>
+
+<p>By checking the <a href="https://www.php.net/manual/en/function.empty.php">PHP manual</a>, you will find:</p>
+
+<blockquote>
+  <p>Determine whether a variable is considered to be empty. A variable is considered empty if it does not exist or if its
+value equals false.</p>
+</blockquote>
+
+<p>Let’s have a look at the following examples:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="k">empty</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="k">empty</span><span class="p">([]);</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>I used to think <code class="language-plaintext highlighter-rouge">empty()</code> always behaves like in these examples, but that’s not the reality!</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="s1">'0'</span><span class="p">);</span> <span class="c1">// true (huh?) // Technically, '0' is not an empty string.</span>
+<span class="k">empty</span><span class="p">(</span><span class="k">new</span> <span class="nc">ArrayObject</span><span class="p">());</span> <span class="c1">// false (Huh! It's already empty!)</span>
+</code></pre></div></div>
+
+<p>Surprise! <code class="language-plaintext highlighter-rouge">empty()</code> is doing a loose comparison with <code class="language-plaintext highlighter-rouge">false</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">$value</code></th>
+      <th><code class="language-plaintext highlighter-rouge">== false</code></th>
+      <th><code class="language-plaintext highlighter-rouge">empty($value)</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">null</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">''</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[]</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><strong>Observe the following</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">'0'</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">new ArrayObject()</code></td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Not only that! But <code class="language-plaintext highlighter-rouge">empty()</code> also throws a warning if the variable does not exist. That means <code class="language-plaintext highlighter-rouge">empty()</code> is equivalent to
+<code class="language-plaintext highlighter-rouge">!isset($value) || $value == false</code>.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">is_empty</span><span class="p">(</span><span class="nv">$value</span><span class="p">):</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$value</span> <span class="o">==</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In case you mistyped the variable name, your code will not complain about it.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$type</span> <span class="o">=</span> <span class="s1">'car'</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$typo</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// Laterally THIS IS A TYPO</span>
+    <span class="k">echo</span> <span class="s1">'This should not be printed'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The above code will print the message without any warnings or errors, even though the developer intended to check
+the <code class="language-plaintext highlighter-rouge">type</code> variable length.</p>
+
+<h2 id="better-alternatives-to-empty">Better alternatives to <code class="language-plaintext highlighter-rouge">empty()</code></h2>
+
+<p>It depends on the context and the data type you are working with. Here are some alternatives:</p>
+
+<h3 id="strings">Strings</h3>
+
+<p>You can directly compare the string with an empty string.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="s1">''</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="arrays">Arrays</h3>
+
+<p>You can compare the array size with 0.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>I’m not sure about the performance implications of using <code class="language-plaintext highlighter-rouge">count()</code> if the array is large, I’ve read also that
+using <code class="language-plaintext highlighter-rouge">empty()</code> in this case is better, but We still have another alternative. We can check if the array is empty by
+checking the existence of the first element.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="kc">null</span> <span class="o">===</span> <span class="nb">array_key_first</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Even though, I still prefer using <code class="language-plaintext highlighter-rouge">count()</code> until I face a performance issue, then I will adjust my code.</p>
+
+<h2 id="more-thoughts">More thoughts</h2>
+
+<p>Because <code class="language-plaintext highlighter-rouge">empty()</code> accepts any variable type, you may come across usages with Objects, integers and floats. I can’t
+picture a developer will need to check if an integer value is empty, maybe they want to check if it’s zero. You got the
+point! For that reason, I didn’t provide alternatives for these types.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">empty()</code> is not working as expected with magic classes. I also omitted adding alternatives for them because we
+should avoid using magic methods in the first place, but if you are interested, you can check the following:</p>
+
+<p>Suppose we have a regular class:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">RegularClass</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$property</span> <span class="o">=</span> <span class="s1">'value'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And another magic class with dynamic properties:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MagicClass</span> <span class="p">{</span>
+   <span class="k">private</span> <span class="nv">$properties</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'property'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">];</span>
+   
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__get</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">properties</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">??</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now let’s create an instance of each class and check if the property is empty:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$regular</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RegularClass</span><span class="p">();</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$regular</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">);</span> <span class="c1">// string(5) "value"</span>
+
+<span class="nv">$magic</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MagicClass</span><span class="p">();</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$magic</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">);</span> <span class="c1">// string(5) "value"</span>
+
+<span class="c1">// Now let's check if the property is empty</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$regular</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">));</span> <span class="c1">// false</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$magic</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">));</span> <span class="c1">// true (Huh!)</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><code class="language-plaintext highlighter-rouge">empty()</code> is not as straightforward as I thought. It’s better to avoid using it and use the alternatives I mentioned
+above. It’s always better to be explicit in your code and avoid any surprises.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the empty() function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a bad idea. In this blog post, I’ll share why we should stop using empty() and look at better alternatives.]]></summary></entry><entry><title type="html">Singleton Design Pattern in Laravel</title><link href="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/" rel="alternate" type="text/html" title="Singleton Design Pattern in Laravel" /><published>2024-04-15T06:05:51+00:00</published><updated>2024-04-15T06:05:51+00:00</updated><id>https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel</id><content type="html" xml:base="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/"><![CDATA[<p>Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”.
 But they landed on my <a href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html/">PHP Real-world use cases of singleton design pattern</a> post. So I decided to make them happy with a dedicated post
 about Singleton Design Pattern in Laravel.</p>
 
@@ -1294,209 +1471,4 @@ dark theme. I’m using the <a href="https://www.nordtheme.com/">Nord</a> theme,
 <p>Whenever I google for “Dark theme vs Light theme”, I get a lot of articles, and YouTube videos, saying that light themes
 are better for your eyes. I don’t know if that’s true, but I know that I’m more productive with dark themes.</p>
 
-<p>It could be because I’m from the old school of using white chalk on a blackboard? 🤔😅</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[I always liked dark themes, but I came across this blog post by Brent, and I thought I’d give it a try. I installed the Light lite theme on my PHPStorm and WebStorm. In the beginning, it wasn’t comfortable, but I thought I just needed to get used to it and I could even modify the theme to my liking.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/nord.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/nord.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Approximating square roots with Newton’s method</title><link href="https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton's-method.html/" rel="alternate" type="text/html" title="Approximating square roots with Newton’s method" /><published>2022-12-12T11:55:59+00:00</published><updated>2022-12-12T11:55:59+00:00</updated><id>https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton&apos;s-method</id><content type="html" xml:base="https://imdhemy.com/blog/dsa/approximating-square-roots-with-newton&apos;s-method.html/"><![CDATA[<p>Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to
-approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The
-x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the
-desired accuracy is reached.</p>
-
-<p>Let’s say we need to find the square root of a number <code class="language-plaintext highlighter-rouge">a</code>. The equation we need to solve is \(f(x) = x^2 - a = 0\).</p>
-
-<ol>
-  <li>
-    <p>We can start by drawing the curve of the function \(f(x)\) (Blue line in the figure below). The curve is a parabola
-,but it shows only one root, the positive root.</p>
-  </li>
-  <li>
-    <p>Then, we can start by choosing an initial guess \(x_n\) (Blue dashed line in the figure below). The tangent line at
-the point \(x_n\) is \(f'(x_n) = 2x_n\) (Red line in the figure below). The x-intercept of the tangent line is the
-next guess.</p>
-  </li>
-  <li>
-    <p>As you can see, the next guess \(x_{n+1}\) is closer to the root than the previous guess \(x_n\). The process can be
-repeated until the desired accuracy is reached.</p>
-  </li>
-</ol>
-
-<p><img src="/assets/img/Newton_iteration.png" alt="Newton Iteration" /></p>
-
-<p>So, we can approximate the square root of \(a\) by:</p>
-
-\[x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)}\]
-
-\[= x_n - \frac{x_n^2 - a}{2x_n}\]
-
-\[= \frac{1}{2} (x_n + \frac{a}{x_n})\]
-
-<p>We start with an initial guess \(x_0\) and then we iterate over the formula until we reach a desired accuracy. For
-each step, we can calculate the error \(\epsilon\) as:</p>
-
-\[\epsilon = \frac{|x_{n+1} - x_n|}{x_{n+1}}\]
-
-<p>For example, if the first guess is \(x_0 = 1\), and the new guess is \(x_1 = 1.5\), then the error is:</p>
-
-\[\epsilon = \frac{|1.5 - 1|}{1.5} = 0.333\]
-
-<p>The error value ranges between \(0\) and \(1\), and the smaller the error, the closer we are to the square root of
-\(a\). When the error equals \(0\), we have reached the square root of \(a\). We can also define an accepted error
-so that we stop iterating when the error is less than the accepted error.</p>
-
-<h2 id="example-1">Example (1)</h2>
-
-<p>Let’s find the square root of \(a = 9\) using Newton’s method. We start with an initial guess \(x_0 = 1\), and then we
-iterate over the formula until we reach a desired accuracy. This time, we will use an accepted error of \(0\). The
-following table shows the steps:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>\(n\)</th>
-      <th>\(x_n\)</th>
-      <th>\(x_{n+1}\)</th>
-      <th>\(\epsilon\)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>1</td>
-      <td>5</td>
-      <td>0.8</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>5</td>
-      <td>3.4</td>
-      <td>0.47</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>3.4</td>
-      <td>3.023</td>
-      <td>0.12</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td>3.023</td>
-      <td>3.000091</td>
-      <td>0.0076</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td>3.000091</td>
-      <td>3.000000092</td>
-      <td>0.00003</td>
-    </tr>
-    <tr>
-      <td>5</td>
-      <td>3.000000092</td>
-      <td>3.000000000</td>
-      <td>0.00000003</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td><strong>3</strong></td>
-      <td>3</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>As we can see, after the sixth step, the error is equal to \(0\), so we have reached the square root of \(9\).</p>
-
-<h2 id="example-2">Example (2)</h2>
-
-<p>Let’s find the square root of \(a = 16\) with an initial guess of \(x_0 = 1\) and an accepted error of \(0.1\).</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>\(n\)</th>
-      <th>\(x_n\)</th>
-      <th>\(x_{n+1}\)</th>
-      <th>\(\epsilon\)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>0</td>
-      <td>1</td>
-      <td>8.5</td>
-      <td>0.88</td>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td>8.5</td>
-      <td>5.04</td>
-      <td>0.69</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td>5.04</td>
-      <td>4.0016</td>
-      <td>0.26</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td><strong>4.0016</strong></td>
-      <td>3.999904</td>
-      <td>0.00004</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>After the third step, the error is less than the accepted error, so we stop iterating. The square root of \(16\) is
-\(4.0016\), which is close enough to the actual square root of \(16\) which is \(4\).</p>
-
-<h2 id="implementation">Implementation</h2>
-
-<p>The following code implements Newton’s method in Java:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">NewtonsMethod</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">double</span> <span class="nf">sqrt</span><span class="o">(</span><span class="kt">double</span> <span class="n">a</span><span class="o">,</span> <span class="kt">double</span> <span class="n">x0</span><span class="o">,</span> <span class="kt">double</span> <span class="n">epsilon</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="n">x0</span><span class="o">;</span>
-        <span class="kt">double</span> <span class="n">error</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-        
-        <span class="k">while</span> <span class="o">(</span><span class="n">error</span> <span class="o">&gt;</span> <span class="n">epsilon</span><span class="o">)</span> <span class="o">{</span>
-            <span class="kt">double</span> <span class="n">x1</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="o">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">a</span> <span class="o">/</span> <span class="n">x</span><span class="o">);</span>
-            <span class="n">error</span> <span class="o">=</span> <span class="nc">Math</span><span class="o">.</span><span class="na">abs</span><span class="o">(</span><span class="n">x1</span> <span class="o">-</span> <span class="n">x</span><span class="o">)</span> <span class="o">/</span> <span class="n">x1</span><span class="o">;</span>
-            <span class="n">x</span> <span class="o">=</span> <span class="n">x1</span><span class="o">;</span>
-        <span class="o">}</span>
-        
-        <span class="k">return</span> <span class="n">x</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<h2 id="leetcode-problem">Leetcode problem</h2>
-
-<p>We can use Newton’s method to solve the <a href="https://leetcode.com/problems/sqrtx/">69. Sqrt(x)</a> problem on Leetcode.</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mySqrt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-        <span class="kt">double</span> <span class="n">x0</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
-        <span class="kt">double</span> <span class="n">epsilon</span> <span class="o">=</span> <span class="mf">0.00000000000001</span><span class="o">;</span>
-        <span class="kt">double</span> <span class="n">sqrt</span> <span class="o">=</span> <span class="nc">NewtonsMethod</span><span class="o">.</span><span class="na">sqrt</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">x0</span><span class="o">,</span> <span class="n">epsilon</span><span class="o">);</span>
-        <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span> <span class="n">sqrt</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>
-
-<p>The same problem can be solved using binary search:</p>
-
-<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">mySqrt</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
-       <span class="kt">long</span> <span class="n">lo</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">x</span><span class="o">,</span> <span class="n">mid</span><span class="o">,</span> <span class="n">c</span><span class="o">;</span>
-
-       <span class="k">while</span> <span class="o">(</span><span class="n">lo</span> <span class="o">&lt;=</span> <span class="n">hi</span><span class="o">)</span> <span class="o">{</span>
-           <span class="n">mid</span> <span class="o">=</span> <span class="o">(</span><span class="n">hi</span> <span class="o">-</span> <span class="n">lo</span><span class="o">)</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">lo</span><span class="o">;</span>
-           <span class="n">c</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">*</span> <span class="n">mid</span><span class="o">;</span>
-
-           <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">c</span><span class="o">)</span> <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">mid</span><span class="o">;</span>
-           <span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">c</span><span class="o">)</span> <span class="n">lo</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
-           <span class="k">else</span> <span class="n">hi</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
-       <span class="o">}</span>
-
-       <span class="k">return</span> <span class="o">(</span><span class="kt">int</span><span class="o">)</span><span class="n">hi</span><span class="o">;</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div></div>]]></content><author><name>Dhemy</name></author><category term="dsa" /><summary type="html"><![CDATA[Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the desired accuracy is reached.]]></summary></entry></feed>
+<p>It could be because I’m from the old school of using white chalk on a blackboard? 🤔😅</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[I always liked dark themes, but I came across this blog post by Brent, and I thought I’d give it a try. I installed the Light lite theme on my PHPStorm and WebStorm. In the beginning, it wasn’t comfortable, but I thought I just needed to get used to it and I could even modify the theme to my liking.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/nord.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/nord.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
