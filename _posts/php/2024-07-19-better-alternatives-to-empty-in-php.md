@@ -3,6 +3,8 @@ layout: post
 title: Better alternatives to empty() in PHP
 date: 2024-07-19
 categories: [ php ]
+image: /assets/img/desert.jpg
+image_source: https://unsplash.com/photos/sand-landscape-R9OS29xJb-8
 ---
 
 I'm working on a weekend project: a [static code analysis tool](https://github.com/symblaze/mare-scan) for PHP, just
