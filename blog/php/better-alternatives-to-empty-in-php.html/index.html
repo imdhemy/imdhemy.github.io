@@ -248,8 +248,8 @@ value equals false.</p>
   </tbody>
 </table>
 
-<p>Not only that! But <code class="language-plaintext highlighter-rouge">empty()</code> also throws a warning if the variable does not exist. That means <code class="language-plaintext highlighter-rouge">empty()</code> is equivalent to
-<code class="language-plaintext highlighter-rouge">!isset($value) || $value == false</code>.</p>
+<p>Not only that! But <code class="language-plaintext highlighter-rouge">empty()</code> also doesn’t throw a warning if the variable does not exist. That means <code class="language-plaintext highlighter-rouge">empty()</code> is
+equivalent to <code class="language-plaintext highlighter-rouge">!isset($value) || $value == false</code>.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">is_empty</span><span class="p">(</span><span class="nv">$value</span><span class="p">):</span> <span class="kt">bool</span> <span class="p">{</span>
     <span class="k">return</span> <span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$value</span> <span class="o">==</span> <span class="kc">false</span><span class="p">;</span>
