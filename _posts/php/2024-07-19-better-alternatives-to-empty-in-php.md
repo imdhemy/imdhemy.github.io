@@ -49,8 +49,8 @@ Surprise! `empty()` is doing a loose comparison with `false`
 | `'0'`                     | true       | true            |
 | `new ArrayObject()`       | false      | false           |
 
-Not only that! But `empty()` also throws a warning if the variable does not exist. That means `empty()` is equivalent to
-`!isset($value) || $value == false`.
+Not only that! But `empty()` also doesn't throw a warning if the variable does not exist. That means `empty()` is
+equivalent to `!isset($value) || $value == false`.
 
 ```php
 function is_empty($value): bool {
