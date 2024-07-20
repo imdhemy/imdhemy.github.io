@@ -86,7 +86,15 @@ if('' === $value) {
 
 ### Arrays
 
-You can compare the array size with 0.
+You can compare with an empty array.
+
+```php
+if([] === $value) {
+    // Do something
+}
+```
+
+Or you can use the `count()` function.
 
 ```php
 if(0 === count($value)) {
@@ -94,29 +102,17 @@ if(0 === count($value)) {
 }
 ```
 
-I'm not sure about the performance implications of using `count()` if the array is large, I've read also that
-using `empty()` in this case is better, but We still have another alternative. We can check if the array is empty by
-checking the existence of the first element.
+Comparing with an empty array is more readable than using the `count()` function. I wanted to be sure about the
+performance difference between them, so I wrote a simple benchmark to compare how long it takes to execute each one on
+an empty array and an array with `1000000` elements, and here are the results:
 
-```php
-if([] === $value) {
-    // Do something
-}
+| Method                      | Empty Array Time (seconds) | Large Array Time (seconds) |
+|-----------------------------|----------------------------|----------------------------|
+| `checkWithCount`            | 0.21758413314819           | 0.2175669670105            |
+| `checkWithDirectComparison` | 0.21403312683105           | 0.21817898750305           |
 
-if(!isset($value[0])) {
-    // Do something
-}
-
-if(array_key_exists(0, $value)) {
-    // Do something
-}
-
-if(null === array_key_first($value)) {
-    // Do something
-}
-```
-
-Even though, I still prefer using `count()` until I face a performance issue, then I will adjust my code.
+Based on these results, there is no significant performance difference between the two methods for both empty and large
+arrays. However, from a code readability and directness perspective, using if ([] === $value) may still be preferred.
 
 ## More thoughts
 
