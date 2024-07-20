@@ -241,7 +241,7 @@ final class PostVoter extends CanDoVoter
     protected array $supportedAttributes = [self::GET, self::UPDATE];
     protected string $supportedClass = Post::class;
 
-    private function canGet(User $user, Post $post): bool
+    protected function canGet(User $user, Post $post): bool
     {   
         if ($post->isPublic()) {
             return true;
@@ -254,7 +254,7 @@ final class PostVoter extends CanDoVoter
         return false;
     }
 
-    private function canUpdate(User $user, Post $post): bool
+    protected function canUpdate(User $user, Post $post): bool
     {
         return $user === $post->getAuthor();
     }
@@ -294,7 +294,7 @@ We have discussed before [how to organize our unit tests]({% post_url
 testing/2022-11-11-how-to-organize-your-unit-tests %}).
 It's a good practice to write unit tests that document your business logic, and testing the interface is the way to go.
 That means you should write your tests against the `vote()` method not the `can*()` methods. The `can*()` methods
-should be private methods, and you should not test them directly.
+should be `protected` methods, and you should not test them directly.
 
 <div class="tip" markdown="1">
 
