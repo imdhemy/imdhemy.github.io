@@ -6,7 +6,7 @@ source "https://rubygems.org"
 #
 # This is the version of Ruby you want to use.
 #
-ruby "3.3.0"
+ruby "3.3.4"
 
 # ------------------------------------------------------------------------------
 # Jekyll
