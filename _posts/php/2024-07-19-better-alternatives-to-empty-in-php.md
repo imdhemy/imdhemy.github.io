@@ -112,7 +112,7 @@ an empty array and an array with `1000000` elements, and here are the results:
 | `checkWithDirectComparison` | 0.21403312683105           | 0.21817898750305           |
 
 Based on these results, there is no significant performance difference between the two methods for both empty and large
-arrays. However, from a code readability and directness perspective, using if ([] === $value) may still be preferred.
+arrays. However, from a code readability and directness perspective, using `if ([] === $value)` may still be preferred.
 
 ## More thoughts
 
