@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-07-19T12:13:13+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.3">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-07-20T07:50:23+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
 </subtitle><author><name>Dhemy</name></author><entry><title type="html">Better alternatives to empty() in PHP</title><link href="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/" rel="alternate" type="text/html" title="Better alternatives to empty() in PHP" /><published>2024-07-19T00:00:00+00:00</published><updated>2024-07-19T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/"><![CDATA[<p>I’m working on a weekend project: a <a href="https://github.com/symblaze/mare-scan">static code analysis tool</a> for PHP, just
 because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the <code class="language-plaintext highlighter-rouge">empty()</code>
@@ -119,7 +119,11 @@ the <code class="language-plaintext highlighter-rouge">type</code> variable leng
 using <code class="language-plaintext highlighter-rouge">empty()</code> in this case is better, but We still have another alternative. We can check if the array is empty by
 checking the existence of the first element.</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">([]</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+
+<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
     <span class="c1">// Do something</span>
 <span class="p">}</span>
 
@@ -569,7 +573,7 @@ first argument, and the <code class="language-plaintext highlighter-rouge">subje
     <span class="k">protected</span> <span class="kt">array</span> <span class="nv">$supportedAttributes</span> <span class="o">=</span> <span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">GET</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="no">UPDATE</span><span class="p">];</span>
     <span class="k">protected</span> <span class="kt">string</span> <span class="nv">$supportedClass</span> <span class="o">=</span> <span class="nc">Post</span><span class="o">::</span><span class="n">class</span><span class="p">;</span>
 
-    <span class="k">private</span> <span class="k">function</span> <span class="n">canGet</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">canGet</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
     <span class="p">{</span>   
         <span class="k">if</span> <span class="p">(</span><span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">isPublic</span><span class="p">())</span> <span class="p">{</span>
             <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
@@ -582,7 +586,7 @@ first argument, and the <code class="language-plaintext highlighter-rouge">subje
         <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="k">private</span> <span class="k">function</span> <span class="n">canUpdate</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">canUpdate</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
     <span class="p">{</span>
         <span class="k">return</span> <span class="nv">$user</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">getAuthor</span><span class="p">();</span>
     <span class="p">}</span>
@@ -620,7 +624,7 @@ first argument, and the <code class="language-plaintext highlighter-rouge">subje
 <p>We have discussed before <a href="/blog/testing/how-to-organize-your-unit-tests.html/">how to organize our unit tests</a>.
 It’s a good practice to write unit tests that document your business logic, and testing the interface is the way to go.
 That means you should write your tests against the <code class="language-plaintext highlighter-rouge">vote()</code> method not the <code class="language-plaintext highlighter-rouge">can*()</code> methods. The <code class="language-plaintext highlighter-rouge">can*()</code> methods
-should be private methods, and you should not test them directly.</p>
+should be <code class="language-plaintext highlighter-rouge">protected</code> methods, and you should not test them directly.</p>
 
 <div class="tip">
 
