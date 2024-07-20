@@ -99,6 +99,10 @@ using `empty()` in this case is better, but We still have another alternative. W
 checking the existence of the first element.
 
 ```php
+if([] === $value) {
+    // Do something
+}
+
 if(!isset($value[0])) {
     // Do something
 }
