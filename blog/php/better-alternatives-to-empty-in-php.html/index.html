@@ -282,35 +282,48 @@ the <code class="language-plaintext highlighter-rouge">type</code> variable leng
 
 <h3 id="arrays">Arrays</h3>
 
-<p>You can compare the array size with 0.</p>
+<p>You can compare with an empty array.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">([]</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Or you can use the <code class="language-plaintext highlighter-rouge">count()</code> function.</p>
 
 <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
     <span class="c1">// Do something</span>
 <span class="p">}</span>
 </code></pre></div></div>
 
-<p>I’m not sure about the performance implications of using <code class="language-plaintext highlighter-rouge">count()</code> if the array is large, I’ve read also that
-using <code class="language-plaintext highlighter-rouge">empty()</code> in this case is better, but We still have another alternative. We can check if the array is empty by
-checking the existence of the first element.</p>
+<p>Comparing with an empty array is more readable than using the <code class="language-plaintext highlighter-rouge">count()</code> function. I wanted to be sure about the
+performance difference between them, so I wrote a simple benchmark to compare how long it takes to execute each one on
+an empty array and an array with <code class="language-plaintext highlighter-rouge">1000000</code> elements, and here are the results:</p>
 
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">([]</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Do something</span>
-<span class="p">}</span>
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Empty Array Time (seconds)</th>
+      <th>Large Array Time (seconds)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">checkWithCount</code></td>
+      <td>0.21758413314819</td>
+      <td>0.2175669670105</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">checkWithDirectComparison</code></td>
+      <td>0.21403312683105</td>
+      <td>0.21817898750305</td>
+    </tr>
+  </tbody>
+</table>
 
-<span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
-    <span class="c1">// Do something</span>
-<span class="p">}</span>
-
-<span class="k">if</span><span class="p">(</span><span class="nb">array_key_exists</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
-    <span class="c1">// Do something</span>
-<span class="p">}</span>
-
-<span class="k">if</span><span class="p">(</span><span class="kc">null</span> <span class="o">===</span> <span class="nb">array_key_first</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
-    <span class="c1">// Do something</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Even though, I still prefer using <code class="language-plaintext highlighter-rouge">count()</code> until I face a performance issue, then I will adjust my code.</p>
+<p>Based on these results, there is no significant performance difference between the two methods for both empty and large
+arrays. However, from a code readability and directness perspective, using if ([] === $value) may still be preferred.</p>
 
 <h2 id="more-thoughts">More thoughts</h2>
 
