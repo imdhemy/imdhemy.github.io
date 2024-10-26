@@ -4,29 +4,25 @@ title: About
 description: "Ahoy, curious wanderer! Welcome to the About page! If you're after tales of adventure and intrigue, this isn’t it. But if awkward moments and questionable life choices interest you, you’re in for a treat!"
 ---
 
-I wasn’t planning to become a Software Engineer. I was a medical student at one of the top medical schools in the middle
-east,  [Kasr Alainy](https://en.wikipedia.org/wiki/Qasr_El_Eyni_Hospital).
+Welcome to my little corner of the internet! I'm Mohamad Eldhemy, but you can just call me Dhemy — everyone else does!
+😊
+I started this blog to share my thoughts, feelings, experiences, and the occasional existential crisis—think of it as my
+online diary. 📖
 
-In October 2011 I started to study Computer science. I graduated in 2015 with a Bachelor’s degree in computer science
-and was ranked the first in my class.
+I’m a software developer with over a decade of experience, currently serving as a senior developer at Reservix GmbH. 💻
+Here, I tackle everything from personal life to programming, PHP, JavaScript, algorithms, data structures, testing, and
+self-development. You name it, I’ve probably written about it—or will soon!
 
-It was a hard shift, especially in our oriental society, but I did it!
+My mission? To inspire you, share some knowledge, and throw in a few best practices along the way. I’d love for you to
+get to know me better through my ramblings! 🤗
 
-Let me tell you why I see myself as a **Software Artist**. As per Wikipedia, art is a diverse range of (and products of)
-human activities involving creative imagination to express technical proficiency, beauty, emotional power, or conceptual
-ideas. That is definitely what Software Developers do! Every developer is an artist, not just me.
+Feel free to reach out via [email](mailto:imdhemy@gmail.com); I promise I don’t bite! When I'm not busy blogging,
+you’ll
+find me reading, playing PUBG on PS4, or challenging myself in a game of chess. 🎮♟️
 
-I'm the **creator and the maintainer** of the [Laravel in-app purchase](https://imdhemy.com/laravel-iap-docs/) package,
-besides the two packages used under the hood for Google Play and App Store.
+In everything I do, I strive for excellence and continuous improvement. 🌟 So, grab a coffee (or tea), make yourself
+comfortable, and enjoy your stay! ☕️
 
-I'm also the **founder** of the [Piscibus](https://github.com/piscibus) open-source organization, where we create the
-e-creatures of the sea. Feel free to request joining us.
+Cheers,
 
-On December, 9, 2020, my son was born. He is called Mohaia. Good to mention, on that day I felt the real meaning of
-_“Wealth and sons are allurements of the life of this world.”_.
-
-I wish to be a good father!
-
-My story is to be continued..
-
-~ Dhemy!
+Dhemy - 26th October 2024
