@@ -4,43 +4,48 @@ title: HTTP Client Factory Code Refactoring
 categories: [ "dev-log" ]
 ---
 
-I'm working on a Proxy/Adapter project, let's call it "Banana". Banana is developed in TypeScript and uses Axios for
-HTTP requests. It should be able to communicate with different APIs, each with different authentication methods and
+I'm working on a Proxy/Adapter project, which we'll call "Banana." Banana is developed in TypeScript and uses Axios for
+HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and
 configurations.
 
-The system started with a single API "PeelAPI", where we provided a `createClient` function that returned an Axios
-instance with the correct configuration. When the second API "BunchAPI" was added, we created a new function called the
-same `createClient` but in a different subdomain. It wasn't different for the third API "SplitAPI". For each Axios
-instance, we wrapped the errors in a custom error class, so we could identify the source of the error. This was done by
-a response interceptor.
+The system started with a single API, "PeelAPI," for which we provided a `createClient` function that returned an Axios
+instance with the correct configuration. When we added a second API, "BunchAPI," we created another `createClient`
+function for it, but in a different subdomain. The same was done for the third API, "SplitAPI." For each Axios instance,
+we wrapped errors in a custom error class to identify the source of the error, accomplished by a response interceptor.
 
-The problem is that we have a lot of duplicated code, and the `createClient` functions breaks the Single Responsibility
-Principle, as it is responsible for creating the client and authenticating it. I'm still not sure if it is a good idea
-to keep the Error wrapping in the same function or if it should be done in a separate module after the client is
-created.
+<div class="tip" markdown="1">
+One API, one `createClient`—simple, right? Fast forward to three APIs, and now it's like juggling bananas 🍌🍌🍌 with TypeScript.
+</div>
 
-To add more complexity, since the client tokens are cached in Redis, we need to pass the Cache service to the
-`createClient` function and not all Clients needs to cache tokens. This results in different signatures for each
-`createClient` function.
+The issue is that we now have a lot of duplicated code, and the `createClient` functions break the Single Responsibility
+Principle, as they are responsible for both creating the client and handling authentication. I'm uncertain whether it's
+best to keep error wrapping within the same function or move it to a separate module after the client is created.
 
-I'm considering a Factory pattern to create the clients. The plan is to Unify or to standardize the client creation
-functions to have the same signature, then we can replace it with a single Factory function that will create the
-clients based on the configuration.
+To add complexity, since client tokens are cached in Redis, we need to pass the Cache service to the `createClient`
+function, although not all clients require token caching. This results in different signatures for each `createClient`
+function.
 
-I found out that the `baseURL` is the only configuration that changes between the clients so far. I'm not sure if it's
-convenient to accept a configuration object or `baseURL` as a parameter. I went for the `baseURL` parameter, as doing it
-when is needed is easier than creating a configuration object with a single property.
+I'm considering using a Factory pattern for client creation. The plan is to unify or standardize the client creation
+functions so they have a consistent signature, allowing us to replace them with a single Factory function that creates
+clients based on configuration.
 
-Last week I started refactoring the "PeelAPI" client ended up with a `createClient(baseURL: string): AxiosInstance` that
-returns an Axios instance with the correct configuration. Then I moved to the "BunchAPI", and it wasn't straightforward
-because the "PeelAPI" didn't require authentication, but the "BunchAPI" does. I had to extract the authentication logic
-to a separate function. I didn't change the Signature of the `createClient` function, I decided to do that in the next
-merge request.
+I discovered that `baseURL` is the only configuration that varies between clients so far. I'm unsure whether it’s best
+to accept a configuration object or just `baseURL` as a parameter. I chose `baseURL`, as it’s easier to handle only when
+needed than creating a configuration object with a single property.
 
-The first merge request is already merged, but I'm still waiting for the second one to be reviewed. Once it is merged, I
-will start working on standardizing the `createClient` functions, ensuring that the first two API clients have the same
-signature. Then the third API client will be refactored in two steps, first for authentication and then for the standard
-signature.
+Last week, I began refactoring the "PeelAPI" client and ended up with a `createClient(baseURL: string): AxiosInstance`
+function, which returns an Axios instance with the correct configuration. I then moved on to "BunchAPI," which was less
+straightforward because, unlike "PeelAPI," "BunchAPI" requires authentication. I had to extract the authentication logic
+into a separate function. I didn’t change the signature of the `createClient` function, planning to address that in the
+next merge request.
 
-Once all the `createClient` functions are standardized, I will create the Factory function that will create the clients
-based on the configuration. I still need to figure out how to handle authentication in a clean way.
+<div class="tip" markdown="1">
+Once standardized, Factory Pattern will take the wheel. But the question remains: what’s the cleanest way to handle authentication? 🤔 #CodeDesign
+</div>
+
+The first merge request is already merged, but I'm waiting for the second one to be reviewed. Once it's merged, I will
+standardize the `createClient` functions, ensuring that the first two API clients have a consistent signature. Then, the
+third API client will be refactored in two steps: first to address authentication, then to standardize the signature.
+
+After all `createClient` functions are standardized, I'll create the Factory function to generate clients based on
+configuration. I still need to determine a clean way to handle authentication. Do you have any suggestions?
