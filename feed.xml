@@ -1,6 +1,50 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-10-26T21:51:46+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-10-27T16:42:59+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Better alternatives to empty() in PHP</title><link href="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/" rel="alternate" type="text/html" title="Better alternatives to empty() in PHP" /><published>2024-07-19T00:00:00+00:00</published><updated>2024-07-19T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/"><![CDATA[<p>I’m working on a weekend project: a <a href="https://github.com/symblaze/mare-scan">static code analysis tool</a> for PHP, just
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">HTTP Client Factory Code Refactoring</title><link href="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html/" rel="alternate" type="text/html" title="HTTP Client Factory Code Refactoring" /><published>2024-10-27T00:00:00+00:00</published><updated>2024-10-27T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring</id><content type="html" xml:base="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html/"><![CDATA[<p>I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for
+HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and
+configurations.</p>
+
+<p>The system started with a single API, “PeelAPI,” for which we provided a <code class="language-plaintext highlighter-rouge">createClient</code> function that returned an Axios
+instance with the correct configuration. When we added a second API, “BunchAPI,” we created another <code class="language-plaintext highlighter-rouge">createClient</code>
+function for it, but in a different subdomain. The same was done for the third API, “SplitAPI.” For each Axios instance,
+we wrapped errors in a custom error class to identify the source of the error, accomplished by a response interceptor.</p>
+
+<div class="tip">
+  <p>One API, one <code class="language-plaintext highlighter-rouge">createClient</code>—simple, right? Fast forward to three APIs, and now it’s like juggling bananas 🍌🍌🍌 with TypeScript.</p>
+</div>
+
+<p>The issue is that we now have a lot of duplicated code, and the <code class="language-plaintext highlighter-rouge">createClient</code> functions break the Single Responsibility
+Principle, as they are responsible for both creating the client and handling authentication. I’m uncertain whether it’s
+best to keep error wrapping within the same function or move it to a separate module after the client is created.</p>
+
+<p>To add complexity, since client tokens are cached in Redis, we need to pass the Cache service to the <code class="language-plaintext highlighter-rouge">createClient</code>
+function, although not all clients require token caching. This results in different signatures for each <code class="language-plaintext highlighter-rouge">createClient</code>
+function.</p>
+
+<p>I’m considering using a Factory pattern for client creation. The plan is to unify or standardize the client creation
+functions so they have a consistent signature, allowing us to replace them with a single Factory function that creates
+clients based on configuration.</p>
+
+<p>I discovered that <code class="language-plaintext highlighter-rouge">baseURL</code> is the only configuration that varies between clients so far. I’m unsure whether it’s best
+to accept a configuration object or just <code class="language-plaintext highlighter-rouge">baseURL</code> as a parameter. I chose <code class="language-plaintext highlighter-rouge">baseURL</code>, as it’s easier to handle only when
+needed than creating a configuration object with a single property.</p>
+
+<p>Last week, I began refactoring the “PeelAPI” client and ended up with a <code class="language-plaintext highlighter-rouge">createClient(baseURL: string): AxiosInstance</code>
+function, which returns an Axios instance with the correct configuration. I then moved on to “BunchAPI,” which was less
+straightforward because, unlike “PeelAPI,” “BunchAPI” requires authentication. I had to extract the authentication logic
+into a separate function. I didn’t change the signature of the <code class="language-plaintext highlighter-rouge">createClient</code> function, planning to address that in the
+next merge request.</p>
+
+<div class="tip">
+  <p>Once standardized, Factory Pattern will take the wheel. But the question remains: what’s the cleanest way to handle authentication? 🤔 #CodeDesign</p>
+</div>
+
+<p>The first merge request is already merged, but I’m waiting for the second one to be reviewed. Once it’s merged, I will
+standardize the <code class="language-plaintext highlighter-rouge">createClient</code> functions, ensuring that the first two API clients have a consistent signature. Then, the
+third API client will be refactored in two steps: first to address authentication, then to standardize the signature.</p>
+
+<p>After all <code class="language-plaintext highlighter-rouge">createClient</code> functions are standardized, I’ll create the Factory function to generate clients based on
+configuration. I still need to determine a clean way to handle authentication. Do you have any suggestions?</p>]]></content><author><name>Dhemy</name></author><category term="dev-log" /><summary type="html"><![CDATA[I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and configurations.]]></summary></entry><entry><title type="html">Better alternatives to empty() in PHP</title><link href="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/" rel="alternate" type="text/html" title="Better alternatives to empty() in PHP" /><published>2024-07-19T00:00:00+00:00</published><updated>2024-07-19T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/"><![CDATA[<p>I’m working on a weekend project: a <a href="https://github.com/symblaze/mare-scan">static code analysis tool</a> for PHP, just
 because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the <code class="language-plaintext highlighter-rouge">empty()</code>
 function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a
 bad idea. In this blog post, I’ll share why we should stop using <code class="language-plaintext highlighter-rouge">empty()</code> and look at better alternatives.</p>
@@ -1476,16 +1520,4 @@ root requirements.</li>
 mentioned commands can help you resolve dependency issues and keep your project up-to-date. I hope you found this
 article useful.</p>
 
-<p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Composer is the most popular PHP dependency manager. I’ve heard about other package managers like PEAR &amp; Phing, but I’ve never used them. While many developers are familiar with basic Composer commands like install, update, and require, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this blog post, We’ll explore some of these hidden gems.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Back to dark theme</title><link href="https://imdhemy.com/blog/generic/back-to-dark-theme.html/" rel="alternate" type="text/html" title="Back to dark theme" /><published>2023-04-09T00:00:00+00:00</published><updated>2023-04-09T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/back-to-dark-theme</id><content type="html" xml:base="https://imdhemy.com/blog/generic/back-to-dark-theme.html/"><![CDATA[<p>I always liked dark themes, but I came across
-this <a href="https://stitcher.io/blog/why-light-themes-are-better-according-to-science">blog post</a> by Brent, and I thought I’d
-give it a try. I installed the Light lite theme on my PHPStorm and WebStorm. In the beginning, it wasn’t comfortable,
-but I thought I just needed to get used to it and I could
-even <a href="https://github.com/imdhemy/phpstorm-light-lite-theme">modify the theme</a> to my liking.</p>
-
-<p>I pushed myself to use it for around two months, but I couldn’t get used to it. Finally, I decided to go back to the
-dark theme. I’m using the <a href="https://www.nordtheme.com/">Nord</a> theme, and I’m happy with it.</p>
-
-<p>Whenever I google for “Dark theme vs Light theme”, I get a lot of articles, and YouTube videos, saying that light themes
-are better for your eyes. I don’t know if that’s true, but I know that I’m more productive with dark themes.</p>
-
-<p>It could be because I’m from the old school of using white chalk on a blackboard? 🤔😅</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[I always liked dark themes, but I came across this blog post by Brent, and I thought I’d give it a try. I installed the Light lite theme on my PHPStorm and WebStorm. In the beginning, it wasn’t comfortable, but I thought I just needed to get used to it and I could even modify the theme to my liking.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/nord.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/nord.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Composer is the most popular PHP dependency manager. I’ve heard about other package managers like PEAR &amp; Phing, but I’ve never used them. While many developers are familiar with basic Composer commands like install, update, and require, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this blog post, We’ll explore some of these hidden gems.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
