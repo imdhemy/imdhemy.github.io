@@ -91,9 +91,9 @@ contributions:
     url: "https://spatie.be/open-source"
     logo: "theme/images/contributions/spatie.png"
 
-  - name: "Siklid"
-    url: "https://docs.siklid.io/"
-    logo: "theme/images/contributions/siklid.png"
+  - name: "OpenSearch"
+    url: "https://opensearch.org/"
+    logo: "theme/images/contributions/opensearch.png"
 
   - name: "Google Play Billing"
     url: "https://github.com/imdhemy/google-play-billing"
