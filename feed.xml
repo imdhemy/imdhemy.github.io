@@ -1,6 +1,34 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-10-30T19:06:16+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-11-03T13:50:58+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">HTTP Client Factory Code Refactoring</title><link href="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html/" rel="alternate" type="text/html" title="HTTP Client Factory Code Refactoring" /><published>2024-10-27T00:00:00+00:00</published><updated>2024-10-27T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring</id><content type="html" xml:base="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html/"><![CDATA[<p>I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">A Week of Goodbyes</title><link href="https://imdhemy.com/blog/generic/week-of-goodbyes.html/" rel="alternate" type="text/html" title="A Week of Goodbyes" /><published>2024-11-03T00:00:00+00:00</published><updated>2024-11-03T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/week-of-goodbyes</id><content type="html" xml:base="https://imdhemy.com/blog/generic/week-of-goodbyes.html/"><![CDATA[<p>Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently,
+our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other
+navigating a more difficult transition. I’ve been taught a valuable lesson last week!</p>
+
+<h2 id="goodbye-benni">Goodbye, Benni</h2>
+
+<p>Benjamin Berg, aka Benni, has left Reservix. He was a great colleague, and I wish him all the best for his future.
+Although I didn’t have the chance to work on the same team as him, I enjoyed sharing the office with him for almost two
+years. He was always friendly and helpful. Everyone acknowledges his impact on his team and the company, not only as a
+developer but also for his leadership and ability to bring people together. I hope we can stay in touch and go
+to <a href="https://www.tripadvisor.de/Restaurant_Review-g187337-d2166694-Reviews-Tatie_Food_Drinks-Frankfurt_Hesse.html?m=19905&amp;ref=imdhemy.com">Tatie</a>
+together.</p>
+
+<p>We had a farewell party at the office. It was emotional and fun, with pizza, drinks, and lots of laughs. Leonie shared a
+fun questions box game with us. We had to answer questions like “How many times has this country won the World Cup?”
+or “What is the name of this formula?” Rafi was impressive as always, and I was lucky to be on the same team as Benni.</p>
+
+<p>The moment when Carsten gave Benni a present that was collectively bought by the team was very emotional. Benni was
+especially happy when he saw a device that he wanted to try to automate his home. That was a great idea from Wiktor.
+They were creative enough to give him a soundboard with some funny sounds to remind him of our soundboard in the office.</p>
+
+<h2 id="another-team-member-moves-on">Another team member moves on</h2>
+
+<p>Last week wasn’t easy for our team. The team decided to go to different ways with one our colleagues. She was a good
+developer, but we couldn’t find a way to continue working together. I hope she finds a new job soon. I wish her all the
+best.</p>
+
+<p>At the end of the day, the people will remember how you made them feel, it’s not about how good you are at your job.
+It’s also crucial to pay attention to the feedback you receive and to be open to change.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently, our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other navigating a more difficult transition. I’ve been taught a valuable lesson last week!]]></summary></entry><entry><title type="html">HTTP Client Factory Code Refactoring</title><link href="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html/" rel="alternate" type="text/html" title="HTTP Client Factory Code Refactoring" /><published>2024-10-27T00:00:00+00:00</published><updated>2024-10-27T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring</id><content type="html" xml:base="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html/"><![CDATA[<p>I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for
 HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and
 configurations.</p>
 
@@ -1425,99 +1453,4 @@ the language.</p>
 <p>In conclusion, I believe that taking the first step towards learning a new language is always the hardest, but it’s also
 the most important. If you’re thinking of learning a new language, don’t be afraid to start, even if it’s just for ten
 minutes a day. You’ll be amazed at how much progress you can make with consistent effort. Believe me, I did the same
-with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll be able to do the same with German.</p>]]></content><author><name>Dhemy</name></author><category term="germany" /><summary type="html"><![CDATA[For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Since I moved from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for open source projects.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Hidden Gems in Composer Every PHP Developer Should Know</title><link href="https://imdhemy.com/blog/php/hidden-gems-in-composer.html/" rel="alternate" type="text/html" title="Hidden Gems in Composer Every PHP Developer Should Know" /><published>2023-04-16T00:00:00+00:00</published><updated>2023-04-16T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/hidden-gems-in-composer</id><content type="html" xml:base="https://imdhemy.com/blog/php/hidden-gems-in-composer.html/"><![CDATA[<p>Composer is the most popular PHP dependency manager. I’ve heard about other package managers like <code class="language-plaintext highlighter-rouge">PEAR</code> &amp; <code class="language-plaintext highlighter-rouge">Phing</code>, but
-I’ve never used them. While many developers are familiar with basic Composer commands like <code class="language-plaintext highlighter-rouge">install</code>, <code class="language-plaintext highlighter-rouge">update</code>,
-and <code class="language-plaintext highlighter-rouge">require</code>, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this
-blog post, We’ll explore some of these hidden gems.</p>
-
-<h2 id="1-composer-bump--composer-audit">1. composer bump &amp; composer audit</h2>
-
-<p>Composer 2.4 added two new commands <code class="language-plaintext highlighter-rouge">composer bump</code> and <code class="language-plaintext highlighter-rouge">composer audit</code>.</p>
-
-<p><code class="language-plaintext highlighter-rouge">composer bump</code> “bumps” the package version constraints listed in the composer.json file by increasing them to the
-latest version within the allowed constraints.</p>
-
-<p><code class="language-plaintext highlighter-rouge">composer audit</code>, scans the installed packages for reported security vulnerabilities. It exists with an error code if
-there are any packages installed with known security vulnerabilities.</p>
-
-<p>You can read more about them in the official <a href="https://php.watch/articles/composer-24">blog post</a>.</p>
-
-<h2 id="2-composer-outdated">2. composer outdated</h2>
-
-<p>Keeping your dependencies up-to-date is important for security and compatibility reasons. However, it can be
-time-consuming to manually check for updates to each package in your project. This is where <code class="language-plaintext highlighter-rouge">composer outdated</code> comes
-in. This command lists all the packages that have newer versions available, this comes with a color legend to help you
-determine which packages are recommended to update or just possible to update.</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer outdated
-</code></pre></div></div>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Color legend:
-- patch or minor release available - update recommended
-- major release available - update possible
-
-Direct dependencies required <span class="k">in </span>composer.json:
-blackfire/php-sdk                  v1.33.0            v1.35.0            Blackfire.io PHP SDK
-doctrine/annotations               1.14.3             2.0.1              Docblock Annotations Parser
-
-... Other packages are omitted <span class="k">for </span>brevity ...
-
-</code></pre></div></div>
-
-<h2 id="3-composer-show-latest">3. composer show –latest</h2>
-
-<p>Similar to composer outdated, <code class="language-plaintext highlighter-rouge">composer show --latest</code> shows you the latest version of each package that is available on
-the remote repository. This can be helpful for keeping track of the latest package versions and deciding when to update
-your project. The <code class="language-plaintext highlighter-rouge">composer show</code> command has a lot of other useful options that you can explore by running
-<code class="language-plaintext highlighter-rouge">composer show --help</code>.</p>
-
-<h2 id="4-composer-why--composer-why-not">4. composer why &amp; composer why-not</h2>
-
-<p>Sometimes, when you try to install a package with Composer, it fails due to dependency conflicts or other issues. In
-these situations, it can be difficult to determine why the package cannot be installed. This is where <code class="language-plaintext highlighter-rouge">composer why</code> and
-<code class="language-plaintext highlighter-rouge">composer why-not</code> come in.</p>
-
-<p><code class="language-plaintext highlighter-rouge">composer why</code> command tells you which other packages depend on a certain package. For example, you can run the
-following command to find out which packages depend on <code class="language-plaintext highlighter-rouge">vimeo/psalm</code>:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer why vimeo/psalm
-</code></pre></div></div>
-
-<p><code class="language-plaintext highlighter-rouge">composer why-not</code> shows you a detailed explanation of why a package cannot be installed, including all the packages
-that are blocking it. This can be helpful for troubleshooting complex dependency issues. Specify a version constraint to
-verify whether upgrades can be performed in your project, and if not why not. See the following example to find out why
-PHPUnit 10 cannot be installed in your project:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer why-not phpunit/phpunit 10
-</code></pre></div></div>
-
-<h2 id="5-composer-with-dependencies">5. composer –with-dependencies</h2>
-
-<p>The <code class="language-plaintext highlighter-rouge">composer update</code>, <code class="language-plaintext highlighter-rouge">composer require</code>, and <code class="language-plaintext highlighter-rouge">composer remove</code> commands have a <code class="language-plaintext highlighter-rouge">--with-dependencies</code> and
-<code class="language-plaintext highlighter-rouge">--with-all-dependencies</code> option that can be used to update all the dependencies of a package. This can be useful when
-you want to update a package and all the packages that depend on it. For example, you can run the following command to
-update the <code class="language-plaintext highlighter-rouge">symfony/console</code> package and all the packages that depend on it:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>composer update symfony/console <span class="nt">--with-dependencies</span>
-</code></pre></div></div>
-
-<p>There are shortcuts for these options, you can use <code class="language-plaintext highlighter-rouge">-W</code> and <code class="language-plaintext highlighter-rouge">-w</code> instead of <code class="language-plaintext highlighter-rouge">--with-dependencies</code> and
-<code class="language-plaintext highlighter-rouge">--with-all-dependencies</code>.</p>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">--with-dependencies (-w)</code>: Update also dependencies of packages in the argument list, except those which are root
-requirements.</li>
-  <li><code class="language-plaintext highlighter-rouge">--with-all-dependencies (-W)</code>: Update also dependencies of packages in the argument list, including those which are
-root requirements.</li>
-</ul>
-
-<p>It’d be better to use the short versions as they work fine with different commands like <code class="language-plaintext highlighter-rouge">composer require</code> that has a
-<code class="language-plaintext highlighter-rouge">--update-with-dependencies (-w)</code> and <code class="language-plaintext highlighter-rouge">--update-with-all-dependencies (-W)</code> option.</p>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>Upgrading your dependencies can be a tedious task, but it’s important to keep your project up-to-date. Using the
-mentioned commands can help you resolve dependency issues and keep your project up-to-date. I hope you found this
-article useful.</p>
-
-<p><small>Photo by <a href="https://unsplash.com/@dtopkin1">Dayne Topkin</a> on <a href="https://unsplash.com">Unsplash</a></small></p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Composer is the most popular PHP dependency manager. I’ve heard about other package managers like PEAR &amp; Phing, but I’ve never used them. While many developers are familiar with basic Composer commands like install, update, and require, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this blog post, We’ll explore some of these hidden gems.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/glass-on-music-notes.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll be able to do the same with German.</p>]]></content><author><name>Dhemy</name></author><category term="germany" /><summary type="html"><![CDATA[For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Since I moved from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for open source projects.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
