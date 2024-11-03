@@ -32,4 +32,5 @@ developer, but we couldn't find a way to continue working together. I hope she f
 best.
 
 At the end of the day, the people will remember how you made them feel, it's not about how good you are at your job.
-It's also crucial to pay attention to the feedback you receive and to be open to change.
+It's also crucial to [pay attention to the feedback]({% post_url 2024-03-30-the-pipeline-ate-my-code %}) you receive and
+to be open to change.
