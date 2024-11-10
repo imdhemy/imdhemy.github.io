@@ -14,9 +14,10 @@ During this time, I also decided to tackle some overdue cleaning tasks. From tid
 to organizing my kitchen and even my Git branches, it was a week of thorough cleanup.
 
 My friend Eman introduced me to Hadeer, a talented organizer. She helped me organize my desk and plans to add some
-aesthetic touches later. I wanted to share a photo of my desk, but the surrounding mess still impacts its appearance.
+aesthetic touches later.
 
 ![Desk-Bike](/assets/img/desk-bike.JPG)
+I wanted to share a photo of my desk, but the surrounding mess still impacts its appearance.
 
 ![Zhgt](/assets/img/any-zhgt.PNG)
 I'm thinking about either cleaning up the entire office or moving my desk to a different spot.
