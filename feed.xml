@@ -1,6 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-11-03T14:45:58+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-11-10T13:59:32+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">A Week of Goodbyes</title><link href="https://imdhemy.com/blog/generic/week-of-goodbyes.html/" rel="alternate" type="text/html" title="A Week of Goodbyes" /><published>2024-11-03T00:00:00+00:00</published><updated>2024-11-03T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/week-of-goodbyes</id><content type="html" xml:base="https://imdhemy.com/blog/generic/week-of-goodbyes.html/"><![CDATA[<p>Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently,
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Delivery on Time and Some Clean Up 🧹</title><link href="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html/" rel="alternate" type="text/html" title="Delivery on Time and Some Clean Up 🧹" /><published>2024-11-10T00:00:00+00:00</published><updated>2024-11-10T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup</id><content type="html" xml:base="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html/"><![CDATA[<p>Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully
+handed over a project to the Deutscher Fußball-Bund (<a href="https://www.dfb.de/">DFB</a>) right on schedule. The DFB, being the
+German Football Association, is not only one of our biggest clients but also one of the largest football associations
+globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and
+it did! 🎉</p>
+
+<p>During this time, I also decided to tackle some overdue cleaning tasks. From tidying up my desk and washing room
+to organizing my kitchen and even my Git branches, it was a week of thorough cleanup.</p>
+
+<p>My friend Eman introduced me to Hadeer, a talented organizer. She helped me organize my desk and plans to add some
+aesthetic touches later.</p>
+
+<p><img src="/assets/img/desk-bike.JPG" alt="Desk-Bike" /></p>
+
+<p>I wanted to share a photo of my desk, but the surrounding mess still impacts its appearance. I’m thinking about either
+cleaning up the entire office or moving my desk to a different spot.</p>
+
+<p>Another spot that needed attention was my PS4 desk:</p>
+
+<p><img src="/assets/img/ps4.JPG" alt="PS4" /></p>
+
+<p>The cable arrangement still bothers me, but I’ve ordered some cable management tools arriving tomorrow. Hopefully, it
+will look much better after that.</p>
+
+<p>On the tech side, I realized I had many local Git branches that were no longer needed since they had already been
+merged. While Jetbrains IDEs can filter branches easily, I wanted to handle this cleanup from the terminal. So, I
+updated my <code class="language-plaintext highlighter-rouge">~/.gitconfig</code> file with a new alias tailored for our team’s workflow:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nb">alias</span><span class="o">]</span>
+    cleanup <span class="o">=</span> <span class="s2">"!f() { git branch | grep -v 'develop' | grep -v 'main' | grep -v 'master' | grep -v -E '^[0-9]+</span><span class="se">\\</span><span class="s2">.x' | grep -v '</span><span class="se">\\</span><span class="s2">*' | xargs git branch -D; }; f"</span>
+</code></pre></div></div>
+
+<p>This way, I can simply run:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git cleanup
+</code></pre></div></div>
+
+<p>And all branches will delete all branches except <code class="language-plaintext highlighter-rouge">develop</code>, <code class="language-plaintext highlighter-rouge">main</code>, <code class="language-plaintext highlighter-rouge">master</code>, and any <code class="language-plaintext highlighter-rouge">1.x</code> or similar branches.</p>
+
+<p>Additionally, to keep my Git history clean, I configured my Git pulls to rebase:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>pull]
+    rebase <span class="o">=</span> <span class="nb">true</span>
+</code></pre></div></div>
+
+<p>Typically, when you pull changes from a remote repository, Git merges them into your current branch. However, with
+rebase enabled, Git reapplies your local commits on top of the fetched commits, creating a linear project history. This
+keeps your commit history cleaner and more readable by avoiding unnecessary merge commits.</p>
+
+<p>Wrapping up, it was a week of successful deliveries and much-needed organization. I’m looking forward to the next
+steps… 🐾</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully handed over a project to the Deutscher Fußball-Bund (DFB) right on schedule. The DFB, being the German Football Association, is not only one of our biggest clients but also one of the largest football associations globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and it did! 🎉]]></summary></entry><entry><title type="html">A Week of Goodbyes</title><link href="https://imdhemy.com/blog/generic/week-of-goodbyes.html/" rel="alternate" type="text/html" title="A Week of Goodbyes" /><published>2024-11-03T00:00:00+00:00</published><updated>2024-11-03T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/week-of-goodbyes</id><content type="html" xml:base="https://imdhemy.com/blog/generic/week-of-goodbyes.html/"><![CDATA[<p>Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently,
 our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other
 navigating a more difficult transition. I’ve been taught a valuable lesson last week!</p>
 
@@ -1419,39 +1469,4 @@ modules using both module systems. We didn’t cover all the details, but we cov
 differentiate between the two module systems.</p>
 
 <p><sub>
-Image: <a href="https://unsplash.com/photos/a-dog-lays-on-a-bed-next-to-a-laptop-IGfoMhQhtwo">Photo by Jorge Rosal on Unsplash</a></sub></p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[Do you know what is the difference between the following two code snippets?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">From Code to German: My First Steps Towards Learning a New Language</title><link href="https://imdhemy.com/blog/germany/from-code-to-german.html/" rel="alternate" type="text/html" title="From Code to German: My First Steps Towards Learning a New Language" /><published>2023-04-22T00:00:00+00:00</published><updated>2023-04-22T00:00:00+00:00</updated><id>https://imdhemy.com/blog/germany/from-code-to-german</id><content type="html" xml:base="https://imdhemy.com/blog/germany/from-code-to-german.html/"><![CDATA[<p>For years, I have been dedicated to writing code every day and contributing to various
-projects. <a href="https://github.com/imdhemy">My GitHub account</a> showcases my commitment and hard work. Since I moved
-from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I
-couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and
-focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source
-projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for
-open source projects.</p>
-
-<p>As an expat in a foreign country, learning the local language is vital not only for practical purposes but also for
-understanding the culture better. I have tried learning a new language in the past, particularly Turkish, but I failed
-to do so. However, I have faith that German is different, and my background in English, which has some similarities with
-German, may give me an edge.</p>
-
-<p>To begin my language learning journey, I set a goal to finish one lesson per week from
-the <a href="https://www.hueber.de/menschen">Menschen book</a>, a popular German language textbook for adults and young adults
-designed according to the latest findings in educational psychology as they describe it.</p>
-
-<p>I already tried some applications like Duolingo and Babbel, but I didn’t like them. I prefer a more structured approach
-to learning a new language. I want to learn the language in a way similar to how I learned English which I learned from
-the “Hello” series of books.</p>
-
-<p>I’ve just completed my first lesson, and it feels like a great accomplishment. The first lesson introduced me to the
-basics of the German language, such as the alphabet, how to ask about names, how say “how are you” and so on.</p>
-
-<p>In addition to the book, I planned to practice speaking German for 10 minutes every day. My first attempt was
-challenging, I couldn’t pronounce correctly, and I was quite nervous. I’m not sure if I will be able to do it every day,
-but I will try my best.</p>
-
-<p>Learning a new language is challenging, and I’ve already encountered some difficulties, particularly with the
-pronunciation of some German words. However, I’m optimistic that with persistence and hard work, I’ll be able to master
-the language.</p>
-
-<p>In conclusion, I believe that taking the first step towards learning a new language is always the hardest, but it’s also
-the most important. If you’re thinking of learning a new language, don’t be afraid to start, even if it’s just for ten
-minutes a day. You’ll be amazed at how much progress you can make with consistent effort. Believe me, I did the same
-with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll be able to do the same with German.</p>]]></content><author><name>Dhemy</name></author><category term="germany" /><summary type="html"><![CDATA[For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Since I moved from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for open source projects.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+Image: <a href="https://unsplash.com/photos/a-dog-lays-on-a-bed-next-to-a-laptop-IGfoMhQhtwo">Photo by Jorge Rosal on Unsplash</a></sub></p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[Do you know what is the difference between the following two code snippets?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
