@@ -43,7 +43,7 @@ This way, I can simply run:
 git cleanup
 ```
 
-And all branches will delete all branches except `develop`, `main`, `master`, and any `1.x` or similar branches.
+And all branches will be deleted except `develop`, `main`, `master`, and any `1.x` or similar branches.
 
 Additionally, to keep my Git history clean, I configured my Git pulls to rebase:
 
