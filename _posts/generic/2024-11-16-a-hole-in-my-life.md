@@ -27,8 +27,9 @@ Here in Germany, I have better opportunities, but something is missing. I can't 
 satisfied. I don't blame Germany. I came here already with a heavy heart. 💔
 
 My first week in Germany was just after Salsabil, my ex, left me. I was devastated. I communicated with everyone that I
-would start a new life in Germany and never look back. I thought it was just a matter of time until I learned the
-language and would be able to make friends. I was wrong. Yeah, I haven't learned the language yet, but I've seen many
+would start a new life in Germany and never look back. I thought it was just a matter of time until I learned [the
+language]({% post_url 2023-04-22-from-code-to-german %}) and would be able to make friends. I was wrong. Yeah, I haven't
+learned the language yet, but I've seen many
 immigrants who speak German fluently, and they still complain about the same thing. Am I wrong? I don't know, but I will
 keep trying.
 
