@@ -2,6 +2,9 @@
 layout: post
 title: Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬
 categories: [ "nodejs" ]
+image: /assets/img/koala.jpg
+image_alt: 'A sleeping koala'
+image_source: 'https://unsplash.com/photos/koala-sleeping-on-tree-branch-EerxztHCjM8'
 ---
 
 Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights
@@ -15,7 +18,7 @@ my [GitHub repository](https://github.com/imdhemy/koala-recommender). Let's get 
 
 ## Overview
 
-The basic idea is store the movies into a MongoDB database and get advantage of MongoDB Atlas search `moreLikeThis`
+The basic idea is to store the movies into a MongoDB database and get advantage of MongoDB Atlas search `moreLikeThis`
 query to get similar movies. The better movie attributes you have, the better recommendations you will get.
 Needless to say that the amount of data also plays a big role in the quality of the recommendations.
 
