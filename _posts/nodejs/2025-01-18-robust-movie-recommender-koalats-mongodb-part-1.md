@@ -268,9 +268,9 @@ movies most likely you will get no results.
 While building this project, I was impressed myself with how easy it was to build a REST API using KoalaTs. There is
 always room for improvement, and below is a list of things I will improve in KoalaTs:
 
-- Add templates for vitest setup files in the generated project.
-- Improve Typescript configuration.
-- Add the `PORT` environment variable to the generated project.
+- [Add templates for vitest setup files in the generated project.](https://github.com/koala-ts/cli/issues/10)
+- [Improve Typescript configuration](https://github.com/koala-ts/cli/issues/11).
+- [Add the `PORT` environment variable to the generated project](https://github.com/koala-ts/cli/issues/12).
 
 ### Next steps
 
