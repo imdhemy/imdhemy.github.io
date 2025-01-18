@@ -1,6 +1,263 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2024-11-16T17:12:22+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2025-01-18T20:26:25+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Delivery on Time and Some Clean Up 🧹</title><link href="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html/" rel="alternate" type="text/html" title="Delivery on Time and Some Clean Up 🧹" /><published>2024-11-10T00:00:00+00:00</published><updated>2024-11-10T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup</id><content type="html" xml:base="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html/"><![CDATA[<p>Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬</title><link href="https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/" rel="alternate" type="text/html" title="Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/"><![CDATA[<p>Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights
+into what should be the next improvement. I decided to build a simple movie recommender
+using <a href="https://koala-ts.github.io/docs/">KoalaTs</a> and MongoDB. Once,
+I had the simple version working, I decided to dive deeper into the project and make it more powerful and robust.</p>
+
+<p>Today, I will show you the simple version of the movie recommender, and next week, I will discuss how to make it more
+powerful. You can find the code for this project on
+my <a href="https://github.com/imdhemy/koala-recommender">GitHub repository</a>. Let’s get started!</p>
+
+<h2 id="overview">Overview</h2>
+
+<p>The basic idea is to store the movies into a MongoDB database and get advantage of MongoDB Atlas search <code class="language-plaintext highlighter-rouge">moreLikeThis</code>
+query to get similar movies. The better movie attributes you have, the better recommendations you will get.
+Needless to say that the amount of data also plays a big role in the quality of the recommendations.</p>
+
+<h2 id="project-setup">Project setup</h2>
+
+<p>First, you need to create a new KoalaTs project. You can do this by running the following command:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npx @koala-ts/cli create koala-recommender
+</code></pre></div></div>
+
+<p>Then, we need to dockerize the project to make it easier to run. You can find
+the <a href="https://github.com/imdhemy/koala-recommender/blob/main/Dockerfile">Dockerfile</a>
+and <a href="https://github.com/imdhemy/koala-recommender/blob/main/docker-compose.yml">docker-compose.yml</a> in
+the GitHub repository.</p>
+
+<h2 id="mongodb-setup">MongoDB setup</h2>
+
+<p>We are using the <code class="language-plaintext highlighter-rouge">mongodb/mongodb-atlas-local:8</code> image to run a local MongoDB Atlas instance. Unfortunately, seeding the
+search index with the container startup is not supported yet. So, we need to do it ourselves. You can do this manually
+if you are running MongoDB Compass. I have created a script to do this for my unit tests.</p>
+
+<p>KoalaTs comes with <a href="https://vitest.dev/">Vitest</a> by default, which we will use to write out unit tests. You still can
+use any other testing library you like, but KoalaTs is built with Vitest in mind, because everyone should! 😄</p>
+
+<p>The script is located in
+the <a href="https://github.com/imdhemy/koala-recommender/blob/0b6903e7c79baef6143bffef19e1f806eced7f78/tests/_setup/global.ts#L14-L28">tests/_setup/global.ts</a></p>
+
+<p>The basic idea is to create a <code class="language-plaintext highlighter-rouge">movies</code> collection and insert a temporary document, then create a search index with a
+dynamic mapping, and finally delete the temporary document. The temporary document is not necessary, but it helped to
+debug the search index creation.</p>
+
+<p>Talking about testing is beyond the scope of this article, but you can find the tests in the GitHub repository.</p>
+
+<h2 id="connecting-to-mongodb">Connecting to MongoDB</h2>
+
+<p>KoalaTs is a database-agnostic, but it recommends using the native MongoDB driver. I used the powerful KoalaTs <code class="language-plaintext highlighter-rouge">.env</code>
+configuration files to store the MongoDB connection string.</p>
+
+<p>Let’s install the MongoDB driver:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>npm <span class="nb">install </span>mongodb
+</code></pre></div></div>
+
+<p>Then update our environment variables:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># .env
+MONGODB_URI=mongodb://mongod:27017?directConnection=true
+MONGODB_DB=koala
+</code></pre></div></div>
+
+<p>And for testing, I used a different database:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># .env.test
+MONGODB_URI=mongodb://mongod:27017?directConnection=true
+MONGODB_DB=koala_test
+</code></pre></div></div>
+
+<p>Now, we can connect to MongoDB using the following code:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">Db</span><span class="p">,</span> <span class="nx">MongoClient</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">mongodb</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="o">*</span> <span class="kd">as </span><span class="nx">process</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">node:process</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">db</span><span class="p">:</span> <span class="nx">Db</span><span class="p">;</span>
+<span class="k">export</span> <span class="kd">let</span> <span class="nx">client</span><span class="p">:</span> <span class="nx">MongoClient</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nf">connectToDb</span><span class="p">():</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="k">void</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="c1">// I used here the `process.env` to get the environment variables directly</span>
+    <span class="c1">// but as a best practice, you should extract them to a configuration file under the `/src/config` directory</span>
+    <span class="nx">client</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MongoClient</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGODB_URI</span> <span class="kd">as </span><span class="kr">string</span><span class="p">);</span>
+    <span class="k">await</span> <span class="nx">client</span><span class="p">.</span><span class="nf">connect</span><span class="p">();</span>
+    <span class="nx">db</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nf">db</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">MONGODB_DB</span> <span class="kd">as </span><span class="kr">string</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>This code will connect to the MongoDB instance and monkey-patch the <code class="language-plaintext highlighter-rouge">db</code> and <code class="language-plaintext highlighter-rouge">client</code> variables to be used in other
+parts of the application. We need to call this function in the <code class="language-plaintext highlighter-rouge">index.ts</code> file before starting the server, to ensure
+that the database connection is established only once.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// src/index.ts
+<span class="err">
+</span><span class="p">import {create} from '@koala-ts/framework';
+import {appConfig} from './config/app';
+</span><span class="gi">+ import {connectToDb} from './infrastructure/database';
+</span><span class="err">
+</span><span class="p">const app = create(appConfig);
+</span><span class="err">
+</span>// The top-level await works like a charm because KoalaTs was built with ES modules in mind
+<span class="gi">+ await connectToDb();
+</span><span class="p">app.listen(3000);
+</span><span class="err">
+</span><span class="p">console.log('Server is running on http://localhost:3000');
+</span></code></pre></div></div>
+
+<h2 id="the-movie-document">The Movie document</h2>
+
+<p>As mentioned earlier, I started with a simple version, but once again, the better the attributes, the better the
+recommendations. Here is an example of a movie document:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"_id"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"$oid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6786c3566e2c67647853df7d"</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The Godfather"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"genre"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Crime"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Drama"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Thriller"</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nl">"plot"</span><span class="p">:</span><span class="w"> </span><span class="s2">"The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son."</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"releaseDate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"$date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1972-03-24T00:00:00.000Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="creating-the-movie-endpoint">Creating the movie endpoint</h2>
+
+<p>We need to create an endpoint to add a movie to the database. We will use the <code class="language-plaintext highlighter-rouge">POST</code> method to create a new movie. This
+can be done by creating a new controller under the <code class="language-plaintext highlighter-rouge">src/controllers</code> directory.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/controllers/MovieController.ts</span>
+<span class="k">import</span> <span class="p">{</span><span class="kd">type</span> <span class="nx">IScope</span><span class="p">,</span> <span class="nx">Route</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@koala-ts/framework</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">MovieController</span> <span class="p">{</span>
+    <span class="p">@</span><span class="nd">Route</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span> <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/movies</span><span class="dl">'</span><span class="p">})</span>
+    <span class="k">async</span> <span class="nf">store</span><span class="p">(</span><span class="nx">scope</span><span class="p">:</span> <span class="nx">IScope</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">201</span><span class="p">;</span> <span class="c1">// Added for now, because the default is 404!</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Don’t forget to add the controller to the <code class="language-plaintext highlighter-rouge">controllers</code> array in the <code class="language-plaintext highlighter-rouge">src/config/app.ts</code> file.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// src/config/app.ts
+<span class="p">import { HomeController } from '../controller/HomeController';
+import { type IKoalaConfig } from '@koala-ts/framework';
+</span><span class="gi">+import { MovieController } from '../controller/MovieController';
+</span><span class="err">
+</span><span class="p">export const appConfig: IKoalaConfig = {
+</span>    controllers: [
+        HomeController,
+<span class="gi">+       MovieController,
+</span>    ]
+};
+</code></pre></div></div>
+
+<p>Then we need to implement the <code class="language-plaintext highlighter-rouge">createMovie</code> service. This service will be responsible for creating a new movie in the
+database.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/application/movie/creat-movie.ts</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">IMovie</span><span class="p">,</span> <span class="nx">IMovieProps</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./types</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">db</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../../infrastructure/database</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nf">createMovie</span><span class="p">(</span><span class="nx">props</span><span class="p">:</span> <span class="nx">IMovieProps</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">IMovie</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="na">doc</span><span class="p">:</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">IMovie</span><span class="o">&gt;</span> <span class="o">=</span> <span class="p">{...</span><span class="nx">props</span><span class="p">,</span> <span class="na">releaseDate</span><span class="p">:</span> <span class="k">new</span> <span class="nc">Date</span><span class="p">(</span><span class="nx">props</span><span class="p">.</span><span class="nx">releaseDate</span><span class="p">)};</span>
+
+    <span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nf">collection</span><span class="p">(</span><span class="dl">'</span><span class="s1">movies</span><span class="dl">'</span><span class="p">).</span><span class="nf">insertOne</span><span class="p">({...</span><span class="nx">doc</span><span class="p">});</span>
+    <span class="nx">doc</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">insertedId</span><span class="p">.</span><span class="nf">toString</span><span class="p">();</span>
+
+    <span class="k">return</span> <span class="nx">doc</span> <span class="kd">as </span><span class="nx">IMovie</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Then we need to call this service in the controller:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// src/controllers/MovieController.ts
+<span class="p">import { type IScope, Route } from '@koala-ts/framework';
+</span><span class="gi">+ import { createMovie, IMovieProps } from '../application/movie';
+</span><span class="err">
+</span><span class="p">export class MovieController {
+</span>    @Route({ method: 'POST', path: '/movies' })
+    async store(scope: IScope) {
+<span class="gi">+        scope.response.body = await createMovie(scope.request.body as IMovieProps);
+</span>         scope.response.status = 201;
+    }
+}
+</code></pre></div></div>
+
+<h2 id="recommendations">Recommendations</h2>
+
+<p>Now, the time has come to get the recommendations. We will create a new endpoint to get the recommendations for a movie.</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/controllers/MovieController.ts</span>
+<span class="k">import</span> <span class="p">{</span><span class="kd">type</span> <span class="nx">IScope</span><span class="p">,</span> <span class="nx">Route</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">@koala-ts/framework</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">createMovie</span><span class="p">,</span> <span class="nx">IMovieProps</span><span class="p">,</span> <span class="nx">recommendMovie</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../application/movie</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="kd">class</span> <span class="nc">MovieController</span> <span class="p">{</span>
+    <span class="p">@</span><span class="nd">Route</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span> <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/movies</span><span class="dl">'</span><span class="p">})</span>
+    <span class="k">async</span> <span class="nf">store</span><span class="p">(</span><span class="nx">scope</span><span class="p">:</span> <span class="nx">IScope</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">body</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">createMovie</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span> <span class="kd">as </span><span class="nx">IMovieProps</span><span class="p">);</span>
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">status</span> <span class="o">=</span> <span class="mi">201</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="p">@</span><span class="nd">Route</span><span class="p">({</span><span class="na">method</span><span class="p">:</span> <span class="dl">'</span><span class="s1">POST</span><span class="dl">'</span><span class="p">,</span> <span class="na">path</span><span class="p">:</span> <span class="dl">'</span><span class="s1">/movies:recommend</span><span class="dl">'</span><span class="p">})</span>
+    <span class="k">async</span> <span class="nf">recommend</span><span class="p">(</span><span class="nx">scope</span><span class="p">:</span> <span class="nx">IScope</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">scope</span><span class="p">.</span><span class="nx">response</span><span class="p">.</span><span class="nx">body</span> <span class="o">=</span> <span class="k">await</span> <span class="nf">recommendMovie</span><span class="p">(</span><span class="nx">scope</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">body</span> <span class="kd">as </span><span class="nx">IMovieProps</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">recommendMovie</code> function will receive a movie object and return the top 5 recommended movies. Here is the code for
+the service:</p>
+
+<div class="language-typescript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// src/application/movie/recommend-movie.ts</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">IMovie</span><span class="p">,</span> <span class="nx">IMovieProps</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./types</span><span class="dl">'</span><span class="p">;</span>
+<span class="k">import</span> <span class="p">{</span><span class="nx">db</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">../../infrastructure/database</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="k">export</span> <span class="k">async</span> <span class="kd">function</span> <span class="nf">recommendMovie</span><span class="p">(</span><span class="nx">props</span><span class="p">:</span> <span class="nb">Partial</span><span class="o">&lt;</span><span class="nx">IMovieProps</span><span class="o">&gt;</span><span class="p">):</span> <span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">IMovie</span><span class="p">[]</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">cursor</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nf">collection</span><span class="p">(</span><span class="dl">'</span><span class="s1">movies</span><span class="dl">'</span><span class="p">).</span><span class="nf">aggregate</span><span class="p">([</span>
+        <span class="p">{</span><span class="na">$search</span><span class="p">:</span> <span class="p">{</span><span class="na">moreLikeThis</span><span class="p">:</span> <span class="p">{</span><span class="na">like</span><span class="p">:</span> <span class="nx">props</span><span class="p">}}},</span>
+        <span class="p">{</span><span class="na">$limit</span><span class="p">:</span> <span class="mi">5</span><span class="p">},</span>
+        <span class="p">{</span><span class="na">$addFields</span><span class="p">:</span> <span class="p">{</span><span class="na">score</span><span class="p">:</span> <span class="p">{</span><span class="na">$meta</span><span class="p">:</span> <span class="dl">'</span><span class="s1">searchScore</span><span class="dl">'</span><span class="p">}}}</span>
+    <span class="p">]);</span>
+
+    <span class="kd">const</span> <span class="na">result</span><span class="p">:</span> <span class="nx">IMovie</span><span class="p">[]</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="k">await </span><span class="p">(</span><span class="kd">const</span> <span class="nx">movie</span> <span class="k">of</span> <span class="nx">cursor</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">result</span><span class="p">.</span><span class="nf">push</span><span class="p">({...</span><span class="nx">movie</span><span class="p">,</span> <span class="na">id</span><span class="p">:</span> <span class="nx">movie</span><span class="p">.</span><span class="nx">_id</span><span class="p">.</span><span class="nf">toString</span><span class="p">()}</span> <span class="kd">as </span><span class="nx">IMovie</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="takeaways">Takeaways</h2>
+
+<h3 id="mongodb-atlas-search">MongoDB Atlas Search</h3>
+
+<p>MongoDB Atlas is using Lucene under the hood to provide the search capabilities. The <code class="language-plaintext highlighter-rouge">moreLikeThis</code> query to work, you
+need to seed the Database with many documents, in other words, if you tried recommending a movie with only one or two
+movies most likely you will get no results.</p>
+
+<h3 id="koalats">KoalaTs</h3>
+
+<p>While building this project, I was impressed myself with how easy it was to build a REST API using KoalaTs. There is
+always room for improvement, and below is a list of things I will improve in KoalaTs:</p>
+
+<ul>
+  <li><a href="https://github.com/koala-ts/cli/issues/10">Add templates for vitest setup files in the generated project.</a></li>
+  <li><a href="https://github.com/koala-ts/cli/issues/11">Improve Typescript configuration</a>.</li>
+  <li><a href="https://github.com/koala-ts/cli/issues/12">Add the <code class="language-plaintext highlighter-rouge">PORT</code> environment variable to the generated project</a>.</li>
+</ul>
+
+<h3 id="next-steps">Next steps</h3>
+
+<p>In the next article, I will discuss how to make the movie recommender more powerful, stay tuned! Let the KoalaTs be with
+you! 🐨</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights into what should be the next improvement. I decided to build a simple movie recommender using KoalaTs and MongoDB. Once, I had the simple version working, I decided to dive deeper into the project and make it more powerful and robust.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/koala.jpg" /><media:content medium="image" url="https://imdhemy.com/assets/img/koala.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Delivery on Time and Some Clean Up 🧹</title><link href="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html/" rel="alternate" type="text/html" title="Delivery on Time and Some Clean Up 🧹" /><published>2024-11-10T00:00:00+00:00</published><updated>2024-11-10T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup</id><content type="html" xml:base="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html/"><![CDATA[<p>Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully
 handed over a project to the Deutscher Fußball-Bund (<a href="https://www.dfb.de/">DFB</a>) right on schedule. The DFB, being the
 German Football Association, is not only one of our biggest clients but also one of the largest football associations
 globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and
@@ -1183,291 +1440,4 @@ loaded before continuing the execution.</p>
   <p>Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.</p>
 </div>
 
-<p>That’s it! You have learned how to use dynamic imports in ESM modules.</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use require to import modules anywhere in your code, but in ESM you can only use import at the top level of your code. What if you want to import a module dynamically in ESM?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-running.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-running.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Effective Node.js Modules - Part 1: Basic Syntax</title><link href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html/" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 1: Basic Syntax" /><published>2024-01-07T00:00:00+00:00</published><updated>2024-01-07T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html/"><![CDATA[<p>Do you know what is the difference between the following two code snippets?</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>And this one:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>Both of them import the <code class="language-plaintext highlighter-rouge">app</code> and <code class="language-plaintext highlighter-rouge">connection</code> from the <code class="language-plaintext highlighter-rouge">config</code> module, but the first one is using the <strong>CommonJS</strong> (
-CJS) module system, and the second one is using the <strong>ECMAScript</strong> (ES) module system.</p>
-
-<p>Modules allow you to split your code into small units, that can be reused and tested independently. They are also the
-main way to enforce information hiding by exposing (exporting) only the public API of the module.</p>
-
-<p>In this series of posts, we will talk about how to use modules effectively in your Node.js applications. By the end of
-this series, you should be able to make pragmatic decisions about how to use modules effectively in your Node.js
-applications.</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>📋</th>
-      <th>Posts in this series</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td>Basic Syntax</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td><a href="/blog/nodejs/esm-dynamic-imports.html/">Dynamic imports</a></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Javascript was introduced in 1995 as a scripting language for browsers. It was not designed to be used as a server
-language. Browsers should keep an eye on the security of the user and the system, so they need to limit the access of
-the Javascript code to the system resources. The nature of the Javascript and the browser environment allowed the use
-of the <code class="language-plaintext highlighter-rouge">script</code> tag to load Javascript code didn’t help the developers to write modular code. Developers used
-multiple <code class="language-plaintext highlighter-rouge">script</code>
-tags to load the Javascript code in the right order.</p>
-
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"foo.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"bar.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"baz.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</code></pre></div></div>
-
-<p>When Node.js was introduced in 2009 as a server-side Javascript runtime, it came with full access to the underlying
-system resources. This allowed providing the CommonJS module system to allow developers to write modular code and
-organize their applications into small reusable units.</p>
-
-<h3 id="cjs-commonjs-module-system">CJS: CommonJS module system</h3>
-
-<p>The CJS module system is the default module system of Node.js. <strong>CJS</strong> uses <code class="language-plaintext highlighter-rouge">require</code> to import modules
-and <code class="language-plaintext highlighter-rouge">module.exports</code>or <code class="language-plaintext highlighter-rouge">exports</code> to export modules. <code class="language-plaintext highlighter-rouge">exports</code> is a reference to <code class="language-plaintext highlighter-rouge">module.exports</code>, so you can use either
-of them to export modules as follows:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Is the same as:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
-<span class="nx">exports</span><span class="p">.</span><span class="nx">foo</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">require</code> function returns the exported value of the module.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
-<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="c1">// { app: { name: 'Awesome App', port: 3000 } }</span>
-</code></pre></div></div>
-
-<p>You can also use the <code class="language-plaintext highlighter-rouge">require</code> function to import a single module from a file that exports multiple modules.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// config.js</span>
-<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="na">app</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">Awesome App</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">port</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
-    <span class="p">},</span>
-    <span class="na">connection</span><span class="p">:</span> <span class="p">{</span>
-        <span class="na">host</span><span class="p">:</span> <span class="dl">'</span><span class="s1">localhost</span><span class="dl">'</span><span class="p">,</span>
-        <span class="na">port</span><span class="p">:</span> <span class="mi">27017</span><span class="p">,</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
-<span class="kd">const</span> <span class="p">{</span><span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config.js</span><span class="dl">'</span><span class="p">)</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">connection</span><span class="p">)</span> <span class="c1">// { host: 'localhost', port: 27017 }</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">app</span><span class="p">)</span> <span class="c1">// ReferenceError: app is not defined</span>
-</code></pre></div></div>
-
-<p>The CJS allows you to conditionally import modules using the <code class="language-plaintext highlighter-rouge">require</code> function. This is useful when you want to load
-modules based on a specific condition.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
-<span class="kd">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">)</span>
-
-<span class="kd">let</span> <span class="nx">logger</span>
-<span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./silent-logger</span><span class="dl">'</span><span class="p">)</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="nx">logger</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./logger</span><span class="dl">'</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="esm-ecmascript-module-system">ESM: ECMAScript module system</h3>
-
-<div class="tip">
-  <p>
-If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
-</p>
-</div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
-<span class="p">{</span>
-    <span class="dl">"</span><span class="s2">type</span><span class="dl">"</span>
-<span class="p">:</span>
-    <span class="dl">"</span><span class="s2">module</span><span class="dl">"</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>ECMAScript modules (ESM) are the standard official module system of Javascript. It was introduced in 2015 as part of
-the ES6 specification. It was introduced with the goal of narrowing the gap between the browser and the server when
-it comes to the module system. It was added to Node.js on <code class="language-plaintext highlighter-rouge">v8.5.0</code> as an experimental feature. By <code class="language-plaintext highlighter-rouge">v13.2.0</code>, loading
-ESM modules became available without any command-line flags.</p>
-
-<p>ESM uses <code class="language-plaintext highlighter-rouge">export</code> to export modules and <code class="language-plaintext highlighter-rouge">import</code> to import modules.</p>
-
-<div class="tip">
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;ESM uses `export` in the singular format not `exports` like CJS.&lt;/p&gt;
-</code></pre></div>  </div>
-</div>
-
-<p>The following example shows how to export a function:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
-<span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
-<span class="p">}</span>
-
-<span class="k">export</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span>
-</code></pre></div></div>
-
-<p>The following example shows how to import that function:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-<span class="k">import</span> <span class="p">{</span><span class="nx">sum</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span> <span class="c1">// File extension is required to import relative modules</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
-</code></pre></div></div>
-
-<p>You can also export a default module using the <code class="language-plaintext highlighter-rouge">export default</code> syntax. This is useful when you want to export a single
-module from a file. Exporting a default module doesn’t prevent you from exporting other modules from the same file.</p>
-
-<p>The following example shows how to export a default module:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// sum.mjs</span>
-<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The following example shows how to import that function:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-<span class="k">import</span> <span class="nx">sum</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./sum.mjs</span><span class="dl">'</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span> <span class="c1">// 16</span>
-</code></pre></div></div>
-
-<p>The following example shows a mixed export of a default module and other modules:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// calculator.mjs</span>
-<span class="k">export</span> <span class="kd">function</span> <span class="nf">sum</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span>
-<span class="p">}</span>
-
-<span class="k">export</span> <span class="kd">function</span> <span class="nf">subtract</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">a</span> <span class="o">-</span> <span class="nx">b</span>
-<span class="p">}</span>
-
-<span class="k">export</span> <span class="k">default</span> <span class="kd">function</span> <span class="nf">calculate</span><span class="p">(</span><span class="nx">input</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// a magic function that takes a string input like "1 + 2" and returns the result</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>If you imported the default module, then you have access to the <code class="language-plaintext highlighter-rouge">calculate</code> function which is the default export of
-the module. You can also give it any name you want.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-
-<span class="k">import</span> <span class="nx">myCalculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">myCalculator</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
-
-<span class="nx">myCalculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1">// TypeError: myCalculator.sum is not a function</span>
-</code></pre></div></div>
-
-<p>If you imported the module using the <code class="language-plaintext highlighter-rouge">import * as</code> syntax, then you have access to all the exported modules.
-The <code class="language-plaintext highlighter-rouge">import * as</code>
-imports all the exported modules in a single object.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-
-<span class="k">import</span> <span class="o">*</span> <span class="nx">as</span> <span class="nx">calculator</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">calculator</span><span class="p">.</span><span class="k">default</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
-</code></pre></div></div>
-
-<p>As you already noticed, using something like <code class="language-plaintext highlighter-rouge">calculator.default</code> is not very convenient. You can get the same
-result by the following readable syntax:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-
-<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">calculate</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">calculate</code> is our custom name for the default export of the module, the other modules are imported using their
-original names. You can also use the <code class="language-plaintext highlighter-rouge">as</code> keyword to rename the imported modules.</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-
-<span class="k">import</span> <span class="nx">calculate</span><span class="p">,</span> <span class="p">{</span><span class="nx">sum</span> <span class="nx">as</span> <span class="nx">add</span><span class="p">,</span> <span class="nx">subtract</span><span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./calculator.mjs</span><span class="dl">'</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// 3</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">subtract</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="c1">// -1</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">calculate</span><span class="p">(</span><span class="dl">'</span><span class="s1">1 + 2</span><span class="dl">'</span><span class="p">))</span> <span class="c1">// 3</span>
-</code></pre></div></div>
-
-<p>The ESM modules doesn’t support conditionally importing modules. All the imports should be at the top of the file.</p>
-
-<div class="danger">
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;The following code will throw a SyntaxError: &lt;/p&gt;
-</code></pre></div>  </div>
-</div>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
-
-<span class="k">import</span> <span class="nx">config</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">./config.mjs</span><span class="dl">'</span>
-
-<span class="k">if </span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">app</span><span class="p">.</span><span class="nx">env</span> <span class="o">===</span> <span class="dl">'</span><span class="s1">test</span><span class="dl">'</span><span class="p">)</span> <span class="p">{</span>
-<span class="k">import</span>
-    <span class="nx">logger</span>
-    <span class="k">from</span>
-    <span class="dl">'</span><span class="s1">./silent-logger.mjs</span><span class="dl">'</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-<span class="k">import</span>
-    <span class="nx">logger</span>
-    <span class="k">from</span>
-    <span class="dl">'</span><span class="s1">./logger.mjs</span><span class="dl">'</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h2 id="summary">Summary</h2>
-
-<p>In this post, we talked about the basic syntax of the CJS and ESM modules. We talked about how to import and export
-modules using both module systems. We didn’t cover all the details, but we covered the basics that you need to know to
-differentiate between the two module systems.</p>
-
-<p><sub>
-Image: <a href="https://unsplash.com/photos/a-dog-lays-on-a-bed-next-to-a-laptop-IGfoMhQhtwo">Photo by Jorge Rosal on Unsplash</a></sub></p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[Do you know what is the difference between the following two code snippets?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-laptop-code-bed.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+<p>That’s it! You have learned how to use dynamic imports in ESM modules.</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use require to import modules anywhere in your code, but in ESM you can only use import at the top level of your code. What if you want to import a module dynamically in ESM?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-running.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-running.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

@@ -9,7 +9,7 @@ endef
 
 start:
 	$(call toast,$(COLOR_INFO),"Starting server...")
-	jekyll serve --livereload --drafts --open
+	bundle exec jekyll serve --livereload --drafts --open
 
 reinstall:
 	$(call toast,$(COLOR_INFO),"Reinstalling dependencies...")
