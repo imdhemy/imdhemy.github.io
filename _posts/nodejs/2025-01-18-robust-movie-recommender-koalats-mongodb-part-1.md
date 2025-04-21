@@ -12,9 +12,7 @@ into what should be the next improvement. I decided to build a simple movie reco
 using [KoalaTs](https://koala-ts.github.io/docs/) and MongoDB. Once,
 I had the simple version working, I decided to dive deeper into the project and make it more powerful and robust.
 
-Today, I will show you the simple version of the movie recommender, and next week, I will discuss how to make it more
-powerful. You can find the code for this project on
-my [GitHub repository](https://github.com/imdhemy/koala-recommender). Let's get started!
+Today, I will show you the simple version of the movie recommender, ~~and next week, I will discuss how to make it more powerful~~. You can find the code for this project on my [GitHub repository](https://github.com/imdhemy/koala-recommender). Let's get started!
 
 ## Overview
 
@@ -274,5 +272,9 @@ always room for improvement, and below is a list of things I will improve in Koa
 
 ### Next steps
 
-In the next article, I will discuss how to make the movie recommender more powerful, stay tuned! Let the KoalaTs be with
-you! 🐨
+~~In the next article, I will discuss how to make the movie recommender more powerful, stay tuned! Let the KoalaTs be with
+you! 🐨~~
+
+Even though I won't publish a second article, the path to improving the movie recommender is clear: the richer your movie attributes, the better the recommendations you’ll get. Enhancing the documents with extra metadata like cast, director, language, country, keywords, runtime, or even ratings will make the `moreLikeThis` query far more effective. So, if you want better results, feed your database with real-world movie data that's as complete as possible.
+
+Let the KoalaTs be with you! 🐨
