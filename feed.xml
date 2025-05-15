@@ -1,6 +1,132 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2025-04-21T16:58:44+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2025-05-15T15:44:05+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬</title><link href="https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/" rel="alternate" type="text/html" title="Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/"><![CDATA[<p>Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">How Small Changes Can Drive Big Results Without Blocking the Business</title><link href="https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/" rel="alternate" type="text/html" title="How Small Changes Can Drive Big Results Without Blocking the Business" /><published>2025-05-15T00:00:00+00:00</published><updated>2025-05-15T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites</id><content type="html" xml:base="https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/"><![CDATA[<p>Software serves the business, not the other way around. Yet many technical teams struggle to balance improving their
+code with delivering value. This blog explores why lean, incremental change often wins over big-bang rewrites, and how
+small, accessible improvements can unlock results, foster a culture of ownership, and create many leaders, not just one.</p>
+
+<h2 id="big-bang-rewrites-more-than-just-starting-over">Big-Bang Rewrites: More Than Just Starting Over</h2>
+
+<p>When we talk about a big-bang rewrite, most people imagine throwing away the whole codebase, choosing a new language or
+architecture, and rebuilding everything from scratch. And yes, that’s the classic example. But the idea goes beyond
+that.</p>
+
+<p>A big-bang rewrite can also mean any change that’s large in scope, takes a long time to complete, and delays visible
+value to the business. It could be a refactoring project, a redesign of a critical module, or a deep integration task.
+The common factor is that it puts other work on hold or requires long periods of planning and coordination before any
+outcome can be delivered.</p>
+
+<p><strong>If your work:</strong></p>
+
+<ul>
+  <li>involves a long stretch without deployable results</li>
+  <li>requires other teams to wait until you’re done</li>
+  <li>needs detailed up-front planning before anything starts</li>
+  <li>or puts the system in a state where changes are frozen for a while</li>
+</ul>
+
+<p>…then it might be closer to a big-bang approach than you think, even if you’re not rebuilding everything from zero.</p>
+
+<p>Now, this doesn’t mean these changes are bad. Sometimes they’re necessary, especially when the foundations are no longer
+fit for purpose. But they do carry risks. They slow down feedback, delay business value, and can quietly block momentum
+if not managed carefully.</p>
+
+<p>The alternative isn’t “never do big work.” It’s to approach change in a way that’s gradual, visible, and allows teams to
+keep moving while improving.</p>
+
+<h2 id="why-lean-continuous-change-works">Why Lean, Continuous Change Works</h2>
+
+<p>Instead of going big and bold, lean thinking says: keep moving, keep improving, and don’t stop
+delivering. <a href="https://martinfowler.com/books/refactoring.html">Martin Fowler</a>
+describes refactoring as small, safe steps that don’t break existing behavior. That’s the sweet spot. Clean things up,
+one slice at a time, while still shipping features and fixing bugs.</p>
+
+<p>This idea isn’t just theoretical. Companies like <a href="https://aws.amazon.com/devops/continuous-delivery/">Amazon</a> got their
+deploy time down to <a href="https://www.youtube.com/watch?v=dxk8b9rSKOo">every 11.6 seconds</a>. That’s not a
+typo. They managed this by breaking work into tiny, safe pieces and automating everything around it. High-performing
+teams in the <a href="https://services.google.com/fh/files/misc/state-of-devops-2018.pdf">State of DevOps</a> reports follow the
+same pattern: small batches, fast feedback, fewer incidents, and happier
+devs.</p>
+
+<p>The lean mindset, and <a href="https://en.wikipedia.org/wiki/Kaizen">kaizen</a> in particular, teaches us to chase continuous
+improvement, not through big dramatic
+overhauls, but through small daily wins. It’s less stressful, more sustainable, and easier to build into the team
+culture.</p>
+
+<h2 id="the-bottleneck-only-a-few-people-can-make-things-better">The Bottleneck: Only a Few People Can Make Things Better</h2>
+
+<p>Here’s a common trap. You run a retro, come up with great ideas, and assign action items. But then nothing happens. Why?
+Because only a few people on the team have the tools, the authority, or the confidence to make the change.</p>
+
+<p>In big projects, this gets worse. You’ve got multiple teams, different levels of experience, some folks can edit the
+core logic, others can’t touch it. So while a few people discuss fixing things, the rest of the team is waiting, unsure
+if they can help.</p>
+
+<p>When change is locked behind experience or seniority, it slows everyone down.</p>
+
+<h2 id="ask-this-question-instead">Ask This Question Instead</h2>
+
+<div class="tip">
+  <p>What’s the smallest change we can make right now to improve things?</p>
+</div>
+
+<p>It’s a simple question, but it changes everything. Small improvements are easier to explain, easier to adopt, and easier
+to measure. And because they’re small, more people can actually do them.</p>
+
+<p>You don’t need a 3-week planning cycle to rename a misleading variable. You don’t need a Jira epic to make that one SQL
+query readable. These little things matter. And when done right, they stack up fast. Your next smallest change could be
+different from the examples above, you just need to define what “small” means for your team.</p>
+
+<p>The more people you include in improving the system, the more improvement you get. Even better, you’re building new
+leaders. Not by giving out job titles, but by letting people take ownership of something and deliver real value.</p>
+
+<h2 id="small-wins-big-momentum">Small Wins, Big Momentum</h2>
+
+<p>Short-term wins are essential for lasting change. People need to see results. Nobody
+wants to feel like they’re pushing a rock uphill forever.</p>
+
+<p>When a team sees that a tiny fix made something faster, more stable, or less painful, they start believing in the
+process. It’s no longer theory, it’s real. And it encourages the next fix. And the one after that.</p>
+
+<p>Small changes reduce the risk of failure. If something breaks, it’s easy to revert or adjust. There’s no panic, no long
+outage, just a quick fix and move on. Compare that to a big-bang release that fails. That’s a disaster no one wants to
+repeat.</p>
+
+<p>Momentum comes from motion. Keep the changes small, and the motion never stops.</p>
+
+<h2 id="real-world-proof">Real-World Proof</h2>
+
+<p>This isn’t just blog talk. Plenty of companies live by this philosophy:</p>
+
+<ul>
+  <li>
+    <p><strong><a href="https://platformengineering.org/talks-library/continuous-delivery-at-walmart">Walmart</a></strong> switched from a few giant
+releases per year to deploying daily. One of their lead engineers kept asking
+“What’s the smallest change we can make today?” That single question helped them build a culture of fast, safe
+improvement.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://netflixtechblog.com/full-cycle-developers-at-netflix-a08c31f83249">Netflix</a></strong> Switched to “Operate what you
+build” culture. They empower developers to take ownership of their code, from writing it to running it in production.</p>
+  </li>
+  <li>
+    <p><strong><a href="https://learn.microsoft.com/en-us/devops/">Microsoft</a></strong> used to ship major Windows updates every few years. Now,
+features and fixes come monthly. That shift started by shrinking the size of changes and giving more control to more
+teams.</p>
+  </li>
+</ul>
+
+<h2 id="final-thought">Final Thought</h2>
+
+<p>You don’t need a revolution to make your system better. You just need to start. Right now. With something small.</p>
+
+<p>Ask your team: what’s one thing we can improve today? Keep doing that. Every sprint. Every week. Every time someone
+touches the code.</p>
+
+<p>You’ll fix things. You’ll move faster. And you’ll create an environment where more people feel like they can lead.</p>
+
+<p>Forget waiting six months to deliver the perfect system. Make it better today. Then do it again tomorrow.</p>
+
+<p>That’s how you build real progress. Tiny, steady, unstoppable.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[Software serves the business, not the other way around. Yet many technical teams struggle to balance improving their code with delivering value. This blog explores why lean, incremental change often wins over big-bang rewrites, and how small, accessible improvements can unlock results, foster a culture of ownership, and create many leaders, not just one.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/steps.jpg" /><media:content medium="image" url="https://imdhemy.com/assets/img/steps.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬</title><link href="https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/" rel="alternate" type="text/html" title="Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬" /><published>2025-01-18T00:00:00+00:00</published><updated>2025-01-18T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/"><![CDATA[<p>Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights
 into what should be the next improvement. I decided to build a simple movie recommender
 using <a href="https://koala-ts.github.io/docs/">KoalaTs</a> and MongoDB. Once,
 I had the simple version working, I decided to dive deeper into the project and make it more powerful and robust.</p>
@@ -1374,72 +1500,4 @@ environment where humility, openness, and collaboration are championed, we can m
 empower team members to thrive, and build stronger, more resilient teams capable of overcoming any obstacle.</p>
 
 <p>Helping a team member who struggles does not mean to forget about the other team members, they also need your support.
-It’s about striking a balance between empathy and accountability.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m kidding, of course. My pipelines are just like yours. They fail, and they fail a lot.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/plumbers.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/plumbers.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Effective Node.js Modules - Part 2: ESM dynamic imports</title><link href="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html/" rel="alternate" type="text/html" title="Effective Node.js Modules - Part 2: ESM dynamic imports" /><published>2024-03-25T00:00:00+00:00</published><updated>2024-03-25T00:00:00+00:00</updated><id>https://imdhemy.com/blog/nodejs/esm-dynamic-imports</id><content type="html" xml:base="https://imdhemy.com/blog/nodejs/esm-dynamic-imports.html/"><![CDATA[<p>One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use
-<code class="language-plaintext highlighter-rouge">require</code> to import modules anywhere in your code, but in ESM you can only use <code class="language-plaintext highlighter-rouge">import</code> at the top level of your code.
-What if you want to import a module dynamically in ESM?</p>
-
-<p>In this post, we will create a simple <code class="language-plaintext highlighter-rouge">Hello world!</code> application that uses dynamic imports to greet the user in
-different languages. If you don’t know how to enable ESM in Node.js, check the
-<a href="/blog/nodejs/effective-nodejs-modules-part-1.html/">previous post</a>.</p>
-
-<p>Below is the directory structure of our application:</p>
-
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
-├── main.js
-├── package.json
-└── translations
-    ├── ar.js
-    ├── de.js
-    └── en.js
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">translations</code> directory contains three files: <code class="language-plaintext highlighter-rouge">en.js</code>, <code class="language-plaintext highlighter-rouge">de.js</code>, and <code class="language-plaintext highlighter-rouge">ar.js</code>. Each file exports constants that
-represent the greeting message in a specific language. Here are the contents of the files:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// translations/en.js</span>
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">GREETING</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hello world!</span><span class="dl">'</span><span class="p">;</span>
-</code></pre></div></div>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// translations/ar.js</span>
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">GREETING</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">مرحبا بالعالم!</span><span class="dl">'</span><span class="p">;</span>
-</code></pre></div></div>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// translations/de.js</span>
-<span class="k">export</span> <span class="kd">const</span> <span class="nx">GREETING</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">Hallo Welt!</span><span class="dl">'</span><span class="p">;</span>
-</code></pre></div></div>
-
-<p>The <code class="language-plaintext highlighter-rouge">main.js</code> file is the entry point of our application. It gets the user’s preferred language from the command
-line then imports the corresponding translation module dynamically if it exists.</p>
-
-<p>Here is the content of the <code class="language-plaintext highlighter-rouge">main.js</code> file:</p>
-
-<div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// main.js</span>
-<span class="kd">const</span> <span class="nx">languages</span> <span class="o">=</span> <span class="p">[</span><span class="dl">'</span><span class="s1">en</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">de</span><span class="dl">'</span><span class="p">,</span> <span class="dl">'</span><span class="s1">ar</span><span class="dl">'</span><span class="p">];</span>
-<span class="kd">const</span> <span class="nx">defaultLanguage</span> <span class="o">=</span> <span class="dl">'</span><span class="s1">en</span><span class="dl">'</span><span class="p">;</span>
-
-<span class="kd">const</span> <span class="nx">language</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">||</span> <span class="nx">defaultLanguage</span><span class="p">;</span>
-
-<span class="k">if </span><span class="p">(</span><span class="o">!</span><span class="nx">languages</span><span class="p">.</span><span class="nf">includes</span><span class="p">(</span><span class="nx">language</span><span class="p">))</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nf">error</span><span class="p">(</span><span class="s2">`Unsupported language: </span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">`</span><span class="p">);</span>
-    <span class="nx">process</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// Get advantage of top-level await</span>
-<span class="kd">const</span> <span class="p">{</span><span class="nx">GREETING</span><span class="p">}</span> <span class="o">=</span> <span class="k">await</span> <span class="k">import</span><span class="p">(</span><span class="s2">`./translations/</span><span class="p">${</span><span class="nx">language</span><span class="p">}</span><span class="s2">.js`</span><span class="p">);</span>
-<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nx">GREETING</span><span class="p">);</span>
-</code></pre></div></div>
-
-<p>To run the application, execute the following command:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node main.js de
-</code></pre></div></div>
-
-<p>In the <code class="language-plaintext highlighter-rouge">main.js</code> we used the <code class="language-plaintext highlighter-rouge">import()</code> expression, commonly called dynamic import. This expression will be evaluated
-at runtime, and the module will be loaded asynchronously. The <code class="language-plaintext highlighter-rouge">await</code> keyword is used to wait for the module to be
-loaded before continuing the execution.</p>
-
-<div class="tip">
-  <p>Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking.</p>
-</div>
-
-<p>That’s it! You have learned how to use dynamic imports in ESM modules.</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><summary type="html"><![CDATA[One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use require to import modules anywhere in your code, but in ESM you can only use import at the top level of your code. What if you want to import a module dynamically in ESM?]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/dog-running.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/dog-running.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+It’s about striking a balance between empathy and accountability.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m kidding, of course. My pipelines are just like yours. They fail, and they fail a lot.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/plumbers.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/plumbers.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
