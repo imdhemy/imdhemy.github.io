@@ -1,6 +1,88 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2025-05-15T15:44:05+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.3.4">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2025-10-21T18:07:42+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
 Passionate about open source, blogging, and reading.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">How Small Changes Can Drive Big Results Without Blocking the Business</title><link href="https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/" rel="alternate" type="text/html" title="How Small Changes Can Drive Big Results Without Blocking the Business" /><published>2025-05-15T00:00:00+00:00</published><updated>2025-05-15T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites</id><content type="html" xml:base="https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/"><![CDATA[<p>Software serves the business, not the other way around. Yet many technical teams struggle to balance improving their
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</title><link href="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/" rel="alternate" type="text/html" title="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization" /><published>2025-10-21T00:00:00+00:00</published><updated>2025-10-21T00:00:00+00:00</updated><id>https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization</id><content type="html" xml:base="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/"><![CDATA[<p>“<strong>An electronic computer and a religious mission are not very closely associated in most people’s minds</strong>”. This is
+how “<em>The Catholic Standard and Times</em>”
+started <a href="https://www.thecatholicnewsarchive.org/?a=d&amp;d=cst19590911-01.2.96&amp;e=-------en-20--1--txt-txIN--------">its article</a>
+published on 11 September 1959 about how Personalized
+mailing lead to response rate of 80%!! Here we are talking about traditional mainling.</p>
+
+<p>Before telling the full story, let’s set the context. In the 1950s, they use Punched cards and magnetic tape to store
+and process data.</p>
+
+<h2 id="ibm-026-key-punch">IBM 026 Key Punch</h2>
+
+<div class="flex justify-center">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Y0GurDnBK8E?si=hzD81HdfNR59EmkQ&amp;start=81" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+</div>
+
+<h2 id="the-cutting-edge-ibm-650-magnetic-tape-system">The Cutting-Edge IBM 650 Magnetic Tape System</h2>
+
+<div class="flex justify-center">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/x7nq-rxYHXk?si=Lh-Ww4piftIvK4Q-&amp;start=4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+</div>
+
+<h2 id="the-imb-1403-printer">The IMB 1403 Printer</h2>
+
+<div class="flex justify-center">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/xmetWufc_44?si=ZkzRjm0LYbEXy_qT&amp;start=49" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+
+</div>
+
+<h2 id="the-story">The Story</h2>
+
+<p>Each year, the Society of the Divine Savior sent out appeals to benefactors supporting its seven seminaries, missions,
+camps, and schools in the U.S. and Africa. To do this, they used the IBM 650 Electronic Data Processing
+Machine—cutting-edge at the time—to reach each benefactor <strong>by name</strong>, matching the appeal with a seminary, mission, or
+project they were genuinely interested in.</p>
+
+<p>This personalized approach worked remarkably well, according to Salvatorian spokesmen. Not only did it bring strong
+responses, but it also reduced mailing costs. Letters were never sent to generic addresses like “occupant,” but only to
+those who had shown real interest in the work.</p>
+
+<p>The computer stored detailed, up-to-date records of benefactors as electrical impulses on magnetic tapes. When they
+planned an appeal for a specific mission, they fed punched card instructions into the computer. In response, the IBM 650
+created a new tape listing past contributors to that mission. From this tape, it could print mailing address cards at
+speeds of up to 9,000 per hour. It also printed or punched cards used by another unit to generate the appeal or
+acknowledgment letters.</p>
+
+<p>When new responses or names came in, operators punched IBM cards with the updated information. These were fed into the
+system weekly, allowing the computer to add new names and update donation records.</p>
+
+<p>Now think about this—it was 1959. Yet they were already working with a functioning donor database stored on IBM magnetic
+tape. Each record, packed into just 341 characters, held names, addresses, appeal history, response times, types of
+appeals that worked, donation sizes, total contributions, and more. They used this data to predict future behavior and
+plan smarter campaigns. In many ways, they were already doing data-driven outreach long before it became the norm.</p>
+
+<h2 id="tha-raw-basics-of-customer-data-management">Tha raw basics of customer data management</h2>
+
+<p>Many modern marketers think they can’t take lessons from the past, hey they didn’t have TikTok back then! But the
+fundamentals are quite obvious in this story, the same exact timeless “stack” of customer data management is still valid
+today:</p>
+
+<ul>
+  <li>“<strong>Data Capture</strong>”: capture and ingest data from multiple sources.</li>
+  <li>“<strong>Data Storage</strong>”: Persistent, available storage of relevant customer data.</li>
+  <li>“<strong>Data Processing</strong>”: Process data to generate actionable insights.</li>
+  <li>“<strong>Data Activation</strong>”: Turn the output of processing into signals.</li>
+  <li>“<strong>Engagement</strong>”: Send the signals to multiple channels to engage customers.</li>
+  <li>“<strong>Measurement</strong>”: Track and optimize.</li>
+</ul>
+
+<p>What the Society of the Divine Savior did in 1959 wasn’t just impressive for its time; it was <strong>visionary</strong>. They
+treated their data not as a pile of records, but as relationships. Every punch card, every tape, every printed letter
+represented a person who cared about something real.</p>
+
+<p>Fast-forward to today, and the tools have changed: from magnetic tapes to cloud databases, from letters to personalized
+emails and ads, but the idea remains the same. <strong>Understand people, respect their interests, and communicate with
+purpose.</strong></p>
+
+<p>The Salvatorians were running a data-driven mission decades before “CRM” or “marketing automation” even existed. Maybe
+that’s the real lesson here: technology evolves, but empathy and precision never go out of style.</p>]]></content><author><name>Dhemy</name></author><category term="customer data" /><summary type="html"><![CDATA[“An electronic computer and a religious mission are not very closely associated in most people’s minds”. This is how “The Catholic Standard and Times” started its article published on 11 September 1959 about how Personalized mailing lead to response rate of 80%!! Here we are talking about traditional mainling.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">How Small Changes Can Drive Big Results Without Blocking the Business</title><link href="https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/" rel="alternate" type="text/html" title="How Small Changes Can Drive Big Results Without Blocking the Business" /><published>2025-05-15T00:00:00+00:00</published><updated>2025-05-15T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites</id><content type="html" xml:base="https://imdhemy.com/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/"><![CDATA[<p>Software serves the business, not the other way around. Yet many technical teams struggle to balance improving their
 code with delivering value. This blog explores why lean, incremental change often wins over big-bang rewrites, and how
 small, accessible improvements can unlock results, foster a culture of ownership, and create many leaders, not just one.</p>
 
@@ -1387,117 +1469,4 @@ decision strategy.</p>
 <p>In this post, we covered some of the basics of Symfony’s security system that you should know before using voters.
 understanding them will help you make the most out of Symfony’s security system. You should always consult the Symfony
 documentation for the most up-to-date information and best practices. In the next article, we will cover how to create
-a custom voter and how to use it in your application.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you should know before using voters.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/voting.webp" /><media:content medium="image" url="https://imdhemy.com/assets/img/voting.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">The pipeline ate my code</title><link href="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html/" rel="alternate" type="text/html" title="The pipeline ate my code" /><published>2024-03-30T00:00:00+00:00</published><updated>2024-03-30T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/the-pipeline-ate-my-code</id><content type="html" xml:base="https://imdhemy.com/blog/generic/the-pipeline-ate-my-code.html/"><![CDATA[<p>I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are
-always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m
-kidding, of course. My pipelines are just like yours. They fail, and they fail a lot.</p>
-
-<p>Imagine working with a team member who exudes confidence at every turn, is self-centered, and repeatedly stumbles over
-the simplest tasks. Welcome to the puzzling world of the <strong>Dunning-Kruger Effect</strong> <em>where the less you know, the more
-you think you know, leaving you with a false sense of confidence.</em> This does not only affect your ability to learn and
-grow, but it also affects the team’s productivity and morale leaving behind a trail of stressed-out and unsatisfied team
-members.</p>
-
-<p>In this article, we’ll shine a light on the challenges posed by such colleagues and explore strategies for mitigating
-their impact on team productivity and morale.</p>
-
-<h2 id="understanding-the-dunning-kruger-effect">Understanding the Dunning-Kruger Effect</h2>
-
-<p>Let’s start by understanding
-the <a href="https://www.semanticscholar.
-org/paper/Unskilled-and-unaware-of-it%3A-how-difficulties-in-to-Kruger-Dunning
-/f2c80eef3585e0569e93ace0b9770cf76c8ebabc?p2df">Dunning-Kruger Effect</a>. Imagine you are learning to play a musical instrument, and in your
-mind, you are the next Beethoven. The reality? You sound more like a cat walking on a piano.</p>
-
-<p>That’s the Dunning-Kruger Effect in action. It’s the tendency of individuals with limited knowledge or skills to
-over-inflate their own abilities. They are unable to recognize their incompetence, leading them to believe they are
-better than they actually are.</p>
-
-<p>When you are in the presence of a colleague who is a victim of the Dunning-Kruger Effect, you might notice the following
-traits:</p>
-
-<ol>
-  <li><strong>Inability to accept feedback</strong>: They are resistant to feedback and often dismiss it.</li>
-  <li><strong>Lack of self-awareness</strong>: They are unable to recognize their own incompetence.</li>
-  <li><strong>Inability to collaborate</strong>: They are unable to work effectively with others.</li>
-  <li><strong>Inability to take responsibility</strong>: They are unable to take responsibility for their actions.</li>
-  <li><strong>Inability to adapt</strong>: They are unable to adapt to new situations.</li>
-  <li><strong>Inability to communicate</strong>: They are unable to communicate effectively.</li>
-</ol>
-
-<p>Responsibility isn’t just about ticking off boxes on a to-do list—it’s about understanding the bigger picture and how
-your role fits into the grand scheme of things. It’s about being accountable for your actions and the impact they have
-on the team’s success. In a software development setting, this means knowing your tasks inside out, collaborating
-effectively with your peers, and owning up to your mistakes when things don’t go as planned. After all, a chain is only
-as strong as its weakest link, and in a team environment, everyone’s contribution matters.</p>
-
-<h2 id="impact-on-team-dynamics">Impact on Team Dynamics</h2>
-
-<p>The Dunning-Kruger Effect can have a significant impact on team dynamics. When a team member is blinded by their
-overconfidence, taking over tasks she is not qualified for without regard for collaboration nor feedback. This
-misplaced confidence not only hinders her progress but also creates a friction within the team. Others are left
-picking up the pieces, feeling frustrated and demotivated by the lack of accountability and miss-communication.</p>
-
-<p>In a team environment, trust and collaboration are the cornerstones of success. When one team member fails to pull their
-weight, it creates a ripple effect that can lead to missed deadlines, poor-quality work, and strained relationships.
-The result? A fractured team struggling to stay afloat in a sea of discord.</p>
-
-<h2 id="navigating-stress-and-frustration">Navigating Stress and Frustration</h2>
-
-<p>As we come face to face with the challenges posed by the Dunning-Kruger team member, it’s essential to raise
-awareness about the cost it takes on individual stress level. Being in a constant state of frustration, trying to
-navigate the maze of misplaced confidence and lack of accountability, can take a toll on one’s mental health and
-well-being. Their refusal to accept feedback and collaborate effectively can lead to a toxic work environment where
-team members feel undervalued and unappreciated.</p>
-
-<p>Navigating stress and frustration in such an environment requires patience, resilience, and a healthy dose of
-self-care. Take a step back, breathe, and remind yourself that you’re doing the best you can in a challenging situation.
-Seek support from trusted colleagues and mentors, and don’t hesitate to communicate your concerns with your team leader.
-Together, we can weather the storm and emerge stronger on the other side.</p>
-
-<p>It’s not that easy to talk openly about such issues, but it’s essential to address them before they escalate. It’s
-the responsibility of the team leader to create a safe space where team members can voice their concerns without fear of
-being judged or dismissed. The open and honest communication is the key to resolving conflicts.</p>
-
-<h2 id="promoting-self-awareness-and-accountability">Promoting Self-Awareness and Accountability</h2>
-
-<p>It’s important to promote self-awareness and accountability within the team. One of the effective ways for doing so is
-encourage regular self-reflection. Encourage team members to take a step back and evaluate their performance
-objectively, identifying areas for improvement and acknowledging their own shortcomings.</p>
-
-<p>Additionally, it’s essential to foster a culture of open feedback and constructive criticism. This will help team
-members to recognize the blind spots and work towards addressing them.</p>
-
-<p>Accountability goes hand in hand with self-awareness. It’s about taking ownership of one’s actions and their impact on
-the team’s success. Encourage team members to take responsibility for their mistakes and learn from them. This will not
-only help them grow professionally but also foster a sense of trust and collaboration within the team. By fostering a
-culture of transparency and accountability, we create an environment where continuous learning and improvement thrive.</p>
-
-<h2 id="addressing-the-root-cause">Addressing the Root Cause</h2>
-
-<p>Digging beneath the surface, uncovering the deep-rooted causes of this behavior is crucial to examine what give rise to
-the Dunning-Kruger Effect within the team. Is it a lack of training and development opportunities? Is it a lack of
-feedback and mentorship? Is it a lack of recognition and appreciation? By identifying the underlying causes, we can take
-proactive steps to address them and create a supportive work environment where team
-members can thrive.</p>
-
-<h2 id="creating-a-supportive-work-environment">Creating a Supportive Work Environment</h2>
-
-<p>Sometimes, our empathy towards our colleagues who are struggling with the Dunning-Kruger Effect or any other challenges
-can affect our responsibility towards the other team members who are affected by their behavior. It’s essential to
-strike a balance between empathy and accountability. Supportive work environment is not meant only for those who are
-misplacing their confidence but also for those who are affected by their behavior.</p>
-
-<p>On the other hand, embracing a culture of humility and continuous learning can help mitigate the issue. This
-means recognizing that we all have areas where we can improve and that seeking assistance is not a sign of weakness, but
-rather a demonstration of self-awareness and maturity. In a supportive work environment, team members are empowered to
-share their challenges openly, knowing that their colleagues will offer support and guidance without judgment.</p>
-
-<h2 id="conclusion-balancing-empathy-and-accountability">Conclusion: Balancing Empathy and Accountability</h2>
-
-<p>In the dynamic landscape of software development, navigating the challenges posed by the Dunning-Kruger Effect
-requires a delicate balance of empathy, accountability, and continuous learning. By fostering a supportive work
-environment where humility, openness, and collaboration are championed, we can mitigate the impact of overconfidence,
-empower team members to thrive, and build stronger, more resilient teams capable of overcoming any obstacle.</p>
-
-<p>Helping a team member who struggles does not mean to forget about the other team members, they also need your support.
-It’s about striking a balance between empathy and accountability.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><summary type="html"><![CDATA[I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m kidding, of course. My pipelines are just like yours. They fail, and they fail a lot.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/plumbers.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/plumbers.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+a custom voter and how to use it in your application.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><summary type="html"><![CDATA[Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you should know before using voters.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/voting.webp" /><media:content medium="image" url="https://imdhemy.com/assets/img/voting.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
