@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Math Notes about Sum Formulas
-categories: DSA
+categories: dsa
 math: true
 ---
 

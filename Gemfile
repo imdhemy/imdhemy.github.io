@@ -40,6 +40,8 @@ platforms :mingw, :x64_mingw, :mswin, :jruby do
 end
 gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
+gem "csv"
+gem "base64"
 
 # ------------------------------------------------------------------------------
 # Custom Installed Gems
@@ -48,4 +50,4 @@ gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
 # If you have any custom installed gems, put them here!
 #
 
-gem "jekyll-remote-theme", "~> 0.4.3"
+gem "imdhemy-jekyll-theme", "~> 0.4.0"
