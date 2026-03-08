@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>php</title>
     <meta name="description"
-          content="I&#39;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. Passionate about open source, blogging, and reading.">
+          content="I&#39;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights. I work across the full customer data lifec...">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
           rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #eef4ff;
+            --color-surface: #ffffff;
+            --color-text: #0f172a;
+            --color-muted: #475569;
+            --color-border: #c9d8f2;
+            --color-brand: #3b82f6;
+            --color-brand-strong: #2563eb;
+            --color-brand-soft: #dbeafe;
+            --color-brand-surface: #eff6ff;
+            --color-success: #16a34a;
+            --color-info: #2563eb;
+            --color-warning: #d97706;
+            --color-danger: #dc2626;
+        }
+    </style>
 
     <link rel="canonical" href="https://imdhemy.com/category/php/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
@@ -27,79 +44,114 @@
     
 
 </head>
-<body class="min-h-screen">
-<div class="min-h-screen">
-    <header class="relative" id="main-header">
-    <div class="container mx-auto">
-        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
             <!-- begin logo -->
-            <div class="flex-auto">
-                <div>
-                    <a href="/" class="text-gray-900 text-3xl font-bold">
-                        Imdhemy
-                    </a>
-                </div>
+            <div class="site-header__brand">
+                <a href="/" class="site-logo">
+                    Imdhemy
+                </a>
             </div>
             <!-- end logo -->
             <!-- begin right part -->
-            <div class="flex-auto">
-                <div class="flex justify-end lg:hidden">
-                    <button type="button" class="menu-toggle" data-target="#mobile-nav">
+            <div class="site-header__actions">
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button" class="site-header__toggle" data-target="#mobile-nav" aria-controls="mobile-nav"
+                            aria-expanded="false" aria-label="Toggle navigation menu">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
                 </div>
 
-                <div class="hidden lg:flex justify-end">
-                    <ul class="flex items-center">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/blog"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link is-active">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/about"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 About
                             </a>
                         </li>
                         
                     </ul>
-                </div>
+                </nav>
                 <!-- end right part -->
             </div>
             <!-- begin mobile nav -->
             <nav id="mobile-nav"
-                 class="menu -z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
-                <div class="ml-auto">
-                    <ul class="p-0 m-0 flex-column items-center">
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation">
+                <div class="site-mobile-nav__inner">
+                    <ul class="site-mobile-nav__list">
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/blog"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link is-active">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/about"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 About
                             </a>
                         </li>
@@ -112,14 +164,15 @@
     </div>
 </header>
 
-    <main>
-        <section class="bg-white p-0">
-    <div class="container mx-auto">
-        <div class="max-w-screen-md mx-auto border-b border-b-gray-200 py-16 mb-16">
-            <div class="flex-col px-5 lg:px-0">
-                <h1 class="text-8xl mb-8 font-bold text-center relative">php</h1>
-                <p class="text-center text-xl text-gray-700">Check out the <a
-                        class="text-black font-bold border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+    <main id="main-content">
+        <article class="archive-hub">
+    <section class="page-header-wrap page-header-wrap--archive">
+    <div class="page-header-wrap__container">
+        <div class="page-header page-header--archive page-header--archive-hub">
+            <div class="page-header__layout page-header__layout--stacked">
+                <h1 class="page-header__title page-header__title--centered">php</h1>
+                <p class="page-header__description page-header__description--centered">Check out the <a
+                        class="archive-header__blog-link"
                         href="/blog">blog</a> for all
                     posts.</p>
             </div>
@@ -128,275 +181,600 @@
 </section>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5">
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+    <div class="post-listing archive-hub__listing">
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/php/better-alternatives-to-empty-in-php.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/desert.jpg"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
+             class="post-card__image-el"
              alt="Better alternatives to empty() in PHP"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Jul 19, 2024 · 5 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/code-quality"
+       class="tag-pill">
+        #code-quality
+    </a>
+    
+    
+    <a href="/tag/language-features"
+       class="tag-pill">
+        #language-features
+    </a>
+    
+    
+    <a href="/tag/static-analysis"
+       class="tag-pill">
+        #static-analysis
+    </a>
+    
+    
+    <a href="/tag/best-practices"
+       class="tag-pill">
+        #best-practices
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/better-alternatives-to-empty-in-php.html/">Better alternatives to empty() in PHP</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve...
         </div>
+        <a class="post-card__read-link" href="/blog/php/better-alternatives-to-empty-in-php.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/php/singleton-design-pattern-in-laravel.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/stay_single.jpeg"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
+             class="post-card__image-el"
              alt="Singleton Design Pattern in Laravel"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Apr 15, 2024 · 5 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/laravel"
+       class="tag-pill">
+        #laravel
+    </a>
+    
+    
+    <a href="/tag/singleton"
+       class="tag-pill">
+        #singleton
+    </a>
+    
+    
+    <a href="/tag/service-container"
+       class="tag-pill">
+        #service-container
+    </a>
+    
+    
+    <a href="/tag/dependency-injection"
+       class="tag-pill">
+        #dependency-injection
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/singleton-design-pattern-in-laravel.html/">Singleton Design Pattern in Laravel</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”. But...
         </div>
+        <a class="post-card__read-link" href="/blog/php/singleton-design-pattern-in-laravel.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/vote.jpeg"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
+             class="post-card__image-el"
              alt="How to avoid boilerplate code in Symfony Voters"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Apr 3, 2024 · 10 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/symfony"
+       class="tag-pill">
+        #symfony
+    </a>
+    
+    
+    <a href="/tag/authorization"
+       class="tag-pill">
+        #authorization
+    </a>
+    
+    
+    <a href="/tag/code-reuse"
+       class="tag-pill">
+        #code-reuse
+    </a>
+    
+    
+    <a href="/tag/voters"
+       class="tag-pill">
+        #voters
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html/">How to avoid boilerplate code in Symfony Voters</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have...
         </div>
+        <a class="post-card__read-link" href="/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/php/what-symfony-developers-should-know-before-using-voters.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/voting.webp"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
+             class="post-card__image-el"
              alt="What Symfony developers should know before using Voters"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Apr 2, 2024 · 5 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/symfony"
+       class="tag-pill">
+        #symfony
+    </a>
+    
+    
+    <a href="/tag/authorization"
+       class="tag-pill">
+        #authorization
+    </a>
+    
+    
+    <a href="/tag/security"
+       class="tag-pill">
+        #security
+    </a>
+    
+    
+    <a href="/tag/voters"
+       class="tag-pill">
+        #voters
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/what-symfony-developers-should-know-before-using-voters.html/">What Symfony developers should know before using Voters</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them...
         </div>
+        <a class="post-card__read-link" href="/blog/php/what-symfony-developers-should-know-before-using-voters.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/php/hidden-gems-in-composer.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/glass-on-music-notes.jpeg"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
+             class="post-card__image-el"
              alt="Hidden Gems in Composer Every PHP Developer Should Know"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Apr 16, 2023 · 3 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/composer"
+       class="tag-pill">
+        #composer
+    </a>
+    
+    
+    <a href="/tag/dependency-management"
+       class="tag-pill">
+        #dependency-management
+    </a>
+    
+    
+    <a href="/tag/developer-tools"
+       class="tag-pill">
+        #developer-tools
+    </a>
+    
+    
+    <a href="/tag/security"
+       class="tag-pill">
+        #security
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/hidden-gems-in-composer.html/">Hidden Gems in Composer Every PHP Developer Should Know</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Composer is the most popular PHP dependency manager. I’ve heard about other package managers like PEAR &amp; Phing, but I’ve...
         </div>
+        <a class="post-card__read-link" href="/blog/php/hidden-gems-in-composer.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Dec 30, 2021 · 5 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/design-patterns"
+       class="tag-pill">
+        #design-patterns
+    </a>
+    
+    
+    <a href="/tag/singleton"
+       class="tag-pill">
+        #singleton
+    </a>
+    
+    
+    <a href="/tag/laravel"
+       class="tag-pill">
+        #laravel
+    </a>
+    
+    
+    <a href="/tag/software-architecture"
+       class="tag-pill">
+        #software-architecture
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html/">PHP Real-world use cases of singleton design pattern</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers...
         </div>
+        <a class="post-card__read-link" href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Sep 9, 2021 · 7 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/testing"
+       class="tag-pill">
+        #testing
+    </a>
+    
+    
+    <a href="/tag/elasticsearch"
+       class="tag-pill">
+        #elasticsearch
+    </a>
+    
+    
+    <a href="/tag/integration-testing"
+       class="tag-pill">
+        #integration-testing
+    </a>
+    
+    
+    <a href="/tag/unit-testing"
+       class="tag-pill">
+        #unit-testing
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/how-to-test-elasticsearch-in-php-apps.html/">How to test Elasticsearch in PHP applications</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v...
         </div>
+        <a class="post-card__read-link" href="/blog/php/how-to-test-elasticsearch-in-php-apps.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Jun 2, 2021 · 10 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/design-patterns"
+       class="tag-pill">
+        #design-patterns
+    </a>
+    
+    
+    <a href="/tag/builder-pattern"
+       class="tag-pill">
+        #builder-pattern
+    </a>
+    
+    
+    <a href="/tag/domain-modeling"
+       class="tag-pill">
+        #domain-modeling
+    </a>
+    
+    
+    <a href="/tag/oop"
+       class="tag-pill">
+        #oop
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html/">Why you need a builder to create your entities and models</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the...
         </div>
+        <a class="post-card__read-link" href="/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+        
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">May 16, 2021 · 7 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/design-patterns"
+       class="tag-pill">
+        #design-patterns
+    </a>
+    
+    
+    <a href="/tag/static-factory"
+       class="tag-pill">
+        #static-factory
+    </a>
+    
+    
+    <a href="/tag/object-creation"
+       class="tag-pill">
+        #object-creation
+    </a>
+    
+    
+    <a href="/tag/oop"
+       class="tag-pill">
+        #oop
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html/">Three advantages of using static factory methods in PHP</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow...
         </div>
+        <a class="post-card__read-link" href="/blog/php/three-advantages-of-using-static-factory-methods-in-php.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-</div>
+        
+        
+    </div>
+</article>
 
     </main>
-    <section class="sticky top-[100vh]">
-    <div class="p-10">
-        <div class="max-w-screen-md mx-auto">
-            <p class="text-center">
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
                 <!-- 2001 - jekyll current year -->
                 &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
             </p>

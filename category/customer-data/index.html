@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>customer data</title>
     <meta name="description"
-          content="I&#39;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. Passionate about open source, blogging, and reading.">
+          content="I&#39;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights. I work across the full customer data lifec...">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
           rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #eef4ff;
+            --color-surface: #ffffff;
+            --color-text: #0f172a;
+            --color-muted: #475569;
+            --color-border: #c9d8f2;
+            --color-brand: #3b82f6;
+            --color-brand-strong: #2563eb;
+            --color-brand-soft: #dbeafe;
+            --color-brand-surface: #eff6ff;
+            --color-success: #16a34a;
+            --color-info: #2563eb;
+            --color-warning: #d97706;
+            --color-danger: #dc2626;
+        }
+    </style>
 
     <link rel="canonical" href="https://imdhemy.com/category/customer-data/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
@@ -27,79 +44,114 @@
     
 
 </head>
-<body class="min-h-screen">
-<div class="min-h-screen">
-    <header class="relative" id="main-header">
-    <div class="container mx-auto">
-        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
             <!-- begin logo -->
-            <div class="flex-auto">
-                <div>
-                    <a href="/" class="text-gray-900 text-3xl font-bold">
-                        Imdhemy
-                    </a>
-                </div>
+            <div class="site-header__brand">
+                <a href="/" class="site-logo">
+                    Imdhemy
+                </a>
             </div>
             <!-- end logo -->
             <!-- begin right part -->
-            <div class="flex-auto">
-                <div class="flex justify-end lg:hidden">
-                    <button type="button" class="menu-toggle" data-target="#mobile-nav">
+            <div class="site-header__actions">
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button" class="site-header__toggle" data-target="#mobile-nav" aria-controls="mobile-nav"
+                            aria-expanded="false" aria-label="Toggle navigation menu">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
                 </div>
 
-                <div class="hidden lg:flex justify-end">
-                    <ul class="flex items-center">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/blog"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link is-active">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/about"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 About
                             </a>
                         </li>
                         
                     </ul>
-                </div>
+                </nav>
                 <!-- end right part -->
             </div>
             <!-- begin mobile nav -->
             <nav id="mobile-nav"
-                 class="menu -z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
-                <div class="ml-auto">
-                    <ul class="p-0 m-0 flex-column items-center">
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation">
+                <div class="site-mobile-nav__inner">
+                    <ul class="site-mobile-nav__list">
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/blog"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link is-active">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/about"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 About
                             </a>
                         </li>
@@ -112,14 +164,15 @@
     </div>
 </header>
 
-    <main>
-        <section class="bg-white p-0">
-    <div class="container mx-auto">
-        <div class="max-w-screen-md mx-auto border-b border-b-gray-200 py-16 mb-16">
-            <div class="flex-col px-5 lg:px-0">
-                <h1 class="text-8xl mb-8 font-bold text-center relative">customer data</h1>
-                <p class="text-center text-xl text-gray-700">Check out the <a
-                        class="text-black font-bold border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+    <main id="main-content">
+        <article class="archive-hub">
+    <section class="page-header-wrap page-header-wrap--archive">
+    <div class="page-header-wrap__container">
+        <div class="page-header page-header--archive page-header--archive-hub">
+            <div class="page-header__layout page-header__layout--stacked">
+                <h1 class="page-header__title page-header__title--centered">customer data</h1>
+                <p class="page-header__description page-header__description--centered">Check out the <a
+                        class="archive-header__blog-link"
                         href="/blog">blog</a> for all
                     posts.</p>
             </div>
@@ -128,47 +181,84 @@
 </section>
 
 
-<div class="max-w-screen-md mx-auto bg-white p-5">
-    
-    
-    <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+    <div class="post-listing archive-hub__listing">
+        
+        
+        
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/customer%20data/customer-data-management-1959-personalization.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
+             class="post-card__image-el"
              alt="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Oct 21, 2025 · 3 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/customer-data"
+       class="tag-pill">
+        #customer-data
+    </a>
+    
+    
+    <a href="/tag/personalization"
+       class="tag-pill">
+        #personalization
+    </a>
+    
+    
+    <a href="/tag/marketing-history"
+       class="tag-pill">
+        #marketing-history
+    </a>
+    
+    
+    <a href="/tag/crm"
+       class="tag-pill">
+        #crm
+    </a>
+    
+    
+    <a href="/tag/data-strategy"
+       class="tag-pill">
+        #data-strategy
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/customer%20data/customer-data-management-1959-personalization.html/">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             “An electronic computer and a religious mission are not very closely associated in most people’s minds”. This is how “The...
         </div>
+        <a class="post-card__read-link" href="/blog/customer%20data/customer-data-management-1959-personalization.html/">Read article &rarr;</a>
     </div>
 </article>
 
-    
-    
-</div>
+        
+        
+    </div>
+</article>
 
     </main>
-    <section class="sticky top-[100vh]">
-    <div class="p-10">
-        <div class="max-w-screen-md mx-auto">
-            <p class="text-center">
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
                 <!-- 2001 - jekyll current year -->
                 &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
             </p>

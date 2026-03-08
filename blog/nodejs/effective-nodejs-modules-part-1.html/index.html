@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Effective Node.js Modules - Part 1: Basic Syntax</title>
     <meta name="description"
@@ -12,10 +12,27 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
           rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #eef4ff;
+            --color-surface: #ffffff;
+            --color-text: #0f172a;
+            --color-muted: #475569;
+            --color-border: #c9d8f2;
+            --color-brand: #3b82f6;
+            --color-brand-strong: #2563eb;
+            --color-brand-soft: #dbeafe;
+            --color-brand-surface: #eff6ff;
+            --color-success: #16a34a;
+            --color-info: #2563eb;
+            --color-warning: #d97706;
+            --color-danger: #dc2626;
+        }
+    </style>
 
     <link rel="canonical" href="https://imdhemy.com/blog/nodejs/effective-nodejs-modules-part-1.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
@@ -45,79 +62,114 @@
     
 
 </head>
-<body class="min-h-screen">
-<div class="min-h-screen">
-    <header class="relative" id="main-header">
-    <div class="container mx-auto">
-        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
             <!-- begin logo -->
-            <div class="flex-auto">
-                <div>
-                    <a href="/" class="text-gray-900 text-3xl font-bold">
-                        Imdhemy
-                    </a>
-                </div>
+            <div class="site-header__brand">
+                <a href="/" class="site-logo">
+                    Imdhemy
+                </a>
             </div>
             <!-- end logo -->
             <!-- begin right part -->
-            <div class="flex-auto">
-                <div class="flex justify-end lg:hidden">
-                    <button type="button" class="menu-toggle" data-target="#mobile-nav">
+            <div class="site-header__actions">
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button" class="site-header__toggle" data-target="#mobile-nav" aria-controls="mobile-nav"
+                            aria-expanded="false" aria-label="Toggle navigation menu">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
                 </div>
 
-                <div class="hidden lg:flex justify-end">
-                    <ul class="flex items-center">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/blog"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link is-active">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/about"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 About
                             </a>
                         </li>
                         
                     </ul>
-                </div>
+                </nav>
                 <!-- end right part -->
             </div>
             <!-- begin mobile nav -->
             <nav id="mobile-nav"
-                 class="menu -z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
-                <div class="ml-auto">
-                    <ul class="p-0 m-0 flex-column items-center">
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation">
+                <div class="site-mobile-nav__inner">
+                    <ul class="site-mobile-nav__list">
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/blog"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link is-active">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/about"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 About
                             </a>
                         </li>
@@ -130,38 +182,65 @@
     </div>
 </header>
 
-    <main>
-        <div class="max-w-screen-md mx-auto bg-white p-5">
-    <h1 class="font-black font-sans text-2xl lg:text-4xl post-title">Effective Node.js Modules - Part 1: Basic Syntax</h1>
+    <main id="main-content">
+        
+<div class="reading-progress" aria-hidden="true">
+    <span class="reading-progress__bar" data-reading-progress></span>
 </div>
 
-<div class="max-w-screen-md mx-auto bg-white p-5">
-    <div class="flex justify-between flex-wrap my-2">
-        <div class="flex items-center mr-8">
-            <img src="/theme/images/avatar.jpeg" alt=""
-                 class="rounded-full w-10 h-10 mr-3 block"/>
-            <div>
-                <p class="text-gray-700 text-sm font-bold">Dhemy</p>
-                <p class="text-gray-500 text-xs">
-                    January 7, 2024 - 9 min read
-                </p>
-            </div>
-        </div>
-    </div>
 
+<article class="post-page">
+    
+
+<div class="post-header">
+    <a class="post-back-link" href="/blog">&larr; Back to all posts</a>
+    <p class="post-header__meta">Jan 7, 2024 · 9 min read</p>
     <div>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/nodejs"
+       class="tag-pill">
+        #nodejs
+    </a>
+    
+    
+    <a href="/tag/javascript"
+       class="tag-pill">
+        #javascript
+    </a>
+    
+    
+    <a href="/tag/modules"
+       class="tag-pill">
+        #modules
+    </a>
+    
+    
+    <a href="/tag/commonjs"
+       class="tag-pill">
+        #commonjs
+    </a>
+    
+    
+    <a href="/tag/esm"
+       class="tag-pill">
+        #esm
+    </a>
     
 </div>
 
+
     </div>
+    <h1 class="post-title">Effective Node.js Modules - Part 1: Basic Syntax</h1>
 
     
-    <div class="relative overflow-hidden">
+    <div class="post-image-wrap">
         <img src="/assets/img/dog-laptop-code-bed.jpeg"
              alt="Effective Node.js Modules - Part 1: Basic Syntax"
-             class="w-full h-auto rounded"/>
+             class="post-image"/>
         <!-- Image source -->
         
     </div>
@@ -169,7 +248,7 @@
 </div>
 
 
-<div class="m-auto max-w-screen-md bg-white p-5 text-xl content">
+    <div class="content-shell content read-surface">
     <p>Do you know what is the difference between the following two code snippets?</p>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="p">{</span><span class="nx">app</span><span class="p">,</span> <span class="nx">connection</span><span class="p">}</span> <span class="o">=</span> <span class="nf">require</span><span class="p">(</span><span class="dl">'</span><span class="s1">./config</span><span class="dl">'</span><span class="p">);</span>
@@ -299,9 +378,7 @@ modules based on a specific condition.</p>
 <h3 id="esm-ecmascript-module-system">ESM: ECMAScript module system</h3>
 
 <div class="tip">
-  <p>
-If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
-</p>
+  <p>If you want to use ESM modules, you need to set the “type” to module “module” in the package.json file. Or name your files with the “.mjs” extension.</p>
 </div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// package.json</span>
@@ -320,8 +397,7 @@ ESM modules became available without any command-line flags.</p>
 <p>ESM uses <code class="language-plaintext highlighter-rouge">export</code> to export modules and <code class="language-plaintext highlighter-rouge">import</code> to import modules.</p>
 
 <div class="tip">
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;ESM uses `export` in the singular format not `exports` like CJS.&lt;/p&gt;
-</code></pre></div>  </div>
+  <p>ESM uses <code class="language-plaintext highlighter-rouge">export</code> in the singular format not <code class="language-plaintext highlighter-rouge">exports</code> like CJS.</p>
 </div>
 
 <p>The following example shows how to export a function:</p>
@@ -429,8 +505,7 @@ original names. You can also use the <code class="language-plaintext highlighter
 <p>The ESM modules doesn’t support conditionally importing modules. All the imports should be at the top of the file.</p>
 
 <div class="danger">
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;p&gt;The following code will throw a SyntaxError: &lt;/p&gt;
-</code></pre></div>  </div>
+  <p>The following code will throw a SyntaxError:</p>
 </div>
 
 <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// app.mjs</span>
@@ -462,11 +537,517 @@ Image: <a href="https://unsplash.com/photos/a-dog-lays-on-a-bed-next-to-a-laptop
 </div>
 
 
+    
+
+<section class="post-navigation-shell">
+    <div class="post-navigation-shell__inner post-navigation">
+        
+        <a class="post-navigation__item" href="/blog/germany/from-code-to-german.html/">
+            <span class="post-navigation__label">Previous article</span>
+            <span class="post-navigation__title">From Code to German: My First Steps Towards Learning a New Language</span>
+        </a>
+        
+        
+        <a class="post-navigation__item post-navigation__item--next" href="/blog/nodejs/esm-dynamic-imports.html/">
+            <span class="post-navigation__label">Next article</span>
+            <span class="post-navigation__title">Effective Node.js Modules - Part 2: ESM dynamic imports</span>
+        </a>
+        
+    </div>
+</section>
+
+
+    
+
+
+
+
+<section class="related-posts-shell">
+    <div class="related-posts-shell__inner">
+        <h2 class="related-posts__heading">Keep reading</h2>
+        <div class="related-posts">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/">
+                <span class="related-posts__title">Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬</span>
+                <span class="related-posts__meta">Jan 18, 2025</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/nodejs/esm-dynamic-imports.html/">
+                <span class="related-posts__title">Effective Node.js Modules - Part 2: ESM dynamic imports</span>
+                <span class="related-posts__meta">Mar 25, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/customer%20data/customer-data-management-1959-personalization.html/">
+                <span class="related-posts__title">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</span>
+                <span class="related-posts__meta">Oct 21, 2025</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </div>
+    </div>
+</section>
+
+</article>
+
     </main>
-    <section class="sticky top-[100vh]">
-    <div class="p-10">
-        <div class="max-w-screen-md mx-auto">
-            <p class="text-center">
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
                 <!-- 2001 - jekyll current year -->
                 &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
             </p>

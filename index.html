@@ -3,19 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+          content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Imdhemy</title>
     <meta name="description"
-          content="I&#39;m a software artist, fullstack (BE heavy) with 10+ years of experience in software development. Passionate about open source, blogging, and reading.">
+          content="I&#39;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights. I work across the full customer data lifec...">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap"
           rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
           rel="stylesheet">
+    <style>
+        :root {
+            --color-bg: #eef4ff;
+            --color-surface: #ffffff;
+            --color-text: #0f172a;
+            --color-muted: #475569;
+            --color-border: #c9d8f2;
+            --color-brand: #3b82f6;
+            --color-brand-strong: #2563eb;
+            --color-brand-soft: #dbeafe;
+            --color-brand-surface: #eff6ff;
+            --color-success: #16a34a;
+            --color-info: #2563eb;
+            --color-warning: #d97706;
+            --color-danger: #dc2626;
+        }
+    </style>
 
     <link rel="canonical" href="https://imdhemy.com/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
@@ -27,79 +44,114 @@
     
 
 </head>
-<body class="min-h-screen">
-<div class="min-h-screen">
-    <header class="relative" id="main-header">
-    <div class="container mx-auto">
-        <div class="flex py-6 lg:py-14 p-5 lg:px-0">
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
             <!-- begin logo -->
-            <div class="flex-auto">
-                <div>
-                    <a href="/" class="text-gray-900 text-3xl font-bold">
-                        Imdhemy
-                    </a>
-                </div>
+            <div class="site-header__brand">
+                <a href="/" class="site-logo">
+                    Imdhemy
+                </a>
             </div>
             <!-- end logo -->
             <!-- begin right part -->
-            <div class="flex-auto">
-                <div class="flex justify-end lg:hidden">
-                    <button type="button" class="menu-toggle" data-target="#mobile-nav">
+            <div class="site-header__actions">
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button" class="site-header__toggle" data-target="#mobile-nav" aria-controls="mobile-nav"
+                            aria-expanded="false" aria-label="Toggle navigation menu">
                         <ion-icon name="menu-outline"></ion-icon>
                     </button>
                 </div>
 
-                <div class="hidden lg:flex justify-end">
-                    <ul class="flex items-center">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link is-active">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/blog"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="ml-10">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
                             <a href="/about"
-                               class="text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="nav-link">
                                 About
                             </a>
                         </li>
                         
                     </ul>
-                </div>
+                </nav>
                 <!-- end right part -->
             </div>
             <!-- begin mobile nav -->
             <nav id="mobile-nav"
-                 class="menu -z-10 opacity-0 absolute top-32 right-6 block min-w-fit w-40 bg-white p-5 rounded-md shadow-md ease-linear">
-                <div class="ml-auto">
-                    <ul class="p-0 m-0 flex-column items-center">
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation">
+                <div class="site-mobile-nav__inner">
+                    <ul class="site-mobile-nav__list">
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link is-active">
                                 Home
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/blog"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 Blog
                             </a>
                         </li>
                         
-                        <li class="block flex-1 w-full m-0">
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
                             <a href="/about"
-                               class="block text-right text-base font-semibold p-2 text-gray-900 ease-linear hover:text-blue-600 active:text-blue-600">
+                               class="site-mobile-nav__link nav-link">
                                 About
                             </a>
                         </li>
@@ -112,20 +164,29 @@
     </div>
 </header>
 
-    <main>
-        <section class="bg-white py-16">
-    <div class="container mx-auto">
-        <div class="flex flex-col items-center flex-wrap">
-            <div class="flex-1 px-8 max-w-2xl">
-                <div class="text-center mx-auto">
-                    <h1 class="text-3xl lg:text-6xl mb-8 lg:text-5xl font-bold">
-                        Hi, I'm <span class="text-blue-500">Dhemy</span>
+    <main id="main-content">
+        
+
+
+
+<section class="hero-section">
+    <div class="hero-section__container">
+        <div class="hero-section__layout">
+            <div class="hero-section__content">
+                <div class="hero-section__content-inner">
+                    <p class="hero-kicker">Personal blog and engineering notes</p>
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="hero-title__accent">Dhemy</span>
                     </h1>
-                    <p class="text-lg lg:text-2xl leading-8 lg:leading-10 text-gray-500">
-                        I'm a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
-Passionate about open source, blogging, and reading.
+                    <p class="hero-description">
+                        I'm a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
 
                     </p>
+                    <div class="hero-cta hero-cta--dual">
+                        <a href="/blog" class="primary-button">Start reading</a>
+                        <a href="/about" class="secondary-button">About me</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,54 +195,54 @@ Passionate about open source, blogging, and reading.
 
 
 
-<section class="mb-8">
-    <div class="container mx-auto">
-        <div class="p-5 max-w-screen-lg mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Contributions</h2>
+<section class="contributions">
+    <div class="contributions__container">
+        <div class="contributions__inner">
+            <h2 class="contributions__title">Contributions</h2>
 
-            <p class="text-center text-2xl text-gray-500 mb-8">I have contributed to some great projects</p>
+            <p class="contributions__subtitle">I have contributed to some great projects</p>
 
-            <div class="grid gap-4 grid-cols-1 lg:grid-cols-3">
+            <div class="contributions__grid">
                 
-                <div class="py-5 flex items-center flex-col">
-                    <a href="https://laravel.com" class="block ease-linear">
+                <div class="contributions__item">
+                    <a href="https://laravel.com" class="contributions__link">
                         <img src="theme/images/contributions/laravel.png"
-                             class="h-8 block" alt="Laravel">
+                             class="contributions__logo" alt="Laravel">
                     </a>
                 </div>
                 
-                <div class="py-5 flex items-center flex-col">
-                    <a href="https://spatie.be/open-source" class="block ease-linear">
+                <div class="contributions__item">
+                    <a href="https://spatie.be/open-source" class="contributions__link">
                         <img src="theme/images/contributions/spatie.png"
-                             class="h-8 block" alt="Spatie">
+                             class="contributions__logo" alt="Spatie">
                     </a>
                 </div>
                 
-                <div class="py-5 flex items-center flex-col">
-                    <a href="https://opensearch.org/" class="block ease-linear">
+                <div class="contributions__item">
+                    <a href="https://opensearch.org/" class="contributions__link">
                         <img src="theme/images/contributions/opensearch.png"
-                             class="h-8 block" alt="OpenSearch">
+                             class="contributions__logo" alt="OpenSearch">
                     </a>
                 </div>
                 
-                <div class="py-5 flex items-center flex-col">
-                    <a href="https://github.com/imdhemy/google-play-billing" class="block ease-linear">
+                <div class="contributions__item">
+                    <a href="https://github.com/imdhemy/google-play-billing" class="contributions__link">
                         <img src="theme/images/contributions/google-play-billing.png"
-                             class="h-8 block" alt="Google Play Billing">
+                             class="contributions__logo" alt="Google Play Billing">
                     </a>
                 </div>
                 
-                <div class="py-5 flex items-center flex-col">
-                    <a href="https://github.com/imdhemy/appstore-iap" class="block ease-linear">
+                <div class="contributions__item">
+                    <a href="https://github.com/imdhemy/appstore-iap" class="contributions__link">
                         <img src="theme/images/contributions/app-store-iap.png"
-                             class="h-8 block" alt="App Store IAP">
+                             class="contributions__logo" alt="App Store IAP">
                     </a>
                 </div>
                 
-                <div class="py-5 flex items-center flex-col">
-                    <a href="https://imdhemy.com/laravel-iap-docs/" class="block ease-linear">
+                <div class="contributions__item">
+                    <a href="https://imdhemy.com/laravel-iap-docs/" class="contributions__link">
                         <img src="theme/images/contributions/liap.png"
-                             class="h-8 block" alt="Laravel In-app Purchase">
+                             class="contributions__logo" alt="Laravel In-app Purchase">
                     </a>
                 </div>
                 
@@ -193,33 +254,31 @@ Passionate about open source, blogging, and reading.
 
 
 
-<section class="mb-8">
-    <div class="container mx-auto">
-        <div class="p-5 max-w-screen-lg mx-auto">
-            <h2 class="text-3xl font-bold text-center mb-8">Testimonials</h2>
-            <div class="grid gap-5 grid-cols-1 lg:grid-cols-3">
+<section class="testimonials">
+    <div class="testimonials__container">
+        <div class="testimonials__inner">
+            <h2 class="testimonials__title">Testimonials</h2>
+            <div class="testimonials__grid">
                 
                 <!-- Item start -->
-                <div class="w-full">
-                    <div class="relative p-8 overflow-hidden bg-violet-100 rounded-3xl">
-                        <div class="relative z-1 flex items-center mb-8">
-                            <div class="relative min-w-[68px] min-h-[68px] mr-3 border-2 border-indigo-600 rounded-full">
+                <div class="testimonial-card-wrap">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__header">
+                            <div class="testimonial-card__avatar-frame">
                                 <img width="40px" height="40px"
-                                     class="absolute top-0 left-0 w-full h-full object-cover rounded-full select-none p-[2px]"
+                                     class="testimonial-card__avatar"
                                      src="theme/images/testimonials/dogan-aydin.jpg"
                                      alt=""/>
                             </div>
                             <div>
-                                <h3 class="font-sans mb-1 text-lg font-bold">
+                                <h3 class="testimonial-card__name">
                                     <a href="#">Dogan Aydin</a>
                                 </h3>
-                                <p class="mb-0 text-sm text-gray-500">TurkNet CTO</p>
+                                <p class="testimonial-card__role">TurkNet CTO</p>
                             </div>
                         </div>
 
-                        <p class="relative text-base mb-0 before:font-sans before:font-serif
-                        before:content-['\0022'] before:absolute before:top-[50px] before:-left-[10px] before:block before:text-[182px] before:opacity-10
-                            ">
+                        <p class="testimonial-card__content">
                             Endorsing Dhemy for his exceptional coding skills and commitment to best practices. 
 With an R&D engineer mindset and meticulous approach to code structure, I highly recommend Dhemy to any company.
 
@@ -229,26 +288,24 @@ With an R&D engineer mindset and meticulous approach to code structure, I highly
                 <!-- Item end -->
                 
                 <!-- Item start -->
-                <div class="w-full">
-                    <div class="relative p-8 overflow-hidden bg-violet-100 rounded-3xl">
-                        <div class="relative z-1 flex items-center mb-8">
-                            <div class="relative min-w-[68px] min-h-[68px] mr-3 border-2 border-indigo-600 rounded-full">
+                <div class="testimonial-card-wrap">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__header">
+                            <div class="testimonial-card__avatar-frame">
                                 <img width="40px" height="40px"
-                                     class="absolute top-0 left-0 w-full h-full object-cover rounded-full select-none p-[2px]"
+                                     class="testimonial-card__avatar"
                                      src="theme/images/testimonials/obada-qawwas.jpg"
                                      alt=""/>
                             </div>
                             <div>
-                                <h3 class="font-sans mb-1 text-lg font-bold">
+                                <h3 class="testimonial-card__name">
                                     <a href="#">Obada Qawwas</a>
                                 </h3>
-                                <p class="mb-0 text-sm text-gray-500">Frontend Tech Lead at Valtech</p>
+                                <p class="testimonial-card__role">Frontend Tech Lead at Valtech</p>
                             </div>
                         </div>
 
-                        <p class="relative text-base mb-0 before:font-sans before:font-serif
-                        before:content-['\0022'] before:absolute before:top-[50px] before:-left-[10px] before:block before:text-[182px] before:opacity-10
-                            ">
+                        <p class="testimonial-card__content">
                             Dhemy is one of the best among all people I have ever met and is a loyal colleague who understands complex matters. 
 He is a strong and goal-oriented team player; with every problem, there was a solution. Highly recommended.
 
@@ -258,26 +315,24 @@ He is a strong and goal-oriented team player; with every problem, there was a so
                 <!-- Item end -->
                 
                 <!-- Item start -->
-                <div class="w-full">
-                    <div class="relative p-8 overflow-hidden bg-violet-100 rounded-3xl">
-                        <div class="relative z-1 flex items-center mb-8">
-                            <div class="relative min-w-[68px] min-h-[68px] mr-3 border-2 border-indigo-600 rounded-full">
+                <div class="testimonial-card-wrap">
+                    <div class="testimonial-card">
+                        <div class="testimonial-card__header">
+                            <div class="testimonial-card__avatar-frame">
                                 <img width="40px" height="40px"
-                                     class="absolute top-0 left-0 w-full h-full object-cover rounded-full select-none p-[2px]"
+                                     class="testimonial-card__avatar"
                                      src="theme/images/testimonials/abdelrahman-waziry.jpg"
                                      alt=""/>
                             </div>
                             <div>
-                                <h3 class="font-sans mb-1 text-lg font-bold">
+                                <h3 class="testimonial-card__name">
                                     <a href="#">Abdelrahman Waziry</a>
                                 </h3>
-                                <p class="mb-0 text-sm text-gray-500">Solutions Architect at TurnDigital</p>
+                                <p class="testimonial-card__role">Solutions Architect at TurnDigital</p>
                             </div>
                         </div>
 
-                        <p class="relative text-base mb-0 before:font-sans before:font-serif
-                        before:content-['\0022'] before:absolute before:top-[50px] before:-left-[10px] before:block before:text-[182px] before:opacity-10
-                            ">
+                        <p class="testimonial-card__content">
                             Dhemy, an exceptional and innovative talent, consistently displays unwavering commitment and dedication in our collaborative projects, setting a stellar example for the ideal programmer.
 
                         </p>
@@ -292,106 +347,216 @@ He is a strong and goal-oriented team player; with every problem, there was a so
 
 
 
-<section class="mb-8">
-    <div class="container mx-auto">
-        <div class="p-5">
-            <h2 class="text-3xl font-bold text-center mb-8">Latest Posts</h2>
-            <div class="max-w-screen-md mx-auto">
+
+<section class="latest-posts" id="latest-posts">
+    <div class="latest-posts__container">
+        <div class="latest-posts__inner">
+            <h2 class="latest-posts__title">Latest Posts</h2>
+            <p class="section-subtitle">Fresh writing you can read in a few minutes.</p>
+            <div class="latest-posts__list">
                 
-                <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+                
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/customer%20data/customer-data-management-1959-personalization.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
+             class="post-card__image-el"
              alt="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Oct 21, 2025 · 3 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/customer-data"
+       class="tag-pill">
+        #customer-data
+    </a>
+    
+    
+    <a href="/tag/personalization"
+       class="tag-pill">
+        #personalization
+    </a>
+    
+    
+    <a href="/tag/marketing-history"
+       class="tag-pill">
+        #marketing-history
+    </a>
+    
+    
+    <a href="/tag/crm"
+       class="tag-pill">
+        #crm
+    </a>
+    
+    
+    <a href="/tag/data-strategy"
+       class="tag-pill">
+        #data-strategy
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/customer%20data/customer-data-management-1959-personalization.html/">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             “An electronic computer and a religious mission are not very closely associated in most people’s minds”. This is how “The...
         </div>
+        <a class="post-card__read-link" href="/blog/customer%20data/customer-data-management-1959-personalization.html/">Read article &rarr;</a>
     </div>
 </article>
 
                 
-                <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+                
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/steps.jpg"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
-             alt="How Small Changes Can Drive Big Results Without Blocking the Business"/>
+             class="post-card__image-el"
+             alt="The text steps highlighted"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">May 15, 2025 · 5 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/refactoring"
+       class="tag-pill">
+        #refactoring
+    </a>
+    
+    
+    <a href="/tag/incremental-delivery"
+       class="tag-pill">
+        #incremental-delivery
+    </a>
+    
+    
+    <a href="/tag/lean"
+       class="tag-pill">
+        #lean
+    </a>
+    
+    
+    <a href="/tag/continuous-improvement"
+       class="tag-pill">
+        #continuous-improvement
+    </a>
+    
+    
+    <a href="/tag/software-architecture"
+       class="tag-pill">
+        #software-architecture
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/">How Small Changes Can Drive Big Results Without Blocking the Business</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Software serves the business, not the other way around. Yet many technical teams struggle to balance improving their code with...
         </div>
+        <a class="post-card__read-link" href="/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/">Read article &rarr;</a>
     </div>
 </article>
 
                 
-                <article class="flex flex-col lg:flex-row items-center mb-8 pb-8 border-b border-gray-200">
+                
+
+<article class="post-card">
     <!-- thumbnail -->
     
     <a href="/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/"
-       class="w-full relative block lg:min-w-[250px] lg:max-w-[250px] lg:max-h-[250px] aspect-square lg:mr-5 mb-5 lg:mb-0 rounded-lg overflow-hidden">
+       class="post-card__image">
         <img src="/assets/img/koala.jpg"
-             class="absolute inset-0 w-full h-full object-cover hover:scale-105 ease-in duration-300"
-             alt="Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬"/>
+             class="post-card__image-el"
+             alt="A sleeping koala"/>
     </a>
     
     <!-- content -->
-    <div>
+    <div class="post-card__content">
+        <p class="post-card__meta">Jan 18, 2025 · 9 min read</p>
         
-        <div class="flex mb-5">
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/nodejs"
+       class="tag-pill">
+        #nodejs
+    </a>
+    
+    
+    <a href="/tag/mongodb"
+       class="tag-pill">
+        #mongodb
+    </a>
+    
+    
+    <a href="/tag/recommender-systems"
+       class="tag-pill">
+        #recommender-systems
+    </a>
+    
+    
+    <a href="/tag/koalats"
+       class="tag-pill">
+        #koalats
+    </a>
+    
+    
+    <a href="/tag/backend"
+       class="tag-pill">
+        #backend
+    </a>
     
 </div>
 
+
         <!-- title -->
-        <h2 class="text-3xl font-black mb-5 font-sans">
-            <a class="border-b-2 border-transparent hover:border-b-violet-600 ease-in duration-300"
+        <h2 class="post-card__title">
+            <a class="post-card__title-link"
                href="/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/">Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬</a>
         </h2>
         <!-- excerpt -->
-        <div class="text-gray-500 text-lg mb-0">
+        <div class="post-card__excerpt">
             Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to...
         </div>
+        <a class="post-card__read-link" href="/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/">Read article &rarr;</a>
     </div>
 </article>
 
                 
             </div>
-            <div class="mt-16 text-center">
+            <div class="latest-posts__cta">
                 <a href="/blog"
-                   class="py-4 px-6 bg-violet-700 text-lg font-semibold rounded-3xl text-white ease-in duration-300 hover:bg-violet-800">
+                   class="primary-button">
                     All Posts &rarr;
                 </a>
             </div>
@@ -400,30 +565,30 @@ He is a strong and goal-oriented team player; with every problem, there was a so
 </section>
 
 
-<section class="mb-0 mt-24">
-    <div class="relative py-16">
-        <div class="max-w-screen-md mx-auto">
-            <div class="p-5 text-center">
-                <h3 class="text-white font-sans font-bold text-5xl">Dhemy</h3>
-                <div class="relative mb-5 py-10">
-                    <ul class="flex items-center justify-center flex-wrap m-0 p-0">
+<section class="social-section">
+    <div class="social-section__inner">
+        <div class="social-section__container">
+            <div class="social-section__content">
+                <h3 class="social-section__title">Dhemy</h3>
+                <div class="social-section__links-wrap">
+                    <ul class="social-section__links">
                         
-                        <li class="mr-5">
-                            <a class="block bg-white relative w-[48px] h-[48px] rounded-full flex items-center justify-center ease-linear duration-300 hover:bg-indigo-600 hover:text-white"
+                        <li class="social-section__item">
+                            <a class="social-section__link"
                                href="https://github.com/imdhemy">
                                 <ion-icon name="logo-github"></ion-icon>
                             </a>
                         </li>
                         
-                        <li class="mr-5">
-                            <a class="block bg-white relative w-[48px] h-[48px] rounded-full flex items-center justify-center ease-linear duration-300 hover:bg-indigo-600 hover:text-white"
+                        <li class="social-section__item">
+                            <a class="social-section__link"
                                href="https://twitter.com/imdhemy">
                                 <ion-icon name="logo-twitter"></ion-icon>
                             </a>
                         </li>
                         
-                        <li class="mr-5">
-                            <a class="block bg-white relative w-[48px] h-[48px] rounded-full flex items-center justify-center ease-linear duration-300 hover:bg-indigo-600 hover:text-white"
+                        <li class="social-section__item">
+                            <a class="social-section__link"
                                href="https://www.linkedin.com/in/imdhemy/">
                                 <ion-icon name="logo-linkedin"></ion-icon>
                             </a>
@@ -431,24 +596,24 @@ He is a strong and goal-oriented team player; with every problem, there was a so
                         
                     </ul>
                 </div>
-                <div class="text-xl text-white drop-shadow-md">
-                    <p>I'm a software artist, fullstack (BE heavy) with 10+ years of experience in software development. 
-Passionate about open source, blogging, and reading.
+                <div class="social-section__description">
+                    <p>I'm a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
 </p>
                 </div>
             </div>
         </div>
-        <div class="bg-social opacity-75 absolute top-0 left-0 w-full h-full bg-bottom bg-cover -z-10"></div>
-        <div class="absolute top-0 left-0 w-full h-full bg-black -z-20"></div>
+        <div class="social-section__bg-image social-section__bg-pattern"></div>
+        <div class="social-section__bg-overlay"></div>
     </div>
 </section>
 
 
     </main>
-    <section class="sticky top-[100vh]">
-    <div class="p-10">
-        <div class="max-w-screen-md mx-auto">
-            <p class="text-center">
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
                 <!-- 2001 - jekyll current year -->
                 &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
             </p>
