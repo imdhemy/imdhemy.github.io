@@ -2,6 +2,7 @@
 layout: post
 title: 'Effective Node.js Modules - Part 1: Basic Syntax'
 categories: [ nodejs ]
+tags: [ "nodejs", "javascript", "modules", "commonjs", "esm" ]
 image: /assets/img/dog-laptop-code-bed.jpeg
 ---
 

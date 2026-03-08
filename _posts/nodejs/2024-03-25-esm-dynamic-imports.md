@@ -2,6 +2,7 @@
 layout: post
 title: 'Effective Node.js Modules - Part 2: ESM dynamic imports'
 categories: [ nodejs ]
+tags: [ "nodejs", "javascript", "esm", "dynamic-import", "modules" ]
 image: /assets/img/dog-running.jpeg
 image_alt: 'Dog running'
 image_source: 'https://unsplash.com/photos/shallow-focus-photography-of-white-shih-tzu-puppy-running-on-the-grass-qO-PIF84Vxg'

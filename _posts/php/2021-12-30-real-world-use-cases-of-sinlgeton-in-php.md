@@ -3,6 +3,7 @@ layout: post
 title: PHP Real-world use cases of singleton design pattern
 date: 2021-12-30T12:45:00.130Z
 categories: php
+tags: [ "php", "design-patterns", "singleton", "laravel", "software-architecture" ]
 ---
 
 The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers

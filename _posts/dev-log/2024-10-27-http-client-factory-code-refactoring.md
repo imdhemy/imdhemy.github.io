@@ -2,6 +2,7 @@
 layout: post
 title: HTTP Client Factory Code Refactoring
 categories: [ "dev-log" ]
+tags: [ "typescript", "refactoring", "design-patterns", "http-clients", "software-architecture" ]
 ---
 
 I'm working on a Proxy/Adapter project, which we'll call "Banana." Banana is developed in TypeScript and uses Axios for

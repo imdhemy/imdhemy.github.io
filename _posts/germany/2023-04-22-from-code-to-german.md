@@ -2,6 +2,7 @@
 layout: post
 title: 'From Code to German: My First Steps Towards Learning a New Language'
 categories: [ germany ]
+tags: [ "language-learning", "personal-growth", "germany", "habits", "expat-life" ]
 image: /assets/img/frankfurt-blossom.jpeg
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: How to avoid boilerplate code in Symfony Voters
 categories: [ php ]
+tags: [ "php", "symfony", "authorization", "code-reuse", "voters" ]
 image: /assets/img/vote.jpeg
 image_source: https://unsplash.com/photos/white-and-black-letter-b-9xp4F57ATzs
 ---

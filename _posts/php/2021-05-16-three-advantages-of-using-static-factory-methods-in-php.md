@@ -3,6 +3,7 @@ layout: post
 title: Three advantages of using static factory methods in PHP
 date: 2021-05-16T06:05:51.560Z
 categories: php
+tags: [ "php", "design-patterns", "static-factory", "object-creation", "oop" ]
 ---
 Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn't allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an [example from the Carbon Library](https://github.com/briannesbitt/Carbon/blob/2.48.0/src/Carbon/Traits/Creator.php#L56:L97).
 

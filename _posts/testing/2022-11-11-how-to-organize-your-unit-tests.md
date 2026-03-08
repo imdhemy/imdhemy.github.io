@@ -3,6 +3,7 @@ layout: post
 title: How to organize your unit tests
 date: 2022-11-11T22:48:41.NZ
 categories: testing
+tags: [ "testing", "unit-testing", "test-structure", "naming", "best-practices" ]
 ---
 
 One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the

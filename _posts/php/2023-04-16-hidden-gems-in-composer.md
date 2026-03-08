@@ -2,6 +2,7 @@
 layout: post
 title: Hidden Gems in Composer Every PHP Developer Should Know
 categories: [ php ]
+tags: [ "php", "composer", "dependency-management", "developer-tools", "security" ]
 image: /assets/img/glass-on-music-notes.jpeg
 ---
 

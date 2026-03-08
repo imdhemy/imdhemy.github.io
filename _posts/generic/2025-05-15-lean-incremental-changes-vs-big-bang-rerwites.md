@@ -2,6 +2,7 @@
 layout: post
 title: 'How Small Changes Can Drive Big Results Without Blocking the Business'
 categories: [ "generic" ]
+tags: [ "refactoring", "incremental-delivery", "lean", "continuous-improvement", "software-architecture" ]
 image: /assets/img/steps.jpg
 image_alt: 'The text steps highlighted'
 image_source: 'https://unsplash.com/photos/text-7r7-7RLdwCU'

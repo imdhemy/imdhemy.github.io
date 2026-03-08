@@ -3,6 +3,7 @@ layout: post
 title: We need more tests
 date: 2022-01-31T06:05:51.560Z
 categories: testing
+tags: [ "testing", "unit-testing", "code-coverage", "technical-debt", "software-quality" ]
 math: true
 ---
 

@@ -2,6 +2,7 @@
 layout: post
 title: Math Notes about Sum Formulas
 categories: dsa
+tags: [ "mathematics", "dsa", "formulas", "problem-solving", "technical-interviews" ]
 math: true
 ---
 

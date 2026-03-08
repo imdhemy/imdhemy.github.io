@@ -3,6 +3,7 @@ layout: post
 title: Singleton Design Pattern in Laravel
 date: 2024-04-15T06:05:51.560Z
 categories: [ php ]
+tags: [ "php", "laravel", "singleton", "service-container", "dependency-injection" ]
 image: /assets/img/stay_single.jpeg
 image_source: https://unsplash.com/photos/white-and-blue-labeled-carton-jmRikC7H2FA
 ---

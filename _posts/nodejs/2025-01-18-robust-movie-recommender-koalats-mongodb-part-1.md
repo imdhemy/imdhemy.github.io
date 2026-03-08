@@ -2,6 +2,7 @@
 layout: post
 title: Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬
 categories: [ "nodejs" ]
+tags: [ "nodejs", "mongodb", "recommender-systems", "koalats", "backend" ]
 image: /assets/img/koala.jpg
 image_alt: 'A sleeping koala'
 image_source: 'https://unsplash.com/photos/koala-sleeping-on-tree-branch-EerxztHCjM8'

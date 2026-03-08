@@ -2,6 +2,7 @@
 layout: post
 title: 'Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization'
 categories: [ "customer data" ]
+tags: [ "customer-data", "personalization", "marketing-history", "crm", "data-strategy" ]
 image: /assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png
 ---
 

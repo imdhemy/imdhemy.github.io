@@ -3,6 +3,7 @@ layout: post
 title: Approximating square roots with Newton's method
 date: 2022-12-12T11:55:59.NZ
 categories: dsa
+tags: [ "mathematics", "numerical-methods", "newtons-method", "algorithms", "problem-solving" ]
 math: true
 ---
 

@@ -3,6 +3,7 @@ layout: post
 title: How to test Elasticsearch in PHP applications
 date: 2021-09-09T00:00:00.130Z
 categories: php
+tags: [ "php", "testing", "elasticsearch", "integration-testing", "unit-testing" ]
 ---
 
 <div class="caution" markdown="1">

@@ -2,6 +2,7 @@
 layout: post
 title: The pipeline ate my code
 categories: [ generic ]
+tags: [ "teamwork", "software-engineering", "feedback-culture", "dunning-kruger", "leadership" ]
 image: /assets/img/plumbers.jpeg
 image_source: https://unsplash.com/photos/a-couple-of-men-working-on-a-wooden-structure-zKlmUuc7pBk
 ---

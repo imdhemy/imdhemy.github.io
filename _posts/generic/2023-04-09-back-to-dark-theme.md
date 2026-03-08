@@ -2,6 +2,7 @@
 layout: post
 title: Back to dark theme
 categories: generic
+tags: [ "developer-experience", "productivity", "developer-tools", "dark-theme", "work-habits" ]
 image: /assets/img/nord.png
 ---
 

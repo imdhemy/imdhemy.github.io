@@ -2,6 +2,7 @@
 layout: post
 title: "A Week of Goodbyes"
 categories: [ "generic" ]
+tags: [ "career", "teamwork", "workplace-culture", "leadership", "reflection" ]
 ---
 
 Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently,

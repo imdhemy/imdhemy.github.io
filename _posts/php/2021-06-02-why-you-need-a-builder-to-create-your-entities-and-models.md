@@ -3,6 +3,7 @@ layout: post
 title: Why you need a builder to create your entities and models
 date: 2021-06-02T00:01:38.109Z
 categories: php
+tags: [ "php", "design-patterns", "builder-pattern", "domain-modeling", "oop" ]
 ---
 [Static factories]({% post_url php/2021-05-16-three-advantages-of-using-static-factory-methods-in-php %}) and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a **User** on a social network platform. This class has only three required fields (`$name`, `$email` & `$password`) and a bunch of optional fields with default values, for instance: (`$address`, `$avatar`, `$gender`, `$emailVerifiedAt`, etc...).
 

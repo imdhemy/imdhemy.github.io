@@ -2,6 +2,7 @@
 layout: post
 title: What Symfony developers should know before using Voters
 categories: [ php ]
+tags: [ "php", "symfony", "authorization", "security", "voters" ]
 image: /assets/img/voting.webp
 image_source: Shutterstock
 ---

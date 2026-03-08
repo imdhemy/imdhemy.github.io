@@ -2,6 +2,7 @@
 layout: post
 title: Delivery on Time and Some Clean Up 🧹
 categories: [ "generic" ]
+tags: [ "delivery", "project-management", "git", "developer-workflow", "productivity" ]
 ---
 
 Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully
