@@ -1,28 +1,21 @@
 ---
 layout: page
 title: About
-description: "Ahoy, curious wanderer! Welcome to the About page! If you're after tales of adventure and intrigue, this isn’t it. But if awkward moments and questionable life choices interest you, you’re in for a treat!"
+description: "Software engineer and customer data expert turning raw data into meaningful, actionable insights."
 ---
 
-Welcome to my little corner of the internet! I'm Mohamad Eldhemy, but you can just call me Dhemy — everyone else does!
-😊
-I started this blog to share my thoughts, feelings, experiences, and the occasional existential crisis—think of it as my
-online diary. 📖
+I’m Mohamad Eldhemy, but most people call me Dhemy.
 
-I’m a software developer with over a decade of experience, currently serving as a senior developer at Reservix GmbH. 💻
-Here, I tackle everything from personal life to programming, PHP, JavaScript, algorithms, data structures, testing, and
-self-development. You name it, I’ve probably written about it—or will soon!
+I’m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights. My work spans the full customer data lifecycle, from capturing clean, structured inputs to designing models that reflect real-world relationships and behavior.
 
-My mission? To inspire you, share some knowledge, and throw in a few best practices along the way. I’d love for you to
-get to know me better through my ramblings! 🤗
+I’ve spent more than a decade building software systems, with a backend-heavy focus and strong interest in architecture, maintainability, and pragmatic delivery. I enjoy working where engineering meets decision-making: improving data quality, shaping reliable pipelines, and helping teams use data with confidence.
 
-Feel free to reach out via [email](mailto:imdhemy@gmail.com); I promise I don’t bite! When I'm not busy blogging,
-you’ll
-find me reading, playing PUBG on PS4, or challenging myself in a game of chess. 🎮♟️
+This blog is where I share what I’m learning and building, from software design, testing, and backend development to customer data strategy and occasional personal notes. My goal is simple: publish useful ideas you can apply in real projects.
 
-In everything I do, I strive for excellence and continuous improvement. 🌟 So, grab a coffee (or tea), make yourself
-comfortable, and enjoy your stay! ☕️
+When I’m away from code, you’ll usually find me reading, playing chess, or unwinding with a game on PS4.
+
+If you'd like to connect, feel free to reach out via [email](mailto:imdhemy@gmail.com).
 
 Cheers,
 
-Dhemy - 26th October 2024
+Dhemy - 8th March 2026

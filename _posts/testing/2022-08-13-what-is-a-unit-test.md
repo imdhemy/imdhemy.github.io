@@ -25,7 +25,7 @@ can write another piece of code that verifies the behavior of the first. The
 second piece of code is called a unit test.
 
 <div class="tip" markdown="1">
-    <p>A unit test should verify a small piece of code in isolation quickly.</p>
+A unit test should verify a small piece of code in isolation quickly.
 </div>
 
 As you can see, a unit test has three characteristics:

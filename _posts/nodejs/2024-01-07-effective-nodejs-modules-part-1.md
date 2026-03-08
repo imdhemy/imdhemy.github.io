@@ -130,9 +130,7 @@ if (config.app.env === 'test') {
 ### ESM: ECMAScript module system
 
 <div class="tip" markdown="1">
-   <p>
 If you want to use ESM modules, you need to set the "type" to module "module" in the package.json file. Or name your files with the ".mjs" extension.
-</p>
 </div>
 
 ```js
@@ -152,7 +150,7 @@ ESM modules became available without any command-line flags.
 ESM uses `export` to export modules and `import` to import modules.
 
 <div class="tip" markdown="1">
-    <p>ESM uses `export` in the singular format not `exports` like CJS.</p>
+ESM uses `export` in the singular format not `exports` like CJS.
 </div>
 
 The following example shows how to export a function:
@@ -269,7 +267,7 @@ console.log(calculate('1 + 2')) // 3
 The ESM modules doesn't support conditionally importing modules. All the imports should be at the top of the file.
 
 <div class="danger" markdown="1">
-    <p>The following code will throw a SyntaxError: </p>
+The following code will throw a SyntaxError:
 </div>
 
 ```js
