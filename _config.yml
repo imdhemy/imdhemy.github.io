@@ -142,3 +142,25 @@ footer:
       url: "https://twitter.com/imdhemy"
     - icon: "logo-linkedin"
       url: "https://www.linkedin.com/in/imdhemy/"
+
+# -------------------------------------------------------------------------------------------------
+# Comments & Reactions
+# -------------------------------------------------------------------------------------------------
+theme_comments:
+  enabled: true
+  provider: "giscus"
+  giscus:
+    host: "https://giscus.app"
+    repo: "imdhemy/imdhemy.github.io"
+    repo_id: "MDEwOlJlcG9zaXRvcnkzNjc1ODI3MjA="
+    category: "General"
+    category_id: "DIC_kwDOFejeAM4C3865"
+    mapping: "pathname"
+    term: ""
+    strict: "1"
+    reactions_enabled: "1"
+    emit_metadata: "0"
+    input_position: "bottom"
+    theme: "preferred_color_scheme"
+    lang: "en"
+    loading: "lazy"
