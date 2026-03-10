@@ -5,9 +5,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>From Code to German: My First Steps Towards Learning a New Language</title>
+    <title>Predicate Functions in JavaScript</title>
     <meta name="description"
-          content="For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Sin...">
+          content="If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called them that.">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
         }
     </style>
 
-    <link rel="canonical" href="https://imdhemy.com/blog/germany/from-code-to-german.html/">
+    <link rel="canonical" href="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
     <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
@@ -43,20 +43,20 @@
 
     
     <!-- Facebook Meta Tags -->
-<meta property="og:title" content="From Code to German: My First Steps Towards Learning a New Language">
+<meta property="og:title" content="Predicate Functions in JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg">
-<meta property="og:url" content="https://imdhemy.com/blog/germany/from-code-to-german.html/">
+<meta property="og:image" content="https://imdhemy.com/assets/img/predicates.png">
+<meta property="og:url" content="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
 <meta property="og:description"
-      content="For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Sin...">
+      content="If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called them that.">
 <meta property="og:site_name" content="Imdhemy">
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="From Code to German: My First Steps Towards Learning a New Language">
+<meta name="twitter:title" content="Predicate Functions in JavaScript">
 <meta name="twitter:description"
-      content="For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Sin...">
-<meta name="twitter:image" content="https://imdhemy.com/assets/img/frankfurt-blossom.jpeg">
+      content="If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called them that.">
+<meta name="twitter:image" content="https://imdhemy.com/assets/img/predicates.png">
 
 
     
@@ -196,10 +196,105 @@
     <a class="post-back-link" href="/blog">&larr; Back to all posts</a>
     
 
-    <h1 class="post-title">From Code to German: My First Steps Towards Learning a New Language</h1>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="post-series series-collapsible is-open" data-series-collapsible>
+    <div class="post-series__header">
+        <div class="post-series__heading-wrap">
+            <span class="post-series__heading">Sharpen Currying Skills</span>
+            <span class="post-series__summary">2 parts</span>
+        </div>
+        <button class="series-collapsible__toggle"
+                type="button"
+                aria-label="Collapse to hide series posts"
+                aria-expanded="true"
+                aria-controls="post-series-panel-blog-fp-how-to-use-predicate-functions-in-javascript-html"
+                data-series-toggle>
+            <span class="series-collapsible__icon-wrap" aria-hidden="true">
+                <ion-icon class="series-collapsible__icon" name="chevron-down-outline"></ion-icon>
+            </span>
+        </button>
+    </div>
+    <div class="series-collapsible__panel" id="post-series-panel-blog-fp-how-to-use-predicate-functions-in-javascript-html" data-series-panel>
+        <ol class="post-series__list" id="post-series-list-blog-fp-how-to-use-predicate-functions-in-javascript-html">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="post-series__item">
+                
+                <a class="post-series__link"
+                   href="/blog/fp/higher-order-functions.html/">
+                    <span class="post-series__index" aria-hidden="true">1</span>
+                    <span class="post-series__title">Higher-order functions for currying in JavaScript</span>
+                </a>
+                
+            </li>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <li class="post-series__item is-current">
+                
+                <span class="post-series__link"
+                      aria-current="true">
+                    <span class="post-series__index" aria-hidden="true">2</span>
+                    <span class="post-series__title">Predicate Functions in JavaScript</span>
+                </span>
+                
+            </li>
+            
+        </ol>
+    </div>
+</div>
+
+
+    <h1 class="post-title">Predicate Functions in JavaScript</h1>
     
 <p class="post-header__meta post-meta">
-    <time datetime="2023-04-22T00:00:00+00:00">Apr 22, 2023</time>
+    <time datetime="2026-03-10T19:06:12+00:00">Mar 10, 2026</time>
     <span class="post-meta__separator" aria-hidden="true">&middot;</span>
     <span class="post-meta__reading-time">
         <ion-icon class="post-meta__icon" name="time-outline" aria-hidden="true"></ion-icon>
@@ -213,33 +308,21 @@
 <div class="post-tags">
     
     
-    <a href="/tag/language-learning"
+    <a href="/tag/fp"
        class="tag-pill">
-        #language-learning
+        #fp
     </a>
     
     
-    <a href="/tag/personal-growth"
+    <a href="/tag/javascript"
        class="tag-pill">
-        #personal-growth
+        #javascript
     </a>
     
     
-    <a href="/tag/germany"
+    <a href="/tag/currying"
        class="tag-pill">
-        #germany
-    </a>
-    
-    
-    <a href="/tag/habits"
-       class="tag-pill">
-        #habits
-    </a>
-    
-    
-    <a href="/tag/expat-life"
-       class="tag-pill">
-        #expat-life
+        #currying
     </a>
     
 </div>
@@ -249,8 +332,8 @@
 
     
     <div class="post-image-wrap">
-        <img src="/assets/img/frankfurt-blossom.jpeg"
-             alt="From Code to German: My First Steps Towards Learning a New Language"
+        <img src="/assets/img/predicates.png"
+             alt="Predicate Functions in JavaScript"
              class="post-image"/>
         <!-- Image source -->
         
@@ -261,42 +344,94 @@
 
 
     <div class="content-shell content read-surface">
-    <p>For years, I have been dedicated to writing code every day and contributing to various
-projects. <a href="https://github.com/imdhemy">My GitHub account</a> showcases my commitment and hard work. Since I moved
-from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I
-couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and
-focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source
-projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for
-open source projects.</p>
+    <p>If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called
+them that.</p>
 
-<p>As an expat in a foreign country, learning the local language is vital not only for practical purposes but also for
-understanding the culture better. I have tried learning a new language in the past, particularly Turkish, but I failed
-to do so. However, I have faith that German is different, and my background in English, which has some similarities with
-German, may give me an edge.</p>
+<p>You already know this pattern, but naming it is useful. Terms help teams communicate ideas quickly. The moment you say
+“<a href="https://refactoring.com/catalog/replacePrimitiveWithObject.html">Replace primitive with object</a>”, your teammate and
+your AI tool understand what you mean without extra explanation. The same is true for predicate functions.</p>
 
-<p>To begin my language learning journey, I set a goal to finish one lesson per week from
-the <a href="https://www.hueber.de/menschen">Menschen book</a>, a popular German language textbook for adults and young adults
-designed according to the latest findings in educational psychology as they describe it.</p>
+<p>This is why I decided to write this post: to give you a name for this common pattern and show you how it fits into the
+larger picture of functional programming and currying.</p>
 
-<p>I already tried some applications like Duolingo and Babbel, but I didn’t like them. I prefer a more structured approach
-to learning a new language. I want to learn the language in a way similar to how I learned English which I learned from
-the “Hello” series of books.</p>
+<h2 id="what-is-a-predicate-function">What is a predicate function?</h2>
 
-<p>I’ve just completed my first lesson, and it feels like a great accomplishment. The first lesson introduced me to the
-basics of the German language, such as the alphabet, how to ask about names, how say “how are you” and so on.</p>
+<div class="info">
+  <p>A predicate function is a function that returns a boolean value <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>.</p>
+</div>
 
-<p>In addition to the book, I planned to practice speaking German for 10 minutes every day. My first attempt was
-challenging, I couldn’t pronounce correctly, and I was quite nervous. I’m not sure if I will be able to do it every day,
-but I will try my best.</p>
+<p>They are often used with <a href="/blog/fp/higher-order-functions.html/">Higher-order functions</a> like <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">find</code>, <code class="language-plaintext highlighter-rouge">some</code> and <code class="language-plaintext highlighter-rouge">every</code> to derive decisions based on the
+data.</p>
 
-<p>Learning a new language is challenging, and I’ve already encountered some difficulties, particularly with the
-pronunciation of some German words. However, I’m optimistic that with persistence and hard work, I’ll be able to master
-the language.</p>
+<p>Let’s look at a single example of a predicate function used with <code class="language-plaintext highlighter-rouge">filter</code>:</p>
 
-<p>In conclusion, I believe that taking the first step towards learning a new language is always the hardest, but it’s also
-the most important. If you’re thinking of learning a new language, don’t be afraid to start, even if it’s just for ten
-minutes a day. You’ll be amazed at how much progress you can make with consistent effort. Believe me, I did the same
-with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll be able to do the same with German.</p>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// A predicate to check if a number is even</span>
+<span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// Using the predicate to derive a new array of even numbers.</span>
+<span class="kd">const</span> <span class="nx">evenNumbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nx">isEven</span><span class="p">);</span> <span class="c1">// [2, 4, 6]</span>
+</code></pre></div></div>
+
+<h3 id="exercises">Exercises</h3>
+
+<div class="tip">
+To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking
+the answers.
+</div>
+
+<h3 id="1-write-basic-predicates">1. Write basic predicates</h3>
+
+<p>Write <code class="language-plaintext highlighter-rouge">isEven</code>, <code class="language-plaintext highlighter-rouge">isLongerThan3</code>, and <code class="language-plaintext highlighter-rouge">hasQ</code> predicates.</p>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">isLongerThan3</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kd">const</span> <span class="nx">hasQ</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="2-use-predicates-with-arrays">2. Use predicates with arrays</h3>
+
+<p>Use predicates to:</p>
+
+<ul>
+  <li>keep only even numbers from <code class="language-plaintext highlighter-rouge">[1, 2, 3, 4, 5, 6]</code></li>
+  <li>keep only strings that contain <code class="language-plaintext highlighter-rouge">q</code> (case-insensitive)</li>
+</ul>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nx">isEven</span><span class="p">);</span> <span class="c1">// [2, 4, 6]</span>
+<span class="p">[</span><span class="dl">"</span><span class="s2">quiet</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">bat</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Qatar</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nx">hasQ</span><span class="p">);</span> <span class="c1">// ["quiet", "Qatar"]</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="3-refactor-inline-predicate-to-named-predicate">3. Refactor inline predicate to named predicate</h3>
+
+<p>Refactor this into a named predicate + filter:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">xs</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+</code></pre></div></div>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">hasQ</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">xs</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">hasQ</span><span class="p">);</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h2 id="checkpoint">Checkpoint</h2>
+
+<div class="info">
+  <p>You are ready to continue when you naturally extract inline boolean logic into named predicates.</p>
+</div>
 
 </div>
 
@@ -352,16 +487,11 @@ with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll b
 <section class="post-navigation-shell">
     <div class="post-navigation-shell__inner post-navigation">
         
-        <a class="post-navigation__item" href="/blog/php/hidden-gems-in-composer.html/">
+        <a class="post-navigation__item" href="/blog/fp/higher-order-functions.html/">
             <span class="post-navigation__label">Previous article</span>
-            <span class="post-navigation__title">Hidden Gems in Composer Every PHP Developer Should Know</span>
+            <span class="post-navigation__title">Higher-order functions for currying in JavaScript</span>
         </a>
         
-        
-        <a class="post-navigation__item post-navigation__item--next" href="/blog/nodejs/effective-nodejs-modules-part-1.html/">
-            <span class="post-navigation__label">Next article</span>
-            <span class="post-navigation__title">Effective Node.js Modules - Part 1: Basic Syntax</span>
-        </a>
         
     </div>
 </section>
@@ -387,6 +517,10 @@ with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll b
             
             
             
+            <a class="related-posts__item" href="/blog/fp/higher-order-functions.html/">
+                <span class="related-posts__title">Higher-order functions for currying in JavaScript</span>
+                <span class="related-posts__meta">Mar 10, 2026</span>
+            </a>
             
             
             
@@ -533,6 +667,10 @@ with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll b
             
             
             
+            <a class="related-posts__item" href="/blog/nodejs/esm-dynamic-imports.html/">
+                <span class="related-posts__title">Effective Node.js Modules - Part 2: ESM dynamic imports</span>
+                <span class="related-posts__meta">Mar 25, 2024</span>
+            </a>
             
             
             
@@ -547,240 +685,10 @@ with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll b
             
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            <a class="related-posts__item" href="/blog/nodejs/effective-nodejs-modules-part-1.html/">
+                <span class="related-posts__title">Effective Node.js Modules - Part 1: Basic Syntax</span>
+                <span class="related-posts__meta">Jan 7, 2024</span>
+            </a>
             
             
             
@@ -814,94 +722,6 @@ with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll b
             
             
 
-            
-            
-            
-            
-            
-            <a class="related-posts__item" href="/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
-                <span class="related-posts__title">Predicate Functions in JavaScript</span>
-                <span class="related-posts__meta">Mar 10, 2026</span>
-            </a>
-            
-            
-            
-            
-            
-            
-            
-            
-            <a class="related-posts__item" href="/blog/fp/higher-order-functions.html/">
-                <span class="related-posts__title">Higher-order functions for currying in JavaScript</span>
-                <span class="related-posts__meta">Mar 10, 2026</span>
-            </a>
-            
-            
-            
-            
-            
-            
-            
-            
-            <a class="related-posts__item" href="/blog/customer%20data/customer-data-management-1959-personalization.html/">
-                <span class="related-posts__title">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</span>
-                <span class="related-posts__meta">Oct 21, 2025</span>
-            </a>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
             
         </div>
     </div>
