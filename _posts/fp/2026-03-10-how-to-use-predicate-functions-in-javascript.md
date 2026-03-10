@@ -1,10 +1,11 @@
 ---
 layout: post
-title: "Predicate Functions in JavaScript: A Currying Step"
+title: "Predicate Functions in JavaScript"
 date: 2026-03-10T19:06:12Z
 categories: [ fp ]
 tags: [ "fp", "javascript", "currying" ]
 image: /assets/img/predicates.png
+list: "Sharpen Currying Skills"
 ---
 
 If you've written code in any programming language, you've already used predicate functions, even if you never called
