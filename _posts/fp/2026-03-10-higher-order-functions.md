@@ -4,6 +4,7 @@ title: Higher-order functions for currying in JavaScript
 date: 2026-03-10T00:07:09Z
 categories: [ fp ]
 tags: [ "fp", "currying", "javascript" ]
+image: /assets/img/higher-order-fn.png
 ---
 
 I've been working on my [functional programming]({{ site.baseurl }}/tag/fp) skills and applying what I learn in real
