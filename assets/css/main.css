@@ -1223,9 +1223,12 @@ h6 {
 
 .hero-title {
   margin-bottom: 2rem;
-  font-size: 1.875rem;
+  font-size: clamp(1.95rem, 4.2vw, 3rem);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .hero-title__accent {
@@ -1301,8 +1304,11 @@ h6 {
 .testimonials__title {
   margin-bottom: 2rem;
   text-align: center;
-  font-size: 1.875rem;
+  font-size: clamp(1.5rem, 2.8vw, 2rem);
   font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
 }
 
 .section-subtitle,
@@ -1446,9 +1452,12 @@ h6 {
 .post-card__title {
   margin-bottom: 0.85rem;
   font-family: "Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.875rem;
-  font-weight: 900;
-  line-height: 1.2;
+  font-size: clamp(1.28rem, 2.3vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .post-card__title-link {
@@ -1492,8 +1501,12 @@ h6 {
 
 .post-title {
   font-family: "Manrope", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 1.5rem;
+  font-size: clamp(1.45rem, 3vw, 2.1rem);
   font-weight: 900;
+  line-height: 1.18;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .post-header__meta {
@@ -1759,9 +1772,9 @@ h6 {
 
 .post-page .post-title {
   margin-bottom: 0.95rem;
-  font-size: clamp(2rem, 4.8vw, 3.25rem);
-  line-height: 1.15;
-  letter-spacing: -0.015em;
+  font-size: clamp(1.85rem, 4.6vw, 3rem);
+  line-height: 1.16;
+  letter-spacing: -0.014em;
 }
 
 .post-page .post-image-wrap {
@@ -1921,10 +1934,12 @@ h6 {
 
 .page-article__title {
   margin: 0 0 1rem;
-  font-size: clamp(2rem, 4.8vw, 3.45rem);
+  font-size: clamp(1.9rem, 4.9vw, 3.2rem);
   font-weight: 800;
-  line-height: 1.15;
-  letter-spacing: -0.015em;
+  line-height: 1.16;
+  letter-spacing: -0.014em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .page-article__description {
@@ -2046,10 +2061,12 @@ h6 {
 
 .page-header__title {
   margin-bottom: 2rem;
-  font-size: 4.75rem;
+  font-size: clamp(2.05rem, 7vw, 4.2rem);
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.05;
   letter-spacing: -0.02em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
 }
 
 .page-header__title--centered {
@@ -2636,9 +2653,6 @@ h6 {
   .site-mobile-nav {
     display: none;
   }
-  .hero-title {
-    font-size: 3rem;
-  }
   .hero-description {
     font-size: 1.5rem;
     line-height: 2.5rem;
@@ -2652,9 +2666,6 @@ h6 {
     max-height: 250px;
     margin-right: 1.25rem;
     margin-bottom: 0;
-  }
-  .post-title {
-    font-size: 2.25rem;
   }
   .page-header__layout {
     padding-inline: 0;
@@ -2676,8 +2687,20 @@ h6 {
     padding-bottom: 2.5rem;
   }
   .page-header__title {
-    font-size: 3rem;
-    line-height: 1.05;
+    font-size: clamp(1.85rem, 9vw, 2.8rem);
+    line-height: 1.08;
+  }
+  .post-card__title {
+    font-size: clamp(1.16rem, 5.8vw, 1.45rem);
+    line-height: 1.28;
+  }
+  .post-page .post-title {
+    font-size: clamp(1.5rem, 7.4vw, 2.1rem);
+    line-height: 1.2;
+  }
+  .page-article__title {
+    font-size: clamp(1.55rem, 7.2vw, 2.25rem);
+    line-height: 1.2;
   }
   .content {
     font-size: 1.12rem;
@@ -2758,6 +2781,19 @@ h6 {
     max-width: none;
     margin-top: 0.6rem;
     font-size: 1.05rem;
+  }
+}
+@media (max-width: 420px) {
+  .post-card__title {
+    font-size: clamp(1.08rem, 7vw, 1.28rem);
+  }
+  .post-page .post-title,
+  .page-article__title {
+    font-size: clamp(1.35rem, 8.2vw, 1.7rem);
+  }
+  .page-header__title {
+    font-size: clamp(1.65rem, 10vw, 2.25rem);
+    line-height: 1.1;
   }
 }
 @media (prefers-reduced-motion: reduce) {
