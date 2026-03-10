@@ -5,9 +5,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</title>
+    <title>Higher-order functions for currying in JavaScript</title>
     <meta name="description"
-          content="“An electronic computer and a religious mission are not very closely associated in most people’s minds”. This is how “The Catholic Standard and Times” starte...">
+          content="I’ve been working on my functional programming skills and applying what I learn in real JavaScript projects. JavaScript is a great choice for FP because it f...">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
         }
     </style>
 
-    <link rel="canonical" href="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/">
+    <link rel="canonical" href="https://imdhemy.com/blog/fp/higher-order-functions.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
     <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
@@ -43,20 +43,20 @@
 
     
     <!-- Facebook Meta Tags -->
-<meta property="og:title" content="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization">
+<meta property="og:title" content="Higher-order functions for currying in JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://imdhemy.com/assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png">
-<meta property="og:url" content="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/">
+<meta property="og:image" content="https://imdhemy.com">
+<meta property="og:url" content="https://imdhemy.com/blog/fp/higher-order-functions.html/">
 <meta property="og:description"
-      content="“An electronic computer and a religious mission are not very closely associated in most people’s minds”. This is how “The Catholic Standard and Times” starte...">
+      content="I’ve been working on my functional programming skills and applying what I learn in real JavaScript projects. JavaScript is a great choice for FP because it f...">
 <meta property="og:site_name" content="Imdhemy">
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization">
+<meta name="twitter:title" content="Higher-order functions for currying in JavaScript">
 <meta name="twitter:description"
-      content="“An electronic computer and a religious mission are not very closely associated in most people’s minds”. This is how “The Catholic Standard and Times” starte...">
-<meta name="twitter:image" content="https://imdhemy.com/assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png">
+      content="I’ve been working on my functional programming skills and applying what I learn in real JavaScript projects. JavaScript is a great choice for FP because it f...">
+<meta name="twitter:image" content="https://imdhemy.com">
 
 
     
@@ -194,10 +194,10 @@
 
 <div class="post-header">
     <a class="post-back-link" href="/blog">&larr; Back to all posts</a>
-    <h1 class="post-title">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</h1>
+    <h1 class="post-title">Higher-order functions for currying in JavaScript</h1>
     
 <p class="post-header__meta post-meta">
-    <time datetime="2025-10-21T00:00:00+00:00">Oct 21, 2025</time>
+    <time datetime="2026-03-10T00:07:09+00:00">Mar 10, 2026</time>
     <span class="post-meta__separator" aria-hidden="true">&middot;</span>
     <span class="post-meta__reading-time">
         <ion-icon class="post-meta__icon" name="time-outline" aria-hidden="true"></ion-icon>
@@ -211,33 +211,21 @@
 <div class="post-tags">
     
     
-    <a href="/tag/customer-data"
+    <a href="/tag/fp"
        class="tag-pill">
-        #customer-data
+        #fp
     </a>
     
     
-    <a href="/tag/personalization"
+    <a href="/tag/currying"
        class="tag-pill">
-        #personalization
+        #currying
     </a>
     
     
-    <a href="/tag/marketing-history"
+    <a href="/tag/javascript"
        class="tag-pill">
-        #marketing-history
-    </a>
-    
-    
-    <a href="/tag/crm"
-       class="tag-pill">
-        #crm
-    </a>
-    
-    
-    <a href="/tag/data-strategy"
-       class="tag-pill">
-        #data-strategy
+        #javascript
     </a>
     
 </div>
@@ -245,102 +233,124 @@
 
     </div>
 
-    
-    <div class="post-image-wrap">
-        <img src="/assets/img/salvatorians-add-ibm-unit-to-aid-mission-unit-needs.png"
-             alt="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization"
-             class="post-image"/>
-        <!-- Image source -->
-        
-    </div>
     
 </div>
 
 
     <div class="content-shell content read-surface">
-    <p>“<strong>An electronic computer and a religious mission are not very closely associated in most people’s minds</strong>”. This is
-how “<em>The Catholic Standard and Times</em>”
-started <a href="https://www.thecatholicnewsarchive.org/?a=d&amp;d=cst19590911-01.2.96&amp;e=-------en-20--1--txt-txIN--------">its article</a>
-published on 11 September 1959 about how Personalized
-mailing lead to response rate of 80%!! Here we are talking about traditional mainling.</p>
+    <p>I’ve been working on my <a href="/tag/fp">functional programming</a> skills and applying what I learn in real
+JavaScript projects. <a href="/tag/javascript">JavaScript</a> is a great choice for FP because it fits the
+paradigm well, has helpful libraries, and still lets me fall back to familiar patterns when I hit a knowledge gap.</p>
 
-<p>Before telling the full story, let’s set the context. In the 1950s, they use Punched cards and magnetic tape to store
-and process data.</p>
+<p>While practicing currying, I noticed something: I can read it and understand it, but refactoring existing code to use
+currying and partial application still feels awkward. So I decided to collect the concepts that make that refactoring
+process more intuitive. There are thousands of great resources on these topics, but I wanted a micro-curriculum that
+matches my learning style and maybe helps others too. The first concept is higher-order functions, which is the
+foundation for <a href="/tag/currying">currying</a> and composition.</p>
 
-<h2 id="ibm-026-key-punch">IBM 026 Key Punch</h2>
-
-<div class="flex justify-center">
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Y0GurDnBK8E?si=hzD81HdfNR59EmkQ&amp;start=81" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
-
+<div class="info">
+  <p><strong>Goal</strong>: Understand functions as values and function-to-function interaction.</p>
 </div>
 
-<h2 id="the-cutting-edge-ibm-650-magnetic-tape-system">The Cutting-Edge IBM 650 Magnetic Tape System</h2>
+<h2 id="what-is-a-higher-order-function">What is a higher-order function?</h2>
 
-<div class="flex justify-center">
+<p>A higher-order function (HOF) is any function that takes a function as an argument, returns a function, or both.
+Functions that do neither are called first-order functions.</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x7nq-rxYHXk?si=Lh-Ww4piftIvK4Q-&amp;start=4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<p>A good example of a HOF is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">
+<code class="language-plaintext highlighter-rouge">Array.prototype.map()</code></a>,
+which takes a function as an argument and applies it to every element of the array, returning a new array with the
+results.</p>
 
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This is a simple function that doubles a number</span>
+<span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="c1">// We can pass the `double` fn to `map`. This makes `map` a HOF.</span>
+<span class="kd">const</span> <span class="nx">doubledNumbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="nx">double</span><span class="p">);</span> <span class="c1">// [2, 4, 6]</span>
+</code></pre></div></div>
+
+<p>Here is another example of a HOF that returns a function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This is a HOF that returns a function</span>
+<span class="kd">const</span> <span class="nx">createMultiplier</span> <span class="o">=</span> <span class="nx">factor</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">factor</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// We can use the HOF to create a new function that multiplies by 3</span>
+<span class="kd">const</span> <span class="nx">triple</span> <span class="o">=</span> <span class="nf">createMultiplier</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// Now we can use the `triple` function to multiply numbers by 3</span>
+<span class="nf">triple</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<h2 id="why-this-matters-for-currying">Why this matters for currying</h2>
+
+<p>Currying becomes much easier when you are comfortable with functions as values. A curried function is just a function
+that keeps returning functions until it has all the arguments it needs.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">y</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">add10</span> <span class="o">=</span> <span class="nf">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="nf">add10</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<p>If that pattern feels natural, currying and partial application stop feeling magical and start feeling practical.</p>
+
+<p>For now, don’t worry about mastering currying in this post. We’ll focus on higher-order functions first, then cover
+currying properly in a separate post.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<div class="tip">
+To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking
+the answers.
 </div>
 
-<h2 id="the-imb-1403-printer">The IMB 1403 Printer</h2>
+<h3 id="1-apply-twice">1. Apply twice</h3>
 
-<div class="flex justify-center">
+<p>Write a function <code class="language-plaintext highlighter-rouge">applyTwice</code> that takes a function and a value, and applies the function to the value twice.</p>
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/xmetWufc_44?si=ZkzRjm0LYbEXy_qT&amp;start=49" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen=""></iframe>
+<details>
+  <summary>View answer</summary>
 
+  <p>You can implement <code class="language-plaintext highlighter-rouge">applyTwice</code> like this:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">applyTwice</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">fn</span><span class="p">(</span><span class="nf">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+</code></pre></div>  </div>
+
+  <p>Here is an example of how to use <code class="language-plaintext highlighter-rouge">applyTwice</code>:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nf">applyTwice</span><span class="p">(</span><span class="nx">increment</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// 7</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="2-build-mapwith">2. Build mapWith</h3>
+
+<p>Implement <code class="language-plaintext highlighter-rouge">mapWith</code> using <code class="language-plaintext highlighter-rouge">Array.prototype.map</code>.</p>
+
+<details>
+  <summary>View answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mapWith</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">xs</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">fn</span><span class="p">);</span>
+</code></pre></div>  </div>
+
+  <p>Usage example:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nf">mapWith</span><span class="p">(</span><span class="nx">increment</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span> <span class="c1">// [2, 3, 4]</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h2 id="checkpoint">Checkpoint</h2>
+
+<div class="info">
+  <p>You are ready to move on when you can explain why each of <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">filter</code>, and <code class="language-plaintext highlighter-rouge">reduce</code> are higher-order functions.</p>
 </div>
 
-<h2 id="the-story">The Story</h2>
-
-<p>Each year, the Society of the Divine Savior sent out appeals to benefactors supporting its seven seminaries, missions,
-camps, and schools in the U.S. and Africa. To do this, they used the IBM 650 Electronic Data Processing
-Machine—cutting-edge at the time—to reach each benefactor <strong>by name</strong>, matching the appeal with a seminary, mission, or
-project they were genuinely interested in.</p>
-
-<p>This personalized approach worked remarkably well, according to Salvatorian spokesmen. Not only did it bring strong
-responses, but it also reduced mailing costs. Letters were never sent to generic addresses like “occupant,” but only to
-those who had shown real interest in the work.</p>
-
-<p>The computer stored detailed, up-to-date records of benefactors as electrical impulses on magnetic tapes. When they
-planned an appeal for a specific mission, they fed punched card instructions into the computer. In response, the IBM 650
-created a new tape listing past contributors to that mission. From this tape, it could print mailing address cards at
-speeds of up to 9,000 per hour. It also printed or punched cards used by another unit to generate the appeal or
-acknowledgment letters.</p>
-
-<p>When new responses or names came in, operators punched IBM cards with the updated information. These were fed into the
-system weekly, allowing the computer to add new names and update donation records.</p>
-
-<p>Now think about this—it was 1959. Yet they were already working with a functioning donor database stored on IBM magnetic
-tape. Each record, packed into just 341 characters, held names, addresses, appeal history, response times, types of
-appeals that worked, donation sizes, total contributions, and more. They used this data to predict future behavior and
-plan smarter campaigns. In many ways, they were already doing data-driven outreach long before it became the norm.</p>
-
-<h2 id="tha-raw-basics-of-customer-data-management">Tha raw basics of customer data management</h2>
-
-<p>Many modern marketers think they can’t take lessons from the past, hey they didn’t have TikTok back then! But the
-fundamentals are quite obvious in this story, the same exact timeless “stack” of customer data management is still valid
-today:</p>
-
-<ul>
-  <li>“<strong>Data Capture</strong>”: capture and ingest data from multiple sources.</li>
-  <li>“<strong>Data Storage</strong>”: Persistent, available storage of relevant customer data.</li>
-  <li>“<strong>Data Processing</strong>”: Process data to generate actionable insights.</li>
-  <li>“<strong>Data Activation</strong>”: Turn the output of processing into signals.</li>
-  <li>“<strong>Engagement</strong>”: Send the signals to multiple channels to engage customers.</li>
-  <li>“<strong>Measurement</strong>”: Track and optimize.</li>
-</ul>
-
-<p>What the Society of the Divine Savior did in 1959 wasn’t just impressive for its time; it was <strong>visionary</strong>. They
-treated their data not as a pile of records, but as relationships. Every punch card, every tape, every printed letter
-represented a person who cared about something real.</p>
-
-<p>Fast-forward to today, and the tools have changed: from magnetic tapes to cloud databases, from letters to personalized
-emails and ads, but the idea remains the same. <strong>Understand people, respect their interests, and communicate with
-purpose.</strong></p>
-
-<p>The Salvatorians were running a data-driven mission decades before “CRM” or “marketing automation” even existed. Maybe
-that’s the real lesson here: technology evolves, but empathy and precision never go out of style.</p>
+<p>If this helped, leave a reaction so I know this series is useful, and comment with the FP topic you want next while we
+prepare the dedicated currying post.</p>
 
 </div>
 
@@ -396,16 +406,11 @@ that’s the real lesson here: technology evolves, but empathy and precision nev
 <section class="post-navigation-shell">
     <div class="post-navigation-shell__inner post-navigation">
         
-        <a class="post-navigation__item" href="/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/">
+        <a class="post-navigation__item" href="/blog/customer%20data/customer-data-management-1959-personalization.html/">
             <span class="post-navigation__label">Previous article</span>
-            <span class="post-navigation__title">How Small Changes Can Drive Big Results Without Blocking the Business</span>
+            <span class="post-navigation__title">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</span>
         </a>
         
-        
-        <a class="post-navigation__item post-navigation__item--next" href="/blog/fp/higher-order-functions.html/">
-            <span class="post-navigation__label">Next article</span>
-            <span class="post-navigation__title">Higher-order functions for currying in JavaScript</span>
-        </a>
         
     </div>
 </section>
@@ -567,6 +572,10 @@ that’s the real lesson here: technology evolves, but empathy and precision nev
             
             
             
+            <a class="related-posts__item" href="/blog/nodejs/esm-dynamic-imports.html/">
+                <span class="related-posts__title">Effective Node.js Modules - Part 2: ESM dynamic imports</span>
+                <span class="related-posts__meta">Mar 25, 2024</span>
+            </a>
             
             
             
@@ -583,102 +592,10 @@ that’s the real lesson here: technology evolves, but empathy and precision nev
             
             
             
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            <a class="related-posts__item" href="/blog/nodejs/effective-nodejs-modules-part-1.html/">
+                <span class="related-posts__title">Effective Node.js Modules - Part 1: Basic Syntax</span>
+                <span class="related-posts__meta">Jan 7, 2024</span>
+            </a>
             
             
             
@@ -847,36 +764,16 @@ that’s the real lesson here: technology evolves, but empathy and precision nev
             
             
             
-            <a class="related-posts__item" href="/blog/fp/higher-order-functions.html/">
-                <span class="related-posts__title">Higher-order functions for currying in JavaScript</span>
-                <span class="related-posts__meta">Mar 10, 2026</span>
+            
+            
+            <a class="related-posts__item" href="/blog/customer%20data/customer-data-management-1959-personalization.html/">
+                <span class="related-posts__title">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</span>
+                <span class="related-posts__meta">Oct 21, 2025</span>
             </a>
             
             
             
             
-            
-            
-            
-            
-            
-            
-            <a class="related-posts__item" href="/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/">
-                <span class="related-posts__title">How Small Changes Can Drive Big Results Without Blocking the Business</span>
-                <span class="related-posts__meta">May 15, 2025</span>
-            </a>
-            
-            
-            
-            
-            
-            
-            
-            
-            <a class="related-posts__item" href="/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/">
-                <span class="related-posts__title">Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬</span>
-                <span class="related-posts__meta">Jan 18, 2025</span>
-            </a>
             
             
             

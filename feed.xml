@@ -1,6 +1,118 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-03-09T21:21:37+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-03-10T00:22:39+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
 I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</title><link href="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/" rel="alternate" type="text/html" title="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization" /><published>2025-10-21T00:00:00+00:00</published><updated>2025-10-21T00:00:00+00:00</updated><id>https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization</id><content type="html" xml:base="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/"><![CDATA[<p>“<strong>An electronic computer and a religious mission are not very closely associated in most people’s minds</strong>”. This is
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Higher-order functions for currying in JavaScript</title><link href="https://imdhemy.com/blog/fp/higher-order-functions.html/" rel="alternate" type="text/html" title="Higher-order functions for currying in JavaScript" /><published>2026-03-10T00:07:09+00:00</published><updated>2026-03-10T00:07:09+00:00</updated><id>https://imdhemy.com/blog/fp/higher-order-functions</id><content type="html" xml:base="https://imdhemy.com/blog/fp/higher-order-functions.html/"><![CDATA[<p>I’ve been working on my <a href="/tag/fp">functional programming</a> skills and applying what I learn in real
+JavaScript projects. <a href="/tag/javascript">JavaScript</a> is a great choice for FP because it fits the
+paradigm well, has helpful libraries, and still lets me fall back to familiar patterns when I hit a knowledge gap.</p>
+
+<p>While practicing currying, I noticed something: I can read it and understand it, but refactoring existing code to use
+currying and partial application still feels awkward. So I decided to collect the concepts that make that refactoring
+process more intuitive. There are thousands of great resources on these topics, but I wanted a micro-curriculum that
+matches my learning style and maybe helps others too. The first concept is higher-order functions, which is the
+foundation for <a href="/tag/currying">currying</a> and composition.</p>
+
+<div class="info">
+  <p><strong>Goal</strong>: Understand functions as values and function-to-function interaction.</p>
+</div>
+
+<h2 id="what-is-a-higher-order-function">What is a higher-order function?</h2>
+
+<p>A higher-order function (HOF) is any function that takes a function as an argument, returns a function, or both.
+Functions that do neither are called first-order functions.</p>
+
+<p>A good example of a HOF is <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">
+<code class="language-plaintext highlighter-rouge">Array.prototype.map()</code></a>,
+which takes a function as an argument and applies it to every element of the array, returning a new array with the
+results.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This is a simple function that doubles a number</span>
+<span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+<span class="c1">// We can pass the `double` fn to `map`. This makes `map` a HOF.</span>
+<span class="kd">const</span> <span class="nx">doubledNumbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">].</span><span class="nf">map</span><span class="p">(</span><span class="nx">double</span><span class="p">);</span> <span class="c1">// [2, 4, 6]</span>
+</code></pre></div></div>
+
+<p>Here is another example of a HOF that returns a function:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// This is a HOF that returns a function</span>
+<span class="kd">const</span> <span class="nx">createMultiplier</span> <span class="o">=</span> <span class="nx">factor</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="nx">factor</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="c1">// We can use the HOF to create a new function that multiplies by 3</span>
+<span class="kd">const</span> <span class="nx">triple</span> <span class="o">=</span> <span class="nf">createMultiplier</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+
+<span class="c1">// Now we can use the `triple` function to multiply numbers by 3</span>
+<span class="nf">triple</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<h2 id="why-this-matters-for-currying">Why this matters for currying</h2>
+
+<p>Currying becomes much easier when you are comfortable with functions as values. A curried function is just a function
+that keeps returning functions until it has all the arguments it needs.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">y</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span><span class="p">;</span>
+
+<span class="kd">const</span> <span class="nx">add10</span> <span class="o">=</span> <span class="nf">add</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="nf">add10</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<p>If that pattern feels natural, currying and partial application stop feeling magical and start feeling practical.</p>
+
+<p>For now, don’t worry about mastering currying in this post. We’ll focus on higher-order functions first, then cover
+currying properly in a separate post.</p>
+
+<h2 id="exercises">Exercises</h2>
+
+<div class="tip">
+To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking
+the answers.
+</div>
+
+<h3 id="1-apply-twice">1. Apply twice</h3>
+
+<p>Write a function <code class="language-plaintext highlighter-rouge">applyTwice</code> that takes a function and a value, and applies the function to the value twice.</p>
+
+<details>
+  <summary>View answer</summary>
+
+  <p>You can implement <code class="language-plaintext highlighter-rouge">applyTwice</code> like this:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">applyTwice</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">x</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nf">fn</span><span class="p">(</span><span class="nf">fn</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+</code></pre></div>  </div>
+
+  <p>Here is an example of how to use <code class="language-plaintext highlighter-rouge">applyTwice</code>:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nf">applyTwice</span><span class="p">(</span><span class="nx">increment</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span> <span class="c1">// 7</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="2-build-mapwith">2. Build mapWith</h3>
+
+<p>Implement <code class="language-plaintext highlighter-rouge">mapWith</code> using <code class="language-plaintext highlighter-rouge">Array.prototype.map</code>.</p>
+
+<details>
+  <summary>View answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">mapWith</span> <span class="o">=</span> <span class="p">(</span><span class="nx">fn</span><span class="p">,</span> <span class="nx">xs</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">map</span><span class="p">(</span><span class="nx">fn</span><span class="p">);</span>
+</code></pre></div>  </div>
+
+  <p>Usage example:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nf">mapWith</span><span class="p">(</span><span class="nx">increment</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span> <span class="c1">// [2, 3, 4]</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h2 id="checkpoint">Checkpoint</h2>
+
+<div class="info">
+  <p>You are ready to move on when you can explain why each of <code class="language-plaintext highlighter-rouge">map</code>, <code class="language-plaintext highlighter-rouge">filter</code>, and <code class="language-plaintext highlighter-rouge">reduce</code> are higher-order functions.</p>
+</div>
+
+<p>If this helped, leave a reaction so I know this series is useful, and comment with the FP topic you want next while we
+prepare the dedicated currying post.</p>]]></content><author><name>Dhemy</name></author><category term="fp" /><category term="fp" /><category term="currying" /><category term="javascript" /><summary type="html"><![CDATA[I’ve been working on my functional programming skills and applying what I learn in real JavaScript projects. JavaScript is a great choice for FP because it fits the paradigm well, has helpful libraries, and still lets me fall back to familiar patterns when I hit a knowledge gap.]]></summary></entry><entry><title type="html">Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization</title><link href="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/" rel="alternate" type="text/html" title="Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization" /><published>2025-10-21T00:00:00+00:00</published><updated>2025-10-21T00:00:00+00:00</updated><id>https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization</id><content type="html" xml:base="https://imdhemy.com/blog/customer%20data/customer-data-management-1959-personalization.html/"><![CDATA[<p>“<strong>An electronic computer and a religious mission are not very closely associated in most people’s minds</strong>”. This is
 how “<em>The Catholic Standard and Times</em>”
 started <a href="https://www.thecatholicnewsarchive.org/?a=d&amp;d=cst19590911-01.2.96&amp;e=-------en-20--1--txt-txIN--------">its article</a>
 published on 11 September 1959 about how Personalized
@@ -1277,196 +1389,4 @@ the <a href="https://github.com/symblaze/security-bundle">Symblaze Security Bund
 <p>In this post, we have introduced a new way to write Symfony voters with less boilerplate code, the <code class="language-plaintext highlighter-rouge">CanDoVoter</code>. The
 <code class="language-plaintext highlighter-rouge">CanDoVoter</code> class is an abstract class that you can extend to write your voters. Improving the way we write voters
 will make our codebase more maintainable and easier to read. I hope you find this post helpful, and I would love to
-hear your feedback.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><category term="php" /><category term="symfony" /><category term="authorization" /><category term="code-reuse" /><category term="voters" /><summary type="html"><![CDATA[Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way we write voters, one of them was by introducing the AbstractVoter class in Symfony 2.6. Later on, it was deprecated in Symfony 2.8 to be removed in v3.0 with the introduction of the Voterclass. The continuous improvement didn’t stop there, and I believe it will not.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/vote.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/vote.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">What Symfony developers should know before using Voters</title><link href="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html/" rel="alternate" type="text/html" title="What Symfony developers should know before using Voters" /><published>2024-04-02T00:00:00+00:00</published><updated>2024-04-02T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters</id><content type="html" xml:base="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html/"><![CDATA[<p>Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then
-reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you
-should know before using voters.</p>
-
-<h2 id="permissions-should-be-linked-to-a-user">Permissions should be linked to a user</h2>
-
-<p>In Symfony, permissions are always linked to a user object. If you need to secure parts of your application, you
-need to create a user object that implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>.</p>
-
-<div class="tip">
-
-  <p>Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system</p>
-
-</div>
-
-<p>Some applications have an external SSO system that provides user information through an access token. Even in this case,
-you should not depend directly on the access token to check permissions. Instead, you should create a user object that
-implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>. If you opt out of this approach, you will lose many benefits that you get from
-Symfony’s security system.</p>
-
-<h2 id="security-user-interface">Security User Interface</h2>
-
-<p>The <code class="language-plaintext highlighter-rouge">UserInterface</code> provided by
-the <a href="https://github.com/symfony/symfony/blob/923c4efa1df53e351aa52be1907191977cbf980f/src/Symfony/Component/Security/Core/User/UserInterface.php#L31">Symfony security component</a>
-helps you to make sure that your user object has all the necessary methods to work with Symfony’s security system
-regardless of how you load or create the user object, e.g., from a database, an API, or a Token.</p>
-
-<div class="tip">
-
-  <p>The security user interface is the contract between your user object and Symfony’s security system.</p>
-
-</div>
-
-<p>Let’s take a look at the <code class="language-plaintext highlighter-rouge">UserInterface</code>:</p>
-
-<p>The first method is <code class="language-plaintext highlighter-rouge">getRoles()</code>. The name of the method is self-explanatory, it should return an array of roles for the
-user. We will cover roles in the next section.</p>
-
-<p>The second method is <code class="language-plaintext highlighter-rouge">eraseCredentials()</code>. This method is designed to clear any sensitive data that the user object
-might be holding at any given point. For instance, clearing the plain text password after the user is authenticated.</p>
-
-<p>The last method is <code class="language-plaintext highlighter-rouge">getUserIdentifier()</code>. This method should return the <strong>Public representation</strong> of a user e.g.,
-the <code class="language-plaintext highlighter-rouge">username</code>. This method can be used by the user providers which helps you to get many benefits, like <a href="https://symfony.com/doc/current/security.html#fetching-the-user-from-a-service">fetching
-the user object in your
-service</a>, <a href="https://symfony.com/doc/current/security/impersonating_user.html">impersonating a user</a>,
-etc.</p>
-
-<h2 id="user-roles">User Roles</h2>
-
-<p>When a user is authenticated, Symfony calls the <code class="language-plaintext highlighter-rouge">getRoles()</code> method on the user object to determine the roles of the
-user. It doesn’t matter how the roles are stored in the database or how they are generated. The only thing that matters
-is that every role must start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix - otherwise, things won’t work as expected. You will use these
-roles to grant access to specific parts of your application.</p>
-
-<div class="tip">
-
-  <p>All roles should start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix. This is a requirement of Symfony’s security system.</p>
-
-</div>
-
-<p>Symfony provides a role hierarchy system out of the box. Instead of assigning multiple roles to a user, you can
-configure a role hierarchy. This way, you can assign a single role to a user, and Symfony will automatically grant
-access to all the roles in the hierarchy.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
-<span class="na">security</span><span class="pi">:</span>
-  <span class="c1"># ...</span>
-
-  <span class="na">role_hierarchy</span><span class="pi">:</span>
-    <span class="na">ROLE_MODERATOR</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
-    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_MODERATOR</span>
-    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_ADMIN</span>
-
-</code></pre></div></div>
-
-<p>Using the above configuration, if a user has the <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role, Symfony will automatically grant access to
-<code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code>, <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code>, and <code class="language-plaintext highlighter-rouge">ROLE_USER</code>. This is illustrated as follows:</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role inherits the <code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code> role, which inherits the <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code> role, which inherits
-the <code class="language-plaintext highlighter-rouge">ROLE_USER</code> role. It’s worth noting that a role can inherit multiple roles.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
-<span class="na">security</span><span class="pi">:</span>
-  <span class="c1"># ...</span>
-
-  <span class="na">role_hierarchy</span><span class="pi">:</span>
-    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
-    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">ROLE_ADMIN</span><span class="pi">,</span> <span class="nv">ROLE_ALLOWED_TO_SWITCH</span> <span class="pi">]</span>
-</code></pre></div></div>
-
-<p>For role hierarchy to work, do not use <code class="language-plaintext highlighter-rouge">$user-&gt;getRoles()</code> manually, instead you should always depend on the
-<code class="language-plaintext highlighter-rouge">isGranted()</code> or <code class="language-plaintext highlighter-rouge">denyAccessUnlessGranted()</code> methods provided by the <code class="language-plaintext highlighter-rouge">AuthorizationCheckerInterface</code>.</p>
-
-<div class="tip">
-
-  <p>Let symfony does the heavy lifting for you. Always use the security methods to check for roles.</p>
-
-</div>
-
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// BAD - $user-&gt;getRoles() will not know about the role hierarchy
-<span class="gd">- $hasAccess = in_array('ROLE_ADMIN', $user-&gt;getRoles());
-</span><span class="err">
-</span>// GOOD - use of the normal security methods
-<span class="gi">+ $hasAccess = $this-&gt;isGranted('ROLE_ADMIN');
-+ $this-&gt;denyAccessUnlessGranted('ROLE_ADMIN');
-</span><span class="err">
-</span></code></pre></div></div>
-
-<h2 id="decision-strategy">Decision Strategy</h2>
-
-<p>When you start using voters, Symfony will ask each voter to vote on the access decision. There are three decisions
-that a voter can make, like any other voting system:</p>
-
-<ol>
-  <li><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code>: The voter grants access to the resource.</li>
-  <li><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code>: The voter denies access to the resource.</li>
-  <li><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code>: The voter abstains from voting.</li>
-</ol>
-
-<p>Normally, only one voter will vote at any given time, and all the rest will <code class="language-plaintext highlighter-rouge">abstain</code>. However, if you want to
-change this behavior, you need to know about the <code class="language-plaintext highlighter-rouge">decision_strategy</code> configuration.</p>
-
-<div class="tip">
-  <p>It’s always good to keep the default <code class="language-plaintext highlighter-rouge">decision_strategy</code> and design your voters accordingly. A resource oriented
-voter should only vote on the resource it is designed for.</p>
-</div>
-
-<p>Suppose you have a feature that requires a user to be part of a group and is older than 18 years. You have two separate
-voters to check these conditions. The following table will help you understand different decision strategies:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Decision Strategy</th>
-      <th>Description</th>
-      <th>Voter 1</th>
-      <th>Voter 2</th>
-      <th>Voter 3</th>
-      <th>Result</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>affirmative (default)</td>
-      <td>This grants access as soon as there is one voter granting access</td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-    </tr>
-    <tr>
-      <td>consensus</td>
-      <td>This grants access if there are more voters granting access than denying. In case of a tie the decision is based on the allow_if_equal_granted_denied config option (defaulting to true);</td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-    </tr>
-    <tr>
-      <td>unanimous</td>
-      <td>This only grants access if there is no voter denying access.</td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
-    </tr>
-    <tr>
-      <td>priority</td>
-      <td>This grants or denies access by the first voter that does not abstain, based on their service priority</td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
-      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Back to our example, if you want to grant access only if both voters grant access, you should use the <code class="language-plaintext highlighter-rouge">unanimous</code>
-decision strategy.</p>
-
-<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
-<span class="na">security</span><span class="pi">:</span>
-  <span class="na">access_decision_manager</span><span class="pi">:</span>
-    <span class="na">strategy</span><span class="pi">:</span> <span class="s">unanimous</span>
-    <span class="na">allow_if_all_abstain</span><span class="pi">:</span> <span class="kc">false</span>
-</code></pre></div></div>
-
-<h2 id="summary">Summary</h2>
-
-<p>In this post, we covered some of the basics of Symfony’s security system that you should know before using voters.
-understanding them will help you make the most out of Symfony’s security system. You should always consult the Symfony
-documentation for the most up-to-date information and best practices. In the next article, we will cover how to create
-a custom voter and how to use it in your application.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><category term="php" /><category term="symfony" /><category term="authorization" /><category term="security" /><category term="voters" /><summary type="html"><![CDATA[Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you should know before using voters.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/voting.webp" /><media:content medium="image" url="https://imdhemy.com/assets/img/voting.webp" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+hear your feedback.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><category term="php" /><category term="symfony" /><category term="authorization" /><category term="code-reuse" /><category term="voters" /><summary type="html"><![CDATA[Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way we write voters, one of them was by introducing the AbstractVoter class in Symfony 2.6. Later on, it was deprecated in Symfony 2.8 to be removed in v3.0 with the introduction of the Voterclass. The continuous improvement didn’t stop there, and I believe it will not.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/vote.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/vote.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
