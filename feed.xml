@@ -1,6 +1,133 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-03-11T20:57:04+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-03-13T00:17:11+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
 I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Predicate Functions in JavaScript</title><link href="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/" rel="alternate" type="text/html" title="Predicate Functions in JavaScript" /><published>2026-03-10T19:06:12+00:00</published><updated>2026-03-10T19:06:12+00:00</updated><id>https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript</id><content type="html" xml:base="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/"><![CDATA[<p>If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Currying in JavaScript</title><link href="https://imdhemy.com/blog/fp/currying-in-javascript.html/" rel="alternate" type="text/html" title="Currying in JavaScript" /><published>2026-03-12T23:07:01+00:00</published><updated>2026-03-12T23:07:01+00:00</updated><id>https://imdhemy.com/blog/fp/currying-in-javascript</id><content type="html" xml:base="https://imdhemy.com/blog/fp/currying-in-javascript.html/"><![CDATA[<p>In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be
+useful in real JavaScript code.</p>
+
+<h2 id="what-is-currying">What is currying?</h2>
+
+<p>Currying transforms a function of many arguments into a chain of one-argument functions.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// uncurried</span>
+<span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+
+<span class="c1">// curried</span>
+<span class="kd">const</span> <span class="nx">addC</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Instead of passing all arguments at once, you pass them one at a time. Each call returns a new function that waits for
+the next argument until the final result can be produced.</p>
+
+<p>A small example makes it easier:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="c1">// The you can call it like this:</span>
+<span class="nf">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 5</span>
+
+<span class="c1">// Or you can partially apply it:</span>
+<span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">add5</span> <span class="o">=</span> <span class="nf">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">// And call it later:</span>
+<span class="nf">increment</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 5</span>
+<span class="nf">add5</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<h2 id="currying-vs-partial-application">Currying vs partial application</h2>
+
+<p>These ideas are related, but they are not the same. I used to blur them together, so it is worth separating them
+clearly. <strong>Currying</strong> changes the shape of a function. <strong>Partial application</strong> uses that shape to pre-fill some
+arguments and get back a more specific function.</p>
+
+<p>Here is a simple example:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span> <span class="c1">// curried function</span>
+
+<span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="nf">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// partial application</span>
+
+<span class="nf">double</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 10</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">multiply</code> is curried because it takes one argument at a time. <code class="language-plaintext highlighter-rouge">double()</code> is the result of partial application because
+we fixed the first argument to <code class="language-plaintext highlighter-rouge">2</code> and got back a more specific function.</p>
+
+<h2 id="why-this-is-useful">Why this is useful</h2>
+
+<p>The main thing I like about currying is that it helps me build small reusable functions from more general ones.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">replace</span> <span class="o">=</span> <span class="nx">regex</span> <span class="o">=&gt;</span> <span class="nx">replacement</span> <span class="o">=&gt;</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">replaceSpaces</span> <span class="o">=</span> <span class="nf">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/g</span><span class="p">)(</span><span class="dl">"</span><span class="s2">-</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nf">replaceSpaces</span><span class="p">(</span><span class="dl">"</span><span class="s2">functional programming in js</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "functional-programming-in-js"</span>
+</code></pre></div></div>
+
+<p>This is useful when you want to configure a function once and then reuse it in several places without repeating the
+same arguments over and over.</p>
+
+<h3 id="exercises">Exercises</h3>
+
+<div class="tip">
+To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking
+the answers.
+</div>
+
+<h3 id="1-curry-multiply">1. Curry multiply</h3>
+
+<p>Convert this <code class="language-plaintext highlighter-rouge">multiply</code> function to curried form:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
+</code></pre></div></div>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="2-curry-replace">2. Curry replace</h3>
+
+<p>Convert this <code class="language-plaintext highlighter-rouge">replace</code> function to curried form:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">replace</span> <span class="o">=</span> <span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">);</span>
+</code></pre></div></div>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">replace</span> <span class="o">=</span> <span class="nx">regex</span> <span class="o">=&gt;</span> <span class="nx">replacement</span> <span class="o">=&gt;</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">);</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="3-explain-the-first-application">3. Explain the first application</h3>
+
+<p>Explain in your own words:</p>
+
+<ul>
+  <li>What does <code class="language-plaintext highlighter-rouge">multiply(2)</code> return?</li>
+  <li>Why is that useful?</li>
+</ul>
+
+<details>
+  <summary>Show answer</summary>
+
+  <p><code class="language-plaintext highlighter-rouge">multiply(2)</code> returns a new function that is still waiting for the second argument (<code class="language-plaintext highlighter-rouge">b</code>).
+That is useful because it gives you a reusable function for a more specific job, for example:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="nf">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nf">double</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 10</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h2 id="checkpoint">Checkpoint</h2>
+
+<div class="info">
+  <p>You are ready to continue when you can quickly convert between uncurried and curried forms, and explain how partial
+application is related but different.</p>
+</div>]]></content><author><name>Dhemy</name></author><category term="fp" /><category term="fp" /><category term="javascript" /><category term="currying" /><summary type="html"><![CDATA[In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be useful in real JavaScript code.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/currying-in-javascript.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/currying-in-javascript.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Predicate Functions in JavaScript</title><link href="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/" rel="alternate" type="text/html" title="Predicate Functions in JavaScript" /><published>2026-03-10T19:06:12+00:00</published><updated>2026-03-10T19:06:12+00:00</updated><id>https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript</id><content type="html" xml:base="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/"><![CDATA[<p>If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called
 them that.</p>
 
 <p>You already know this pattern, but naming it is useful. Terms help teams communicate ideas quickly. The moment you say
@@ -984,167 +1111,4 @@ should avoid using magic methods in the first place, but if you are interested, 
 <h2 id="conclusion">Conclusion</h2>
 
 <p><code class="language-plaintext highlighter-rouge">empty()</code> is not as straightforward as I thought. It’s better to avoid using it and use the alternatives I mentioned
-above. It’s always better to be explicit in your code and avoid any surprises.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><category term="php" /><category term="code-quality" /><category term="language-features" /><category term="static-analysis" /><category term="best-practices" /><summary type="html"><![CDATA[I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the empty() function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a bad idea. In this blog post, I’ll share why we should stop using empty() and look at better alternatives.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/desert.jpg" /><media:content medium="image" url="https://imdhemy.com/assets/img/desert.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Singleton Design Pattern in Laravel</title><link href="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/" rel="alternate" type="text/html" title="Singleton Design Pattern in Laravel" /><published>2024-04-15T06:05:51+00:00</published><updated>2024-04-15T06:05:51+00:00</updated><id>https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel</id><content type="html" xml:base="https://imdhemy.com/blog/php/singleton-design-pattern-in-laravel.html/"><![CDATA[<p>Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”.
-But they landed on my <a href="/blog/php/real-world-use-cases-of-sinlgeton-in-php.html/">PHP Real-world use cases of singleton design pattern</a> post. So I decided to make them happy with a dedicated post
-about Singleton Design Pattern in Laravel.</p>
-
-<p>In the mentioned post, I explained the Singleton Design Pattern in PHP, how to implement it, how to test it, and some
-real-world use cases. If you are not familiar with this pattern, you can check it out.</p>
-
-<h2 id="why-would-you-use-singleton-design-pattern">Why would you use Singleton Design Pattern?</h2>
-
-<p>A perfect use case for the Singleton is a FileSystem class. You want to perform file operations in your application, and
-you want to use the same instance of the FileSystem class everywhere in your application. It’s impossible to depend on
-the constructors to get the same instance of the FileSystem, that’s where the Singleton Design Pattern comes in.</p>
-
-<p>It may look unnecessary to use the Singleton Design pattern in PHP because each request is a new instance of the
-application and all instances are destroyed after the request is done. But you get more benefits from it using it in
-something like a Queue worker or a Laravel Octane server.</p>
-
-<h2 id="some-laravel-binding-basics">Some Laravel Binding basics</h2>
-
-<p>Before we create our Laravel Singleton, let’s understand some Laravel binding basics. The Laravel service container is a
-powerful tool for managing class dependencies and performing dependency injection. Binding is the process of defining
-how the container should resolve a class or an interface. Most of the time you don’t need to instruct the container how
-to resolve your dependencies, but sometimes you do.</p>
-
-<p>To bind a class into the container, you can use the <code class="language-plaintext highlighter-rouge">bind()</code> method inside one of the service providers. The following
-example binds a <code class="language-plaintext highlighter-rouge">Foo</code> class. We can use the <code class="language-plaintext highlighter-rouge">\App\Providers\AppServiceProvider</code> for this.</p>
-
-<p>Let’s assume we have a <code class="language-plaintext highlighter-rouge">Foo</code> class that can tell us when it was created.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-
-<span class="k">declare</span><span class="p">(</span><span class="n">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
-
-<span class="kn">namespace</span> <span class="nn">App</span><span class="p">;</span>
-
-<span class="k">final</span> <span class="k">readonly</span> <span class="kd">class</span> <span class="nc">Foo</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">__construct</span><span class="p">(</span><span class="k">public</span> <span class="kt">int</span> <span class="nv">$createdAt</span><span class="p">)</span>
-    <span class="p">{</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now we can bind the <code class="language-plaintext highlighter-rouge">Foo</code> class to the container.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-
-<span class="kn">namespace</span> <span class="nn">App\Providers</span><span class="p">;</span>
-
-<span class="kn">use</span> <span class="nc">App\Foo</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nc">Illuminate\Support\ServiceProvider</span><span class="p">;</span>
-
-<span class="kd">class</span> <span class="nc">AppServiceProvider</span> <span class="kd">extends</span> <span class="nc">ServiceProvider</span>
-<span class="p">{</span>
-    <span class="cd">/**
-     * Register any application services.
-     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="n">register</span><span class="p">():</span> <span class="kt">void</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">app</span><span class="o">-&gt;</span><span class="nf">bind</span><span class="p">(</span><span class="nc">Foo</span><span class="o">::</span><span class="n">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="k">new</span> <span class="nc">Foo</span><span class="p">(</span><span class="nb">time</span><span class="p">());</span>
-        <span class="p">});</span>
-    <span class="p">}</span>
-    
-    <span class="c1">// .. other methods</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now we can resolve the <code class="language-plaintext highlighter-rouge">Foo</code> class from the container.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-
-<span class="kn">use</span> <span class="nc">App\Foo</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nc">Illuminate\Support\Facades\Route</span><span class="p">;</span>
-
-<span class="nc">Route</span><span class="o">::</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="kt">Foo</span> <span class="nv">$foo</span><span class="p">)</span> <span class="p">{</span>
-   <span class="k">return</span> <span class="nv">$foo</span><span class="o">-&gt;</span><span class="n">createdAt</span><span class="p">;</span>
-<span class="p">});</span>
-
-</code></pre></div></div>
-
-<p>Now if you visited your home page, you can see the timestamp when the <code class="language-plaintext highlighter-rouge">Foo</code> class was created, Something like this</p>
-
-<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1713182568
-</code></pre></div></div>
-
-<h2 id="binding-a-singleton">Binding a Singleton</h2>
-
-<p>The <code class="language-plaintext highlighter-rouge">singleton</code> method binds a class or interface into the container that should only be resolved one time. Once a
-singleton binding is resolved, the same object instance will be returned on subsequent calls into the container. To see
-it in action, let’s change our <code class="language-plaintext highlighter-rouge">Foo</code> example to a Singleton.</p>
-
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// app/Providers/AppServiceProvider.php
-<span class="err">
-</span>    public function register(): void
-    {   
-<span class="gd">-       $this-&gt;app-&gt;bind(Foo::class, function () {
-</span><span class="gi">+       $this-&gt;app-&gt;singleton(Foo::class, function () {
-</span>            return new Foo(time());
-        });
-    }
-<span class="err">
-</span></code></pre></div></div>
-
-<p>Now, let’s create two instances of the <code class="language-plaintext highlighter-rouge">Foo</code> class in our route.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
-<span class="c1">// routes/web.php</span>
-
-<span class="kn">use</span> <span class="nc">App\Foo</span><span class="p">;</span>
-<span class="kn">use</span> <span class="nc">Illuminate\Support\Facades\Route</span><span class="p">;</span>
-
-<span class="nc">Route</span><span class="o">::</span><span class="nf">get</span><span class="p">(</span><span class="s1">'/'</span><span class="p">,</span> <span class="k">static</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="nv">$firstCall</span> <span class="o">=</span> <span class="nf">app</span><span class="p">(</span><span class="nc">Foo</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
-
-  <span class="c1">// Simulate a delay</span>
-  <span class="nb">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
-
-  <span class="nv">$secondCall</span> <span class="o">=</span> <span class="nf">app</span><span class="p">(</span><span class="nc">Foo</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
-
-  <span class="k">return</span> <span class="nf">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="nf">json</span><span class="p">([</span>
-        <span class="s1">'first_call'</span> <span class="o">=&gt;</span> <span class="nv">$firstCall</span><span class="o">-&gt;</span><span class="n">createdAt</span><span class="p">,</span>
-        <span class="s1">'second_call'</span> <span class="o">=&gt;</span> <span class="nv">$secondCall</span><span class="o">-&gt;</span><span class="n">createdAt</span><span class="p">,</span>
-        <span class="s1">'is_same_instance'</span> <span class="o">=&gt;</span> <span class="nv">$firstCall</span> <span class="o">===</span> <span class="nv">$secondCall</span><span class="p">,</span>
-    <span class="p">]);</span>
-<span class="p">});</span>
-</code></pre></div></div>
-
-<p>The response should be something like this</p>
-
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"first_call"</span><span class="p">:</span><span class="w"> </span><span class="mi">1713183052</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"second_call"</span><span class="p">:</span><span class="w"> </span><span class="mi">1713183052</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"is_same_instance"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div>
-
-<p>As you can see, the <code class="language-plaintext highlighter-rouge">first_call</code> and <code class="language-plaintext highlighter-rouge">second_call</code> are the same, and the <code class="language-plaintext highlighter-rouge">is_same_instance</code> is <code class="language-plaintext highlighter-rouge">true</code>. Try to replace
-the <code class="language-plaintext highlighter-rouge">singleton</code> with <code class="language-plaintext highlighter-rouge">bind</code> and see the difference.</p>
-
-<h2 id="two-types-of-singletons-binding-in-laravel">Two types of Singletons binding in Laravel</h2>
-
-<p>We have already tried the <code class="language-plaintext highlighter-rouge">singleton()</code> method, but there is another way to bind a Singleton in Laravel. The Scoped
-Bindings. The <code class="language-plaintext highlighter-rouge">scoped()</code> method binds a class or interface into the container that should only be resolved one time
-within a given Laravel request / job lifecycle. While this method is similar to the singleton method, instances
-registered using the scoped method will be flushed whenever the Laravel application starts a new “lifecycle”, such as
-when a Laravel Octane worker processes a new request or when a Laravel queue worker processes a new job:</p>
-
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// app/Providers/AppServiceProvider.php
-<span class="err">
-</span>    public function register(): void
-    {   
-<span class="gd">-       $this-&gt;app-&gt;singleton(Foo::class, function () {
-</span><span class="gi">+       $this-&gt;app-&gt;scoped(Foo::class, function () {
-</span>            return new Foo(time());
-        });
-    }
-<span class="err">
-</span></code></pre></div></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p>Laravel offers two types of Singleton bindings, the <code class="language-plaintext highlighter-rouge">singleton()</code> and the <code class="language-plaintext highlighter-rouge">scoped()</code>, each with its own use cases and
-lifecycle.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><category term="php" /><category term="laravel" /><category term="singleton" /><category term="service-container" /><category term="dependency-injection" /><summary type="html"><![CDATA[Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”. But they landed on my PHP Real-world use cases of singleton design pattern post. So I decided to make them happy with a dedicated post about Singleton Design Pattern in Laravel.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/stay_single.jpeg" /><media:content medium="image" url="https://imdhemy.com/assets/img/stay_single.jpeg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+above. It’s always better to be explicit in your code and avoid any surprises.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><category term="php" /><category term="code-quality" /><category term="language-features" /><category term="static-analysis" /><category term="best-practices" /><summary type="html"><![CDATA[I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the empty() function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a bad idea. In this blog post, I’ll share why we should stop using empty() and look at better alternatives.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/desert.jpg" /><media:content medium="image" url="https://imdhemy.com/assets/img/desert.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>

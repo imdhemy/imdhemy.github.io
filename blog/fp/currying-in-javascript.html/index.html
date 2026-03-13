@@ -5,9 +5,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Predicate Functions in JavaScript</title>
+    <title>Currying in JavaScript</title>
     <meta name="description"
-          content="If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called them that.">
+          content="In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be useful in real JavaScript code.">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
         }
     </style>
 
-    <link rel="canonical" href="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
+    <link rel="canonical" href="https://imdhemy.com/blog/fp/currying-in-javascript.html/">
     <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
     
     <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
@@ -43,20 +43,20 @@
 
     
     <!-- Facebook Meta Tags -->
-<meta property="og:title" content="Predicate Functions in JavaScript">
+<meta property="og:title" content="Currying in JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:image" content="https://imdhemy.com/assets/img/predicates.png">
-<meta property="og:url" content="https://imdhemy.com/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
+<meta property="og:image" content="https://imdhemy.com/assets/img/currying-in-javascript.png">
+<meta property="og:url" content="https://imdhemy.com/blog/fp/currying-in-javascript.html/">
 <meta property="og:description"
-      content="If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called them that.">
+      content="In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be useful in real JavaScript code.">
 <meta property="og:site_name" content="Imdhemy">
 
 <!-- Twitter Meta Tags -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Predicate Functions in JavaScript">
+<meta name="twitter:title" content="Currying in JavaScript">
 <meta name="twitter:description"
-      content="If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called them that.">
-<meta name="twitter:image" content="https://imdhemy.com/assets/img/predicates.png">
+      content="In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be useful in real JavaScript code.">
+<meta name="twitter:image" content="https://imdhemy.com/assets/img/currying-in-javascript.png">
 
 
     
@@ -194,14 +194,14 @@
 
 <div class="post-header">
     <a class="post-back-link" href="/blog">&larr; Back to all posts</a>
-    <h1 class="post-title">Predicate Functions in JavaScript</h1>
+    <h1 class="post-title">Currying in JavaScript</h1>
     
 <p class="post-header__meta post-meta">
-    <time datetime="2026-03-10T19:06:12+00:00">Mar 10, 2026</time>
+    <time datetime="2026-03-12T23:07:01+00:00">Mar 12, 2026</time>
     <span class="post-meta__separator" aria-hidden="true">&middot;</span>
     <span class="post-meta__reading-time">
         <ion-icon class="post-meta__icon" name="time-outline" aria-hidden="true"></ion-icon>
-        <span>2 min read</span>
+        <span>3 min read</span>
     </span>
 </p>
 
@@ -269,15 +269,15 @@
                 type="button"
                 aria-label="Collapse to hide series posts"
                 aria-expanded="true"
-                aria-controls="post-series-panel-blog-fp-how-to-use-predicate-functions-in-javascript-html"
+                aria-controls="post-series-panel-blog-fp-currying-in-javascript-html"
                 data-series-toggle>
             <span class="series-collapsible__icon-wrap" aria-hidden="true">
                 <ion-icon class="series-collapsible__icon" name="chevron-down-outline"></ion-icon>
             </span>
         </button>
     </div>
-    <div class="series-collapsible__panel" id="post-series-panel-blog-fp-how-to-use-predicate-functions-in-javascript-html" data-series-panel>
-        <ol class="post-series__list" id="post-series-list-blog-fp-how-to-use-predicate-functions-in-javascript-html">
+    <div class="series-collapsible__panel" id="post-series-panel-blog-fp-currying-in-javascript-html" data-series-panel>
+        <ol class="post-series__list" id="post-series-list-blog-fp-currying-in-javascript-html">
             
             
             
@@ -314,13 +314,13 @@
             
             
             
-            <li class="post-series__item is-current">
+            <li class="post-series__item">
                 
-                <span class="post-series__link"
-                      aria-current="true">
+                <a class="post-series__link"
+                   href="/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
                     <span class="post-series__index" aria-hidden="true">2</span>
                     <span class="post-series__title">Predicate Functions in JavaScript</span>
-                </span>
+                </a>
                 
             </li>
             
@@ -335,13 +335,13 @@
             
             
             
-            <li class="post-series__item">
+            <li class="post-series__item is-current">
                 
-                <a class="post-series__link"
-                   href="/blog/fp/currying-in-javascript.html/">
+                <span class="post-series__link"
+                      aria-current="true">
                     <span class="post-series__index" aria-hidden="true">3</span>
                     <span class="post-series__title">Currying in JavaScript</span>
-                </a>
+                </span>
                 
             </li>
             
@@ -353,8 +353,8 @@
 
     
     <div class="post-image-wrap">
-        <img src="/assets/img/predicates.png"
-             alt="Predicate Functions in JavaScript"
+        <img src="/assets/img/currying-in-javascript.png"
+             alt="Currying in JavaScript"
              class="post-image"/>
         <!-- Image source -->
         
@@ -365,33 +365,69 @@
 
 
     <div class="content-shell content read-surface">
-    <p>If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called
-them that.</p>
+    <p>In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be
+useful in real JavaScript code.</p>
 
-<p>You already know this pattern, but naming it is useful. Terms help teams communicate ideas quickly. The moment you say
-“<a href="https://refactoring.com/catalog/replacePrimitiveWithObject.html">Replace primitive with object</a>”, your teammate and
-your AI tool understand what you mean without extra explanation. The same is true for predicate functions.</p>
+<h2 id="what-is-currying">What is currying?</h2>
 
-<p>This is why I decided to write this post: to give you a name for this common pattern and show you how it fits into the
-larger picture of functional programming and currying.</p>
+<p>Currying transforms a function of many arguments into a chain of one-argument functions.</p>
 
-<h2 id="what-is-a-predicate-function">What is a predicate function?</h2>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// uncurried</span>
+<span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
 
-<div class="info">
-  <p>A predicate function is a function that returns a boolean value <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>.</p>
-</div>
-
-<p>They are often used with <a href="/blog/fp/higher-order-functions.html/">Higher-order functions</a> like <code class="language-plaintext highlighter-rouge">filter</code>, <code class="language-plaintext highlighter-rouge">find</code>, <code class="language-plaintext highlighter-rouge">some</code> and <code class="language-plaintext highlighter-rouge">every</code> to derive decisions based on the
-data.</p>
-
-<p>Let’s look at a single example of a predicate function used with <code class="language-plaintext highlighter-rouge">filter</code>:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// A predicate to check if a number is even</span>
-<span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
-
-<span class="c1">// Using the predicate to derive a new array of even numbers.</span>
-<span class="kd">const</span> <span class="nx">evenNumbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nx">isEven</span><span class="p">);</span> <span class="c1">// [2, 4, 6]</span>
+<span class="c1">// curried</span>
+<span class="kd">const</span> <span class="nx">addC</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
 </code></pre></div></div>
+
+<p>Instead of passing all arguments at once, you pass them one at a time. Each call returns a new function that waits for
+the next argument until the final result can be produced.</p>
+
+<p>A small example makes it easier:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">add</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">+</span> <span class="nx">b</span><span class="p">;</span>
+<span class="c1">// The you can call it like this:</span>
+<span class="nf">add</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// 5</span>
+
+<span class="c1">// Or you can partially apply it:</span>
+<span class="kd">const</span> <span class="nx">increment</span> <span class="o">=</span> <span class="nf">add</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">add5</span> <span class="o">=</span> <span class="nf">add</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+
+<span class="c1">// And call it later:</span>
+<span class="nf">increment</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 5</span>
+<span class="nf">add5</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span> <span class="c1">// 15</span>
+</code></pre></div></div>
+
+<h2 id="currying-vs-partial-application">Currying vs partial application</h2>
+
+<p>These ideas are related, but they are not the same. I used to blur them together, so it is worth separating them
+clearly. <strong>Currying</strong> changes the shape of a function. <strong>Partial application</strong> uses that shape to pre-fill some
+arguments and get back a more specific function.</p>
+
+<p>Here is a simple example:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span> <span class="c1">// curried function</span>
+
+<span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="nf">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span> <span class="c1">// partial application</span>
+
+<span class="nf">double</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 10</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">multiply</code> is curried because it takes one argument at a time. <code class="language-plaintext highlighter-rouge">double()</code> is the result of partial application because
+we fixed the first argument to <code class="language-plaintext highlighter-rouge">2</code> and got back a more specific function.</p>
+
+<h2 id="why-this-is-useful">Why this is useful</h2>
+
+<p>The main thing I like about currying is that it helps me build small reusable functions from more general ones.</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">replace</span> <span class="o">=</span> <span class="nx">regex</span> <span class="o">=&gt;</span> <span class="nx">replacement</span> <span class="o">=&gt;</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">replaceSpaces</span> <span class="o">=</span> <span class="nf">replace</span><span class="p">(</span><span class="sr">/</span><span class="se">\s</span><span class="sr">+/g</span><span class="p">)(</span><span class="dl">"</span><span class="s2">-</span><span class="dl">"</span><span class="p">);</span>
+
+<span class="nf">replaceSpaces</span><span class="p">(</span><span class="dl">"</span><span class="s2">functional programming in js</span><span class="dl">"</span><span class="p">);</span> <span class="c1">// "functional-programming-in-js"</span>
+</code></pre></div></div>
+
+<p>This is useful when you want to configure a function once and then reuse it in several places without repeating the
+same arguments over and over.</p>
 
 <h3 id="exercises">Exercises</h3>
 
@@ -400,50 +436,53 @@ To get the best out of this series, I recommend spending 15-25 minutes solving t
 the answers.
 </div>
 
-<h3 id="1-write-basic-predicates">1. Write basic predicates</h3>
+<h3 id="1-curry-multiply">1. Curry multiply</h3>
 
-<p>Write <code class="language-plaintext highlighter-rouge">isEven</code>, <code class="language-plaintext highlighter-rouge">isLongerThan3</code>, and <code class="language-plaintext highlighter-rouge">hasQ</code> predicates.</p>
+<p>Convert this <code class="language-plaintext highlighter-rouge">multiply</code> function to curried form:</p>
 
-<details>
-  <summary>Show answer</summary>
-
-  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">isEven</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">isLongerThan3</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">;</span>
-<span class="kd">const</span> <span class="nx">hasQ</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-</code></pre></div>  </div>
-
-</details>
-
-<h3 id="2-use-predicates-with-arrays">2. Use predicates with arrays</h3>
-
-<p>Use predicates to:</p>
-
-<ul>
-  <li>keep only even numbers from <code class="language-plaintext highlighter-rouge">[1, 2, 3, 4, 5, 6]</code></li>
-  <li>keep only strings that contain <code class="language-plaintext highlighter-rouge">q</code> (case-insensitive)</li>
-</ul>
-
-<details>
-  <summary>Show answer</summary>
-
-  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nx">isEven</span><span class="p">);</span> <span class="c1">// [2, 4, 6]</span>
-<span class="p">[</span><span class="dl">"</span><span class="s2">quiet</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">bat</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">Qatar</span><span class="dl">"</span><span class="p">,</span> <span class="dl">"</span><span class="s2">dog</span><span class="dl">"</span><span class="p">].</span><span class="nf">filter</span><span class="p">(</span><span class="nx">hasQ</span><span class="p">);</span> <span class="c1">// ["quiet", "Qatar"]</span>
-</code></pre></div>  </div>
-
-</details>
-
-<h3 id="3-refactor-inline-predicate-to-named-predicate">3. Refactor inline predicate to named predicate</h3>
-
-<p>Refactor this into a named predicate + filter:</p>
-
-<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">xs</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="p">(</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
 </code></pre></div></div>
 
 <details>
   <summary>Show answer</summary>
 
-  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">hasQ</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-<span class="kd">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">xs</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">hasQ</span><span class="p">);</span>
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">multiply</span> <span class="o">=</span> <span class="nx">a</span> <span class="o">=&gt;</span> <span class="nx">b</span> <span class="o">=&gt;</span> <span class="nx">a</span> <span class="o">*</span> <span class="nx">b</span><span class="p">;</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="2-curry-replace">2. Curry replace</h3>
+
+<p>Convert this <code class="language-plaintext highlighter-rouge">replace</code> function to curried form:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">replace</span> <span class="o">=</span> <span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">,</span> <span class="nx">str</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">);</span>
+</code></pre></div></div>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">replace</span> <span class="o">=</span> <span class="nx">regex</span> <span class="o">=&gt;</span> <span class="nx">replacement</span> <span class="o">=&gt;</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">replace</span><span class="p">(</span><span class="nx">regex</span><span class="p">,</span> <span class="nx">replacement</span><span class="p">);</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="3-explain-the-first-application">3. Explain the first application</h3>
+
+<p>Explain in your own words:</p>
+
+<ul>
+  <li>What does <code class="language-plaintext highlighter-rouge">multiply(2)</code> return?</li>
+  <li>Why is that useful?</li>
+</ul>
+
+<details>
+  <summary>Show answer</summary>
+
+  <p><code class="language-plaintext highlighter-rouge">multiply(2)</code> returns a new function that is still waiting for the second argument (<code class="language-plaintext highlighter-rouge">b</code>).
+That is useful because it gives you a reusable function for a more specific job, for example:</p>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="nf">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="nf">double</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span> <span class="c1">// 10</span>
 </code></pre></div>  </div>
 
 </details>
@@ -451,7 +490,8 @@ the answers.
 <h2 id="checkpoint">Checkpoint</h2>
 
 <div class="info">
-  <p>You are ready to continue when you naturally extract inline boolean logic into named predicates.</p>
+  <p>You are ready to continue when you can quickly convert between uncurried and curried forms, and explain how partial
+application is related but different.</p>
 </div>
 
 </div>
@@ -511,16 +551,11 @@ the answers.
 <section class="post-navigation-shell">
     <div class="post-navigation-shell__inner post-navigation">
         
-        <a class="post-navigation__item" href="/blog/fp/higher-order-functions.html/">
+        <a class="post-navigation__item" href="/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
             <span class="post-navigation__label">Previous article</span>
-            <span class="post-navigation__title">Higher-order functions for currying in JavaScript</span>
+            <span class="post-navigation__title">Predicate Functions in JavaScript</span>
         </a>
         
-        
-        <a class="post-navigation__item post-navigation__item--next" href="/blog/fp/currying-in-javascript.html/">
-            <span class="post-navigation__label">Next article</span>
-            <span class="post-navigation__title">Currying in JavaScript</span>
-        </a>
         
     </div>
 </section>
@@ -544,12 +579,12 @@ the answers.
             
             
             
-            <a class="related-posts__item" href="/blog/fp/currying-in-javascript.html/">
-                <span class="related-posts__title">Currying in JavaScript</span>
-                <span class="related-posts__meta">Mar 12, 2026</span>
+            
+            
+            <a class="related-posts__item" href="/blog/fp/how-to-use-predicate-functions-in-javascript.html/">
+                <span class="related-posts__title">Predicate Functions in JavaScript</span>
+                <span class="related-posts__meta">Mar 10, 2026</span>
             </a>
-            
-            
             
             
             
