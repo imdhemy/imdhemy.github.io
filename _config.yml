@@ -148,7 +148,7 @@ footer:
 # SEO
 # -------------------------------------------------------------------------------------------------
 theme_seo:
-  default_image: "/assets/theme/social-card.svg"
+  default_image: "/assets/theme/social-card.png"
   default_image_alt: "Imdhemy personal site social preview"
   twitter_site: "@imdhemy"
   same_as:
