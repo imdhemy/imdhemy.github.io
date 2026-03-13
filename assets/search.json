@@ -1,0 +1,1089 @@
+[{
+      "title": "Currying in JavaScript",
+      "url": "/blog/fp/currying-in-javascript.html/",
+      "content": "In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be useful in real JavaScript code. What is currying? Currying transforms a function of many arguments into a chain of one-argument functions. // uncurried const add = (a, b) =&gt; a + b; // curried const addC = a =&gt; b =&gt; a + b; Instead of passing all arguments at once, you pass them one at a time. Each call returns a new function that waits for the next argument until the final result can be produced. A small example makes it easier: const add = a =&gt; b =&gt; a + b; // The you can call it like this: add(2)(3); // 5 // Or you can partially apply it: const increment = add(1); const add5 = add(5); // And call it later: increment(4); // 5 add5(10); // 15 Currying vs partial application These ideas are related, but they are not the same. I used to blur them together, so it is worth separating them clearly. Currying changes the shape of a function. Partial application uses that shape to pre-fill some arguments and get back a more specific function. Here is a simple example: const multiply = a =&gt; b =&gt; a * b; // curried function const double = multiply(2); // partial application double(5); // 10 multiply is curried because it takes one argument at a time. double() is the result of partial application because we fixed the first argument to 2 and got back a more specific function. Why this is useful The main thing I like about currying is that it helps me build small reusable functions from more general ones. const replace = regex =&gt; replacement =&gt; str =&gt; str.replace(regex, replacement); const replaceSpaces = replace(/\\s+/g)(\"-\"); replaceSpaces(\"functional programming in js\"); // \"functional-programming-in-js\" This is useful when you want to configure a function once and then reuse it in several places without repeating the same arguments over and over. Exercises To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking the answers. 1. Curry multiply Convert this multiply function to curried form: const multiply = (a, b) =&gt; a * b; Show answer const multiply = a =&gt; b =&gt; a * b; 2. Curry replace Convert this replace function to curried form: const replace = (regex, replacement, str) =&gt; str.replace(regex, replacement); Show answer const replace = regex =&gt; replacement =&gt; str =&gt; str.replace(regex, replacement); 3. Explain the first application Explain in your own words: What does multiply(2) return? Why is that useful? Show answer multiply(2) returns a new function that is still waiting for the second argument (b). That is useful because it gives you a reusable function for a more specific job, for example: const double = multiply(2); double(5); // 10 Checkpoint You are ready to continue when you can quickly convert between uncurried and curried forms, and explain how partial application is related but different.",
+      "tags": ["fp","javascript","currying"],
+      "categories": ["fp"],
+      "date": "2026-03-12T23:07:01+00:00",
+      "type": "post"
+    },{
+      "title": "Predicate Functions in JavaScript",
+      "url": "/blog/fp/how-to-use-predicate-functions-in-javascript.html/",
+      "content": "If you’ve written code in any programming language, you’ve already used predicate functions, even if you never called them that. You already know this pattern, but naming it is useful. Terms help teams communicate ideas quickly. The moment you say “Replace primitive with object”, your teammate and your AI tool understand what you mean without extra explanation. The same is true for predicate functions. This is why I decided to write this post: to give you a name for this common pattern and show you how it fits into the larger picture of functional programming and currying. What is a predicate function? A predicate function is a function that returns a boolean value true or false. They are often used with Higher-order functions like filter, find, some and every to derive decisions based on the data. Let’s look at a single example of a predicate function used with filter: // A predicate to check if a number is even const isEven = x =&gt; x % 2 === 0; // Using the predicate to derive a new array of even numbers. const evenNumbers = [1, 2, 3, 4, 5, 6].filter(isEven); // [2, 4, 6] Exercises To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking the answers. 1. Write basic predicates Write isEven, isLongerThan3, and hasQ predicates. Show answer const isEven = x =&gt; x % 2 === 0; const isLongerThan3 = x =&gt; x.length &gt; 3; const hasQ = x =&gt; /q/i.test(x); 2. Use predicates with arrays Use predicates to: keep only even numbers from [1, 2, 3, 4, 5, 6] keep only strings that contain q (case-insensitive) Show answer [1, 2, 3, 4, 5, 6].filter(isEven); // [2, 4, 6] [\"quiet\", \"bat\", \"Qatar\", \"dog\"].filter(hasQ); // [\"quiet\", \"Qatar\"] 3. Refactor inline predicate to named predicate Refactor this into a named predicate + filter: const result = xs =&gt; xs.filter(x =&gt; /q/i.test(x)); Show answer const hasQ = x =&gt; /q/i.test(x); const result = xs =&gt; xs.filter(hasQ); Checkpoint You are ready to continue when you naturally extract inline boolean logic into named predicates.",
+      "tags": ["fp","javascript","currying"],
+      "categories": ["fp"],
+      "date": "2026-03-10T19:06:12+00:00",
+      "type": "post"
+    },{
+      "title": "Higher-order functions for currying in JavaScript",
+      "url": "/blog/fp/higher-order-functions.html/",
+      "content": "I’ve been working on my functional programming skills and applying what I learn in real JavaScript projects. JavaScript is a great choice for FP because it fits the paradigm well, has helpful libraries, and still lets me fall back to familiar patterns when I hit a knowledge gap. While practicing currying, I noticed something: I can read it and understand it, but refactoring existing code to use currying and partial application still feels awkward. So I decided to collect the concepts that make that refactoring process more intuitive. There are thousands of great resources on these topics, but I wanted a micro-curriculum that matches my learning style and maybe helps others too. The first concept is higher-order functions, which is the foundation for currying and composition. Goal: Understand functions as values and function-to-function interaction. What is a higher-order function? A higher-order function (HOF) is any function that takes a function as an argument, returns a function, or both. Functions that do neither are called first-order functions. A good example of a HOF is Array.prototype.map(), which takes a function as an argument and applies it to every element of the array, returning a new array with the results. // This is a simple function that doubles a number const double = x =&gt; x * 2; // We can pass the `double` fn to `map`. This makes `map` a HOF. const doubledNumbers = [1, 2, 3].map(double); // [2, 4, 6] Here is another example of a HOF that returns a function: // This is a HOF that returns a function const createMultiplier = factor =&gt; { return x =&gt; x * factor; }; // We can use the HOF to create a new function that multiplies by 3 const triple = createMultiplier(3); // Now we can use the `triple` function to multiply numbers by 3 triple(5); // 15 Why this matters for currying Currying becomes much easier when you are comfortable with functions as values. A curried function is just a function that keeps returning functions until it has all the arguments it needs. const add = x =&gt; y =&gt; x + y; const add10 = add(10); add10(5); // 15 If that pattern feels natural, currying and partial application stop feeling magical and start feeling practical. For now, don’t worry about mastering currying in this post. We’ll focus on higher-order functions first, then cover currying properly in a separate post. Exercises To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking the answers. 1. Apply twice Write a function applyTwice that takes a function and a value, and applies the function to the value twice. View answer You can implement applyTwice like this: const applyTwice = (fn, x) =&gt; fn(fn(x)); Here is an example of how to use applyTwice: const increment = x =&gt; x + 1; applyTwice(increment, 5); // 7 2. Build mapWith Implement mapWith using Array.prototype.map. View answer const mapWith = (fn, xs) =&gt; xs.map(fn); Usage example: const increment = x =&gt; x + 1; mapWith(increment, [1, 2, 3]); // [2, 3, 4] Checkpoint You are ready to move on when you can explain why each of map, filter, and reduce are higher-order functions. If this helped, leave a reaction so I know this series is useful, and comment with the FP topic you want next while we prepare the dedicated currying post.",
+      "tags": ["fp","currying","javascript"],
+      "categories": ["fp"],
+      "date": "2026-03-10T00:07:09+00:00",
+      "type": "post"
+    },{
+      "title": "Customer Data Management, 1959 Edition: The Forgotten Beginning of Personalization",
+      "url": "/blog/customer%20data/customer-data-management-1959-personalization.html/",
+      "content": "“An electronic computer and a religious mission are not very closely associated in most people’s minds”. This is how “The Catholic Standard and Times” started its article published on 11 September 1959 about how Personalized mailing lead to response rate of 80%!! Here we are talking about traditional mainling. Before telling the full story, let’s set the context. In the 1950s, they use Punched cards and magnetic tape to store and process data. IBM 026 Key Punch The Cutting-Edge IBM 650 Magnetic Tape System The IMB 1403 Printer The Story Each year, the Society of the Divine Savior sent out appeals to benefactors supporting its seven seminaries, missions, camps, and schools in the U.S. and Africa. To do this, they used the IBM 650 Electronic Data Processing Machine—cutting-edge at the time—to reach each benefactor by name, matching the appeal with a seminary, mission, or project they were genuinely interested in. This personalized approach worked remarkably well, according to Salvatorian spokesmen. Not only did it bring strong responses, but it also reduced mailing costs. Letters were never sent to generic addresses like “occupant,” but only to those who had shown real interest in the work. The computer stored detailed, up-to-date records of benefactors as electrical impulses on magnetic tapes. When they planned an appeal for a specific mission, they fed punched card instructions into the computer. In response, the IBM 650 created a new tape listing past contributors to that mission. From this tape, it could print mailing address cards at speeds of up to 9,000 per hour. It also printed or punched cards used by another unit to generate the appeal or acknowledgment letters. When new responses or names came in, operators punched IBM cards with the updated information. These were fed into the system weekly, allowing the computer to add new names and update donation records. Now think about this—it was 1959. Yet they were already working with a functioning donor database stored on IBM magnetic tape. Each record, packed into just 341 characters, held names, addresses, appeal history, response times, types of appeals that worked, donation sizes, total contributions, and more. They used this data to predict future behavior and plan smarter campaigns. In many ways, they were already doing data-driven outreach long before it became the norm. Tha raw basics of customer data management Many modern marketers think they can’t take lessons from the past, hey they didn’t have TikTok back then! But the fundamentals are quite obvious in this story, the same exact timeless “stack” of customer data management is still valid today: “Data Capture”: capture and ingest data from multiple sources. “Data Storage”: Persistent, available storage of relevant customer data. “Data Processing”: Process data to generate actionable insights. “Data Activation”: Turn the output of processing into signals. “Engagement”: Send the signals to multiple channels to engage customers. “Measurement”: Track and optimize. What the Society of the Divine Savior did in 1959 wasn’t just impressive for its time; it was visionary. They treated their data not as a pile of records, but as relationships. Every punch card, every tape, every printed letter represented a person who cared about something real. Fast-forward to today, and the tools have changed: from magnetic tapes to cloud databases, from letters to personalized emails and ads, but the idea remains the same. Understand people, respect their interests, and communicate with purpose. The Salvatorians were running a data-driven mission decades before “CRM” or “marketing automation” even existed. Maybe that’s the real lesson here: technology evolves, but empathy and precision never go out of style.",
+      "tags": ["customer-data","personalization","marketing-history","crm","data-strategy"],
+      "categories": ["customer data"],
+      "date": "2025-10-21T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "How Small Changes Can Drive Big Results Without Blocking the Business",
+      "url": "/blog/generic/lean-incremental-changes-vs-big-bang-rerwites.html/",
+      "content": "Software serves the business, not the other way around. Yet many technical teams struggle to balance improving their code with delivering value. This blog explores why lean, incremental change often wins over big-bang rewrites, and how small, accessible improvements can unlock results, foster a culture of ownership, and create many leaders, not just one. Big-Bang Rewrites: More Than Just Starting Over When we talk about a big-bang rewrite, most people imagine throwing away the whole codebase, choosing a new language or architecture, and rebuilding everything from scratch. And yes, that’s the classic example. But the idea goes beyond that. A big-bang rewrite can also mean any change that’s large in scope, takes a long time to complete, and delays visible value to the business. It could be a refactoring project, a redesign of a critical module, or a deep integration task. The common factor is that it puts other work on hold or requires long periods of planning and coordination before any outcome can be delivered. If your work: involves a long stretch without deployable results requires other teams to wait until you’re done needs detailed up-front planning before anything starts or puts the system in a state where changes are frozen for a while …then it might be closer to a big-bang approach than you think, even if you’re not rebuilding everything from zero. Now, this doesn’t mean these changes are bad. Sometimes they’re necessary, especially when the foundations are no longer fit for purpose. But they do carry risks. They slow down feedback, delay business value, and can quietly block momentum if not managed carefully. The alternative isn’t “never do big work.” It’s to approach change in a way that’s gradual, visible, and allows teams to keep moving while improving. Why Lean, Continuous Change Works Instead of going big and bold, lean thinking says: keep moving, keep improving, and don’t stop delivering. Martin Fowler describes refactoring as small, safe steps that don’t break existing behavior. That’s the sweet spot. Clean things up, one slice at a time, while still shipping features and fixing bugs. This idea isn’t just theoretical. Companies like Amazon got their deploy time down to every 11.6 seconds. That’s not a typo. They managed this by breaking work into tiny, safe pieces and automating everything around it. High-performing teams in the State of DevOps reports follow the same pattern: small batches, fast feedback, fewer incidents, and happier devs. The lean mindset, and kaizen in particular, teaches us to chase continuous improvement, not through big dramatic overhauls, but through small daily wins. It’s less stressful, more sustainable, and easier to build into the team culture. The Bottleneck: Only a Few People Can Make Things Better Here’s a common trap. You run a retro, come up with great ideas, and assign action items. But then nothing happens. Why? Because only a few people on the team have the tools, the authority, or the confidence to make the change. In big projects, this gets worse. You’ve got multiple teams, different levels of experience, some folks can edit the core logic, others can’t touch it. So while a few people discuss fixing things, the rest of the team is waiting, unsure if they can help. When change is locked behind experience or seniority, it slows everyone down. Ask This Question Instead What’s the smallest change we can make right now to improve things? It’s a simple question, but it changes everything. Small improvements are easier to explain, easier to adopt, and easier to measure. And because they’re small, more people can actually do them. You don’t need a 3-week planning cycle to rename a misleading variable. You don’t need a Jira epic to make that one SQL query readable. These little things matter. And when done right, they stack up fast. Your next smallest change could be different from the examples above, you just need to define what “small” means for your team. The more people you include in improving the system, the more improvement you get. Even better, you’re building new leaders. Not by giving out job titles, but by letting people take ownership of something and deliver real value. Small Wins, Big Momentum Short-term wins are essential for lasting change. People need to see results. Nobody wants to feel like they’re pushing a rock uphill forever. When a team sees that a tiny fix made something faster, more stable, or less painful, they start believing in the process. It’s no longer theory, it’s real. And it encourages the next fix. And the one after that. Small changes reduce the risk of failure. If something breaks, it’s easy to revert or adjust. There’s no panic, no long outage, just a quick fix and move on. Compare that to a big-bang release that fails. That’s a disaster no one wants to repeat. Momentum comes from motion. Keep the changes small, and the motion never stops. Real-World Proof This isn’t just blog talk. Plenty of companies live by this philosophy: Walmart switched from a few giant releases per year to deploying daily. One of their lead engineers kept asking “What’s the smallest change we can make today?” That single question helped them build a culture of fast, safe improvement. Netflix Switched to “Operate what you build” culture. They empower developers to take ownership of their code, from writing it to running it in production. Microsoft used to ship major Windows updates every few years. Now, features and fixes come monthly. That shift started by shrinking the size of changes and giving more control to more teams. Final Thought You don’t need a revolution to make your system better. You just need to start. Right now. With something small. Ask your team: what’s one thing we can improve today? Keep doing that. Every sprint. Every week. Every time someone touches the code. You’ll fix things. You’ll move faster. And you’ll create an environment where more people feel like they can lead. Forget waiting six months to deliver the",
+      "tags": ["refactoring","incremental-delivery","lean","continuous-improvement","software-architecture"],
+      "categories": ["generic"],
+      "date": "2025-05-15T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Building a Robust Movie Recommender Using KoalaTs and MongoDB - Part 1 🐨 🎬",
+      "url": "/blog/nodejs/robust-movie-recommender-koalats-mongodb-part-1.html/",
+      "content": "Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights into what should be the next improvement. I decided to build a simple movie recommender using KoalaTs and MongoDB. Once, I had the simple version working, I decided to dive deeper into the project and make it more powerful and robust. Today, I will show you the simple version of the movie recommender, and next week, I will discuss how to make it more powerful. You can find the code for this project on my GitHub repository. Let’s get started! Overview The basic idea is to store the movies into a MongoDB database and get advantage of MongoDB Atlas search moreLikeThis query to get similar movies. The better movie attributes you have, the better recommendations you will get. Needless to say that the amount of data also plays a big role in the quality of the recommendations. Project setup First, you need to create a new KoalaTs project. You can do this by running the following command: npx @koala-ts/cli create koala-recommender Then, we need to dockerize the project to make it easier to run. You can find the Dockerfile and docker-compose.yml in the GitHub repository. MongoDB setup We are using the mongodb/mongodb-atlas-local:8 image to run a local MongoDB Atlas instance. Unfortunately, seeding the search index with the container startup is not supported yet. So, we need to do it ourselves. You can do this manually if you are running MongoDB Compass. I have created a script to do this for my unit tests. KoalaTs comes with Vitest by default, which we will use to write out unit tests. You still can use any other testing library you like, but KoalaTs is built with Vitest in mind, because everyone should! 😄 The script is located in the tests/_setup/global.ts The basic idea is to create a movies collection and insert a temporary document, then create a search index with a dynamic mapping, and finally delete the temporary document. The temporary document is not necessary, but it helped to debug the search index creation. Talking about testing is beyond the scope of this article, but you can find the tests in the GitHub repository. Connecting to MongoDB KoalaTs is a database-agnostic, but it recommends using the native MongoDB driver. I used the powerful KoalaTs .env configuration files to store the MongoDB connection string. Let’s install the MongoDB driver: npm install mongodb Then update our environment variables: # .env MONGODB_URI=mongodb://mongod:27017?directConnection=true MONGODB_DB=koala And for testing, I used a different database: # .env.test MONGODB_URI=mongodb://mongod:27017?directConnection=true MONGODB_DB=koala_test Now, we can connect to MongoDB using the following code: import {Db, MongoClient} from 'mongodb'; import * as process from 'node:process'; export let db: Db; export let client: MongoClient; export async function connectToDb(): Promise&lt;void&gt; { // I used here the `process.env` to get the environment variables directly // but as a best practice, you should extract them to a configuration file under the `/src/config` directory client = new MongoClient(process.env.MONGODB_URI as string); await client.connect(); db = client.db(process.env.MONGODB_DB as string); } This code will connect to the MongoDB instance and monkey-patch the db and client variables to be used in other parts of the application. We need to call this function in the index.ts file before starting the server, to ensure that the database connection is established only once. // src/index.ts import {create} from '@koala-ts/framework'; import {appConfig} from './config/app'; + import {connectToDb} from './infrastructure/database'; const app = create(appConfig); // The top-level await works like a charm because KoalaTs was built with ES modules in mind + await connectToDb(); app.listen(3000); console.log('Server is running on http://localhost:3000'); The Movie document As mentioned earlier, I started with a simple version, but once again, the better the attributes, the better the recommendations. Here is an example of a movie document: { \"_id\": { \"$oid\": \"6786c3566e2c67647853df7d\" }, \"title\": \"The Godfather\", \"genre\": [ \"Crime\", \"Drama\", \"Thriller\" ], \"plot\": \"The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.\", \"releaseDate\": { \"$date\": \"1972-03-24T00:00:00.000Z\" } } Creating the movie endpoint We need to create an endpoint to add a movie to the database. We will use the POST method to create a new movie. This can be done by creating a new controller under the src/controllers directory. // src/controllers/MovieController.ts import {type IScope, Route} from '@koala-ts/framework'; export class MovieController { @Route({method: 'POST', path: '/movies'}) async store(scope: IScope) { scope.response.status = 201; // Added for now, because the default is 404! } } Don’t forget to add the controller to the controllers array in the src/config/app.ts file. // src/config/app.ts import { HomeController } from '../controller/HomeController'; import { type IKoalaConfig } from '@koala-ts/framework'; +import { MovieController } from '../controller/MovieController'; export const appConfig: IKoalaConfig = { controllers: [ HomeController, + MovieController, ] }; Then we need to implement the createMovie service. This service will be responsible for creating a new movie in the database. // src/application/movie/creat-movie.ts import {IMovie, IMovieProps} from './types'; import {db} from '../../infrastructure/database'; export async function createMovie(props: IMovieProps): Promise&lt;IMovie&gt; { const doc: Partial&lt;IMovie&gt; = {...props, releaseDate: new Date(props.releaseDate)}; const result = await db.collection('movies').insertOne({...doc}); doc.id = result.insertedId.toString(); return doc as IMovie; } Then we need to call this service in the controller: // src/controllers/MovieController.ts import { type IScope, Route } from '@koala-ts/framewor",
+      "tags": ["nodejs","mongodb","recommender-systems","koalats","backend"],
+      "categories": ["nodejs"],
+      "date": "2025-01-18T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Delivery on Time and Some Clean Up 🧹",
+      "url": "/blog/generic/delivery-on-time-and-cleanup.html/",
+      "content": "Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully handed over a project to the Deutscher Fußball-Bund (DFB) right on schedule. The DFB, being the German Football Association, is not only one of our biggest clients but also one of the largest football associations globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and it did! 🎉 During this time, I also decided to tackle some overdue cleaning tasks. From tidying up my desk and washing room to organizing my kitchen and even my Git branches, it was a week of thorough cleanup. My friend Eman introduced me to Hadeer, a talented organizer. She helped me organize my desk and plans to add some aesthetic touches later. I wanted to share a photo of my desk, but the surrounding mess still impacts its appearance. I’m thinking about either cleaning up the entire office or moving my desk to a different spot. Another spot that needed attention was my PS4 desk: The cable arrangement still bothers me, but I’ve ordered some cable management tools arriving tomorrow. Hopefully, it will look much better after that. On the tech side, I realized I had many local Git branches that were no longer needed since they had already been merged. While Jetbrains IDEs can filter branches easily, I wanted to handle this cleanup from the terminal. So, I updated my ~/.gitconfig file with a new alias tailored for our team’s workflow: [alias] cleanup = \"!f() { git branch | grep -v 'develop' | grep -v 'main' | grep -v 'master' | grep -v -E '^[0-9]+\\\\.x' | grep -v '\\\\*' | xargs git branch -D; }; f\" This way, I can simply run: git cleanup And all branches will be deleted except develop, main, master, and any 1.x or similar branches. Additionally, to keep my Git history clean, I configured my Git pulls to rebase: [pull] rebase = true Typically, when you pull changes from a remote repository, Git merges them into your current branch. However, with rebase enabled, Git reapplies your local commits on top of the fetched commits, creating a linear project history. This keeps your commit history cleaner and more readable by avoiding unnecessary merge commits. Wrapping up, it was a week of successful deliveries and much-needed organization. I’m looking forward to the next steps… 🐾",
+      "tags": ["delivery","project-management","git","developer-workflow","productivity"],
+      "categories": ["generic"],
+      "date": "2024-11-10T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "A Week of Goodbyes",
+      "url": "/blog/generic/week-of-goodbyes.html/",
+      "content": "Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently, our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other navigating a more difficult transition. I’ve been taught a valuable lesson last week! Goodbye, Benni Benjamin Berg, aka Benni, has left Reservix. He was a great colleague, and I wish him all the best for his future. Although I didn’t have the chance to work on the same team as him, I enjoyed sharing the office with him for almost two years. He was always friendly and helpful. Everyone acknowledges his impact on his team and the company, not only as a developer but also for his leadership and ability to bring people together. I hope we can stay in touch and go to Tatie together. We had a farewell party at the office. It was emotional and fun, with pizza, drinks, and lots of laughs. Leonie shared a fun questions box game with us. We had to answer questions like “How many times has this country won the World Cup?” or “What is the name of this formula?” Rafi was impressive as always, and I was lucky to be on the same team as Benni. The moment when Carsten gave Benni a present that was collectively bought by the team was very emotional. Benni was especially happy when he saw a device that he wanted to try to automate his home. That was a great idea from Wiktor. They were creative enough to give him a soundboard with some funny sounds to remind him of our soundboard in the office. Another team member moves on Last week wasn’t easy for our team. The team decided to go to different ways with one our colleagues. She was a good developer, but we couldn’t find a way to continue working together. I hope she finds a new job soon. I wish her all the best. At the end of the day, the people will remember how you made them feel, it’s not about how good you are at your job. It’s also crucial to pay attention to the feedback you receive and to be open to change.",
+      "tags": ["career","teamwork","workplace-culture","leadership","reflection"],
+      "categories": ["generic"],
+      "date": "2024-11-03T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "HTTP Client Factory Code Refactoring",
+      "url": "/blog/dev-log/http-client-factory-code-refactoring.html/",
+      "content": "I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and configurations. The system started with a single API, “PeelAPI,” for which we provided a createClient function that returned an Axios instance with the correct configuration. When we added a second API, “BunchAPI,” we created another createClient function for it, but in a different subdomain. The same was done for the third API, “SplitAPI.” For each Axios instance, we wrapped errors in a custom error class to identify the source of the error, accomplished by a response interceptor. One API, one createClient—simple, right? Fast forward to three APIs, and now it’s like juggling bananas 🍌🍌🍌 with TypeScript. The issue is that we now have a lot of duplicated code, and the createClient functions break the Single Responsibility Principle, as they are responsible for both creating the client and handling authentication. I’m uncertain whether it’s best to keep error wrapping within the same function or move it to a separate module after the client is created. To add complexity, since client tokens are cached in Redis, we need to pass the Cache service to the createClient function, although not all clients require token caching. This results in different signatures for each createClient function. I’m considering using a Factory pattern for client creation. The plan is to unify or standardize the client creation functions so they have a consistent signature, allowing us to replace them with a single Factory function that creates clients based on configuration. I discovered that baseURL is the only configuration that varies between clients so far. I’m unsure whether it’s best to accept a configuration object or just baseURL as a parameter. I chose baseURL, as it’s easier to handle only when needed than creating a configuration object with a single property. Last week, I began refactoring the “PeelAPI” client and ended up with a createClient(baseURL: string): AxiosInstance function, which returns an Axios instance with the correct configuration. I then moved on to “BunchAPI,” which was less straightforward because, unlike “PeelAPI,” “BunchAPI” requires authentication. I had to extract the authentication logic into a separate function. I didn’t change the signature of the createClient function, planning to address that in the next merge request. Once standardized, Factory Pattern will take the wheel. But the question remains: what’s the cleanest way to handle authentication? 🤔 #CodeDesign The first merge request is already merged, but I’m waiting for the second one to be reviewed. Once it’s merged, I will standardize the createClient functions, ensuring that the first two API clients have a consistent signature. Then, the third API client will be refactored in two steps: first to address authentication, then to standardize the signature. After all createClient functions are standardized, I’ll create the Factory function to generate clients based on configuration. I still need to determine a clean way to handle authentication. Do you have any suggestions?",
+      "tags": ["typescript","refactoring","design-patterns","http-clients","software-architecture"],
+      "categories": ["dev-log"],
+      "date": "2024-10-27T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Better alternatives to empty() in PHP",
+      "url": "/blog/php/better-alternatives-to-empty-in-php.html/",
+      "content": "I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the empty() function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a bad idea. In this blog post, I’ll share why we should stop using empty() and look at better alternatives. What does empty() do? empty(mixed $var): bool By checking the PHP manual, you will find: Determine whether a variable is considered to be empty. A variable is considered empty if it does not exist or if its value equals false. Let’s have a look at the following examples: empty(null); // true empty(''); // true empty([]); // true I used to think empty() always behaves like in these examples, but that’s not the reality! empty('0'); // true (huh?) // Technically, '0' is not an empty string. empty(new ArrayObject()); // false (Huh! It's already empty!) Surprise! empty() is doing a loose comparison with false $value == false empty($value) null true true '' true true [] true true Observe the following     '0' true true new ArrayObject() false false Not only that! But empty() also doesn’t throw a warning if the variable does not exist. That means empty() is equivalent to !isset($value) || $value == false. function is_empty($value): bool { return !isset($value) || $value == false; } In case you mistyped the variable name, your code will not complain about it. $type = 'car'; if(empty($typo)) { // Laterally THIS IS A TYPO echo 'This should not be printed'; } The above code will print the message without any warnings or errors, even though the developer intended to check the type variable length. Better alternatives to empty() It depends on the context and the data type you are working with. Here are some alternatives: Strings You can directly compare the string with an empty string. if('' === $value) { // Do something } Arrays You can compare with an empty array. if([] === $value) { // Do something } Or you can use the count() function. if(0 === count($value)) { // Do something } Comparing with an empty array is more readable than using the count() function. I wanted to be sure about the performance difference between them, so I wrote a simple benchmark to compare how long it takes to execute each one on an empty array and an array with 1000000 elements, and here are the results: Method Empty Array Time (seconds) Large Array Time (seconds) checkWithCount 0.21758413314819 0.2175669670105 checkWithDirectComparison 0.21403312683105 0.21817898750305 Based on these results, there is no significant performance difference between the two methods for both empty and large arrays. However, from a code readability and directness perspective, using if ([] === $value) may still be preferred. More thoughts Because empty() accepts any variable type, you may come across usages with Objects, integers and floats. I can’t picture a developer will need to check if an integer value is empty, maybe they want to check if it’s zero. You got the point! For that reason, I didn’t provide alternatives for these types. The empty() is not working as expected with magic classes. I also omitted adding alternatives for them because we should avoid using magic methods in the first place, but if you are interested, you can check the following: Suppose we have a regular class: class RegularClass { public $property = 'value'; } And another magic class with dynamic properties: class MagicClass { private $properties = ['property' =&gt; 'value']; public function __get($name) { return $this-&gt;properties[$name] ?? null; } } Now let’s create an instance of each class and check if the property is empty: $regular = new RegularClass(); var_dump($regular-&gt;property); // string(5) \"value\" $magic = new MagicClass(); var_dump($magic-&gt;property); // string(5) \"value\" // Now let's check if the property is empty var_dump(empty($regular-&gt;property)); // false var_dump(empty($magic-&gt;property)); // true (Huh!) Conclusion empty() is not as straightforward as I thought. It’s better to avoid using it and use the alternatives I mentioned above. It’s always better to be explicit in your code and avoid any surprises.",
+      "tags": ["php","code-quality","language-features","static-analysis","best-practices"],
+      "categories": ["php"],
+      "date": "2024-07-19T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Singleton Design Pattern in Laravel",
+      "url": "/blog/php/singleton-design-pattern-in-laravel.html/",
+      "content": "Google search console told me that I got some visits from people searching for “Singleton Design Pattern in Laravel”. But they landed on my PHP Real-world use cases of singleton design pattern post. So I decided to make them happy with a dedicated post about Singleton Design Pattern in Laravel. In the mentioned post, I explained the Singleton Design Pattern in PHP, how to implement it, how to test it, and some real-world use cases. If you are not familiar with this pattern, you can check it out. Why would you use Singleton Design Pattern? A perfect use case for the Singleton is a FileSystem class. You want to perform file operations in your application, and you want to use the same instance of the FileSystem class everywhere in your application. It’s impossible to depend on the constructors to get the same instance of the FileSystem, that’s where the Singleton Design Pattern comes in. It may look unnecessary to use the Singleton Design pattern in PHP because each request is a new instance of the application and all instances are destroyed after the request is done. But you get more benefits from it using it in something like a Queue worker or a Laravel Octane server. Some Laravel Binding basics Before we create our Laravel Singleton, let’s understand some Laravel binding basics. The Laravel service container is a powerful tool for managing class dependencies and performing dependency injection. Binding is the process of defining how the container should resolve a class or an interface. Most of the time you don’t need to instruct the container how to resolve your dependencies, but sometimes you do. To bind a class into the container, you can use the bind() method inside one of the service providers. The following example binds a Foo class. We can use the \\App\\Providers\\AppServiceProvider for this. Let’s assume we have a Foo class that can tell us when it was created. &lt;?php declare(strict_types=1); namespace App; final readonly class Foo { public function __construct(public int $createdAt) { } } Now we can bind the Foo class to the container. &lt;?php namespace App\\Providers; use App\\Foo; use Illuminate\\Support\\ServiceProvider; class AppServiceProvider extends ServiceProvider { /** * Register any application services. */ public function register(): void { $this-&gt;app-&gt;bind(Foo::class, function () { return new Foo(time()); }); } // .. other methods } Now we can resolve the Foo class from the container. &lt;?php use App\\Foo; use Illuminate\\Support\\Facades\\Route; Route::get('/', static function (Foo $foo) { return $foo-&gt;createdAt; }); Now if you visited your home page, you can see the timestamp when the Foo class was created, Something like this 1713182568 Binding a Singleton The singleton method binds a class or interface into the container that should only be resolved one time. Once a singleton binding is resolved, the same object instance will be returned on subsequent calls into the container. To see it in action, let’s change our Foo example to a Singleton. // app/Providers/AppServiceProvider.php public function register(): void { - $this-&gt;app-&gt;bind(Foo::class, function () { + $this-&gt;app-&gt;singleton(Foo::class, function () { return new Foo(time()); }); } Now, let’s create two instances of the Foo class in our route. &lt;?php // routes/web.php use App\\Foo; use Illuminate\\Support\\Facades\\Route; Route::get('/', static function () { $firstCall = app(Foo::class); // Simulate a delay sleep(1); $secondCall = app(Foo::class); return response()-&gt;json([ 'first_call' =&gt; $firstCall-&gt;createdAt, 'second_call' =&gt; $secondCall-&gt;createdAt, 'is_same_instance' =&gt; $firstCall === $secondCall, ]); }); The response should be something like this { \"first_call\": 1713183052, \"second_call\": 1713183052, \"is_same_instance\": true } As you can see, the first_call and second_call are the same, and the is_same_instance is true. Try to replace the singleton with bind and see the difference. Two types of Singletons binding in Laravel We have already tried the singleton() method, but there is another way to bind a Singleton in Laravel. The Scoped Bindings. The scoped() method binds a class or interface into the container that should only be resolved one time within a given Laravel request / job lifecycle. While this method is similar to the singleton method, instances registered using the scoped method will be flushed whenever the Laravel application starts a new “lifecycle”, such as when a Laravel Octane worker processes a new request or when a Laravel queue worker processes a new job: // app/Providers/AppServiceProvider.php public function register(): void { - $this-&gt;app-&gt;singleton(Foo::class, function () { + $this-&gt;app-&gt;scoped(Foo::class, function () { return new Foo(time()); }); } Conclusion Laravel offers two types of Singleton bindings, the singleton() and the scoped(), each with its own use cases and lifecycle.",
+      "tags": ["php","laravel","singleton","service-container","dependency-injection"],
+      "categories": ["php"],
+      "date": "2024-04-15T06:05:51+00:00",
+      "type": "post"
+    },{
+      "title": "How to avoid boilerplate code in Symfony Voters",
+      "url": "/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html/",
+      "content": "Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way we write voters, one of them was by introducing the AbstractVoter class in Symfony 2.6. Later on, it was deprecated in Symfony 2.8 to be removed in v3.0 with the introduction of the Voterclass. The continuous improvement didn’t stop there, and I believe it will not. In this post, I will contribute to the trials of improving the way we write voters by introducing the CanDoVoter. The problem Suppose the logic to decide whether a user can view or edit a Post object is pretty complex. For example, a User can always edit or view a Post they created. And if a Post is marked as “public”, anyone can view it. We can write a PostVoter to handle this logic. //src/Acme/Post/PostVoter.php namespace App\\Acme\\Post; use App\\Domain\\Entity\\Post; use App\\Domain\\Entity\\User; use Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface; use Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter; final class PostVoter extends Voter { protected function supports(string $attribute, $subject): bool { return in_array($attribute, ['get', 'update']) &amp;&amp; $subject instanceof Post; } protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool { $user = $token-&gt;getUser(); if (!$user instanceof User) { // This means if the user is not logged in, they can't view or edit the post return false; } $post = $subject; assert($post instanceof Post); // The user can always edit or view a post they created if($user === $post-&gt;getAuthor()) { return true; } // If the post is public, anyone can view it if($attribute === 'get' &amp;&amp; $post-&gt;isPublic()) { return true; } // otherwise, the user can't view or edit the post return false; } } Now, suppose we have another entity, Comment, and we need to write a CommentVoter to handle the logic of whether a user can perform some actions on a Comment object. We will end up repeating a similar code in supports() and the beginning of voteOnAttribute() methods till we get the user and subject objects. //src/Acme/Comment/CommentVoter.php namespace App\\Acme\\Comment; use App\\Domain\\Entity\\Comment; use App\\Domain\\Entity\\User; use Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface; use Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter; final class CommentVoter extends Voter { protected function supports(string $attribute, $subject): bool { return in_array($attribute, ['get', 'update']) &amp;&amp; $subject instanceof Comment; } protected function voteOnAttribute(string $attribute, $subject, TokenInterface $token): bool { $user = $token-&gt;getUser(); if (!$user instanceof User) { return false; } $comment = $subject; // Do the logic here } } Avoiding the repeated code in the supports() The first step is to avoid the repeated code in the supports() method. The supports() method goal is to check if the voter supports the given attribute and subject. We can extract them to configuration properties. namespace App\\Foundation\\Security; use Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface; use Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter; abstract class CanDoVoter extends Voter { /** * @var string[] the attributes that this voter supports */ protected array $supportedAttributes = []; /** * @var class-string the subject that this voter supports */ protected string $supportedClass; protected function supports(string $attribute, mixed $subject): bool { if (! in_array($attribute, $this-&gt;supportedAttributes, true)) { return false; } if (! is_a($subject, $this-&gt;supportedClass, true)) { return false; } return true; } } Avoiding the repeated code in the voteOnAttribute() The voteOnAttribute() should perform the actual voting logic to decide whether the user can perform the given attribute on the given subject. To do so, we need to get the user and subject objects. We can extract this code as follows: namespace App\\Foundation\\Security; use Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface; use Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter; abstract class CanDoVoter extends Voter { // The supports() method is removed for brevity protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool { $method = 'can'.ucfirst($attribute); $user = $token-&gt;getUser(); if (is_null($user)) { return false; } $vote = $this-&gt;$method($user, $subject); assert(is_bool($vote)); return $vote; } } Based on the voteOnAttribute() implementation, we need to define a method for each supported attribute. The method name should be can followed by the attribute name with the first letter capitalized. For example, if the supported attributes are ['get', 'update'], we should define canGet() and canUpdate() methods. The user is passed as the first argument, and the subject is passed as the second argument. Introducing the CanDoVoter A final version of the CanDoVoter class is as follows: namespace App\\Foundation\\Security; use Symfony\\Component\\Security\\Core\\Authentication\\Token\\TokenInterface; use Symfony\\Component\\Security\\Core\\Authorization\\Voter\\Voter; abstract class CanDoVoter extends Voter { public const LIST = 'list'; public const GET = 'get'; public const CREATE = 'create'; public const UPDATE = 'update'; public const DELETE = 'delete'; protected array $supportedAttributes = []; protected string $supportedClass; protected function supports(string $attribute, mixed $subject): bool { if (! in_array($attribute, $this-&gt;supportedAttributes, true)) { return false; } if (! is_a($subject, $this-&gt;supportedClass, true)) { return false; } return true; } protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool { $method = 'can'.ucfirst($attribute); $user = $token-&gt;getUser(); if (is_null($user)) { return false; } $vote = $this-&gt;$method($user, $subject); ",
+      "tags": ["php","symfony","authorization","code-reuse","voters"],
+      "categories": ["php"],
+      "date": "2024-04-03T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "What Symfony developers should know before using Voters",
+      "url": "/blog/php/what-symfony-developers-should-know-before-using-voters.html/",
+      "content": "Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you should know before using voters. Permissions should be linked to a user In Symfony, permissions are always linked to a user object. If you need to secure parts of your application, you need to create a user object that implements the UserInterface. Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system Some applications have an external SSO system that provides user information through an access token. Even in this case, you should not depend directly on the access token to check permissions. Instead, you should create a user object that implements the UserInterface. If you opt out of this approach, you will lose many benefits that you get from Symfony’s security system. Security User Interface The UserInterface provided by the Symfony security component helps you to make sure that your user object has all the necessary methods to work with Symfony’s security system regardless of how you load or create the user object, e.g., from a database, an API, or a Token. The security user interface is the contract between your user object and Symfony’s security system. Let’s take a look at the UserInterface: The first method is getRoles(). The name of the method is self-explanatory, it should return an array of roles for the user. We will cover roles in the next section. The second method is eraseCredentials(). This method is designed to clear any sensitive data that the user object might be holding at any given point. For instance, clearing the plain text password after the user is authenticated. The last method is getUserIdentifier(). This method should return the Public representation of a user e.g., the username. This method can be used by the user providers which helps you to get many benefits, like fetching the user object in your service, impersonating a user, etc. User Roles When a user is authenticated, Symfony calls the getRoles() method on the user object to determine the roles of the user. It doesn’t matter how the roles are stored in the database or how they are generated. The only thing that matters is that every role must start with the ROLE_ prefix - otherwise, things won’t work as expected. You will use these roles to grant access to specific parts of your application. All roles should start with the ROLE_ prefix. This is a requirement of Symfony’s security system. Symfony provides a role hierarchy system out of the box. Instead of assigning multiple roles to a user, you can configure a role hierarchy. This way, you can assign a single role to a user, and Symfony will automatically grant access to all the roles in the hierarchy. # config/packages/security.yaml security: # ... role_hierarchy: ROLE_MODERATOR: ROLE_USER ROLE_ADMIN: ROLE_MODERATOR ROLE_SUPER_ADMIN: ROLE_ADMIN Using the above configuration, if a user has the ROLE_SUPER_ADMIN role, Symfony will automatically grant access to ROLE_ADMIN, ROLE_MODERATOR, and ROLE_USER. This is illustrated as follows: The ROLE_SUPER_ADMIN role inherits the ROLE_ADMIN role, which inherits the ROLE_MODERATOR role, which inherits the ROLE_USER role. It’s worth noting that a role can inherit multiple roles. # config/packages/security.yaml security: # ... role_hierarchy: ROLE_ADMIN: ROLE_USER ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ] For role hierarchy to work, do not use $user-&gt;getRoles() manually, instead you should always depend on the isGranted() or denyAccessUnlessGranted() methods provided by the AuthorizationCheckerInterface. Let symfony does the heavy lifting for you. Always use the security methods to check for roles. // BAD - $user-&gt;getRoles() will not know about the role hierarchy - $hasAccess = in_array('ROLE_ADMIN', $user-&gt;getRoles()); // GOOD - use of the normal security methods + $hasAccess = $this-&gt;isGranted('ROLE_ADMIN'); + $this-&gt;denyAccessUnlessGranted('ROLE_ADMIN'); Decision Strategy When you start using voters, Symfony will ask each voter to vote on the access decision. There are three decisions that a voter can make, like any other voting system: ACCESS_GRANTED: The voter grants access to the resource. ACCESS_DENIED: The voter denies access to the resource. ACCESS_ABSTAIN: The voter abstains from voting. Normally, only one voter will vote at any given time, and all the rest will abstain. However, if you want to change this behavior, you need to know about the decision_strategy configuration. It’s always good to keep the default decision_strategy and design your voters accordingly. A resource oriented voter should only vote on the resource it is designed for. Suppose you have a feature that requires a user to be part of a group and is older than 18 years. You have two separate voters to check these conditions. The following table will help you understand different decision strategies: Decision Strategy Description Voter 1 Voter 2 Voter 3 Result affirmative (default) This grants access as soon as there is one voter granting access ACCESS_GRANTED ACCESS_ABSTAIN ACCESS_ABSTAIN ACCESS_GRANTED consensus This grants access if there are more voters granting access than denying. In case of a tie the decision is based on the allow_if_equal_granted_denied config option (defaulting to true); ACCESS_GRANTED ACCESS_GRANTED ACCESS_DENIED ACCESS_GRANTED unanimous This only grants access if there is no voter denying access. ACCESS_GRANTED ACCESS_GRANTED ACCESS_DENIED ACCESS_DENIED priority This grants or denies access by the first voter that does not abstain, based on their service priority ACCESS_GRANTED ACCESS_DENIED ACCESS_ABSTAIN ACCESS_GRANTED Back to our example, if you want to grant access only if both voters grant access, you should use the unanimous decision strategy. # config/packages/security.yaml security: access",
+      "tags": ["php","symfony","authorization","security","voters"],
+      "categories": ["php"],
+      "date": "2024-04-02T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "The pipeline ate my code",
+      "url": "/blog/generic/the-pipeline-ate-my-code.html/",
+      "content": "I’m your teammate developer, and I’m here to tell you how my CI/CD pipelines aren’t like other pipelines. They are always green, and they never fail. They can even fix my code before I push it to the repository. 🤯 Isn’t that cool? I’m kidding, of course. My pipelines are just like yours. They fail, and they fail a lot. Imagine working with a team member who exudes confidence at every turn, is self-centered, and repeatedly stumbles over the simplest tasks. Welcome to the puzzling world of the Dunning-Kruger Effect where the less you know, the more you think you know, leaving you with a false sense of confidence. This does not only affect your ability to learn and grow, but it also affects the team’s productivity and morale leaving behind a trail of stressed-out and unsatisfied team members. In this article, we’ll shine a light on the challenges posed by such colleagues and explore strategies for mitigating their impact on team productivity and morale. Understanding the Dunning-Kruger Effect Let’s start by understanding the Dunning-Kruger Effect. Imagine you are learning to play a musical instrument, and in your mind, you are the next Beethoven. The reality? You sound more like a cat walking on a piano. That’s the Dunning-Kruger Effect in action. It’s the tendency of individuals with limited knowledge or skills to over-inflate their own abilities. They are unable to recognize their incompetence, leading them to believe they are better than they actually are. When you are in the presence of a colleague who is a victim of the Dunning-Kruger Effect, you might notice the following traits: Inability to accept feedback: They are resistant to feedback and often dismiss it. Lack of self-awareness: They are unable to recognize their own incompetence. Inability to collaborate: They are unable to work effectively with others. Inability to take responsibility: They are unable to take responsibility for their actions. Inability to adapt: They are unable to adapt to new situations. Inability to communicate: They are unable to communicate effectively. Responsibility isn’t just about ticking off boxes on a to-do list—it’s about understanding the bigger picture and how your role fits into the grand scheme of things. It’s about being accountable for your actions and the impact they have on the team’s success. In a software development setting, this means knowing your tasks inside out, collaborating effectively with your peers, and owning up to your mistakes when things don’t go as planned. After all, a chain is only as strong as its weakest link, and in a team environment, everyone’s contribution matters. Impact on Team Dynamics The Dunning-Kruger Effect can have a significant impact on team dynamics. When a team member is blinded by their overconfidence, taking over tasks she is not qualified for without regard for collaboration nor feedback. This misplaced confidence not only hinders her progress but also creates a friction within the team. Others are left picking up the pieces, feeling frustrated and demotivated by the lack of accountability and miss-communication. In a team environment, trust and collaboration are the cornerstones of success. When one team member fails to pull their weight, it creates a ripple effect that can lead to missed deadlines, poor-quality work, and strained relationships. The result? A fractured team struggling to stay afloat in a sea of discord. Navigating Stress and Frustration As we come face to face with the challenges posed by the Dunning-Kruger team member, it’s essential to raise awareness about the cost it takes on individual stress level. Being in a constant state of frustration, trying to navigate the maze of misplaced confidence and lack of accountability, can take a toll on one’s mental health and well-being. Their refusal to accept feedback and collaborate effectively can lead to a toxic work environment where team members feel undervalued and unappreciated. Navigating stress and frustration in such an environment requires patience, resilience, and a healthy dose of self-care. Take a step back, breathe, and remind yourself that you’re doing the best you can in a challenging situation. Seek support from trusted colleagues and mentors, and don’t hesitate to communicate your concerns with your team leader. Together, we can weather the storm and emerge stronger on the other side. It’s not that easy to talk openly about such issues, but it’s essential to address them before they escalate. It’s the responsibility of the team leader to create a safe space where team members can voice their concerns without fear of being judged or dismissed. The open and honest communication is the key to resolving conflicts. Promoting Self-Awareness and Accountability It’s important to promote self-awareness and accountability within the team. One of the effective ways for doing so is encourage regular self-reflection. Encourage team members to take a step back and evaluate their performance objectively, identifying areas for improvement and acknowledging their own shortcomings. Additionally, it’s essential to foster a culture of open feedback and constructive criticism. This will help team members to recognize the blind spots and work towards addressing them. Accountability goes hand in hand with self-awareness. It’s about taking ownership of one’s actions and their impact on the team’s success. Encourage team members to take responsibility for their mistakes and learn from them. This will not only help them grow professionally but also foster a sense of trust and collaboration within the team. By fostering a culture of transparency and accountability, we create an environment where continuous learning and improvement thrive. Addressing the Root Cause Digging beneath the surface, uncovering the deep-rooted causes of this behavior is crucial to examine what give rise to the Dunning-Kruger Effect within the team. Is it a lack of training and development opportunities? Is it a lack of feedb",
+      "tags": ["teamwork","software-engineering","feedback-culture","dunning-kruger","leadership"],
+      "categories": ["generic"],
+      "date": "2024-03-30T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Effective Node.js Modules - Part 2: ESM dynamic imports",
+      "url": "/blog/nodejs/esm-dynamic-imports.html/",
+      "content": "One of the main differences between CJS and ESM modules is the way they handle dynamic imports. In CJS you can use require to import modules anywhere in your code, but in ESM you can only use import at the top level of your code. What if you want to import a module dynamically in ESM? In this post, we will create a simple Hello world! application that uses dynamic imports to greet the user in different languages. If you don’t know how to enable ESM in Node.js, check the previous post. Below is the directory structure of our application: . ├── main.js ├── package.json └── translations ├── ar.js ├── de.js └── en.js The translations directory contains three files: en.js, de.js, and ar.js. Each file exports constants that represent the greeting message in a specific language. Here are the contents of the files: // translations/en.js export const GREETING = 'Hello world!'; // translations/ar.js export const GREETING = 'مرحبا بالعالم!'; // translations/de.js export const GREETING = 'Hallo Welt!'; The main.js file is the entry point of our application. It gets the user’s preferred language from the command line then imports the corresponding translation module dynamically if it exists. Here is the content of the main.js file: // main.js const languages = ['en', 'de', 'ar']; const defaultLanguage = 'en'; const language = process.argv[2] || defaultLanguage; if (!languages.includes(language)) { console.error(`Unsupported language: ${language}`); process.exit(1); } // Get advantage of top-level await const {GREETING} = await import(`./translations/${language}.js`); console.log(GREETING); To run the application, execute the following command: node main.js de In the main.js we used the import() expression, commonly called dynamic import. This expression will be evaluated at runtime, and the module will be loaded asynchronously. The await keyword is used to wait for the module to be loaded before continuing the execution. Use dynamic import only when necessary. The static form is preferable for loading initial dependencies, and can benefit more readily from static analysis tools and tree shaking. That’s it! You have learned how to use dynamic imports in ESM modules.",
+      "tags": ["nodejs","javascript","esm","dynamic-import","modules"],
+      "categories": ["nodejs"],
+      "date": "2024-03-25T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Effective Node.js Modules - Part 1: Basic Syntax",
+      "url": "/blog/nodejs/effective-nodejs-modules-part-1.html/",
+      "content": "Do you know what is the difference between the following two code snippets? const {app, connection} = require('./config'); And this one: import {app, connection} from './config.js'; Both of them import the app and connection from the config module, but the first one is using the CommonJS ( CJS) module system, and the second one is using the ECMAScript (ES) module system. Modules allow you to split your code into small units, that can be reused and tested independently. They are also the main way to enforce information hiding by exposing (exporting) only the public API of the module. In this series of posts, we will talk about how to use modules effectively in your Node.js applications. By the end of this series, you should be able to make pragmatic decisions about how to use modules effectively in your Node.js applications. 📋 Posts in this series 1 Basic Syntax 2 Dynamic imports Javascript was introduced in 1995 as a scripting language for browsers. It was not designed to be used as a server language. Browsers should keep an eye on the security of the user and the system, so they need to limit the access of the Javascript code to the system resources. The nature of the Javascript and the browser environment allowed the use of the script tag to load Javascript code didn’t help the developers to write modular code. Developers used multiple script tags to load the Javascript code in the right order. &lt;script src=\"foo.js\"&gt;&lt;/script&gt; &lt;script src=\"bar.js\"&gt;&lt;/script&gt; &lt;script src=\"baz.js\"&gt;&lt;/script&gt; When Node.js was introduced in 2009 as a server-side Javascript runtime, it came with full access to the underlying system resources. This allowed providing the CommonJS module system to allow developers to write modular code and organize their applications into small reusable units. CJS: CommonJS module system The CJS module system is the default module system of Node.js. CJS uses require to import modules and module.exportsor exports to export modules. exports is a reference to module.exports, so you can use either of them to export modules as follows: // config.js module.exports = { app: { name: 'Awesome App', port: 3000, } } Is the same as: // config.js exports.foo = { app: { name: 'Awesome App', port: 3000, } } The require function returns the exported value of the module. // main.js const config = require('./config.js') console.log(config) // { app: { name: 'Awesome App', port: 3000 } } You can also use the require function to import a single module from a file that exports multiple modules. // config.js module.exports = { app: { name: 'Awesome App', port: 3000, }, connection: { host: 'localhost', port: 27017, } } // main.js const {connection} = require('./config.js') console.log(connection) // { host: 'localhost', port: 27017 } console.log(app) // ReferenceError: app is not defined The CJS allows you to conditionally import modules using the require function. This is useful when you want to load modules based on a specific condition. // main.js const config = require('./config') let logger if (config.app.env === 'test') { logger = require('./silent-logger') } else { logger = require('./logger') } ESM: ECMAScript module system If you want to use ESM modules, you need to set the “type” to module “module” in the package.json file. Or name your files with the “.mjs” extension. // package.json { \"type\" : \"module\" } ECMAScript modules (ESM) are the standard official module system of Javascript. It was introduced in 2015 as part of the ES6 specification. It was introduced with the goal of narrowing the gap between the browser and the server when it comes to the module system. It was added to Node.js on v8.5.0 as an experimental feature. By v13.2.0, loading ESM modules became available without any command-line flags. ESM uses export to export modules and import to import modules. ESM uses export in the singular format not exports like CJS. The following example shows how to export a function: // sum.mjs function sum(a, b) { return a + b } export {sum} The following example shows how to import that function: // app.mjs import {sum} from './sum.mjs' // File extension is required to import relative modules console.log(sum(7, 9)) // 16 You can also export a default module using the export default syntax. This is useful when you want to export a single module from a file. Exporting a default module doesn’t prevent you from exporting other modules from the same file. The following example shows how to export a default module: // sum.mjs export default function sum(a, b) { return a + b } The following example shows how to import that function: // app.mjs import sum from './sum.mjs' console.log(sum(7, 9)) // 16 The following example shows a mixed export of a default module and other modules: // calculator.mjs export function sum(a, b) { return a + b } export function subtract(a, b) { return a - b } export default function calculate(input) { // a magic function that takes a string input like \"1 + 2\" and returns the result } If you imported the default module, then you have access to the calculate function which is the default export of the module. You can also give it any name you want. // app.mjs import myCalculator from './calculator.mjs' console.log(myCalculator('1 + 2')) // 3 myCalculator.sum(1, 2) // TypeError: myCalculator.sum is not a function If you imported the module using the import * as syntax, then you have access to all the exported modules. The import * as imports all the exported modules in a single object. // app.mjs import * as calculator from './calculator.mjs' console.log(calculator.sum(1, 2)) // 3 console.log(calculator.subtract(1, 2)) // -1 console.log(calculator.default('1 + 2')) // 3 As you already noticed, using something like calculator.default is not very convenient. You can get the same result by the following readable syntax: // app.mjs import calculate, {sum, subtract} from './calculator.mjs' console.log(sum(1, 2)) // 3 console.log(subtract(1, 2)) /",
+      "tags": ["nodejs","javascript","modules","commonjs","esm"],
+      "categories": ["nodejs"],
+      "date": "2024-01-07T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "From Code to German: My First Steps Towards Learning a New Language",
+      "url": "/blog/germany/from-code-to-german.html/",
+      "content": "For years, I have been dedicated to writing code every day and contributing to various projects. My GitHub account showcases my commitment and hard work. Since I moved from Egypt to Frankfurt am Main, Germany, I’ve decided to do the same with learning German, but Unfortunately, I couldn’t keep doing both at the same time. I had to choose one of them, and I decided to take a break from coding and focus on learning the German language. It’s not a complete break, though. I will still be contributing to open source projects, and I’m writing code every day in my job, But I mean a break from that habit of writing code every day for open source projects. As an expat in a foreign country, learning the local language is vital not only for practical purposes but also for understanding the culture better. I have tried learning a new language in the past, particularly Turkish, but I failed to do so. However, I have faith that German is different, and my background in English, which has some similarities with German, may give me an edge. To begin my language learning journey, I set a goal to finish one lesson per week from the Menschen book, a popular German language textbook for adults and young adults designed according to the latest findings in educational psychology as they describe it. I already tried some applications like Duolingo and Babbel, but I didn’t like them. I prefer a more structured approach to learning a new language. I want to learn the language in a way similar to how I learned English which I learned from the “Hello” series of books. I’ve just completed my first lesson, and it feels like a great accomplishment. The first lesson introduced me to the basics of the German language, such as the alphabet, how to ask about names, how say “how are you” and so on. In addition to the book, I planned to practice speaking German for 10 minutes every day. My first attempt was challenging, I couldn’t pronounce correctly, and I was quite nervous. I’m not sure if I will be able to do it every day, but I will try my best. Learning a new language is challenging, and I’ve already encountered some difficulties, particularly with the pronunciation of some German words. However, I’m optimistic that with persistence and hard work, I’ll be able to master the language. In conclusion, I believe that taking the first step towards learning a new language is always the hardest, but it’s also the most important. If you’re thinking of learning a new language, don’t be afraid to start, even if it’s just for ten minutes a day. You’ll be amazed at how much progress you can make with consistent effort. Believe me, I did the same with coding, and I gained a lot of experience and knowledge. Hopefully, I’ll be able to do the same with German.",
+      "tags": ["language-learning","personal-growth","germany","habits","expat-life"],
+      "categories": ["germany"],
+      "date": "2023-04-22T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Hidden Gems in Composer Every PHP Developer Should Know",
+      "url": "/blog/php/hidden-gems-in-composer.html/",
+      "content": "Composer is the most popular PHP dependency manager. I’ve heard about other package managers like PEAR &amp; Phing, but I’ve never used them. While many developers are familiar with basic Composer commands like install, update, and require, there are several hidden gems in Composer that can make maintaining your dependencies easier. In this blog post, We’ll explore some of these hidden gems. 1. composer bump &amp; composer audit Composer 2.4 added two new commands composer bump and composer audit. composer bump “bumps” the package version constraints listed in the composer.json file by increasing them to the latest version within the allowed constraints. composer audit, scans the installed packages for reported security vulnerabilities. It exists with an error code if there are any packages installed with known security vulnerabilities. You can read more about them in the official blog post. 2. composer outdated Keeping your dependencies up-to-date is important for security and compatibility reasons. However, it can be time-consuming to manually check for updates to each package in your project. This is where composer outdated comes in. This command lists all the packages that have newer versions available, this comes with a color legend to help you determine which packages are recommended to update or just possible to update. composer outdated Color legend: - patch or minor release available - update recommended - major release available - update possible Direct dependencies required in composer.json: blackfire/php-sdk v1.33.0 v1.35.0 Blackfire.io PHP SDK doctrine/annotations 1.14.3 2.0.1 Docblock Annotations Parser ... Other packages are omitted for brevity ... 3. composer show –latest Similar to composer outdated, composer show --latest shows you the latest version of each package that is available on the remote repository. This can be helpful for keeping track of the latest package versions and deciding when to update your project. The composer show command has a lot of other useful options that you can explore by running composer show --help. 4. composer why &amp; composer why-not Sometimes, when you try to install a package with Composer, it fails due to dependency conflicts or other issues. In these situations, it can be difficult to determine why the package cannot be installed. This is where composer why and composer why-not come in. composer why command tells you which other packages depend on a certain package. For example, you can run the following command to find out which packages depend on vimeo/psalm: composer why vimeo/psalm composer why-not shows you a detailed explanation of why a package cannot be installed, including all the packages that are blocking it. This can be helpful for troubleshooting complex dependency issues. Specify a version constraint to verify whether upgrades can be performed in your project, and if not why not. See the following example to find out why PHPUnit 10 cannot be installed in your project: composer why-not phpunit/phpunit 10 5. composer –with-dependencies The composer update, composer require, and composer remove commands have a --with-dependencies and --with-all-dependencies option that can be used to update all the dependencies of a package. This can be useful when you want to update a package and all the packages that depend on it. For example, you can run the following command to update the symfony/console package and all the packages that depend on it: composer update symfony/console --with-dependencies There are shortcuts for these options, you can use -W and -w instead of --with-dependencies and --with-all-dependencies. --with-dependencies (-w): Update also dependencies of packages in the argument list, except those which are root requirements. --with-all-dependencies (-W): Update also dependencies of packages in the argument list, including those which are root requirements. It’d be better to use the short versions as they work fine with different commands like composer require that has a --update-with-dependencies (-w) and --update-with-all-dependencies (-W) option. Conclusion Upgrading your dependencies can be a tedious task, but it’s important to keep your project up-to-date. Using the mentioned commands can help you resolve dependency issues and keep your project up-to-date. I hope you found this article useful. Photo by Dayne Topkin on Unsplash",
+      "tags": ["php","composer","dependency-management","developer-tools","security"],
+      "categories": ["php"],
+      "date": "2023-04-16T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Back to dark theme",
+      "url": "/blog/generic/back-to-dark-theme.html/",
+      "content": "I always liked dark themes, but I came across this blog post by Brent, and I thought I’d give it a try. I installed the Light lite theme on my PHPStorm and WebStorm. In the beginning, it wasn’t comfortable, but I thought I just needed to get used to it and I could even modify the theme to my liking. I pushed myself to use it for around two months, but I couldn’t get used to it. Finally, I decided to go back to the dark theme. I’m using the Nord theme, and I’m happy with it. Whenever I google for “Dark theme vs Light theme”, I get a lot of articles, and YouTube videos, saying that light themes are better for your eyes. I don’t know if that’s true, but I know that I’m more productive with dark themes. It could be because I’m from the old school of using white chalk on a blackboard? 🤔😅",
+      "tags": ["developer-experience","productivity","developer-tools","dark-theme","work-habits"],
+      "categories": ["generic"],
+      "date": "2023-04-09T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Approximating square roots with Newton's method",
+      "url": "/blog/dsa/approximating-square-roots-with-newton's-method.html/",
+      "content": "Newton’s method is a way to approximate the roots of an equation. The idea is to start with an initial guess, then to approximate the function by its tangent line, and finally to compute the x-intercept of the tangent line. The x-intercept is a better approximation of the root than the initial guess, and the process can be repeated until the desired accuracy is reached. Let’s say we need to find the square root of a number a. The equation we need to solve is \\(f(x) = x^2 - a = 0\\). We can start by drawing the curve of the function \\(f(x)\\) (Blue line in the figure below). The curve is a parabola ,but it shows only one root, the positive root. Then, we can start by choosing an initial guess \\(x_n\\) (Blue dashed line in the figure below). The tangent line at the point \\(x_n\\) is \\(f'(x_n) = 2x_n\\) (Red line in the figure below). The x-intercept of the tangent line is the next guess. As you can see, the next guess \\(x_{n+1}\\) is closer to the root than the previous guess \\(x_n\\). The process can be repeated until the desired accuracy is reached. So, we can approximate the square root of \\(a\\) by: [x_{n+1} = x_n - \\frac{f(x_n)}{f’(x_n)}] [= x_n - \\frac{x_n^2 - a}{2x_n}] [= \\frac{1}{2} (x_n + \\frac{a}{x_n})] We start with an initial guess \\(x_0\\) and then we iterate over the formula until we reach a desired accuracy. For each step, we can calculate the error \\(\\epsilon\\) as: [\\epsilon = \\frac{ x_{n+1} - x_n }{x_{n+1}}] For example, if the first guess is \\(x_0 = 1\\), and the new guess is \\(x_1 = 1.5\\), then the error is: [\\epsilon = \\frac{ 1.5 - 1 }{1.5} = 0.333] The error value ranges between \\(0\\) and \\(1\\), and the smaller the error, the closer we are to the square root of \\(a\\). When the error equals \\(0\\), we have reached the square root of \\(a\\). We can also define an accepted error so that we stop iterating when the error is less than the accepted error. Example (1) Let’s find the square root of \\(a = 9\\) using Newton’s method. We start with an initial guess \\(x_0 = 1\\), and then we iterate over the formula until we reach a desired accuracy. This time, we will use an accepted error of \\(0\\). The following table shows the steps: \\(n\\) \\(x_n\\) \\(x_{n+1}\\) \\(\\epsilon\\) 0 1 5 0.8 1 5 3.4 0.47 2 3.4 3.023 0.12 3 3.023 3.000091 0.0076 4 3.000091 3.000000092 0.00003 5 3.000000092 3.000000000 0.00000003 6 3 3 0 As we can see, after the sixth step, the error is equal to \\(0\\), so we have reached the square root of \\(9\\). Example (2) Let’s find the square root of \\(a = 16\\) with an initial guess of \\(x_0 = 1\\) and an accepted error of \\(0.1\\). \\(n\\) \\(x_n\\) \\(x_{n+1}\\) \\(\\epsilon\\) 0 1 8.5 0.88 1 8.5 5.04 0.69 2 5.04 4.0016 0.26 3 4.0016 3.999904 0.00004 After the third step, the error is less than the accepted error, so we stop iterating. The square root of \\(16\\) is \\(4.0016\\), which is close enough to the actual square root of \\(16\\) which is \\(4\\). Implementation The following code implements Newton’s method in Java: public class NewtonsMethod { public static double sqrt(double a, double x0, double epsilon) { double x = x0; double error = 1; while (error &gt; epsilon) { double x1 = 0.5 * (x + a / x); error = Math.abs(x1 - x) / x1; x = x1; } return x; } } Leetcode problem We can use Newton’s method to solve the 69. Sqrt(x) problem on Leetcode. class Solution { public int mySqrt(int x) { double x0 = 1; double epsilon = 0.00000000000001; double sqrt = NewtonsMethod.sqrt(x, x0, epsilon); return (int) sqrt; } } The same problem can be solved using binary search: class Solution { public int mySqrt(int x) { long lo = 0, hi = x, mid, c; while (lo &lt;= hi) { mid = (hi - lo) / 2 + lo; c = mid * mid; if (x == c) return (int)mid; if(x &gt; c) lo = mid + 1; else hi = mid - 1; } return (int)hi; } }",
+      "tags": ["mathematics","numerical-methods","newtons-method","algorithms","problem-solving"],
+      "categories": ["dsa"],
+      "date": "2022-12-12T11:55:59+00:00",
+      "type": "post"
+    },{
+      "title": "How to organize your unit tests",
+      "url": "/blog/testing/how-to-organize-your-unit-tests.html/",
+      "content": "One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the respiratory system which is known as mucociliary escalator and he said, to understand anything in medicine, you need to understand the idea behind the name, you need to understand the culture behind the name. Check the following image, it auto-moves the particles outside the lungs like an escalator. We are not native English speakers, so this advice applies to us. I believe it’s the same for programming, understanding the idea or the culture behind the name makes it easier to understand the concept. So, let’s talk about the idea behind the names of the unit tests. The names in testing In general, testing is finding out how well something works. In terms of human beings, testing tells what level of knowledge or skill has been acquired. In terms of electronics, testing tells how well the device works. The device under test is the thing that is being tested. In the case of testing car stability, the car is the device under test. It’s referred to as DUT. Engineers may use a device called test fixture to test the DUT. The test fixture is a device that is used to hold the DUT in a specific position or to provide a particular input or output to the DUT. In the case of testing car stability, the test fixture may be a ramp. Let’s map this to programming. The DUT will be SUT (System under test). The test fixture is a piece of data that could be a dependency or an argument passed to the SUT. It can also be data in the database or a file in the file system. The test fixture’s state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable. Test file location There are two conventions for organizing the test files. The first one is to put the test files in the same directory as the source files. The second one is to put the test files in a separate directory. The first is called in-place and the second is called out-of-place. In-place tests are painless to find, you see at a glance if a part of your application lacks tests. When you move the source (inevitable), you remember to move the test, When you rename the source (inevitable), you remember to rename the test. The downside is where to put integration tests, as they don’t belong to any specific source file. It’s often better to create an appropriate directory for them in the tests directory. Out-of-place tests have a natural home directory tests. The directories and files in the tests directory should mirror their corresponding source files. This way, you can easily integrate the tests with your IDE. I prefer the out-of-place convention, even if I have to remember to move or rename the test files to reflect the changes in the source files, but I’m not dogmatic about it. I’m open to changing my mind if I find a good reason to do so. How to struct a test case Structuring a test case starts with naming the test method. It’s often to encounter the following pattern: [MethodUnderTest]_[Scenario]_[ExpectedResult]. I used to follow this pattern, but I found it not very helpful. It focuses on the implementation details, not the behavior. The pattern I prefer is PLAIN ENGLISH. We describe in plain English what we’re testing in a language easy to understand, even for non-programmers. Using plain English is required by the nature of some test frameworks. For example, in the case of Jest, the test method name is the test case name. So, you have to use plain English to name the test method. You can do the same with the xUnit frameworks. I also prefer to separate words by underscores, it makes it easier to read. I use snake case for the test method names, even if the convention in the language or the framework is camel case. Yes, I know it’s not consistent and it breaks the coding style, but I’m open to breaking rules if I find a good reason to do so. It’s easy to exclude the test files from the coding style check of this rule. The good reason here is readability, just compare the readability of the following two test method names: ItShouldIlluminateTheLedAtLowLevelLight It_should_illuminate_the_led_at_low_level_light The snake case version is much easier to read, as it resembles the natural way of using spaces between words. So, what about the body of the test case? The Given-When-Then or Arrange-Act-Assert is a great way to structure test cases. It prescribes an order of operations: Given (Arrange) The Given section is where you set up the test case. You do all the preparations to make the test case ready to run. You may require a fixture, a dependency, a database, a file, etc. You need also to set the initial state. This section should end by creating the SUT instance in the initial state. As far as I know, all xUnit frameworks provide a setup method to do the preparations. Even though this is not the place to put the Given section. The setup method is not the place to put the Given section. The setup method is for the preparations that are common to all test cases. The Given section is for the preparations that are specific to the test case. Putting the Given section in the setup method is not a good idea, because it makes the test case less readable, and it couples the test cases together. If you need to change the initial state of the SUT, you have to change the setup method, which may break other tests. The Given section should be as close to the When section. If your Given section has a boilerplate code, you can extract each part to a factory method with a descriptive name. This way, you can reuse the factory method in other test cases. For instance, createUser(), createUserWithOrders(), and createUserWithOrdersAndPayments() are factory methods that create a user with a different initial state. When (Act) The When section is where you execute the action under test. It SHOULD be a single operation. If you need to execute ",
+      "tags": ["testing","unit-testing","test-structure","naming","best-practices"],
+      "categories": ["testing"],
+      "date": "2022-11-11T22:48:41+00:00",
+      "type": "post"
+    },{
+      "title": "What is a unit test",
+      "url": "/blog/testing/what-is-a-unit-test.html/",
+      "content": "When I started writing this article few months ago, I got blocked by the idea of I’m going to write about something that everyone knows about and everyone can google the topic and found a ton of articles about the same basic topic. Should I publish such an article? As I said, I got blocked by this idea, the thing that stopped me from completing the series I started about testing. Finally, I decided to write this article to refer to it in case I needed in next articles, at least it will be an internal reference. What is a unit test? You should already know about test automation. Given a piece of code, you can write another piece of code that verifies the behavior of the first. The second piece of code is called a unit test. A unit test should verify a small piece of code in isolation quickly. As you can see, a unit test has three characteristics: Verifies a small piece of code. Is quick to run. Works in isolation. A small piece of code could be a function, a class, a method, or whatever you can call a unit. If your test suite’s execution time is good enough to you, it means tests are quick enough. A unit in unit testing is a unit of behaviour, not a unit of code. This behaviour can span across as many as several classes or as a single method, but it should have a single entry point to trigger the behaviour. No doubt, the first two characteristics are non-controversial. The third one, isolation, is controversial. When it comes to isolation, there are two takes, the Mockist take and the Classicist take. Mockist take vs Classicist take These two tribes are commonly referred to as the Detroit School of TDD (Classicist) and the London School of TDD (Mockist). A key difference between them is how they treat the dependencies of the code under test. For the Mockist take, if a class has a dependency on another class or service, it is mocked or doubled. This means that isolation here is code isolation. But for the Classicist take, if a class has a dependency, the dependency should be used as it. It is not the code that needs to be isolated during testing. Instead, unit tests themselves should run in isolation from each other. I believe that the style of mocking everything results in a fragile, hard to refactor code base. It does not reflect the real scenario, besides, it burdens your shoulders with maintaining the mocks when the real source code changes. I’m not completely opposed to mocking, but we should mock to our advantage, wherever it makes our tests more manageable. Another problem with the Mockist take is detecting changes in other services they are integrated with. For example, if a dependency behaviour changed, the mockist test will not detect it, it depends on a non-updated mock. Tests should be sensitive to the behavior changes and insensitive to the structural changes. If I care about the order of operations, I’ve designed the system wrong. — Kent Beck (the Detroit School). If I have an object that has behaviour, and I’m doing “Tell, Don’t Ask” then I can only test interactions. — Steve Freeman (the London School) When to mock vs when to use real dependencies Hopefully, it’s clear now that I prefer the Classicist take. In the classicist take, it’s not the code that needs to be tested in an isolated manner. Instead, the unit tests themselves should be run in isolation from each other. The classes under test reside in the memory of the test runner, so that they can interact with each other without affecting the test results either you run the tests in parallel or in sequence. There is a problem, Okay, they reside in the memory and not affecting each other, but what about the shared states? For example, the database and file system. Of course, changes in the database will affect the test results. For instance, one test could create a record in the database, and the other test could delete the record as a part of its setup. If you run them in parallel, the first test will fail, not because the code is broken, but because it is not isolated. Let’s look at three different types of dependencies: the shared, the private and the out-of-process. The shared dependencies are the ones that are shared across the test suite, for example, a static field, a database record, and the file system. The private dependencies are the ones that are not shared at all, for example a private field, or a function parameter. The out-of-process dependencies are the ones that are the ones that run outside the application’s execution context. For example an external API. Given the above, Classist take still can use mocks and test doubles, but only do that for the shared dependencies, or the out-of-process dependencies in case you need to test a specific behavior of the external service. Conclusion Let’s conclude them in triplets: A unit test has three characteristics: Verifies a small piece of code. Is quick to run. Works in isolation. There are three types of dependencies: Shared. Private. Out-of-process. There are three schools of TDD: The Detroit School. The London School. The one that your manager told you to use. There are three reasons to use mocks: Replacing the shared dependencies. The non-deterministic behavior of the out-of-process dependencies. To make tests faster. (Replacing DB calls for example.)",
+      "tags": ["testing","unit-testing","tdd","mocks","software-quality"],
+      "categories": ["testing"],
+      "date": "2022-08-13T17:21:35+00:00",
+      "type": "post"
+    },{
+      "title": "Math Notes about Sum Formulas",
+      "url": "/blog/dsa/math-notes-about-sum-formulas.html/",
+      "content": "I’m working on enhancing my skills, expanding my knowledge and increasing my chances to pass technical interviews. Mathematics plays an important role in problem-solving. Hence, this notes! This blog post is about Sum Formulas. Each sum of the form: $$ \\sum_{x=1}^{n} x^{k} = 1^{k} + 2^{k} + 3^{k} + .. + n^{k} $$ where k is a positive integer, has a closed-form formula that is a polynomial of degree (k + 1). Triangular number [\\sum_{x=1}^{n} x = 1 + 2 + 3 + … + n = \\frac{n (n + 1)}{2}] Square pyramidal number [\\sum_{x=1}^{n} x^{2} = 1^{2} + 2^{2} + 3^{2} + … + n^{2} = \\frac{n (n + 1) (2n + 1)}{6}] There is a general formula for such sums, called Faulhaber’s Formula. In the next lines, I’ll use mathematical induction to proof the Triangular number and the Square pyramidal number formulas. Triangular number. $$ \\sum_{x=1}^{n} x = 1 + 2 + 3 + ... + n = \\frac{n (n + 1)}{2} $$ Base step: Base case, for n = 1 [L.H.S = 1] [R.H.S = \\frac{n (n + 1)}{2} = \\frac{1 ( 1 + 1)}{2} = \\frac{2}{2} = 1] [L.H.S = R.H.S = 1] Inductive hypothesis Step The equation is true for an arbitrary integer k [1 + 2 + 3 + … + k = \\frac{k(k+1)}{2}] Induction Step Based on the inductive hypothesis, let’s proof the equation if true for n = k + 1 [L.H.S = 1 + 2 + 3 … + k + k + 1] [= \\frac{k(k+1)}{2} + (k + 1)] [= \\frac{k(k+1)}{2} + \\frac{2(k + 1)}{2}] [= \\frac{k^2 + k + 2k + 2}{2}] [= \\frac{k^2 + 3k + 2}{2}] [= \\frac{(k+1)(k+2)}{2}] [= \\frac{(k + 1)(k+1+1)}{2}] For n = k + 1 [R.H.S = \\frac{n(n + 1)}{2} = \\frac{(k+1)(K + 1 + 1)}{2}] [L.H.S = R.H.S #] Square pyramidal number $$ \\sum_{x=1}^{n} x^{2} = 1^{2} + 2^{2} + 3^{2} + ... + n^{2} = \\frac{n (n + 1) (2n + 1)}{6} $$ Base step: Base case, for n = 1 [L.H.S = 1^2 = 1] [R.H.S = \\frac{1(1+1)(2 \\times 1 + 1)}{6} = \\frac{2 \\times 3}{6} = 1] [L.H.S = R.H.S] Inductive hypothesis Step The equation is true for an arbitrary integer k [1^2 + 2^2 + 3^2 + … + k^2 = \\frac{k(k+1)(2k+1)}{6}] Induction Step Based on the inductive hypothesis, let’s proof the equation if true for n = k + 1 [L.H.S = 1^2 + 2^2 + 3^2 + … + k^2 + (k+1)^2] [= \\frac{k(k+1)(2k+1)}{6} + (k+1)^2] [= \\frac{k(k+1)(2k+1)}{6} + \\frac{6(k+1)^2}{6}] Given the R.H.S: [R.H.S = \\frac{n(n+1)(2n+1)}{6} = \\frac{(k+1)(k+2)(2k+3)}{6}] So, we can ignore the 6 in the denominator from both sides for now: [{L.H.S}\\times{6} = k(k+1)(2k+1) + 6(k+1)^2] [= (k^2 + k)(2k+1) + 6(k^2+2k+1)] [= 2k^3 + k^2 + 2k^2 + k + 6k^2 + 12k + 6] [{L.H.S}\\times{6} = 2k^3 + 9k^2 + 13k + 6] [{R.H.S}\\times{6} = (k+1)(k+2)(2k+3)] [= (k^2 + 3k + 2)(2k+3)] [= 2k^3 + 6k^2 + 3k^2 + 4k + 9k + 6] [{R.H.S}\\times{6} = 2k^3 + 9k^2 + 13k + 6] [L.H.S = \\frac{2k^3 + 9k^2 + 13k + 6}{6}] [R.H.S = \\frac{2k^3 + 9k^2 + 13k + 6}{6}] [R.H.S = L.H.S #] Number Progressions A progression, which is also known as a sequence, is nothing but a pattern of numbers. For example, 3, 6, 9, 12 is a progression because there is a pattern observed where every number here is obtained by adding 3 to its previous number. There are four types of the most common progressions. Arithmetic Progression Arithmetic Progression (AP) is a sequence of numbers where the difference between any two consecutive numbers is constant. For Example: 3, 7, 11, 15, is an AP where the common difference is 4. For an AP: a is the first term. l is the last term. d is the common difference. The n term could be found as follows: \\(a_{n} = a + (n - 1) d\\) We can find the sum as follows: \\(S = \\frac{n(a + l)}{2}\\) Let’s proof this formula: The sum of an arithmetic is $$ S = \\frac{n(a + l)}{2} $$ Suppose \\(a_{1}, a_{2}, a_{3}, ..., a_{n}\\) be an arithmetic progression whose first term is a and the common difference is d. Then: [a_{1} = a] [a_{2} = a + d] [a_{3} = a + 2d] [a_{n} = a + (n - 1) d] [S_{n} = a + (a + d) + (a + 2d) + … + {a + (n - 3)d} + {a + (n - 2)d} + {a + (n - 1)d} \\;\\;\\;\\;\\;\\;\\;\\; (i)] And with a simple trick of reversing the order: [S_{n} = {a + (n - 1)d} + {a + (n - 2)d} + {a + (n - 3)d} + … + (a + 2d) + (a + d) + a \\;\\;\\;\\;\\;\\;\\;\\; (ii)] by adding \\((i)\\) and \\((ii)\\) Term (i) Term (ii) Sum a \\(a + (n - 1)d\\) \\(2a + (n-1)d\\) a + d \\(a + (n - 2)d\\) \\(2a + (n-1)d\\) a + 2d \\(a + (n - 3)d\\) \\(2a + (n-1)d\\) … … …     \\(2S_{n} = n\\{2a + (n-1)d\\}\\) [2S_{n} = {2a + (n-1)d} + {2a + (n-1)d} + … + {2a + (n-1)d}] [2S_{n} = n{2a + (n-1)d}] [2S_{n} = n{a + a + (n-1)d}] [2S_{n} = n(a + l)] [S_{n} = \\frac{n(a+l)}{2} #] Geometric Progression Geometric Progression (GP) is a sequence of numbers where the ratio between any two consecutive numbers is constant. [S = \\frac{l\\times k - a}{k - 1}] Harmonic Progression A series of numbers is said to be in harmonic sequence if the reciprocals (the inverse) of all the elements of the sequence form an arithmetic sequence. For example: \\(\\sum_{x=1}^{n}{\\frac{1}{x}} = 1 + \\frac{1}{2} + \\frac{1}{3} + ... + \\frac{1}{n}\\) Fibonacci Progression Fibonacci numbers form an interesting sequence of numbers in which each element is obtained by adding two preceding elements and the sequence starts with 0 and 1. Sequence is defined as, \\(F_{0} = 0\\) and \\(F_{1} = 1\\) and \\(F_{n} = F_{n-1} + F_{n-2}\\)",
+      "tags": ["mathematics","dsa","formulas","problem-solving","technical-interviews"],
+      "categories": ["dsa"],
+      "date": "2022-07-09T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "We need more tests",
+      "url": "/blog/testing/we-need-more-tests.html/",
+      "content": "Well, It’s not about Coronavirus pandemic this time 😷. Moisés Belchín Martínez (Moi), my awesome ex-CTO, keeps repeating these words in every PR “We need more tests”. Sometimes it appears as a joke about Covid-19, but I believe he totally meant it. There’s a reason for optimism about your own code because you wrote it, it works, and you did your best following the best practices of clean code, but is that enough to merge and release this code? TBH, No! Moi doesn’t mean the quantity, but actually he meant the quality of tests we wrote to avoid the technical debt as much as possible by having a strict definition of Done. In this article, I’m discussing the metrics of code coverage, are they reliable enough? de we really need more tests? How to measure a test suite quality? Vamos! What is the goal of unit testing? A simple question, yet one that must be addressed! The goal of unit testing is to allow sustainable growth of the software project. When you start a new project, you make progress so quickly, and get results with a little slaps on your keyboard. No bad architectural decisions have been made yet. No requirement changes or existing code to worry about. Actually, nothing is dragging you back. Eventually, the development speed slows down, and adding a new feature may break another. As per wikipedia, the idea that software eventually rots as it is changed is called Software entropy. Any code modification leads to an amount of disorder in your code base. Leaving entropy without proper care, such as constant cleaning and refactoring, the system becomes increasingly complex and disorganized. Software entropy is tied to the notion of change and has no meaning in a static system. If there is no intent to alter the system, we cannot speak of its entropy. One more idea to put in mind, when software entropy overwhelms a project, the project freezes! Tests act as a safety net. Tests help make sure the existing functionality works, even after you introduce new features or refactor the code to better fit new requirements. Besides, it helps have a well-designed software. Don’t just throw more tests Not all tests are created equal. Some of them are valuable and contribute a lot to overall software quality. Others don’t. You can’t achieve the goal of unit testing by just throwing more tests at the project. Let’s discuss the * *QUANTITY** aspect. Coverage metrics are used to show how much source code tests execute. It gives you a percentage from 0% (No source code executed) to 100% (It covers all lines of code). If a metric shows that is there too little coverage in your code base, say, only 10%. That’s a good indication that you are not testing enough. But the reverse isn’t true: even 100% coverage isn’t a guarantee that you have a good-quality test suite. A test suite that provides high coverage can still be of poor quality. Consider the following example, using the code coverage as a metric. Read the code comments: 1 2 3 4 5 public static bool isBig(int num) { if (num &gt; 5) return true; // Not covered with test return false; } // The following test calls the `isBig()` function. // The if condition evaluates to `false`, then it returns false. // This code executes (4) lines out of total (5) lines of code. public void Test() { bool actual = isBig(3); Assertions.AssertFalse(actual); } With a simple calculation using the code coverage formula: [Code\\ coverage = \\frac{Lines\\ of\\ code\\ executed}{Total\\ number\\ of\\ lines}] [Code\\ coverage = \\frac{4}{5} = 0.8 = 80\\%] Now, with the same test, what if we refactored our function to remove the unnecessary if condition: public static bool isBig(int num) { return num &gt; 5; } When running our test again, it executes the full lines of code with 100% coverage! The test still verifies the same number of possible outcomes and without any improvement to our test suite, the test coverage percentage raised from 80% to 100%. Having a low test coverage is an indication of a bad test suite, but having a high number tells nothing about the QUALITY of the test suite. To enable sustainable project growth, you have to focus on high quality tests. Those are the only type of tests that are worth keeping in the test suite. How to measure a test suite quality? The only reliable way to measure a test suite quality is to evaluate each test individually. The point is there is no automated way to see how good your test suite. You have to apply your personal judgement. The only point in having automated tests is if you constantly use them. All tests should be integrated into the development cycle, you should execute them on every change, even the smallest one. It’s important to direct your unit testing efforts to the most critical parts of the system and verify the others only briefly or indirectly. In most applications, the most important part is the part that contains the business logic (The Domain Model). What’s next? The only way to achieve the goal of unit testing is to learn how to differentiate between a good and a bad test, and you should be able to refactor the test to make it more valuable. I’ll discuss testing more and more in the next articles. This series of articles are inspired by a list of books and courses including: TDD Tutorial by Laracasts. Unit testing Principles, Practices and Patterns. Effective Unit Testing, a guide for java developers. Manténganse al tanto",
+      "tags": ["testing","unit-testing","code-coverage","technical-debt","software-quality"],
+      "categories": ["testing"],
+      "date": "2022-01-31T06:05:51+00:00",
+      "type": "post"
+    },{
+      "title": "PHP Real-world use cases of singleton design pattern",
+      "url": "/blog/php/real-world-use-cases-of-sinlgeton-in-php.html/",
+      "content": "The singleton pattern ensures that a class has only one instance and provides global access to it. Okay, many developers consider the singleton is an anti-pattern and many others don’t. The most common reason for using a singleton is to control access to some shared resources, database connection which is an expensive resource or a file. The singleton pattern is responsible for: Creating an instance of its class. Ensures that a class has just a single instance. This obviously violates the Single Responsibility Principle, as the pattern solves two problems at the same time. In the following lines, I’ll start by explaining how to implement a singleton, then I’ll discuss how Laravel Container uses the singleton pattern, Finally, show you how the Local Adapter within Flysystem PHP package uses the same concept to manipulate files. How to implement a singleton The Singleton class declares the static method getInstance that returns the same instance of its class. To do so, we declare a static private property that holds the instance. By checking its value we can decide whether to create a new instance or return the already instantiated one. The Singleton constructor should be hidden from the client code. Calling the getInstance method should be the only way to create an instance of the Singleton class. Cloning the object should be prevented as well. I start by writing tests… //SingletonTest.php &lt;?php namespace Tests; use Com\\Imdhemy\\Singleton; use Error; class SingletonTest extends TestCase { /** * @test */ public function it_can_be_instantiated_by_a_static_factory_method() { $instance = Singleton::getInstance(); $this-&gt;assertInstanceOf(Singleton::class, $instance); } /** * @test */ public function it_must_return_the_same_instance_every_time() { $firstCall = Singleton::getInstance(); $secondCall = Singleton::getInstance(); $this-&gt;assertSame($firstCall, $secondCall); } /** * @test */ public function it_should_not_be_instantiated_through_a_constructor() { $this-&gt;expectException(Error::class); new Singleton(); } /** * @test */ public function it_should_not_be_cloned() { $this-&gt;expectException(Error::class); $instance = Singleton::getInstance(); clone $instance; } } And here is the Singleton class code… //Singleton.php &lt;?php namespace Com\\Imdhemy; class Singleton { /** * @var Singleton|null */ private static ?Singleton $instance = null; /** * Singleton constructor */ private function __construct() { // } /** * Prevents Cloning */ private function __clone(): void { // } /** * @return Singleton */ public static function getInstance(): Singleton { if (is_null(static::$instance)) { static::$instance = new static(); } return static::$instance; } } Why Laravel Container is a special singleton class If you are looking for Singleton Design Pattern in Laravel and Google sent you here, you can check my dedicated post about Singleton Design Pattern in Laravel. If you checked the Laravel source code, you will find that the Application class extends the Container class. The latter is a special singleton implementation. It makes sense to have a single instance of the application within your application. You can easily find the getInstance method on the Container class, but if you checked the container constructor, you will not find a private constructor. This is why I’m saying that the Laravel Container is a special singleton. It’s implemented in a way that gains the pros of a Singleton and avoids the cons. Laravel developers are smart enough to realize that it’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance. A single instance of a file counts as a singleton The term Singleton comes from mathematics. In mathematics, a Singleton, also known as a unit set, is a set with exactly one element. For example, the set {M} is a singleton containing the element M. Let’s imagine the situation when a particular part of your application code is manipulating the contents of a local file, and another part is updating the same file simultaneously! For instance, the first one is adding to the file, and the other one is removing lines from there! Definitely, this will result in inconsistent file contents. As a solution, we need to ensure having a single instance of the file resource on our application during manipulation. Actually this is not a singleton class implementation, but it still implies the mathematics definition of a singleton. The wonderful Flysystem PHP package provides one interface to interact with many types of filesystems. Flysystem ships with a default adapter, which is the Local adapter. By default, this adapter uses a lock during writes and updates. Summary Singleton is a creational design pattern, which ensures that only one object of its kind exists and provides a single point of access to it for any other code. I’d prefer to assign the responsibility of ensuring having only one object to another Class or helper or at least do the same as Laravel developers did, and I’d also avoid hiding the constructor. It’s completely fine to have a single object within your application, but it’s not fine to make it impossible to make a second instance.",
+      "tags": ["php","design-patterns","singleton","laravel","software-architecture"],
+      "categories": ["php"],
+      "date": "2021-12-30T12:45:00+00:00",
+      "type": "post"
+    },{
+      "title": "How to test Elasticsearch in PHP applications",
+      "url": "/blog/php/how-to-test-elasticsearch-in-php-apps.html/",
+      "content": "Starting from Elasticsearch 8.0, they introduced multiple breaking changes in the Elasticsearch client library. This article is intended to v 7.x and lower. For v 8.0 you can use the Es Utils package. Currently, I’m working on the Elasticsearch PHP Sugar package. It’s a wrapper over the low-level Elasticsearch client that adds syntactic sugar for PHP developers. I’ll publish a blog post once I publish the first release. One of the interesting things I have to work on is testing Elasticsearch in PHP. When unit-testing an external service, you often need to simulate specific scenarios like returning a successful response, returning an error, or returning particular responses in a certain order. In this blog post, I will show you how to add unit tests and integration tests for Elasticsearch in your PHP application. Let’s start with a short note about the Practical Test Pyramid. Practical Test Pyramid In his book Succeeding With Agile, Mike Cohn came up with the Test Pyramid concept. Test Pyramid tells you to think about different layers of testing. It also tells you how much testing to do on each layer. It consists of three layers from the bottom up: Unit Tests. Service Tests. UI Tests. The names introduced by Mike Cohn are confusing, at least for me. I’ll go for different naming for each testing layer: Unit Tests. It’s the same 😅 Integration Tests. End to End Tests. As a rule of thumb, stick to the pyramid shape to come up with a healthy, fast, and maintainable test suite. Below is a list of tips to follow: Write tests with different granularity The more high-level you get the fewer tests you should have Write lots of small and fast unit tests. Write some more coarse-grained tests. Write very few high-level tests that test your application from end to end. In this blog post, I will cover only the first two types of the Test Pyramid. Unit and Integration Tests. How to Unit Test Elasticsearch in PHP Unit tests shouldn’t depend on a running cluster, should be mocked out instead. To be more specific the client response should be mocked. use GuzzleHttp\\Ring\\Client\\MockHandler; use Elasticsearch\\ClientBuilder; // The connection class requires 'body' to be a file stream handle // Depending on what kind of request you do, you may need to set more values here $handler = new MockHandler([ 'status' =&gt; 200, 'transfer_stats' =&gt; [ 'total_time' =&gt; 100 ], 'body' =&gt; fopen('somefile.json'), 'effective_url' =&gt; 'localhost' ]); $builder = ClientBuilder::create(); $builder-&gt;setHosts(['somehost']); $builder-&gt;setHandler($handler); $client = $builder-&gt;build(); // Do a request and you'll get back the 'body' response above The previous example is provided by the official package maintainers. Besides, I don’t like the idea of using JSON files, we may need to override some values or options during the runtime. This is why I created these Utils to be used as follows: [UPDATE: 5 November 2021: 02:21 PM] I published a PHP package with enhanced Utils to test Elasticsearch. You can use composer to install it. $handler = MockHandler::_mockTemplate_('index_document'); Just provide the template name to the static method, and it will do the rest for you. The template is a PHP file that returns an array representing the expected client response. Here is an example of a unit test class ElasticSearchEngineTest extends UnitTestCase { /** * @test */ public function test_it_can_index_a_document() { $handler = MockHandler::mockTemplate('index_document'); $builder = ClientBuilder::create(); $builder-&gt;setHandler($handler); $client = $builder-&gt;build(); $elasticSearchEngine = new ElasticSearchEngine($client); $document = [ 'author' =&gt; 'Albert Einstein', 'quote' =&gt; 'I have no special talents. I am only passionately curious.', ]; $response = $elasticSearchEngine-&gt;index('quotes_index', $document); $expectedResponse = $this-&gt;getTemplate('index_document'); $this-&gt;assertEquals($expectedResponse, $response); } } As simple as that 🚀 How to add Integration Tests to Elasticsearch in PHP Github actions, Bitbucket pipelines and other CI/CD tools could be used to start Elasticsearch to run integration tests. The following example uses CircleCI, but it would be much better if you used the same tool you’re using in your project without depending on a third-party service. For this part, you don’t just need to run your application but also the component you’re integrating with, Elasticsearch in our case. To automate this process I’m going to use CircleCI. CircleCI integrates with GitHub and Bitbucket, in our example project we will use Github, but you can do the same on Bitbucket. Let’s create our configuration file. Don’t be worry if you didn’t use CircleCI before, all you need is to understand the following YAML file. on .circleci/config.yml # PHP8.0 &amp; ES7.14.0 CircleCI 2.0 configuration file # version: 2 jobs: build: docker: - image: circleci/php:8.0.10-cli #1 - image: docker.elastic.co/elasticsearch/elasticsearch:7.14.0 #2 environment: #3 - transport.host: localhost - network.host: 127.0.0.1 - http.port: 9200 - cluster.name: es-cluster - discovery.type: single-node - xpack.security.enabled: false - ES_JAVA_OPTS: \"-Xms256m -Xmx256m\" steps: #4 - checkout - run: sudo apt update # Download and cache dependencies - restore_cache: keys: # \"composer.lock\" can be used if it is committed to the repo - v1-dependencies-{{ checksum \"composer.json\" }} # fallback to using the latest cache if no exact match is found - v1-dependencies- - run: composer install -n --prefer-dist # Wait for ES startup - run: #5 name: Waiting for Elasticsearch command: dockerize --wait http://localhost:9200 -timeout 1m # run tests with phpunit - run: composer test #6 I’m using docker images to build my application, #1 for PHP8.0 and #2 for the Elasticsearch prebuild image. CircleCI provides other ways to start your machine, but docker 🐳 is super easy to use. #3 is the environment variables used for Elasticsearch configuration. Number #4 sh",
+      "tags": ["php","testing","elasticsearch","integration-testing","unit-testing"],
+      "categories": ["php"],
+      "date": "2021-09-09T00:00:00+00:00",
+      "type": "post"
+    },{
+      "title": "Why you need a builder to create your entities and models",
+      "url": "/blog/php/why-you-need-a-builder-to-create-your-entities-and-models.html/",
+      "content": "Static factories and constructors share a limitation; they do not scale well to large numbers of optional parameters. Consider the case of a class presenting a User on a social network platform. This class has only three required fields ($name, $email &amp; $password) and a bunch of optional fields with default values, for instance: ($address, $avatar, $gender, $emailVerifiedAt, etc…). As a side note: this is not my preferred way to design a user entity, but this is only here for purpose of clarifying the situation of having a long parameter list. Starting from here, I’ll explore the practices I previously did or noticed in other developers’ code. The Laravel models taste Laravel models provide two methods to create a model instance, the most popular create method and the less popular make method. Both methods are not implemented in the base Model class. But Laravel defines a __call() and __callStatic() methods, it goes handled through them. Those methods forward the call to a query builder! Finally, we have a model class that has no properties, a parameterless constructor! Everything is injected magically into the class. The Model class looks like the following snippet: class User extends Model { // } The client code be like: $user = User::create([ 'name' =&gt; 'John Doe', 'email' =&gt; 'john@example.com', 'password' =&gt; $passwordHash ]); IMHO, this is not so good due to the following reasons! Sooner or later, you’ll end up with a model with an invalid state or any kind of unexpected behavior. The model has no properties and even more if you defined the properties to solve this problem the code will break! All properties are treated as public properties which means no encapsulation at all! Your IDE doesn’t understand that! You need to check your schema in a repeated manner to remember the properties and their types. Feel free to add more problems to this list… A factory that accepts an array of attributes Another technique I noticed some developers use is to provide a factory that receives an array of attributes, then starts a series of isset calls accompanied by a call to a setter method! class User extends Entity { private string $name; private string $email; // and so on ... public function setName(string $name) { $this-&gt;name = $name; } public function setEmail(string $email) { $this-&gt;email = $email; } // ... public static function create(array $attributes) { $obj = new User(); if(isset($attributes['name'])) $obj-&gt;setName($attributes['name']); if(isset($attributes['email'])) $obj-&gt;setEmail($attributes['email']); // ... Pew Pew Pew } } Just imagine repeating this to cover all the class properties! With parameterless constructors, you need to handle the required params yourself! Again, have entities with an invalid state! Hard to read, hard to maintain code. Your IDE doesn’t understand that! Telescoping constructor Telescoping constructor means to provide a constructor with only the required parameters, another with a single optional parameter, a third with two optional parameters, and so on. Since PHP doesn’t allow constructor overloading, PHP developers started to provide a constructor with a full list of properties starting with the required params. class User { // .. public function __construct(string $name, string $email, string $password, int $foo=5, int $bar=12, ?Address $address = null, ?File $avatar=null, ?DateTime $createdAt=null) { // .. } } When you want to create an instance, you can pass the shortest list of parameters you want to set. Typically, this constructor invocation will require many parameters that you don’t want to set, but you are forced to pass a value for them. $user = new User('John Doe', 'john@example.com', $passwordHash, 5, 12, null, $avatar); In this case, we’re forced to pass 5, 12, null values which are the default values since the avatar comes after them in order! The telescoping constructor work, but it is hard to write client code when there are many parameters, and harder still to read it. The reader is left wondering what all those values mean and must carefully count parameters to find out. Umm, what if he swapped the 12 and 50 since having the same data type, the code won’t break, but it’s an invalid state again! Fluent Setters Fluent Setters is the PHP way to imitate the JavaBeans Pattern In which you call a parameterless constructor followed by call to setter methods. It’s called fluent because all setter methods return the object instance allowing you to call them in chains. This pattern has none of the disadvantages of the telescoping constructor pattern. It makes it easy to create instances, and easy to read the resulting code: $user = new User(); $user-&gt;setName('John Doe') -&gt;setEmail('john@example.com') -&gt;setPassword($passwordHash) -&gt;setAddress('Via Lactea'); Unfortunately, the Fluent setters pattern has the following disadvantages: A class with a parameterless constructor is subject to being instantiated in an invalid state. Having to create setters for every property leads to an immense quantity of boilerplate code. Using a builder is a good solution! We can use a form of the Builder Pattern which combines the safety of the telescoping constructors and the readability of the fluent setters. Instead of creating the desired object directly, the client calls a static factory method with all the required parameters and gets an object of the builder class which provides setter-like methods for other optional methods. Finally, the client calls a parameterless build method to get an instance of the required class. Let me show you an example: I prefer to start with The Client Code: /** * @test */ public function test_builder_can_create_user() { $user = User::builder() -&gt;name('John Doe') -&gt;email('john@example.com') -&gt;address('Via Lactea') -&gt;build(); $this-&gt;assertInstanceOf(User::class, $user); // More assertions... } Then the Entity class: class User { /** * @var string */ private string $name; /** * @var s",
+      "tags": ["php","design-patterns","builder-pattern","domain-modeling","oop"],
+      "categories": ["php"],
+      "date": "2021-06-02T00:01:38+00:00",
+      "type": "post"
+    },{
+      "title": "Three advantages of using static factory methods in PHP",
+      "url": "/blog/php/three-advantages-of-using-static-factory-methods-in-php.html/",
+      "content": "Constructor overloading is a concept of having more than one constructor with a different list of parameters. PHP doesn’t allow constructor overloading. Developers over time developed their workarounds over this limitation. One of those workarounds is to add optional parameters with some logic and type checks inside the constructor, Let me show you an example from the Carbon Library. If the $time is instance of the DateTimeInterface, it calls another private creator method constructTimezoneFromDateTime. If the $time is a timestamp, it starts another journey with creator methods starting from createFromTimestampUTC. If the $time is an empty string or is \"now\", it creates a new object of the current time. If PHP allows constructor overloading, we may have the following constructors: class Carbon { /** * Carbon constructor. */ function Carbon() { // construct with no params } /** * Carbon constructor. * @param Timestamp $timestamp */ function Carbon(Timestamp $timestamp) { // construct using a timestamp param } /** * Carbon constructor. * @param DatetimeInterface $datetime */ function Carbon(DatetimeInterface $datetime) { // construct from a DateTime } /** * Carbon constructor. * @param DateTimeInterface $dateTime * @param DateTimeZone $timeZone */ function Carbon(DateTimeInterface $dateTime, DateTimeZone $timeZone) { // construct from a datetime &amp; timezone } // Other constructors todo... } On instantiation, the debugger/interpreter will choose the proper constructor to use based on the parameter types, count, and order. Even If PHP was allowing constructor overloading, I’d go for another technique that should be a part of every programmer’s toolkit as Joshua Bloch mentioned in his book “Effective Java”. A class can provide a public static factory method, which is simply a static method that returns an instance of the class. Let me show you another example from the Carbon Library: $now = Carbon::now(); $tomorrow = Carbon::tomorrow(); $y2k = Carbon::create(2000, 1, 1, 0, 0); // year, month, day, hour, minute $fromDate = Carbon::createFromDate($year, $month, $day, $tz); $time = Carbon::createFromTimestamp(time()); $timeFromFormat = Carbon::createFromFormat('Y-m-d H', '1990-09-07 22'); Being a wrapper over the PHP Datetime, Carbon has a long list of static factory methods indeed! Another Good example is the Request class from Symfony, which has a long list of constructor params public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null){ // } They provided a static factory method to instantiate this class from globals: You can check a fresh project of Symfony-5 to find the following line in public/index.php $request = Request::createFromGlobals(); After this quite long introduction, let’s get into the topic. Here are three advantages to consider using static factory methods instead of constructors. They have names Java developers can overload their constructors, but in PHP we have to add some logic inside our constructors to do the same. Currently, PHP has type hints, so we can get rid of type checks, and the constructor logic as well and provide clean, logic-free constructors besides descriptive easy to remember static factory methods. Consider the following example: class Conversation { /** * Conversation constructor. * @param ConversationType $type * @param UserCollection $members */ public function __construct(ConversationType $type, UserCollection $members) { $this-&gt;type = $type; $this-&gt;members = $members; } /** * creates a one-to-one conversation * @param UserCollection $members * @return static */ public static function oneToOne(UserCollection $members): self { return new self(ConversationType::oneToOne(), $members); } /** * creates a group conversation * @param UserCollection $members * @return static */ public static function group(UserCollection $members): self { return new self(ConversationType::group(), $members); } } For more explanation, In a chat application, we have two types of conversations, a user can start a one-to-one conversation or a group conversation. The Conversation constructor accepts a ConversationType and UserCollection to instantiate a new conversation object. To make it easier for the client, we provided two static factory methods oneToOne and group. We can solve the same problem through polymorphism. Polymorphism may be a good idea for a Conversation instantiation, but it’s not so good for a Value object class, the ConversationType for instance is a good example for this. They can cache Unlike constructors, static factory methods are not required to create a new object each time they are invoked. Consider the Value object class ConversationType in the previous chat app example. Our chat application allows the user to list all his chat history, suppose the user has 10 conversations in his history, half of them are one-to-one conversations. In this case, if we used the ordinary constructors, we will end with five identical objects of type ConversationType for the five one-to-one conversations and another five identical objects for the group conversations. I agree they are lightweight objects, but in other scenarios and applications, we may overload our limited Memory! Back to our example, we only need two different objects of ConversationType at most! final class ConversationType { public const ONE_TO_ONE = 'one_to_one'; public const GROUP = 'group'; private static array $cache = []; private string $type; private function __construct(string $type) { $this-&gt;type = $type; } public static function oneToOne(): self { $isCached = isset(self::$cache[self::ONE_TO_ONE]); if (!$isCached) { self::cacheOneToOne(); } return self::$cache[self::ONE_TO_ONE]; } private static function cacheOneToOne(): void { self::$cache[self::ONE_TO_ONE] = new self(self::ONE_TO_ONE); } } The ability of static factory methods to return the same object from repeated invocation",
+      "tags": ["php","design-patterns","static-factory","object-creation","oop"],
+      "categories": ["php"],
+      "date": "2021-05-16T06:05:51+00:00",
+      "type": "post"
+    },{
+      "title": "Hello World!",
+      "url": "/blog/generic/hello-world.html/",
+      "content": "Hello world!",
+      "tags": ["announcement","personal","blogging","introduction"],
+      "categories": ["generic"],
+      "date": "2021-05-15T17:18:23+00:00",
+      "type": "post"
+    },{
+      "title": "Error 404 :'(",
+      "url": "/404/",
+      "content": "Go back to the homepage or blog.",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "About",
+      "url": "/about/",
+      "content": "I’m Mohamad Eldhemy, but most people call me Dhemy. I’m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights. My work spans the full customer data lifecycle, from capturing clean, structured inputs to designing models that reflect real-world relationships and behavior. I’ve spent more than a decade building software systems, with a backend-heavy focus and strong interest in architecture, maintainability, and pragmatic delivery. I enjoy working where engineering meets decision-making: improving data quality, shaping reliable pipelines, and helping teams use data with confidence. This blog is where I share what I’m learning and building, from software design, testing, and backend development to customer data strategy and occasional personal notes. My goal is simple: publish useful ideas you can apply in real projects. When I’m away from code, you’ll usually find me reading, playing chess, or unwinding with a game on PS4. If you’d like to connect, feel free to reach out via email. Cheers, Dhemy - 8th March 2026",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "Blog",
+      "url": "/blog/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "announcement",
+      "url": "/tag/announcement/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "personal",
+      "url": "/tag/personal/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "blogging",
+      "url": "/tag/blogging/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "introduction",
+      "url": "/tag/introduction/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "php",
+      "url": "/tag/php/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "design-patterns",
+      "url": "/tag/design-patterns/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "static-factory",
+      "url": "/tag/static-factory/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "object-creation",
+      "url": "/tag/object-creation/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "oop",
+      "url": "/tag/oop/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "builder-pattern",
+      "url": "/tag/builder-pattern/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "domain-modeling",
+      "url": "/tag/domain-modeling/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "testing",
+      "url": "/tag/testing/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "elasticsearch",
+      "url": "/tag/elasticsearch/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "integration-testing",
+      "url": "/tag/integration-testing/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "unit-testing",
+      "url": "/tag/unit-testing/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "singleton",
+      "url": "/tag/singleton/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "laravel",
+      "url": "/tag/laravel/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "software-architecture",
+      "url": "/tag/software-architecture/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "code-coverage",
+      "url": "/tag/code-coverage/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "technical-debt",
+      "url": "/tag/technical-debt/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "software-quality",
+      "url": "/tag/software-quality/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "mathematics",
+      "url": "/tag/mathematics/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dsa",
+      "url": "/tag/dsa/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "formulas",
+      "url": "/tag/formulas/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "problem-solving",
+      "url": "/tag/problem-solving/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "technical-interviews",
+      "url": "/tag/technical-interviews/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "tdd",
+      "url": "/tag/tdd/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "mocks",
+      "url": "/tag/mocks/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "test-structure",
+      "url": "/tag/test-structure/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "naming",
+      "url": "/tag/naming/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "best-practices",
+      "url": "/tag/best-practices/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "numerical-methods",
+      "url": "/tag/numerical-methods/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "newtons-method",
+      "url": "/tag/newtons-method/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "algorithms",
+      "url": "/tag/algorithms/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "developer-experience",
+      "url": "/tag/developer-experience/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "productivity",
+      "url": "/tag/productivity/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "developer-tools",
+      "url": "/tag/developer-tools/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dark-theme",
+      "url": "/tag/dark-theme/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "work-habits",
+      "url": "/tag/work-habits/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "composer",
+      "url": "/tag/composer/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dependency-management",
+      "url": "/tag/dependency-management/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "security",
+      "url": "/tag/security/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "language-learning",
+      "url": "/tag/language-learning/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "personal-growth",
+      "url": "/tag/personal-growth/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "germany",
+      "url": "/tag/germany/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "habits",
+      "url": "/tag/habits/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "expat-life",
+      "url": "/tag/expat-life/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "nodejs",
+      "url": "/tag/nodejs/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "javascript",
+      "url": "/tag/javascript/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "modules",
+      "url": "/tag/modules/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "commonjs",
+      "url": "/tag/commonjs/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "esm",
+      "url": "/tag/esm/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dynamic-import",
+      "url": "/tag/dynamic-import/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "teamwork",
+      "url": "/tag/teamwork/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "software-engineering",
+      "url": "/tag/software-engineering/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "feedback-culture",
+      "url": "/tag/feedback-culture/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dunning-kruger",
+      "url": "/tag/dunning-kruger/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "leadership",
+      "url": "/tag/leadership/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "symfony",
+      "url": "/tag/symfony/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "authorization",
+      "url": "/tag/authorization/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "voters",
+      "url": "/tag/voters/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "code-reuse",
+      "url": "/tag/code-reuse/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "service-container",
+      "url": "/tag/service-container/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dependency-injection",
+      "url": "/tag/dependency-injection/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "code-quality",
+      "url": "/tag/code-quality/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "language-features",
+      "url": "/tag/language-features/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "static-analysis",
+      "url": "/tag/static-analysis/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "typescript",
+      "url": "/tag/typescript/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "refactoring",
+      "url": "/tag/refactoring/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "http-clients",
+      "url": "/tag/http-clients/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "career",
+      "url": "/tag/career/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "workplace-culture",
+      "url": "/tag/workplace-culture/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "reflection",
+      "url": "/tag/reflection/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "delivery",
+      "url": "/tag/delivery/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "project-management",
+      "url": "/tag/project-management/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "git",
+      "url": "/tag/git/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "developer-workflow",
+      "url": "/tag/developer-workflow/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "mongodb",
+      "url": "/tag/mongodb/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "recommender-systems",
+      "url": "/tag/recommender-systems/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "koalats",
+      "url": "/tag/koalats/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "backend",
+      "url": "/tag/backend/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "incremental-delivery",
+      "url": "/tag/incremental-delivery/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "lean",
+      "url": "/tag/lean/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "continuous-improvement",
+      "url": "/tag/continuous-improvement/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "customer-data",
+      "url": "/tag/customer-data/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "personalization",
+      "url": "/tag/personalization/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "marketing-history",
+      "url": "/tag/marketing-history/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "crm",
+      "url": "/tag/crm/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "data-strategy",
+      "url": "/tag/data-strategy/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "fp",
+      "url": "/tag/fp/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "currying",
+      "url": "/tag/currying/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "generic",
+      "url": "/category/generic/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "php",
+      "url": "/category/php/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "testing",
+      "url": "/category/testing/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dsa",
+      "url": "/category/dsa/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "germany",
+      "url": "/category/germany/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "nodejs",
+      "url": "/category/nodejs/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "dev-log",
+      "url": "/category/dev-log/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "customer data",
+      "url": "/category/customer-data/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "fp",
+      "url": "/category/fp/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "Blog",
+      "url": "/blog/page2/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "Blog",
+      "url": "/blog/page3/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "Blog",
+      "url": "/blog/page4/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    },{
+      "title": "Blog",
+      "url": "/blog/page5/",
+      "content": "",
+      "tags": null,
+      "categories": null,
+      "date": "",
+      "type": "page"
+    }]
