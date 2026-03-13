@@ -39,6 +39,7 @@ exclude:
 plugins:
   - jekyll-feed
   - jekyll-paginate
+  - jekyll-archives
   - jekyll-sitemap
 sass:
   quiet_deps: true # Suppress deprecation warnings from Sass
@@ -142,6 +143,18 @@ footer:
       url: "https://twitter.com/imdhemy"
     - icon: "logo-linkedin"
       url: "https://www.linkedin.com/in/imdhemy/"
+
+# -------------------------------------------------------------------------------------------------
+# SEO
+# -------------------------------------------------------------------------------------------------
+theme_seo:
+  default_image: "/assets/theme/social-card.svg"
+  default_image_alt: "Imdhemy personal site social preview"
+  twitter_site: "@imdhemy"
+  same_as:
+    - "https://github.com/imdhemy"
+    - "https://twitter.com/imdhemy"
+    - "https://www.linkedin.com/in/imdhemy/"
 
 # -------------------------------------------------------------------------------------------------
 # Comments & Reactions
