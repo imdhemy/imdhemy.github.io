@@ -1,6 +1,135 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-03-13T17:48:51+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-03-16T15:49:03+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
 I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Currying in JavaScript</title><link href="https://imdhemy.com/blog/fp/currying-in-javascript.html/" rel="alternate" type="text/html" title="Currying in JavaScript" /><published>2026-03-12T23:07:01+00:00</published><updated>2026-03-12T23:07:01+00:00</updated><id>https://imdhemy.com/blog/fp/currying-in-javascript</id><content type="html" xml:base="https://imdhemy.com/blog/fp/currying-in-javascript.html/"><![CDATA[<p>In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">A Simple Currying Refactor: Remove Pass-Through Arguments</title><link href="https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination.html/" rel="alternate" type="text/html" title="A Simple Currying Refactor: Remove Pass-Through Arguments" /><published>2026-03-16T12:32:33+00:00</published><updated>2026-03-16T12:32:33+00:00</updated><id>https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination</id><content type="html" xml:base="https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination.html/"><![CDATA[<p>Like I said at the beginning of this series, I wanted refactoring existing code to use currying and partial
+application to feel natural and intuitive. This heuristic is a big part of that.</p>
+
+<p>This post covers one simple heuristic for spotting those cases. By the end, you should be able to look at a small
+wrapper function and tell whether it can be replaced with partial application.</p>
+
+<h2 id="what-it-is">What it is</h2>
+
+<p>If a parameter is only passed as it is to another function, the wrapper is probably not doing anything useful. In many
+cases, you can remove that extra parameter and keep the partially applied function instead.</p>
+
+<p>Let’s see this in action with a simple example:</p>
+
+<p>Before:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">split</span> <span class="o">=</span> <span class="nx">separator</span> <span class="o">=&gt;</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="nx">separator</span><span class="p">);</span>
+<span class="kd">const</span> <span class="nx">words</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">)(</span><span class="nx">str</span><span class="p">);</span>
+
+<span class="c1">// Usage:</span>
+<span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="nf">words</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello world</span><span class="dl">"</span><span class="p">));</span> <span class="c1">// ["hello", "world"]</span>
+</code></pre></div></div>
+
+<p>Here, <code class="language-plaintext highlighter-rouge">words</code> takes <code class="language-plaintext highlighter-rouge">str</code> and passes it directly to <code class="language-plaintext highlighter-rouge">split(" ")</code>. It does not change <code class="language-plaintext highlighter-rouge">str</code>, and it does not add any
+new behavior.</p>
+
+<p>So the wrapper is not really needed. We can keep the partially applied function itself:</p>
+
+<p>After:</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">const split = separator =&gt; str =&gt; str.split(separator);
+</span><span class="gd">- const words = str =&gt; split(" ")(str);
+</span><span class="gi">+ const words = split(" ");
+</span><span class="err">
+</span>// Usage remains the same:
+<span class="p">console.log(words("hello world")); // ["hello", "world"]
+</span></code></pre></div></div>
+
+<p>The nice part is that usage stays the same. We still call <code class="language-plaintext highlighter-rouge">words("hello world")</code>, but now the implementation is
+smaller and more direct.</p>
+
+<h2 id="why-it-matters">Why it matters</h2>
+
+<p>This matters because this kind of wrapper shows up a lot, and after some time it just adds extra code for no real
+benefit. Once you start noticing it, many refactors become easier and cleaner.</p>
+
+<h2 id="the-mechanics">The mechanics</h2>
+
+<p>Here is the idea:</p>
+
+<ol>
+  <li>Look for a parameter that is only passed unchanged. In the example above, that is <code class="language-plaintext highlighter-rouge">str</code>.</li>
+  <li>Check if the wrapper is doing anything else besides passing that value.</li>
+  <li>If not, remove the wrapper parameter and keep the partially applied function.</li>
+</ol>
+
+<h2 id="safety-checklist">Safety checklist</h2>
+
+<ul>
+  <li>The argument is passed through unchanged.</li>
+  <li>The wrapper does not transform the argument in any way or use it for anything else.</li>
+  <li>The function you call supports currying in that argument order.</li>
+  <li>The result is easier to read, not harder.</li>
+</ul>
+
+<h2 id="exercises">Exercises</h2>
+
+<div class="tip">
+To get the best out of this series, I recommend spending 15-25 minutes solving the exercises on your own, then checking
+the answers.
+</div>
+
+<h3 id="1-remove-pass-through-from-words">1. Remove pass-through from words</h3>
+
+<p>Refactor:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">split</span> <span class="o">=</span> <span class="nx">separator</span> <span class="o">=&gt;</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="nx">separator</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">words</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">)(</span><span class="nx">str</span><span class="p">);</span>
+</code></pre></div></div>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">split</span> <span class="o">=</span> <span class="nx">separator</span> <span class="o">=&gt;</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nx">str</span><span class="p">.</span><span class="nf">split</span><span class="p">(</span><span class="nx">separator</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">words</span> <span class="o">=</span> <span class="nf">split</span><span class="p">(</span><span class="dl">"</span><span class="s2"> </span><span class="dl">"</span><span class="p">);</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="2-remove-pass-through-from-filterqs">2. Remove pass-through from filterQs</h3>
+
+<p>Refactor:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">predicate</span> <span class="o">=&gt;</span> <span class="nx">xs</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">predicate</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">filterQs</span> <span class="o">=</span> <span class="nx">xs</span> <span class="o">=&gt;</span> <span class="nf">filter</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">))(</span><span class="nx">xs</span><span class="p">);</span>
+</code></pre></div></div>
+
+<details>
+  <summary>Show answer</summary>
+
+  <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">predicate</span> <span class="o">=&gt;</span> <span class="nx">xs</span> <span class="o">=&gt;</span> <span class="nx">xs</span><span class="p">.</span><span class="nf">filter</span><span class="p">(</span><span class="nx">predicate</span><span class="p">);</span>
+
+<span class="kd">const</span> <span class="nx">filterQs</span> <span class="o">=</span> <span class="nf">filter</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="sr">/q/i</span><span class="p">.</span><span class="nf">test</span><span class="p">(</span><span class="nx">x</span><span class="p">));</span>
+</code></pre></div>  </div>
+
+</details>
+
+<h3 id="3-decide-whether-to-refactor-this-wrapper">3. Decide whether to refactor this wrapper</h3>
+
+<p>Decide whether to refactor and explain why:</p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">clean</span> <span class="o">=</span> <span class="nx">str</span> <span class="o">=&gt;</span> <span class="nf">trim</span><span class="p">(</span><span class="nx">str</span><span class="p">).</span><span class="nf">toLowerCase</span><span class="p">();</span>
+</code></pre></div></div>
+
+<details>
+  <summary>Show answer</summary>
+
+  <p>Do not refactor with this heuristic.
+<code class="language-plaintext highlighter-rouge">str</code> is not a pass-through argument because it is used in <code class="language-plaintext highlighter-rouge">trim(str)</code> and then transformed again by <code class="language-plaintext highlighter-rouge">.toLowerCase()</code>.</p>
+
+</details>
+
+<h2 id="checkpoint">Checkpoint</h2>
+
+<div class="info">
+  <p>You are ready to move on when you can look at a small wrapper and quickly tell if it is doing real work or just passing
+data through.</p>
+</div>]]></content><author><name>Dhemy</name></author><category term="fp" /><category term="fp" /><category term="javascript" /><category term="currying" /><summary type="html"><![CDATA[Like I said at the beginning of this series, I wanted refactoring existing code to use currying and partial application to feel natural and intuitive. This heuristic is a big part of that.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/remove-pass-through-argument.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/remove-pass-through-argument.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Currying in JavaScript</title><link href="https://imdhemy.com/blog/fp/currying-in-javascript.html/" rel="alternate" type="text/html" title="Currying in JavaScript" /><published>2026-03-12T23:07:01+00:00</published><updated>2026-03-12T23:07:01+00:00</updated><id>https://imdhemy.com/blog/fp/currying-in-javascript</id><content type="html" xml:base="https://imdhemy.com/blog/fp/currying-in-javascript.html/"><![CDATA[<p>In this post, I want to keep things simple: what currying is, how it relates to partial application, and why it can be
 useful in real JavaScript code.</p>
 
 <h2 id="what-is-currying">What is currying?</h2>
@@ -917,198 +1046,4 @@ standardize the <code class="language-plaintext highlighter-rouge">createClient<
 third API client will be refactored in two steps: first to address authentication, then to standardize the signature.</p>
 
 <p>After all <code class="language-plaintext highlighter-rouge">createClient</code> functions are standardized, I’ll create the Factory function to generate clients based on
-configuration. I still need to determine a clean way to handle authentication. Do you have any suggestions?</p>]]></content><author><name>Dhemy</name></author><category term="dev-log" /><category term="typescript" /><category term="refactoring" /><category term="design-patterns" /><category term="http-clients" /><category term="software-architecture" /><summary type="html"><![CDATA[I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and configurations.]]></summary></entry><entry><title type="html">Better alternatives to empty() in PHP</title><link href="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/" rel="alternate" type="text/html" title="Better alternatives to empty() in PHP" /><published>2024-07-19T00:00:00+00:00</published><updated>2024-07-19T00:00:00+00:00</updated><id>https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php</id><content type="html" xml:base="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html/"><![CDATA[<p>I’m working on a weekend project: a <a href="https://github.com/symblaze/mare-scan">static code analysis tool</a> for PHP, just
-because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the <code class="language-plaintext highlighter-rouge">empty()</code>
-function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a
-bad idea. In this blog post, I’ll share why we should stop using <code class="language-plaintext highlighter-rouge">empty()</code> and look at better alternatives.</p>
-
-<h2 id="what-does-empty-do">What does <code class="language-plaintext highlighter-rouge">empty()</code> do?</h2>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="n">mixed</span> <span class="nv">$var</span><span class="p">)</span><span class="o">:</span> <span class="n">bool</span>
-</code></pre></div></div>
-
-<p>By checking the <a href="https://www.php.net/manual/en/function.empty.php">PHP manual</a>, you will find:</p>
-
-<blockquote>
-  <p>Determine whether a variable is considered to be empty. A variable is considered empty if it does not exist or if its
-value equals false.</p>
-</blockquote>
-
-<p>Let’s have a look at the following examples:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span> <span class="c1">// true</span>
-<span class="k">empty</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span> <span class="c1">// true</span>
-<span class="k">empty</span><span class="p">([]);</span> <span class="c1">// true</span>
-</code></pre></div></div>
-
-<p>I used to think <code class="language-plaintext highlighter-rouge">empty()</code> always behaves like in these examples, but that’s not the reality!</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="s1">'0'</span><span class="p">);</span> <span class="c1">// true (huh?) // Technically, '0' is not an empty string.</span>
-<span class="k">empty</span><span class="p">(</span><span class="k">new</span> <span class="nc">ArrayObject</span><span class="p">());</span> <span class="c1">// false (Huh! It's already empty!)</span>
-</code></pre></div></div>
-
-<p>Surprise! <code class="language-plaintext highlighter-rouge">empty()</code> is doing a loose comparison with <code class="language-plaintext highlighter-rouge">false</code></p>
-
-<table>
-  <thead>
-    <tr>
-      <th><code class="language-plaintext highlighter-rouge">$value</code></th>
-      <th><code class="language-plaintext highlighter-rouge">== false</code></th>
-      <th><code class="language-plaintext highlighter-rouge">empty($value)</code></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">null</code></td>
-      <td>true</td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">''</code></td>
-      <td>true</td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">[]</code></td>
-      <td>true</td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td><strong>Observe the following</strong></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">'0'</code></td>
-      <td>true</td>
-      <td>true</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">new ArrayObject()</code></td>
-      <td>false</td>
-      <td>false</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Not only that! But <code class="language-plaintext highlighter-rouge">empty()</code> also doesn’t throw a warning if the variable does not exist. That means <code class="language-plaintext highlighter-rouge">empty()</code> is
-equivalent to <code class="language-plaintext highlighter-rouge">!isset($value) || $value == false</code>.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">is_empty</span><span class="p">(</span><span class="nv">$value</span><span class="p">):</span> <span class="kt">bool</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$value</span> <span class="o">==</span> <span class="kc">false</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>In case you mistyped the variable name, your code will not complain about it.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$type</span> <span class="o">=</span> <span class="s1">'car'</span><span class="p">;</span>
-<span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$typo</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// Laterally THIS IS A TYPO</span>
-    <span class="k">echo</span> <span class="s1">'This should not be printed'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>The above code will print the message without any warnings or errors, even though the developer intended to check
-the <code class="language-plaintext highlighter-rouge">type</code> variable length.</p>
-
-<h2 id="better-alternatives-to-empty">Better alternatives to <code class="language-plaintext highlighter-rouge">empty()</code></h2>
-
-<p>It depends on the context and the data type you are working with. Here are some alternatives:</p>
-
-<h3 id="strings">Strings</h3>
-
-<p>You can directly compare the string with an empty string.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="s1">''</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Do something</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<h3 id="arrays">Arrays</h3>
-
-<p>You can compare with an empty array.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">([]</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Do something</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Or you can use the <code class="language-plaintext highlighter-rouge">count()</code> function.</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
-    <span class="c1">// Do something</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Comparing with an empty array is more readable than using the <code class="language-plaintext highlighter-rouge">count()</code> function. I wanted to be sure about the
-performance difference between them, so I wrote a simple benchmark to compare how long it takes to execute each one on
-an empty array and an array with <code class="language-plaintext highlighter-rouge">1000000</code> elements, and here are the results:</p>
-
-<table>
-  <thead>
-    <tr>
-      <th>Method</th>
-      <th>Empty Array Time (seconds)</th>
-      <th>Large Array Time (seconds)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">checkWithCount</code></td>
-      <td>0.21758413314819</td>
-      <td>0.2175669670105</td>
-    </tr>
-    <tr>
-      <td><code class="language-plaintext highlighter-rouge">checkWithDirectComparison</code></td>
-      <td>0.21403312683105</td>
-      <td>0.21817898750305</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>Based on these results, there is no significant performance difference between the two methods for both empty and large
-arrays. However, from a code readability and directness perspective, using <code class="language-plaintext highlighter-rouge">if ([] === $value)</code> may still be preferred.</p>
-
-<h2 id="more-thoughts">More thoughts</h2>
-
-<p>Because <code class="language-plaintext highlighter-rouge">empty()</code> accepts any variable type, you may come across usages with Objects, integers and floats. I can’t
-picture a developer will need to check if an integer value is empty, maybe they want to check if it’s zero. You got the
-point! For that reason, I didn’t provide alternatives for these types.</p>
-
-<p>The <code class="language-plaintext highlighter-rouge">empty()</code> is not working as expected with magic classes. I also omitted adding alternatives for them because we
-should avoid using magic methods in the first place, but if you are interested, you can check the following:</p>
-
-<p>Suppose we have a regular class:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">RegularClass</span> <span class="p">{</span>
-    <span class="k">public</span> <span class="nv">$property</span> <span class="o">=</span> <span class="s1">'value'</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>And another magic class with dynamic properties:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MagicClass</span> <span class="p">{</span>
-   <span class="k">private</span> <span class="nv">$properties</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'property'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">];</span>
-   
-    <span class="k">public</span> <span class="k">function</span> <span class="n">__get</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
-         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">properties</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">??</span> <span class="kc">null</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div></div>
-
-<p>Now let’s create an instance of each class and check if the property is empty:</p>
-
-<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$regular</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RegularClass</span><span class="p">();</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$regular</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">);</span> <span class="c1">// string(5) "value"</span>
-
-<span class="nv">$magic</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MagicClass</span><span class="p">();</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$magic</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">);</span> <span class="c1">// string(5) "value"</span>
-
-<span class="c1">// Now let's check if the property is empty</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$regular</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">));</span> <span class="c1">// false</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$magic</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">));</span> <span class="c1">// true (Huh!)</span>
-</code></pre></div></div>
-
-<h2 id="conclusion">Conclusion</h2>
-
-<p><code class="language-plaintext highlighter-rouge">empty()</code> is not as straightforward as I thought. It’s better to avoid using it and use the alternatives I mentioned
-above. It’s always better to be explicit in your code and avoid any surprises.</p>]]></content><author><name>Dhemy</name></author><category term="php" /><category term="php" /><category term="code-quality" /><category term="language-features" /><category term="static-analysis" /><category term="best-practices" /><summary type="html"><![CDATA[I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the empty() function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a bad idea. In this blog post, I’ll share why we should stop using empty() and look at better alternatives.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/desert.jpg" /><media:content medium="image" url="https://imdhemy.com/assets/img/desert.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+configuration. I still need to determine a clean way to handle authentication. Do you have any suggestions?</p>]]></content><author><name>Dhemy</name></author><category term="dev-log" /><category term="typescript" /><category term="refactoring" /><category term="design-patterns" /><category term="http-clients" /><category term="software-architecture" /><summary type="html"><![CDATA[I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and configurations.]]></summary></entry></feed>
