@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>Better alternatives to empty() in PHP | Imdhemy</title>
+<meta name="description" content="I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and qui...">
+<meta name="author" content="Dhemy">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html">
+
+
+
+<meta property="og:title" content="Better alternatives to empty() in PHP | Imdhemy">
+<meta property="og:description" content="I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and qui...">
+<meta property="og:url" content="https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html">
+<meta property="og:site_name" content="Imdhemy">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+
+<meta property="og:image" content="https://imdhemy.com/assets/img/desert.jpg">
+
+<meta property="og:image:secure_url" content="https://imdhemy.com/assets/img/desert.jpg">
+
+
+<meta property="og:image:type" content="image/jpeg">
+
+
+<meta property="og:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+
+
+<meta property="article:published_time" content="2024-07-19T00:00:00+00:00">
+
+
+<meta property="article:modified_time" content="2024-07-19T00:00:00+00:00">
+
+
+<meta property="article:author" content="Dhemy">
+
+
+
+<meta property="article:tag" content="php">
+
+<meta property="article:tag" content="code-quality">
+
+<meta property="article:tag" content="language-features">
+
+<meta property="article:tag" content="static-analysis">
+
+<meta property="article:tag" content="best-practices">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Better alternatives to empty() in PHP | Imdhemy">
+<meta name="twitter:description" content="I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and qui...">
+
+<meta name="twitter:site" content="@imdhemy">
+
+
+<meta name="twitter:image" content="https://imdhemy.com/assets/img/desert.jpg">
+
+<meta name="twitter:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+    <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Better alternatives to empty() in PHP",
+  "description": "I’m working on a weekend project: a static code analysis tool for PHP, just because, well, why not? So, I’ve been learning more about PHP’s internals and qui...",
+  "url": "https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html"
+  },
+  "image": ["https://imdhemy.com/assets/img/desert.jpg"],
+  "datePublished": "2024-07-19T00:00:00+00:00",
+  "dateModified": "2024-07-19T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Dhemy"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Dhemy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imdhemy.com/assets/theme/favicon.png"
+    }
+  }
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://imdhemy.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://imdhemy.com/blog"},{"@type":"ListItem","position":3,"name":"Better alternatives to empty() in PHP","item":"https://imdhemy.com/blog/php/better-alternatives-to-empty-in-php.html"}]
+}
+</script>
+
+
+
+</head>
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
+            
+            
+            
+            
+            <!-- begin logo -->
+            <div class="site-header__brand">
+                <a href="/" class="site-logo" aria-label="Imdhemy home">
+                    Imdhemy
+                </a>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="site-header__actions">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/"
+                               class="nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/blog"
+                               class="nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/about"
+                               class="nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--desktop"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-desktop">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-desktop"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-desktop"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-desktop"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-desktop"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-desktop" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                
+
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button"
+                            class="site-header__toggle"
+                            data-target="#mobile-nav"
+                            data-open-label="Open navigation menu"
+                            data-close-label="Close navigation menu"
+                            aria-controls="mobile-nav"
+                            aria-expanded="false"
+                            aria-label="Open navigation menu">
+                        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+                        <span class="sr-only">Open navigation menu</span>
+                    </button>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation"
+                 hidden>
+                <div class="site-mobile-nav__inner">
+                    
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--mobile"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-mobile">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-mobile"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-mobile"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-mobile"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-mobile"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-mobile" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                    
+                    <ul class="site-mobile-nav__list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/"
+                               class="site-mobile-nav__link nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/blog"
+                               class="site-mobile-nav__link nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/about"
+                               class="site-mobile-nav__link nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main id="main-content" tabindex="-1">
+        
+
+<div class="reading-progress" aria-hidden="true">
+    <span class="reading-progress__bar" data-reading-progress></span>
+</div>
+
+
+<article class="post-page">
+    
+
+<div class="post-header">
+    <a class="post-back-link" href="/blog" aria-label="Back to all posts">&larr; Back to all posts</a>
+    <h1 class="post-title">Better alternatives to empty() in PHP</h1>
+    
+<p class="post-header__meta post-meta">
+    <time datetime="2024-07-19T00:00:00+00:00">Jul 19, 2024</time>
+    <span class="post-meta__separator" aria-hidden="true">&middot;</span>
+    <span class="post-meta__reading-time">
+        <ion-icon class="post-meta__icon" name="time-outline" aria-hidden="true"></ion-icon>
+        <span>5 min read</span>
+    </span>
+</p>
+
+    <div class="post-header__tags">
+        
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/code-quality"
+       class="tag-pill">
+        #code-quality
+    </a>
+    
+    
+    <a href="/tag/language-features"
+       class="tag-pill">
+        #language-features
+    </a>
+    
+    
+    <a href="/tag/static-analysis"
+       class="tag-pill">
+        #static-analysis
+    </a>
+    
+    
+    <a href="/tag/best-practices"
+       class="tag-pill">
+        #best-practices
+    </a>
+    
+</div>
+
+
+    </div>
+    
+
+
+    
+    <div class="post-image-wrap">
+        <img src="/assets/img/desert.jpg"
+             alt="Better alternatives to empty() in PHP"
+             class="post-image"/>
+        <!-- Image source -->
+        
+        <div class="post-image-source">
+            Image source: https://unsplash.com/photos/sand-landscape-R9OS29xJb-8
+        </div>
+        
+    </div>
+    
+
+</div>
+
+
+    <div class="content-shell content read-surface">
+    <p>I’m working on a weekend project: a <a href="https://github.com/symblaze/mare-scan">static code analysis tool</a> for PHP, just
+because, well, why not? So, I’ve been learning more about PHP’s internals and quirks. I used to use the <code class="language-plaintext highlighter-rouge">empty()</code>
+function to check if a variable was empty, especially strings and arrays. But recently, I learned why using it can be a
+bad idea. In this blog post, I’ll share why we should stop using <code class="language-plaintext highlighter-rouge">empty()</code> and look at better alternatives.</p>
+
+<h2 id="what-does-empty-do">What does <code class="language-plaintext highlighter-rouge">empty()</code> do?</h2>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="n">mixed</span> <span class="nv">$var</span><span class="p">)</span><span class="o">:</span> <span class="n">bool</span>
+</code></pre></div></div>
+
+<p>By checking the <a href="https://www.php.net/manual/en/function.empty.php">PHP manual</a>, you will find:</p>
+
+<blockquote>
+  <p>Determine whether a variable is considered to be empty. A variable is considered empty if it does not exist or if its
+value equals false.</p>
+</blockquote>
+
+<p>Let’s have a look at the following examples:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="k">empty</span><span class="p">(</span><span class="s1">''</span><span class="p">);</span> <span class="c1">// true</span>
+<span class="k">empty</span><span class="p">([]);</span> <span class="c1">// true</span>
+</code></pre></div></div>
+
+<p>I used to think <code class="language-plaintext highlighter-rouge">empty()</code> always behaves like in these examples, but that’s not the reality!</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">empty</span><span class="p">(</span><span class="s1">'0'</span><span class="p">);</span> <span class="c1">// true (huh?) // Technically, '0' is not an empty string.</span>
+<span class="k">empty</span><span class="p">(</span><span class="k">new</span> <span class="nc">ArrayObject</span><span class="p">());</span> <span class="c1">// false (Huh! It's already empty!)</span>
+</code></pre></div></div>
+
+<p>Surprise! <code class="language-plaintext highlighter-rouge">empty()</code> is doing a loose comparison with <code class="language-plaintext highlighter-rouge">false</code></p>
+
+<table>
+  <thead>
+    <tr>
+      <th><code class="language-plaintext highlighter-rouge">$value</code></th>
+      <th><code class="language-plaintext highlighter-rouge">== false</code></th>
+      <th><code class="language-plaintext highlighter-rouge">empty($value)</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">null</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">''</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">[]</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><strong>Observe the following</strong></td>
+      <td> </td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">'0'</code></td>
+      <td>true</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">new ArrayObject()</code></td>
+      <td>false</td>
+      <td>false</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Not only that! But <code class="language-plaintext highlighter-rouge">empty()</code> also doesn’t throw a warning if the variable does not exist. That means <code class="language-plaintext highlighter-rouge">empty()</code> is
+equivalent to <code class="language-plaintext highlighter-rouge">!isset($value) || $value == false</code>.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">is_empty</span><span class="p">(</span><span class="nv">$value</span><span class="p">):</span> <span class="kt">bool</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">!</span><span class="k">isset</span><span class="p">(</span><span class="nv">$value</span><span class="p">)</span> <span class="o">||</span> <span class="nv">$value</span> <span class="o">==</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>In case you mistyped the variable name, your code will not complain about it.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$type</span> <span class="o">=</span> <span class="s1">'car'</span><span class="p">;</span>
+<span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$typo</span><span class="p">))</span> <span class="p">{</span> <span class="c1">// Laterally THIS IS A TYPO</span>
+    <span class="k">echo</span> <span class="s1">'This should not be printed'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The above code will print the message without any warnings or errors, even though the developer intended to check
+the <code class="language-plaintext highlighter-rouge">type</code> variable length.</p>
+
+<h2 id="better-alternatives-to-empty">Better alternatives to <code class="language-plaintext highlighter-rouge">empty()</code></h2>
+
+<p>It depends on the context and the data type you are working with. Here are some alternatives:</p>
+
+<h3 id="strings">Strings</h3>
+
+<p>You can directly compare the string with an empty string.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="s1">''</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h3 id="arrays">Arrays</h3>
+
+<p>You can compare with an empty array.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">([]</span> <span class="o">===</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Or you can use the <code class="language-plaintext highlighter-rouge">count()</code> function.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span><span class="p">(</span><span class="mi">0</span> <span class="o">===</span> <span class="nb">count</span><span class="p">(</span><span class="nv">$value</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Do something</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Comparing with an empty array is more readable than using the <code class="language-plaintext highlighter-rouge">count()</code> function. I wanted to be sure about the
+performance difference between them, so I wrote a simple benchmark to compare how long it takes to execute each one on
+an empty array and an array with <code class="language-plaintext highlighter-rouge">1000000</code> elements, and here are the results:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Empty Array Time (seconds)</th>
+      <th>Large Array Time (seconds)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">checkWithCount</code></td>
+      <td>0.21758413314819</td>
+      <td>0.2175669670105</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">checkWithDirectComparison</code></td>
+      <td>0.21403312683105</td>
+      <td>0.21817898750305</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Based on these results, there is no significant performance difference between the two methods for both empty and large
+arrays. However, from a code readability and directness perspective, using <code class="language-plaintext highlighter-rouge">if ([] === $value)</code> may still be preferred.</p>
+
+<h2 id="more-thoughts">More thoughts</h2>
+
+<p>Because <code class="language-plaintext highlighter-rouge">empty()</code> accepts any variable type, you may come across usages with Objects, integers and floats. I can’t
+picture a developer will need to check if an integer value is empty, maybe they want to check if it’s zero. You got the
+point! For that reason, I didn’t provide alternatives for these types.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">empty()</code> is not working as expected with magic classes. I also omitted adding alternatives for them because we
+should avoid using magic methods in the first place, but if you are interested, you can check the following:</p>
+
+<p>Suppose we have a regular class:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">RegularClass</span> <span class="p">{</span>
+    <span class="k">public</span> <span class="nv">$property</span> <span class="o">=</span> <span class="s1">'value'</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And another magic class with dynamic properties:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">MagicClass</span> <span class="p">{</span>
+   <span class="k">private</span> <span class="nv">$properties</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'property'</span> <span class="o">=&gt;</span> <span class="s1">'value'</span><span class="p">];</span>
+   
+    <span class="k">public</span> <span class="k">function</span> <span class="n">__get</span><span class="p">(</span><span class="nv">$name</span><span class="p">)</span> <span class="p">{</span>
+         <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">properties</span><span class="p">[</span><span class="nv">$name</span><span class="p">]</span> <span class="o">??</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now let’s create an instance of each class and check if the property is empty:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$regular</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">RegularClass</span><span class="p">();</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$regular</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">);</span> <span class="c1">// string(5) "value"</span>
+
+<span class="nv">$magic</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MagicClass</span><span class="p">();</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$magic</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">);</span> <span class="c1">// string(5) "value"</span>
+
+<span class="c1">// Now let's check if the property is empty</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$regular</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">));</span> <span class="c1">// false</span>
+<span class="nb">var_dump</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$magic</span><span class="o">-&gt;</span><span class="n">property</span><span class="p">));</span> <span class="c1">// true (Huh!)</span>
+</code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p><code class="language-plaintext highlighter-rouge">empty()</code> is not as straightforward as I thought. It’s better to avoid using it and use the alternatives I mentioned
+above. It’s always better to be explicit in your code and avoid any surprises.</p>
+
+</div>
+
+
+    
+
+
+
+
+
+
+<section class="comments-shell" id="comments-section" aria-label="Discussion">
+    <div class="comments-shell__inner comments-collapsible" data-comments-collapsible>
+        <button class="comments-collapsible__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="comments-panel"
+                data-comments-toggle>
+            <span class="comments-collapsible__copy">
+                <span class="comments-shell__heading" role="heading" aria-level="2">Discussion</span>
+                <span class="comments-collapsible__hint">Open to view reactions and comments</span>
+            </span>
+            <span class="comments-collapsible__icon-wrap" aria-hidden="true">
+                <ion-icon class="comments-collapsible__icon" name="chevron-down-outline"></ion-icon>
+            </span>
+        </button>
+        <div class="comments-collapsible__panel" id="comments-panel" data-comments-panel hidden>
+            <div class="comments-collapsible__embed"
+                 data-giscus-mount
+                 data-giscus-script-src="https://giscus.app/client.js"
+                 data-giscus-repo="imdhemy/imdhemy.github.io"
+                 data-giscus-repo-id="MDEwOlJlcG9zaXRvcnkzNjc1ODI3MjA="
+                 data-giscus-category="General"
+                 data-giscus-category-id="DIC_kwDOFejeAM4C3865"
+                 data-giscus-mapping="pathname"
+                 data-giscus-term=""
+                 data-giscus-strict="1"
+                 data-giscus-reactions-enabled="1"
+                 data-giscus-emit-metadata="0"
+                 data-giscus-input-position="bottom"
+                 data-giscus-theme="light"
+                 data-giscus-lang="en"
+                 data-giscus-loading="lazy"></div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    
+
+
+
+
+<section class="post-navigation-shell">
+    <div class="post-navigation-shell__inner post-navigation">
+        
+        <a class="post-navigation__item" href="/blog/php/singleton-design-pattern-in-laravel.html">
+            <span class="post-navigation__label">Previous article</span>
+            <span class="post-navigation__title">Singleton Design Pattern in Laravel</span>
+        </a>
+        
+        
+        <a class="post-navigation__item post-navigation__item--next" href="/blog/dev-log/http-client-factory-code-refactoring.html">
+            <span class="post-navigation__label">Next article</span>
+            <span class="post-navigation__title">HTTP Client Factory Code Refactoring</span>
+        </a>
+        
+    </div>
+</section>
+
+
+    
+
+
+
+
+<section class="related-posts-shell">
+    <div class="related-posts-shell__inner">
+        <h2 class="related-posts__heading">Keep reading</h2>
+        <div class="related-posts">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/singleton-design-pattern-in-laravel.html">
+                <span class="related-posts__title">Singleton Design Pattern in Laravel</span>
+                <span class="related-posts__meta">Apr 15, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html">
+                <span class="related-posts__title">How to avoid boilerplate code in Symfony Voters</span>
+                <span class="related-posts__meta">Apr 3, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/what-symfony-developers-should-know-before-using-voters.html">
+                <span class="related-posts__title">What Symfony developers should know before using Voters</span>
+                <span class="related-posts__meta">Apr 2, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+        </div>
+    </div>
+</section>
+
+</article>
+
+    </main>
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>

@@ -1,0 +1,1078 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>What Symfony developers should know before using Voters | Imdhemy</title>
+<meta name="description" content="Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...">
+<meta name="author" content="Dhemy">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html">
+
+
+
+<meta property="og:title" content="What Symfony developers should know before using Voters | Imdhemy">
+<meta property="og:description" content="Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...">
+<meta property="og:url" content="https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html">
+<meta property="og:site_name" content="Imdhemy">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+
+<meta property="og:image" content="https://imdhemy.com/assets/img/voting.webp">
+
+<meta property="og:image:secure_url" content="https://imdhemy.com/assets/img/voting.webp">
+
+
+<meta property="og:image:type" content="image/webp">
+
+
+<meta property="og:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+
+
+<meta property="article:published_time" content="2024-04-02T00:00:00+00:00">
+
+
+<meta property="article:modified_time" content="2024-04-02T00:00:00+00:00">
+
+
+<meta property="article:author" content="Dhemy">
+
+
+
+<meta property="article:tag" content="php">
+
+<meta property="article:tag" content="symfony">
+
+<meta property="article:tag" content="authorization">
+
+<meta property="article:tag" content="security">
+
+<meta property="article:tag" content="voters">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What Symfony developers should know before using Voters | Imdhemy">
+<meta name="twitter:description" content="Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...">
+
+<meta name="twitter:site" content="@imdhemy">
+
+
+<meta name="twitter:image" content="https://imdhemy.com/assets/img/voting.webp">
+
+<meta name="twitter:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+    <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "What Symfony developers should know before using Voters",
+  "description": "Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then reuse them in many places. In this po...",
+  "url": "https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html"
+  },
+  "image": ["https://imdhemy.com/assets/img/voting.webp"],
+  "datePublished": "2024-04-02T00:00:00+00:00",
+  "dateModified": "2024-04-02T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Dhemy"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Dhemy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imdhemy.com/assets/theme/favicon.png"
+    }
+  }
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://imdhemy.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://imdhemy.com/blog"},{"@type":"ListItem","position":3,"name":"What Symfony developers should know before using Voters","item":"https://imdhemy.com/blog/php/what-symfony-developers-should-know-before-using-voters.html"}]
+}
+</script>
+
+
+
+</head>
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
+            
+            
+            
+            
+            <!-- begin logo -->
+            <div class="site-header__brand">
+                <a href="/" class="site-logo" aria-label="Imdhemy home">
+                    Imdhemy
+                </a>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="site-header__actions">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/"
+                               class="nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/blog"
+                               class="nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/about"
+                               class="nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--desktop"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-desktop">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-desktop"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-desktop"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-desktop"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-desktop"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-desktop" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                
+
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button"
+                            class="site-header__toggle"
+                            data-target="#mobile-nav"
+                            data-open-label="Open navigation menu"
+                            data-close-label="Close navigation menu"
+                            aria-controls="mobile-nav"
+                            aria-expanded="false"
+                            aria-label="Open navigation menu">
+                        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+                        <span class="sr-only">Open navigation menu</span>
+                    </button>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation"
+                 hidden>
+                <div class="site-mobile-nav__inner">
+                    
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--mobile"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-mobile">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-mobile"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-mobile"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-mobile"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-mobile"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-mobile" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                    
+                    <ul class="site-mobile-nav__list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/"
+                               class="site-mobile-nav__link nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/blog"
+                               class="site-mobile-nav__link nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/about"
+                               class="site-mobile-nav__link nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main id="main-content" tabindex="-1">
+        
+
+<div class="reading-progress" aria-hidden="true">
+    <span class="reading-progress__bar" data-reading-progress></span>
+</div>
+
+
+<article class="post-page">
+    
+
+<div class="post-header">
+    <a class="post-back-link" href="/blog" aria-label="Back to all posts">&larr; Back to all posts</a>
+    <h1 class="post-title">What Symfony developers should know before using Voters</h1>
+    
+<p class="post-header__meta post-meta">
+    <time datetime="2024-04-02T00:00:00+00:00">Apr 2, 2024</time>
+    <span class="post-meta__separator" aria-hidden="true">&middot;</span>
+    <span class="post-meta__reading-time">
+        <ion-icon class="post-meta__icon" name="time-outline" aria-hidden="true"></ion-icon>
+        <span>5 min read</span>
+    </span>
+</p>
+
+    <div class="post-header__tags">
+        
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/symfony"
+       class="tag-pill">
+        #symfony
+    </a>
+    
+    
+    <a href="/tag/authorization"
+       class="tag-pill">
+        #authorization
+    </a>
+    
+    
+    <a href="/tag/security"
+       class="tag-pill">
+        #security
+    </a>
+    
+    
+    <a href="/tag/voters"
+       class="tag-pill">
+        #voters
+    </a>
+    
+</div>
+
+
+    </div>
+    
+
+
+    
+    <div class="post-image-wrap">
+        <img src="/assets/img/voting.webp"
+             alt="What Symfony developers should know before using Voters"
+             class="post-image"/>
+        <!-- Image source -->
+        
+        <div class="post-image-source">
+            Image source: Shutterstock
+        </div>
+        
+    </div>
+    
+
+</div>
+
+
+    <div class="content-shell content read-surface">
+    <p>Voters are Symfony’s most powerful way of managing permissions. They allow you to centralize all permission logic, then
+reuse them in many places. In this post, We will cover some of the basics of Symfony’s security system that you
+should know before using voters.</p>
+
+<h2 id="permissions-should-be-linked-to-a-user">Permissions should be linked to a user</h2>
+
+<p>In Symfony, permissions are always linked to a user object. If you need to secure parts of your application, you
+need to create a user object that implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>.</p>
+
+<div class="tip">
+
+  <p>Permissions should be linked to a user object. Always stick to this rule, even if you have an external user system</p>
+
+</div>
+
+<p>Some applications have an external SSO system that provides user information through an access token. Even in this case,
+you should not depend directly on the access token to check permissions. Instead, you should create a user object that
+implements the <code class="language-plaintext highlighter-rouge">UserInterface</code>. If you opt out of this approach, you will lose many benefits that you get from
+Symfony’s security system.</p>
+
+<h2 id="security-user-interface">Security User Interface</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">UserInterface</code> provided by
+the <a href="https://github.com/symfony/symfony/blob/923c4efa1df53e351aa52be1907191977cbf980f/src/Symfony/Component/Security/Core/User/UserInterface.php#L31">Symfony security component</a>
+helps you to make sure that your user object has all the necessary methods to work with Symfony’s security system
+regardless of how you load or create the user object, e.g., from a database, an API, or a Token.</p>
+
+<div class="tip">
+
+  <p>The security user interface is the contract between your user object and Symfony’s security system.</p>
+
+</div>
+
+<p>Let’s take a look at the <code class="language-plaintext highlighter-rouge">UserInterface</code>:</p>
+
+<p>The first method is <code class="language-plaintext highlighter-rouge">getRoles()</code>. The name of the method is self-explanatory, it should return an array of roles for the
+user. We will cover roles in the next section.</p>
+
+<p>The second method is <code class="language-plaintext highlighter-rouge">eraseCredentials()</code>. This method is designed to clear any sensitive data that the user object
+might be holding at any given point. For instance, clearing the plain text password after the user is authenticated.</p>
+
+<p>The last method is <code class="language-plaintext highlighter-rouge">getUserIdentifier()</code>. This method should return the <strong>Public representation</strong> of a user e.g.,
+the <code class="language-plaintext highlighter-rouge">username</code>. This method can be used by the user providers which helps you to get many benefits, like <a href="https://symfony.com/doc/current/security.html#fetching-the-user-from-a-service">fetching
+the user object in your
+service</a>, <a href="https://symfony.com/doc/current/security/impersonating_user.html">impersonating a user</a>,
+etc.</p>
+
+<h2 id="user-roles">User Roles</h2>
+
+<p>When a user is authenticated, Symfony calls the <code class="language-plaintext highlighter-rouge">getRoles()</code> method on the user object to determine the roles of the
+user. It doesn’t matter how the roles are stored in the database or how they are generated. The only thing that matters
+is that every role must start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix - otherwise, things won’t work as expected. You will use these
+roles to grant access to specific parts of your application.</p>
+
+<div class="tip">
+
+  <p>All roles should start with the <code class="language-plaintext highlighter-rouge">ROLE_</code> prefix. This is a requirement of Symfony’s security system.</p>
+
+</div>
+
+<p>Symfony provides a role hierarchy system out of the box. Instead of assigning multiple roles to a user, you can
+configure a role hierarchy. This way, you can assign a single role to a user, and Symfony will automatically grant
+access to all the roles in the hierarchy.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+
+  <span class="na">role_hierarchy</span><span class="pi">:</span>
+    <span class="na">ROLE_MODERATOR</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
+    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_MODERATOR</span>
+    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_ADMIN</span>
+
+</code></pre></div></div>
+
+<p>Using the above configuration, if a user has the <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role, Symfony will automatically grant access to
+<code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code>, <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code>, and <code class="language-plaintext highlighter-rouge">ROLE_USER</code>. This is illustrated as follows:</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">ROLE_SUPER_ADMIN</code> role inherits the <code class="language-plaintext highlighter-rouge">ROLE_ADMIN</code> role, which inherits the <code class="language-plaintext highlighter-rouge">ROLE_MODERATOR</code> role, which inherits
+the <code class="language-plaintext highlighter-rouge">ROLE_USER</code> role. It’s worth noting that a role can inherit multiple roles.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="c1"># ...</span>
+
+  <span class="na">role_hierarchy</span><span class="pi">:</span>
+    <span class="na">ROLE_ADMIN</span><span class="pi">:</span> <span class="s">ROLE_USER</span>
+    <span class="na">ROLE_SUPER_ADMIN</span><span class="pi">:</span> <span class="pi">[</span> <span class="nv">ROLE_ADMIN</span><span class="pi">,</span> <span class="nv">ROLE_ALLOWED_TO_SWITCH</span> <span class="pi">]</span>
+</code></pre></div></div>
+
+<p>For role hierarchy to work, do not use <code class="language-plaintext highlighter-rouge">$user-&gt;getRoles()</code> manually, instead you should always depend on the
+<code class="language-plaintext highlighter-rouge">isGranted()</code> or <code class="language-plaintext highlighter-rouge">denyAccessUnlessGranted()</code> methods provided by the <code class="language-plaintext highlighter-rouge">AuthorizationCheckerInterface</code>.</p>
+
+<div class="tip">
+
+  <p>Let symfony does the heavy lifting for you. Always use the security methods to check for roles.</p>
+
+</div>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// BAD - $user-&gt;getRoles() will not know about the role hierarchy
+<span class="gd">- $hasAccess = in_array('ROLE_ADMIN', $user-&gt;getRoles());
+</span><span class="err">
+</span>// GOOD - use of the normal security methods
+<span class="gi">+ $hasAccess = $this-&gt;isGranted('ROLE_ADMIN');
++ $this-&gt;denyAccessUnlessGranted('ROLE_ADMIN');
+</span><span class="err">
+</span></code></pre></div></div>
+
+<h2 id="decision-strategy">Decision Strategy</h2>
+
+<p>When you start using voters, Symfony will ask each voter to vote on the access decision. There are three decisions
+that a voter can make, like any other voting system:</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code>: The voter grants access to the resource.</li>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code>: The voter denies access to the resource.</li>
+  <li><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code>: The voter abstains from voting.</li>
+</ol>
+
+<p>Normally, only one voter will vote at any given time, and all the rest will <code class="language-plaintext highlighter-rouge">abstain</code>. However, if you want to
+change this behavior, you need to know about the <code class="language-plaintext highlighter-rouge">decision_strategy</code> configuration.</p>
+
+<div class="tip">
+  <p>It’s always good to keep the default <code class="language-plaintext highlighter-rouge">decision_strategy</code> and design your voters accordingly. A resource oriented
+voter should only vote on the resource it is designed for.</p>
+</div>
+
+<p>Suppose you have a feature that requires a user to be part of a group and is older than 18 years. You have two separate
+voters to check these conditions. The following table will help you understand different decision strategies:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Decision Strategy</th>
+      <th>Description</th>
+      <th>Voter 1</th>
+      <th>Voter 2</th>
+      <th>Voter 3</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>affirmative (default)</td>
+      <td>This grants access as soon as there is one voter granting access</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+    <tr>
+      <td>consensus</td>
+      <td>This grants access if there are more voters granting access than denying. In case of a tie the decision is based on the allow_if_equal_granted_denied config option (defaulting to true);</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+    <tr>
+      <td>unanimous</td>
+      <td>This only grants access if there is no voter denying access.</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+    </tr>
+    <tr>
+      <td>priority</td>
+      <td>This grants or denies access by the first voter that does not abstain, based on their service priority</td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_DENIED</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_ABSTAIN</code></td>
+      <td><code class="language-plaintext highlighter-rouge">ACCESS_GRANTED</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Back to our example, if you want to grant access only if both voters grant access, you should use the <code class="language-plaintext highlighter-rouge">unanimous</code>
+decision strategy.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># config/packages/security.yaml</span>
+<span class="na">security</span><span class="pi">:</span>
+  <span class="na">access_decision_manager</span><span class="pi">:</span>
+    <span class="na">strategy</span><span class="pi">:</span> <span class="s">unanimous</span>
+    <span class="na">allow_if_all_abstain</span><span class="pi">:</span> <span class="kc">false</span>
+</code></pre></div></div>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this post, we covered some of the basics of Symfony’s security system that you should know before using voters.
+understanding them will help you make the most out of Symfony’s security system. You should always consult the Symfony
+documentation for the most up-to-date information and best practices. In the next article, we will cover how to create
+a custom voter and how to use it in your application.</p>
+
+</div>
+
+
+    
+
+
+
+
+
+
+<section class="comments-shell" id="comments-section" aria-label="Discussion">
+    <div class="comments-shell__inner comments-collapsible" data-comments-collapsible>
+        <button class="comments-collapsible__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="comments-panel"
+                data-comments-toggle>
+            <span class="comments-collapsible__copy">
+                <span class="comments-shell__heading" role="heading" aria-level="2">Discussion</span>
+                <span class="comments-collapsible__hint">Open to view reactions and comments</span>
+            </span>
+            <span class="comments-collapsible__icon-wrap" aria-hidden="true">
+                <ion-icon class="comments-collapsible__icon" name="chevron-down-outline"></ion-icon>
+            </span>
+        </button>
+        <div class="comments-collapsible__panel" id="comments-panel" data-comments-panel hidden>
+            <div class="comments-collapsible__embed"
+                 data-giscus-mount
+                 data-giscus-script-src="https://giscus.app/client.js"
+                 data-giscus-repo="imdhemy/imdhemy.github.io"
+                 data-giscus-repo-id="MDEwOlJlcG9zaXRvcnkzNjc1ODI3MjA="
+                 data-giscus-category="General"
+                 data-giscus-category-id="DIC_kwDOFejeAM4C3865"
+                 data-giscus-mapping="pathname"
+                 data-giscus-term=""
+                 data-giscus-strict="1"
+                 data-giscus-reactions-enabled="1"
+                 data-giscus-emit-metadata="0"
+                 data-giscus-input-position="bottom"
+                 data-giscus-theme="light"
+                 data-giscus-lang="en"
+                 data-giscus-loading="lazy"></div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    
+
+
+
+
+<section class="post-navigation-shell">
+    <div class="post-navigation-shell__inner post-navigation">
+        
+        <a class="post-navigation__item" href="/blog/generic/the-pipeline-ate-my-code.html">
+            <span class="post-navigation__label">Previous article</span>
+            <span class="post-navigation__title">The pipeline ate my code</span>
+        </a>
+        
+        
+        <a class="post-navigation__item post-navigation__item--next" href="/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html">
+            <span class="post-navigation__label">Next article</span>
+            <span class="post-navigation__title">How to avoid boilerplate code in Symfony Voters</span>
+        </a>
+        
+    </div>
+</section>
+
+
+    
+
+
+
+
+<section class="related-posts-shell">
+    <div class="related-posts-shell__inner">
+        <h2 class="related-posts__heading">Keep reading</h2>
+        <div class="related-posts">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/better-alternatives-to-empty-in-php.html">
+                <span class="related-posts__title">Better alternatives to empty() in PHP</span>
+                <span class="related-posts__meta">Jul 19, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/singleton-design-pattern-in-laravel.html">
+                <span class="related-posts__title">Singleton Design Pattern in Laravel</span>
+                <span class="related-posts__meta">Apr 15, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html">
+                <span class="related-posts__title">How to avoid boilerplate code in Symfony Voters</span>
+                <span class="related-posts__meta">Apr 3, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+        </div>
+    </div>
+</section>
+
+</article>
+
+    </main>
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>

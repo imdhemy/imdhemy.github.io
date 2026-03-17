@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>How to avoid boilerplate code in Symfony Voters | Imdhemy</title>
+<meta name="description" content="Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way ...">
+<meta name="author" content="Dhemy">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html">
+
+
+
+<meta property="og:title" content="How to avoid boilerplate code in Symfony Voters | Imdhemy">
+<meta property="og:description" content="Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way ...">
+<meta property="og:url" content="https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html">
+<meta property="og:site_name" content="Imdhemy">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+
+<meta property="og:image" content="https://imdhemy.com/assets/img/vote.jpeg">
+
+<meta property="og:image:secure_url" content="https://imdhemy.com/assets/img/vote.jpeg">
+
+
+<meta property="og:image:type" content="image/jpeg">
+
+
+<meta property="og:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+
+
+<meta property="article:published_time" content="2024-04-03T00:00:00+00:00">
+
+
+<meta property="article:modified_time" content="2024-04-03T00:00:00+00:00">
+
+
+<meta property="article:author" content="Dhemy">
+
+
+
+<meta property="article:tag" content="php">
+
+<meta property="article:tag" content="symfony">
+
+<meta property="article:tag" content="authorization">
+
+<meta property="article:tag" content="code-reuse">
+
+<meta property="article:tag" content="voters">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to avoid boilerplate code in Symfony Voters | Imdhemy">
+<meta name="twitter:description" content="Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way ...">
+
+<meta name="twitter:site" content="@imdhemy">
+
+
+<meta name="twitter:image" content="https://imdhemy.com/assets/img/vote.jpeg">
+
+<meta name="twitter:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+    <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to avoid boilerplate code in Symfony Voters",
+  "description": "Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have been multiple trials to improve the way ...",
+  "url": "https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html"
+  },
+  "image": ["https://imdhemy.com/assets/img/vote.jpeg"],
+  "datePublished": "2024-04-03T00:00:00+00:00",
+  "dateModified": "2024-04-03T00:00:00+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Dhemy"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Dhemy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imdhemy.com/assets/theme/favicon.png"
+    }
+  }
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://imdhemy.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://imdhemy.com/blog"},{"@type":"ListItem","position":3,"name":"How to avoid boilerplate code in Symfony Voters","item":"https://imdhemy.com/blog/php/how-to-avoid-boilerplate-code-in-symfony-voters.html"}]
+}
+</script>
+
+
+
+</head>
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
+            
+            
+            
+            
+            <!-- begin logo -->
+            <div class="site-header__brand">
+                <a href="/" class="site-logo" aria-label="Imdhemy home">
+                    Imdhemy
+                </a>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="site-header__actions">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/"
+                               class="nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/blog"
+                               class="nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/about"
+                               class="nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--desktop"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-desktop">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-desktop"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-desktop"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-desktop"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-desktop"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-desktop" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                
+
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button"
+                            class="site-header__toggle"
+                            data-target="#mobile-nav"
+                            data-open-label="Open navigation menu"
+                            data-close-label="Close navigation menu"
+                            aria-controls="mobile-nav"
+                            aria-expanded="false"
+                            aria-label="Open navigation menu">
+                        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+                        <span class="sr-only">Open navigation menu</span>
+                    </button>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation"
+                 hidden>
+                <div class="site-mobile-nav__inner">
+                    
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--mobile"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-mobile">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-mobile"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-mobile"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-mobile"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-mobile"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-mobile" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                    
+                    <ul class="site-mobile-nav__list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/"
+                               class="site-mobile-nav__link nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/blog"
+                               class="site-mobile-nav__link nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/about"
+                               class="site-mobile-nav__link nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main id="main-content" tabindex="-1">
+        
+
+<div class="reading-progress" aria-hidden="true">
+    <span class="reading-progress__bar" data-reading-progress></span>
+</div>
+
+
+<article class="post-page">
+    
+
+<div class="post-header">
+    <a class="post-back-link" href="/blog" aria-label="Back to all posts">&larr; Back to all posts</a>
+    <h1 class="post-title">How to avoid boilerplate code in Symfony Voters</h1>
+    
+<p class="post-header__meta post-meta">
+    <time datetime="2024-04-03T00:00:00+00:00">Apr 3, 2024</time>
+    <span class="post-meta__separator" aria-hidden="true">&middot;</span>
+    <span class="post-meta__reading-time">
+        <ion-icon class="post-meta__icon" name="time-outline" aria-hidden="true"></ion-icon>
+        <span>10 min read</span>
+    </span>
+</p>
+
+    <div class="post-header__tags">
+        
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/php"
+       class="tag-pill">
+        #php
+    </a>
+    
+    
+    <a href="/tag/symfony"
+       class="tag-pill">
+        #symfony
+    </a>
+    
+    
+    <a href="/tag/authorization"
+       class="tag-pill">
+        #authorization
+    </a>
+    
+    
+    <a href="/tag/code-reuse"
+       class="tag-pill">
+        #code-reuse
+    </a>
+    
+    
+    <a href="/tag/voters"
+       class="tag-pill">
+        #voters
+    </a>
+    
+</div>
+
+
+    </div>
+    
+
+
+    
+    <div class="post-image-wrap">
+        <img src="/assets/img/vote.jpeg"
+             alt="How to avoid boilerplate code in Symfony Voters"
+             class="post-image"/>
+        <!-- Image source -->
+        
+        <div class="post-image-source">
+            Image source: https://unsplash.com/photos/white-and-black-letter-b-9xp4F57ATzs
+        </div>
+        
+    </div>
+    
+
+</div>
+
+
+    <div class="content-shell content read-surface">
+    <p>Symfony voters are the way to go when you need to centralize the authorization logic of your application. There have
+been multiple trials to improve the way we write voters, one of them was by introducing the <code class="language-plaintext highlighter-rouge">AbstractVoter</code> class in
+<a href="https://symfony.com/blog/new-in-symfony-2-6-simpler-security-voters">Symfony 2.6</a>. Later on, it was deprecated in
+<a href="https://symfony.com/blog/new-in-symfony-2-8-simpler-security-voters">Symfony 2.8</a> to be removed in v3.0 with the
+introduction of the <code class="language-plaintext highlighter-rouge">Voter</code>class. The continuous improvement didn’t stop there, and I believe it will not.</p>
+
+<p>In this post, I will contribute to the trials of improving the way we write voters by introducing the <code class="language-plaintext highlighter-rouge">CanDoVoter</code>.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>Suppose the logic to decide whether a user can <code class="language-plaintext highlighter-rouge">view</code> or <code class="language-plaintext highlighter-rouge">edit</code> a <code class="language-plaintext highlighter-rouge">Post</code> object is pretty complex. For example, a User
+can always edit or view a Post they created. And if a Post is marked as “public”, anyone can view it. We can write
+a <code class="language-plaintext highlighter-rouge">PostVoter</code> to handle this logic.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//src/Acme/Post/PostVoter.php</span>
+<span class="kn">namespace</span> <span class="nn">App\Acme\Post</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Post</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">PostVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>   
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="p">[</span><span class="s1">'get'</span><span class="p">,</span> <span class="s1">'update'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$subject</span> <span class="k">instanceof</span> <span class="nc">Post</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span> <span class="k">instanceof</span> <span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// This means if the user is not logged in, they can't view or edit the post</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$post</span> <span class="o">=</span> <span class="nv">$subject</span><span class="p">;</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="nv">$post</span> <span class="k">instanceof</span> <span class="nc">Post</span><span class="p">);</span>
+        
+        <span class="c1">// The user can always edit or view a post they created</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$user</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">getAuthor</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// If the post is public, anyone can view it</span>
+        <span class="k">if</span><span class="p">(</span><span class="nv">$attribute</span> <span class="o">===</span> <span class="s1">'get'</span> <span class="o">&amp;&amp;</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">isPublic</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="c1">// otherwise, the user can't view or edit the post</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Now, suppose we have another entity, <code class="language-plaintext highlighter-rouge">Comment</code>, and we need to write a <code class="language-plaintext highlighter-rouge">CommentVoter</code> to handle the logic of whether
+a user can perform some actions on a <code class="language-plaintext highlighter-rouge">Comment</code> object. We will end up repeating a similar code in <code class="language-plaintext highlighter-rouge">supports()</code> and
+the beginning of <code class="language-plaintext highlighter-rouge">voteOnAttribute()</code> methods till we get the <code class="language-plaintext highlighter-rouge">user</code> and <code class="language-plaintext highlighter-rouge">subject</code> objects.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">//src/Acme/Comment/CommentVoter.php</span>
+
+<span class="kn">namespace</span> <span class="nn">App\Acme\Comment</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Comment</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">CommentVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="p">[</span><span class="s1">'get'</span><span class="p">,</span> <span class="s1">'update'</span><span class="p">])</span> <span class="o">&amp;&amp;</span> <span class="nv">$subject</span> <span class="k">instanceof</span> <span class="nc">Comment</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span> <span class="k">instanceof</span> <span class="nc">User</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$comment</span> <span class="o">=</span> <span class="nv">$subject</span><span class="p">;</span>
+
+        <span class="c1">// Do the logic here</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="avoiding-the-repeated-code-in-the-supports">Avoiding the repeated code in the supports()</h2>
+
+<p>The first step is to avoid the repeated code in the <code class="language-plaintext highlighter-rouge">supports()</code> method. The <code class="language-plaintext highlighter-rouge">supports()</code> method goal is to check if the
+voter supports the given attribute and subject. We can extract them to configuration properties.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Foundation\Security</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">CanDoVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>
+    <span class="cd">/**
+     * @var string[] the attributes that this voter supports
+     */</span>
+    <span class="k">protected</span> <span class="kt">array</span> <span class="nv">$supportedAttributes</span> <span class="o">=</span> <span class="p">[];</span>
+
+    <span class="cd">/**
+     * @var class-string the subject that this voter supports
+     */</span>
+    <span class="k">protected</span> <span class="kt">string</span> <span class="nv">$supportedClass</span><span class="p">;</span>
+    
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedAttributes</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">is_a</span><span class="p">(</span><span class="nv">$subject</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedClass</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="avoiding-the-repeated-code-in-the-voteonattribute">Avoiding the repeated code in the voteOnAttribute()</h2>
+
+<p>The <code class="language-plaintext highlighter-rouge">voteOnAttribute()</code> should perform the actual voting logic to decide whether the user can perform the given
+attribute on the given subject. To do so, we need to get the <code class="language-plaintext highlighter-rouge">user</code> and <code class="language-plaintext highlighter-rouge">subject</code> objects. We can extract this code
+as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Foundation\Security</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">CanDoVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>
+    <span class="c1">// The supports() method is removed for brevity</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$method</span> <span class="o">=</span> <span class="s1">'can'</span><span class="mf">.</span><span class="nb">ucfirst</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">);</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$vote</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$method</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">);</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="nb">is_bool</span><span class="p">(</span><span class="nv">$vote</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$vote</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Based on the <code class="language-plaintext highlighter-rouge">voteOnAttribute()</code> implementation, we need to define a method for each supported attribute. The method
+name should be <code class="language-plaintext highlighter-rouge">can</code> followed by the attribute name with the first letter capitalized. For example, if the supported
+attributes are <code class="language-plaintext highlighter-rouge">['get', 'update']</code>, we should define <code class="language-plaintext highlighter-rouge">canGet()</code> and <code class="language-plaintext highlighter-rouge">canUpdate()</code> methods. The <code class="language-plaintext highlighter-rouge">user</code> is passed as the
+first argument, and the <code class="language-plaintext highlighter-rouge">subject</code> is passed as the second argument.</p>
+
+<h2 id="introducing-the-candovoter">Introducing the CanDoVoter</h2>
+
+<p>A final version of the <code class="language-plaintext highlighter-rouge">CanDoVoter</code> class is as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Foundation\Security</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authentication\Token\TokenInterface</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Component\Security\Core\Authorization\Voter\Voter</span><span class="p">;</span>
+
+<span class="k">abstract</span> <span class="kd">class</span> <span class="nc">CanDoVoter</span> <span class="kd">extends</span> <span class="nc">Voter</span>
+<span class="p">{</span>   
+    <span class="k">public</span> <span class="k">const</span> <span class="no">LIST</span> <span class="o">=</span> <span class="s1">'list'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">GET</span> <span class="o">=</span> <span class="s1">'get'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">CREATE</span> <span class="o">=</span> <span class="s1">'create'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">UPDATE</span> <span class="o">=</span> <span class="s1">'update'</span><span class="p">;</span>
+    <span class="k">public</span> <span class="k">const</span> <span class="no">DELETE</span> <span class="o">=</span> <span class="s1">'delete'</span><span class="p">;</span>
+    
+    <span class="k">protected</span> <span class="kt">array</span> <span class="nv">$supportedAttributes</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">protected</span> <span class="kt">string</span> <span class="nv">$supportedClass</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">supports</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">in_array</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedAttributes</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nb">is_a</span><span class="p">(</span><span class="nv">$subject</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">supportedClass</span><span class="p">,</span> <span class="kc">true</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">voteOnAttribute</span><span class="p">(</span><span class="kt">string</span> <span class="nv">$attribute</span><span class="p">,</span> <span class="kt">mixed</span> <span class="nv">$subject</span><span class="p">,</span> <span class="kt">TokenInterface</span> <span class="nv">$token</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="nv">$method</span> <span class="o">=</span> <span class="s1">'can'</span><span class="mf">.</span><span class="nb">ucfirst</span><span class="p">(</span><span class="nv">$attribute</span><span class="p">);</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">getUser</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">is_null</span><span class="p">(</span><span class="nv">$user</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="nv">$vote</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nv">$method</span><span class="p">(</span><span class="nv">$user</span><span class="p">,</span> <span class="nv">$subject</span><span class="p">);</span>
+        <span class="nb">assert</span><span class="p">(</span><span class="nb">is_bool</span><span class="p">(</span><span class="nv">$vote</span><span class="p">));</span>
+
+        <span class="k">return</span> <span class="nv">$vote</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="using-the-candovoter">Using the CanDoVoter</h2>
+
+<p>Now, we can use the <code class="language-plaintext highlighter-rouge">CanDoVoter</code> to write the <code class="language-plaintext highlighter-rouge">PostVoter</code> as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Acme\Post</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Post</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\User</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Foundation\Security\CanDoVoter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">PostVoter</span> <span class="kd">extends</span> <span class="nc">CanDoVoter</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="kt">array</span> <span class="nv">$supportedAttributes</span> <span class="o">=</span> <span class="p">[</span><span class="k">self</span><span class="o">::</span><span class="no">GET</span><span class="p">,</span> <span class="k">self</span><span class="o">::</span><span class="no">UPDATE</span><span class="p">];</span>
+    <span class="k">protected</span> <span class="kt">string</span> <span class="nv">$supportedClass</span> <span class="o">=</span> <span class="nc">Post</span><span class="o">::</span><span class="n">class</span><span class="p">;</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">canGet</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>   
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">isPublic</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="nv">$user</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">getAuthor</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">protected</span> <span class="k">function</span> <span class="n">canUpdate</span><span class="p">(</span><span class="kt">User</span> <span class="nv">$user</span><span class="p">,</span> <span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">bool</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$user</span> <span class="o">===</span> <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">getAuthor</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>And in your controller, you can use the voter as follows:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">namespace</span> <span class="nn">App\Controller</span><span class="p">;</span>
+
+<span class="kn">use</span> <span class="nc">App\Domain\Entity\Post</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">Symfony\Bundle\FrameworkBundle\Controller\AbstractController</span><span class="p">;</span>
+<span class="kn">use</span> <span class="nc">App\Acme\Post\PostVoter</span><span class="p">;</span>
+
+<span class="k">final</span> <span class="kd">class</span> <span class="nc">PostController</span> <span class="kd">extends</span> <span class="nc">AbstractController</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="n">show</span><span class="p">(</span><span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">PostVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+        
+        <span class="c1">// The logic to show the post</span>
+    <span class="p">}</span>
+    
+    <span class="k">public</span> <span class="k">function</span> <span class="n">update</span><span class="p">(</span><span class="kt">Post</span> <span class="nv">$post</span><span class="p">):</span> <span class="kt">Response</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">denyAccessUnlessGranted</span><span class="p">(</span><span class="nc">PostVoter</span><span class="o">::</span><span class="no">UPDATE</span><span class="p">,</span> <span class="nv">$post</span><span class="p">);</span>
+        
+        <span class="c1">// The logic to update the post</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="testing-the-candovoter">Testing the canDoVoter</h2>
+
+<p>We have discussed before <a href="/blog/testing/how-to-organize-your-unit-tests.html">how to organize our unit tests</a>.
+It’s a good practice to write unit tests that document your business logic, and testing the interface is the way to go.
+That means you should write your tests against the <code class="language-plaintext highlighter-rouge">vote()</code> method not the <code class="language-plaintext highlighter-rouge">can*()</code> methods. The <code class="language-plaintext highlighter-rouge">can*()</code> methods
+should be <code class="language-plaintext highlighter-rouge">protected</code> methods, and you should not test them directly.</p>
+
+<div class="tip">
+
+  <p>Always test the public interface of your classes. In this case, the public interface is the <code class="language-plaintext highlighter-rouge">vote()</code> method.</p>
+
+</div>
+
+<p>Below is an example of how to test the <code class="language-plaintext highlighter-rouge">PostVoter</code>:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">final</span> <span class="kd">class</span> <span class="nc">PostVoterTest</span> <span class="kd">extends</span> <span class="nc">TestCase</span>
+<span class="p">{</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="n">any_user_can_view_a_public_post</span><span class="p">():</span> <span class="kt">void</span> 
+   <span class="p">{</span>
+       <span class="c1">// Arrange</span>
+       <span class="nv">$post</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Post</span><span class="p">();</span>
+       <span class="nv">$post</span><span class="o">-&gt;</span><span class="nf">setPublic</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+       <span class="nv">$user</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">User</span><span class="p">();</span>
+       <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">createMock</span><span class="p">(</span><span class="nc">TokenInterface</span><span class="o">::</span><span class="n">class</span><span class="p">);</span>
+       <span class="nv">$token</span><span class="o">-&gt;</span><span class="nf">method</span><span class="p">(</span><span class="s1">'getUser'</span><span class="p">)</span><span class="o">-&gt;</span><span class="nf">willReturn</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+       <span class="nv">$sut</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">PostVoter</span><span class="p">();</span>
+       
+       <span class="c1">// Act</span>
+       <span class="nv">$actual</span> <span class="o">=</span> <span class="nv">$sut</span><span class="o">-&gt;</span><span class="nf">vote</span><span class="p">(</span><span class="nv">$token</span><span class="p">,</span> <span class="nv">$post</span><span class="p">,</span> <span class="p">[</span><span class="nc">PostVoter</span><span class="o">::</span><span class="no">GET</span><span class="p">]);</span>
+       
+       <span class="c1">// Assert</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="nf">assertEquals</span><span class="p">(</span><span class="nc">Voter</span><span class="o">::</span><span class="no">ACCESS_GRANTED</span><span class="p">,</span> <span class="nv">$actual</span><span class="p">);</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Avoid test names like: <code class="language-plaintext highlighter-rouge">it_should_fail_when_the_user_is_not_the_author()</code>. Instead, use test names that describe the
+behavior of the system under test.</p>
+
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">- it_should_fail_when_the_user_is_not_the_author()
+</span><span class="err">
+</span><span class="gi">+ only_the_author_can_update_the_post()
++ only_the_author_can_view_a_private_post()
++ any_user_can_view_a_public_post()
+</span></code></pre></div></div>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>You can have the <code class="language-plaintext highlighter-rouge">CanDoVoter</code> and much more out-of the box by using
+the <a href="https://github.com/symblaze/security-bundle">Symblaze Security Bundle</a>.</p>
+
+<p>In this post, we have introduced a new way to write Symfony voters with less boilerplate code, the <code class="language-plaintext highlighter-rouge">CanDoVoter</code>. The
+<code class="language-plaintext highlighter-rouge">CanDoVoter</code> class is an abstract class that you can extend to write your voters. Improving the way we write voters
+will make our codebase more maintainable and easier to read. I hope you find this post helpful, and I would love to
+hear your feedback.</p>
+
+</div>
+
+
+    
+
+
+
+
+
+
+<section class="comments-shell" id="comments-section" aria-label="Discussion">
+    <div class="comments-shell__inner comments-collapsible" data-comments-collapsible>
+        <button class="comments-collapsible__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="comments-panel"
+                data-comments-toggle>
+            <span class="comments-collapsible__copy">
+                <span class="comments-shell__heading" role="heading" aria-level="2">Discussion</span>
+                <span class="comments-collapsible__hint">Open to view reactions and comments</span>
+            </span>
+            <span class="comments-collapsible__icon-wrap" aria-hidden="true">
+                <ion-icon class="comments-collapsible__icon" name="chevron-down-outline"></ion-icon>
+            </span>
+        </button>
+        <div class="comments-collapsible__panel" id="comments-panel" data-comments-panel hidden>
+            <div class="comments-collapsible__embed"
+                 data-giscus-mount
+                 data-giscus-script-src="https://giscus.app/client.js"
+                 data-giscus-repo="imdhemy/imdhemy.github.io"
+                 data-giscus-repo-id="MDEwOlJlcG9zaXRvcnkzNjc1ODI3MjA="
+                 data-giscus-category="General"
+                 data-giscus-category-id="DIC_kwDOFejeAM4C3865"
+                 data-giscus-mapping="pathname"
+                 data-giscus-term=""
+                 data-giscus-strict="1"
+                 data-giscus-reactions-enabled="1"
+                 data-giscus-emit-metadata="0"
+                 data-giscus-input-position="bottom"
+                 data-giscus-theme="light"
+                 data-giscus-lang="en"
+                 data-giscus-loading="lazy"></div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    
+
+
+
+
+<section class="post-navigation-shell">
+    <div class="post-navigation-shell__inner post-navigation">
+        
+        <a class="post-navigation__item" href="/blog/php/what-symfony-developers-should-know-before-using-voters.html">
+            <span class="post-navigation__label">Previous article</span>
+            <span class="post-navigation__title">What Symfony developers should know before using Voters</span>
+        </a>
+        
+        
+        <a class="post-navigation__item post-navigation__item--next" href="/blog/php/singleton-design-pattern-in-laravel.html">
+            <span class="post-navigation__label">Next article</span>
+            <span class="post-navigation__title">Singleton Design Pattern in Laravel</span>
+        </a>
+        
+    </div>
+</section>
+
+
+    
+
+
+
+
+<section class="related-posts-shell">
+    <div class="related-posts-shell__inner">
+        <h2 class="related-posts__heading">Keep reading</h2>
+        <div class="related-posts">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/better-alternatives-to-empty-in-php.html">
+                <span class="related-posts__title">Better alternatives to empty() in PHP</span>
+                <span class="related-posts__meta">Jul 19, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/singleton-design-pattern-in-laravel.html">
+                <span class="related-posts__title">Singleton Design Pattern in Laravel</span>
+                <span class="related-posts__meta">Apr 15, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/what-symfony-developers-should-know-before-using-voters.html">
+                <span class="related-posts__title">What Symfony developers should know before using Voters</span>
+                <span class="related-posts__meta">Apr 2, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+        </div>
+    </div>
+</section>
+
+</article>
+
+    </main>
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>

@@ -1,0 +1,1184 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<title>How to organize your unit tests | Imdhemy</title>
+<meta name="description" content="One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the...">
+<meta name="author" content="Dhemy">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html">
+
+
+
+<meta property="og:title" content="How to organize your unit tests | Imdhemy">
+<meta property="og:description" content="One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the...">
+<meta property="og:url" content="https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html">
+<meta property="og:site_name" content="Imdhemy">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+
+<meta property="og:image" content="https://imdhemy.com/assets/theme/social-card.png">
+
+<meta property="og:image:secure_url" content="https://imdhemy.com/assets/theme/social-card.png">
+
+
+<meta property="og:image:type" content="image/png">
+
+
+<meta property="og:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+
+
+<meta property="article:published_time" content="2022-11-11T22:48:41+00:00">
+
+
+<meta property="article:modified_time" content="2022-11-11T22:48:41+00:00">
+
+
+<meta property="article:author" content="Dhemy">
+
+
+
+<meta property="article:tag" content="testing">
+
+<meta property="article:tag" content="unit-testing">
+
+<meta property="article:tag" content="test-structure">
+
+<meta property="article:tag" content="naming">
+
+<meta property="article:tag" content="best-practices">
+
+
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How to organize your unit tests | Imdhemy">
+<meta name="twitter:description" content="One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the...">
+
+<meta name="twitter:site" content="@imdhemy">
+
+
+<meta name="twitter:image" content="https://imdhemy.com/assets/theme/social-card.png">
+
+<meta name="twitter:image:alt" content="Imdhemy personal site social preview">
+
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="/assets/css/main.css?v=1.0.0">
+    
+    <link rel="icon" type="image/png" href="/assets/theme/favicon.png">
+    
+    
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "How to organize your unit tests",
+  "description": "One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the self-clearing mechanism of the airways in the...",
+  "url": "https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html"
+  },
+  "image": ["https://imdhemy.com/assets/theme/social-card.png"],
+  "datePublished": "2022-11-11T22:48:41+00:00",
+  "dateModified": "2022-11-11T22:48:41+00:00",
+  "author": {
+    "@type": "Person",
+    "name": "Dhemy"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Dhemy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://imdhemy.com/assets/theme/favicon.png"
+    }
+  }
+}
+</script>
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{"@type":"ListItem","position":1,"name":"Home","item":"https://imdhemy.com/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://imdhemy.com/blog"},{"@type":"ListItem","position":3,"name":"How to organize your unit tests","item":"https://imdhemy.com/blog/testing/how-to-organize-your-unit-tests.html"}]
+}
+</script>
+
+
+
+</head>
+<body class="theme-body">
+<a class="skip-link" href="#main-content">Skip to content</a>
+<div class="theme-shell">
+    <header class="site-header" id="main-header">
+    <div class="site-header__container">
+        <div class="site-header__inner">
+            
+            
+            
+            
+            <!-- begin logo -->
+            <div class="site-header__brand">
+                <a href="/" class="site-logo" aria-label="Imdhemy home">
+                    Imdhemy
+                </a>
+            </div>
+            <!-- end logo -->
+            <!-- begin right part -->
+            <div class="site-header__actions">
+                <nav class="site-header__desktop-nav" aria-label="Primary navigation">
+                    <ul class="site-nav-list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/"
+                               class="nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/blog"
+                               class="nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-nav-list__item">
+                            <a href="/about"
+                               class="nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </nav>
+
+                
+                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--desktop"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-desktop">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-desktop"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-desktop"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-desktop"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-desktop"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-desktop" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                
+
+                <div class="site-header__mobile-toggle-wrap">
+                    <button type="button"
+                            class="site-header__toggle"
+                            data-target="#mobile-nav"
+                            data-open-label="Open navigation menu"
+                            data-close-label="Close navigation menu"
+                            aria-controls="mobile-nav"
+                            aria-expanded="false"
+                            aria-label="Open navigation menu">
+                        <ion-icon name="menu-outline" aria-hidden="true"></ion-icon>
+                        <span class="sr-only">Open navigation menu</span>
+                    </button>
+                </div>
+                <!-- end right part -->
+            </div>
+            <!-- begin mobile nav -->
+            <nav id="mobile-nav"
+                 class="site-mobile-nav is-hidden"
+                 aria-label="Mobile navigation"
+                 hidden>
+                <div class="site-mobile-nav__inner">
+                    
+                    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="site-search site-search--mobile"
+         aria-label="Site search"
+         data-search-root
+         data-search-url="/assets/search.json"
+         data-search-max-results="8"
+         data-search-min-query-length="2"
+         data-search-content-preview-length="140"
+         data-search-idle-text="Start typing to search the site."
+         data-search-too-short-text="Type at least %d characters to search."
+         data-search-loading-text="Loading search index..."
+         data-search-empty-text="No results found."
+         data-search-error-text="Search is unavailable right now.">
+    <form class="site-search__form" role="search" action="/assets/search.json" onsubmit="return false;">
+        <label class="site-search__label" for="site-search-input-mobile">Search site content</label>
+        <div class="site-search__field-wrap">
+            <ion-icon class="site-search__icon" name="search-outline" aria-hidden="true"></ion-icon>
+            <input id="site-search-input-mobile"
+                   class="site-search__input"
+                   type="search"
+                   name="q"
+                   placeholder="Search"
+                   autocomplete="off"
+                   spellcheck="false"
+                   aria-controls="site-search-panel-mobile"
+                   aria-expanded="false"
+                   aria-haspopup="list"
+                   aria-autocomplete="list"
+                   aria-describedby="site-search-status-mobile"
+                   data-search-input>
+            <button type="button"
+                    class="site-search__clear"
+                    aria-label="Clear search"
+                    data-search-clear
+                    hidden>
+                <span aria-hidden="true">Clear</span>
+            </button>
+            <button type="submit" class="site-search__submit" aria-label="Search site content">
+                <ion-icon name="search-outline" aria-hidden="true"></ion-icon>
+            </button>
+        </div>
+    </form>
+
+    <div id="site-search-panel-mobile"
+         class="site-search__panel"
+         aria-label="Search results"
+         data-search-panel
+         hidden>
+        <p id="site-search-status-mobile" class="site-search__status" role="status" aria-live="polite" data-search-status>Start typing to search the site.</p>
+        <ul class="site-search__results" data-search-results></ul>
+    </div>
+</section>
+
+                    
+                    <ul class="site-mobile-nav__list">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/"
+                               class="site-mobile-nav__link nav-link">
+                                Home
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/blog"
+                               class="site-mobile-nav__link nav-link is-active" aria-current="page">
+                                Blog
+                            </a>
+                        </li>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <li class="site-mobile-nav__item">
+                            <a href="/about"
+                               class="site-mobile-nav__link nav-link">
+                                About
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </nav>
+            <!-- end mobile nav -->
+        </div>
+    </div>
+</header>
+
+    <main id="main-content" tabindex="-1">
+        
+
+<div class="reading-progress" aria-hidden="true">
+    <span class="reading-progress__bar" data-reading-progress></span>
+</div>
+
+
+<article class="post-page">
+    
+
+<div class="post-header">
+    <a class="post-back-link" href="/blog" aria-label="Back to all posts">&larr; Back to all posts</a>
+    <h1 class="post-title">How to organize your unit tests</h1>
+    
+<p class="post-header__meta post-meta">
+    <time datetime="2022-11-11T22:48:41+00:00">Nov 11, 2022</time>
+    <span class="post-meta__separator" aria-hidden="true">&middot;</span>
+    <span class="post-meta__reading-time">
+        <ion-icon class="post-meta__icon" name="time-outline" aria-hidden="true"></ion-icon>
+        <span>7 min read</span>
+    </span>
+</p>
+
+    <div class="post-header__tags">
+        
+        
+<div class="post-tags">
+    
+    
+    <a href="/tag/testing"
+       class="tag-pill">
+        #testing
+    </a>
+    
+    
+    <a href="/tag/unit-testing"
+       class="tag-pill">
+        #unit-testing
+    </a>
+    
+    
+    <a href="/tag/test-structure"
+       class="tag-pill">
+        #test-structure
+    </a>
+    
+    
+    <a href="/tag/naming"
+       class="tag-pill">
+        #naming
+    </a>
+    
+    
+    <a href="/tag/best-practices"
+       class="tag-pill">
+        #best-practices
+    </a>
+    
+</div>
+
+
+    </div>
+    
+
+
+    
+
+</div>
+
+
+    <div class="content-shell content read-surface">
+    <p>One day, in the school of medicine, the lecturer told us an important thing about naming. He was explaining the
+self-clearing mechanism of the airways in the respiratory system which is known as <strong>mucociliary escalator</strong> and he
+said, to understand anything in medicine, you need to understand the idea behind the name, you need to understand the
+culture behind the name. Check the following image, it auto-moves the particles outside the lungs like an escalator.</p>
+
+<p>We are not native English speakers, so this advice applies to us.</p>
+
+<p><img src="/assets/img/mucociliary-escalator.gif" alt="mucociliary escalator" />
+<img src="/assets/img/escalator-fail.gif" alt="escalator fail" /></p>
+
+<p>I believe it’s the same for programming, understanding the idea or the culture behind the name makes it easier to
+understand the concept. So, let’s talk about the idea behind the names of the unit tests.</p>
+
+<h2 id="the-names-in-testing">The names in testing</h2>
+
+<p>In general, testing is finding out how well something works. In terms of human beings, testing tells what level of
+knowledge or skill has been acquired. In terms of electronics, testing tells how well the device works.</p>
+
+<p>The device under test is the thing that is being tested. In the case of testing car stability, the car is the device
+under test. It’s referred to as <strong>DUT</strong>.</p>
+
+<p>Engineers may use a device called <strong>test fixture</strong> to test the DUT. The test fixture is a device that is used to hold
+the DUT in a specific position or to provide a particular input or output to the DUT. In the case of testing car
+stability, the test fixture may be a ramp.</p>
+
+<p>Let’s map this to programming. The DUT will be <strong>SUT</strong> (System under test). The test fixture is a piece of data that
+could be a dependency or an argument passed to the SUT. It can also be data in the database or a file in the file
+system.</p>
+
+<div class="tip">
+  <p>The test fixture’s state and behavior should not change during the test, the ramp remains a ramp, or at least the changes should be predictable and controllable.</p>
+</div>
+
+<h2 id="test-file-location">Test file location</h2>
+
+<p>There are two conventions for organizing the test files. The first one is to put the test files in the same directory as
+the source files. The second one is to put the test files in a separate directory. The first is called <strong>in-place</strong> and
+the second is called <strong>out-of-place</strong>.</p>
+
+<p><strong>In-place</strong> tests are painless to find, you see at a glance if a part of your application lacks tests. When you move
+the source (inevitable), you remember to move the test, When you rename the source (inevitable), you remember to rename
+the test. The downside is where to put integration tests, as they don’t belong to any specific source file. It’s often
+better to create an appropriate directory for them in the <code class="language-plaintext highlighter-rouge">tests</code> directory.</p>
+
+<p><strong>Out-of-place</strong> tests have a natural home directory <code class="language-plaintext highlighter-rouge">tests</code>. The directories and files in the <code class="language-plaintext highlighter-rouge">tests</code> directory should
+mirror their corresponding source files. This way, you can easily integrate the tests with your IDE.</p>
+
+<p>I prefer the <strong>out-of-place</strong> convention, even if I have to remember to move or rename the test files to reflect the
+changes in the source files, but I’m not dogmatic about it. I’m open to changing my mind if I find a good reason to do
+so.</p>
+
+<h2 id="how-to-struct-a-test-case">How to struct a test case</h2>
+
+<p>Structuring a test case starts with naming the test method. It’s often to encounter the following
+pattern: <code class="language-plaintext highlighter-rouge">[MethodUnderTest]_[Scenario]_[ExpectedResult]</code>. I used to follow this pattern, but I found it not very
+helpful. It focuses on the implementation details, not the behavior.</p>
+
+<p>The pattern I prefer is PLAIN ENGLISH. We describe in plain English what we’re testing in a language easy to understand,
+even for non-programmers.</p>
+
+<p>Using plain English is required by the nature of some test frameworks. For example, in the case
+of <a href="https://jestjs.io/">Jest</a>, the test method name is the test case name. So, you have to use plain English to name the
+test method. You can do the same with the xUnit frameworks.</p>
+
+<p>I also prefer to separate words by underscores, it makes it easier to read. I use snake case for the test method names,
+even if the convention in the language or the framework is camel case. Yes, I know it’s not consistent and it breaks the
+coding style, but I’m open to breaking rules if I find a good reason to do so. It’s easy to exclude the test files from
+the coding style check of this rule.</p>
+
+<p>The good reason here is readability, just compare the readability of the following two test method names:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ItShouldIlluminateTheLedAtLowLevelLight
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>It_should_illuminate_the_led_at_low_level_light
+</code></pre></div></div>
+
+<p>The snake case version is much easier to read, as it resembles the natural way of using spaces between words.</p>
+
+<p><strong>So, what about the body of the test case?</strong></p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Given-When-Then</code> or <code class="language-plaintext highlighter-rouge">Arrange-Act-Assert</code> is a great way to structure test cases. It prescribes an order of
+operations:</p>
+
+<h3 id="given-arrange">Given (Arrange)</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Given</code> section is where you set up the test case. You do all the preparations to make the test case ready to run.
+You may require a fixture, a dependency, a database, a file, etc. You need also to set the initial state. This section
+should end by creating the SUT instance in the initial state.</p>
+
+<p>As far as I know, all xUnit frameworks provide a <code class="language-plaintext highlighter-rouge">setup</code> method to do the preparations. Even though this is not the
+place to put the <code class="language-plaintext highlighter-rouge">Given</code> section.</p>
+
+<div class="tip">
+  <p>The <code class="language-plaintext highlighter-rouge">setup</code> method is not the place to put the <code class="language-plaintext highlighter-rouge">Given</code> section. The <code class="language-plaintext highlighter-rouge">setup</code> method is for the preparations that are common to all test cases. The <code class="language-plaintext highlighter-rouge">Given</code> section is for the preparations that are specific to the test case.</p>
+</div>
+
+<p>Putting the <code class="language-plaintext highlighter-rouge">Given</code> section in the <code class="language-plaintext highlighter-rouge">setup</code> method is not a good idea, because it makes the test case less readable, and
+it couples the test cases together. If you need to change the initial state of the SUT, you have to change the <code class="language-plaintext highlighter-rouge">setup</code>
+method, which may break other tests. The <code class="language-plaintext highlighter-rouge">Given</code> section should be as close to the <code class="language-plaintext highlighter-rouge">When</code> section.</p>
+
+<p>If your <code class="language-plaintext highlighter-rouge">Given</code> section has a boilerplate code, you can extract each part to a factory method with a descriptive name.
+This way, you can reuse the factory method in other test cases.</p>
+
+<p>For instance, <code class="language-plaintext highlighter-rouge">createUser()</code>, <code class="language-plaintext highlighter-rouge">createUserWithOrders()</code>, and <code class="language-plaintext highlighter-rouge">createUserWithOrdersAndPayments()</code> are factory methods that
+create a user with a different initial state.</p>
+
+<h3 id="when-act">When (Act)</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">When</code> section is where you execute the action under test. It SHOULD be a single operation. If you need to execute
+multiple operations, it’s a sign that you are not unit testing! You can find more about this in
+the <a href="/blog/testing/what-is-a-unit-test">What is a unit test?</a> post.</p>
+
+<h3 id="then-assert">Then (Assert)</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">Then</code> section is where you assert the expected result. Assertions will ultimately determine the success or failure
+of the test case. Each xUnit framework provides a set of assertion methods. You can use them to assert the expected
+result or you can require a third-party assertion library. For example, <a href="https://www.chaijs.com/">Chai</a> is a popular
+assertion library for Node.js. PHPUnit has a built-in assertion library, but Laravel provides a wrapper for
+the <a href="https://laravel.com/docs/9.x/http-tests#available-assertions">PHPUnit assertions</a>.</p>
+
+<h2 id="dont-abuse-database-fixtures-and-seeds">Don’t abuse database fixtures and seeds</h2>
+
+<p>You may encounter a test suite that uses database fixtures to set the initial state of the database. This is a bad idea.
+Do you remember when we said A RAMP IS A RAMP? if some data is going to change, it’s not a fixture anymore. The
+downsides of using database fixtures are:</p>
+
+<p>You have to run the DB fixtures before each test to prepare the initial state, which makes the test suite slow, and
+coupled. The thing which breaks the test isolation.</p>
+
+<p>Changing a state of a DB fixture in one test will affect the other tests, and it forces you to run them in a specific
+order.</p>
+
+<p>So, what’s a fixture then? A fixture is a piece of data that should not change during the test. It could be a JSON file
+containing a particular response, a file to test the upload functionality, or a database record containing a global
+configuration or a list of countries.</p>
+
+<p><strong>Seeds</strong> are a different thing. Seeds are used to plant initial data to a Database. It’s extremely useful when you need
+to populate your application with data once installed, let’s say an admin user or an example blog post. Seeds are not
+used in the test suite.</p>
+
+<p><strong>So, what’s the solution?</strong> use factories! Either factory methods or factory classes.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>In this post, we talked about the location of test files, <strong>in-place</strong> or <strong>out-of-place</strong>. We also talked about using
+plain English to name the test methods and separating words by underscores. The <code class="language-plaintext highlighter-rouge">Given-When-Then</code>
+or <code class="language-plaintext highlighter-rouge">Arrange-Act-Assert</code> is a great way to structure test cases. Do you remember what is a fixture? how to use them? and
+the anti-patterns of the <code class="language-plaintext highlighter-rouge">Given</code> section.</p>
+
+</div>
+
+
+    
+
+
+
+
+
+
+<section class="comments-shell" id="comments-section" aria-label="Discussion">
+    <div class="comments-shell__inner comments-collapsible" data-comments-collapsible>
+        <button class="comments-collapsible__toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="comments-panel"
+                data-comments-toggle>
+            <span class="comments-collapsible__copy">
+                <span class="comments-shell__heading" role="heading" aria-level="2">Discussion</span>
+                <span class="comments-collapsible__hint">Open to view reactions and comments</span>
+            </span>
+            <span class="comments-collapsible__icon-wrap" aria-hidden="true">
+                <ion-icon class="comments-collapsible__icon" name="chevron-down-outline"></ion-icon>
+            </span>
+        </button>
+        <div class="comments-collapsible__panel" id="comments-panel" data-comments-panel hidden>
+            <div class="comments-collapsible__embed"
+                 data-giscus-mount
+                 data-giscus-script-src="https://giscus.app/client.js"
+                 data-giscus-repo="imdhemy/imdhemy.github.io"
+                 data-giscus-repo-id="MDEwOlJlcG9zaXRvcnkzNjc1ODI3MjA="
+                 data-giscus-category="General"
+                 data-giscus-category-id="DIC_kwDOFejeAM4C3865"
+                 data-giscus-mapping="pathname"
+                 data-giscus-term=""
+                 data-giscus-strict="1"
+                 data-giscus-reactions-enabled="1"
+                 data-giscus-emit-metadata="0"
+                 data-giscus-input-position="bottom"
+                 data-giscus-theme="light"
+                 data-giscus-lang="en"
+                 data-giscus-loading="lazy"></div>
+        </div>
+    </div>
+</section>
+
+
+
+
+    
+
+
+
+
+<section class="post-navigation-shell">
+    <div class="post-navigation-shell__inner post-navigation">
+        
+        <a class="post-navigation__item" href="/blog/testing/what-is-a-unit-test.html">
+            <span class="post-navigation__label">Previous article</span>
+            <span class="post-navigation__title">What is a unit test</span>
+        </a>
+        
+        
+        <a class="post-navigation__item post-navigation__item--next" href="/blog/dsa/approximating-square-roots-with-newton's-method.html">
+            <span class="post-navigation__label">Next article</span>
+            <span class="post-navigation__title">Approximating square roots with Newton's method</span>
+        </a>
+        
+    </div>
+</section>
+
+
+    
+
+
+
+
+<section class="related-posts-shell">
+    <div class="related-posts-shell__inner">
+        <h2 class="related-posts__heading">Keep reading</h2>
+        <div class="related-posts">
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/php/better-alternatives-to-empty-in-php.html">
+                <span class="related-posts__title">Better alternatives to empty() in PHP</span>
+                <span class="related-posts__meta">Jul 19, 2024</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/testing/what-is-a-unit-test.html">
+                <span class="related-posts__title">What is a unit test</span>
+                <span class="related-posts__meta">Aug 13, 2022</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            <a class="related-posts__item" href="/blog/testing/we-need-more-tests.html">
+                <span class="related-posts__title">We need more tests</span>
+                <span class="related-posts__meta">Jan 31, 2022</span>
+            </a>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+
+            
+        </div>
+    </div>
+</section>
+
+</article>
+
+    </main>
+    <section class="site-footer">
+    <div class="site-footer__inner">
+        <div class="site-footer__container">
+            <p class="site-footer__text">
+                <!-- 2001 - jekyll current year -->
+                &copy; 2021 - 2026 . imdhemy.com Published by Jekyll, hosted on GitHub Pages.
+            </p>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<!-- Main JS file -->
+<script src="/assets/js/dist/main.js?v=1.0.0"></script>
+</body>
+</html>
