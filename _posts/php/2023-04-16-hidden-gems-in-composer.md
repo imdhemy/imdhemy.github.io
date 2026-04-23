@@ -3,7 +3,7 @@ layout: post
 title: Hidden Gems in Composer Every PHP Developer Should Know
 categories: [ php ]
 tags: [ "php", "composer", "dependency-management", "developer-tools", "security" ]
-image: /assets/img/glass-on-music-notes.jpeg
+image: /assets/img/hidden-gems-in-composer.png
 ---
 
 Composer is the most popular PHP dependency manager. I've heard about other package managers like `PEAR` & `Phing`, but
