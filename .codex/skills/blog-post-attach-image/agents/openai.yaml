@@ -1,0 +1,7 @@
+skill:
+  display_name: Blog Post Attach Image
+  short_description: Copy an image into assets/img and set the post image field.
+  default_prompt: >-
+    Use this skill to attach one provided image to one post by copying it into
+    assets/img with an SEO-friendly filename and updating the post front matter
+    image field.
