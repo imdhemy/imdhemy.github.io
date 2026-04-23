@@ -6,7 +6,7 @@ source "https://rubygems.org"
 #
 # This is the version of Ruby you want to use.
 #
-ruby "3.3.4"
+ruby "4.0.0"
 
 # ------------------------------------------------------------------------------
 # Jekyll
@@ -47,4 +47,4 @@ gem "base64"
 # If you have any custom installed gems, put them here!
 #
 
-gem "imdhemy-jekyll-theme", "1.6.0"
+gem "imdhemy-jekyll-theme", "1.7.0"
