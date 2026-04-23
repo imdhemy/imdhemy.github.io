@@ -47,4 +47,4 @@ gem "base64"
 # If you have any custom installed gems, put them here!
 #
 
-gem "imdhemy-jekyll-theme", "1.7.0"
+gem "imdhemy-jekyll-theme", "1.7.1"
