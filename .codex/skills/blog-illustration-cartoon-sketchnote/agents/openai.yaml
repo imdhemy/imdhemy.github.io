@@ -1,0 +1,7 @@
+skill:
+  display_name: Blog Illustration, Minimal Cartoon + Sketchnote Style
+  short_description: Build a cartoon sketchnote blog image prompt from a post.
+  default_prompt: >-
+    Use this skill to create a minimal cartoon plus sketchnote prompt for a
+    blog post thumbnail or an inline illustration by reading the target post
+    first.

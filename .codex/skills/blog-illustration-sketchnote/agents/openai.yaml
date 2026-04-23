@@ -1,0 +1,6 @@
+skill:
+  display_name: Blog Illustration, Sketchnote Style
+  short_description: Build a sketchnote blog image prompt from a post.
+  default_prompt: >-
+    Use this skill to create a sketchnote-style prompt for a blog post
+    thumbnail or an inline illustration by reading the target post first.
