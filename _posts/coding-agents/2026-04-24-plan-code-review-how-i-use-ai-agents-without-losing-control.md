@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Plan, Code, Review: How I Use AI Agents Without Losing Control"
-categories: [ "generic" ]
+categories: [ "coding-agents" ]
 tags: [ "ai", "developer-workflow", "codex", "software-engineering" ]
 image: /assets/img/plan-code-review-how-i-use-ai-agents-without-losing-control.png
 ---
@@ -16,14 +16,16 @@ APIs, and explain unfamiliar ideas without needing a long introduction.
 
 It also needs direction, review, and clear boundaries.
 
+AI agents are useful, but without a workflow they can make you lose ownership of the codebase. My answer became a simple
+loop: **Plan, Code, Review**.
+
 That distinction matters because current AI has not reached AGI yet.
 
 <div class="info" markdown="1">
 [AGI](https://en.wikipedia.org/wiki/Artificial_general_intelligence), or Artificial General Intelligence, is a
 hypothetical type of AI that "matches or surpasses human capabilities across virtually all cognitive tasks."
 
-That distinction matters here because code generation is only one task. Owning a codebase requires context switching,
-judgment, and long-term responsibility.
+That is not what we have today. We have useful agents that work best inside clear, constrained feedback loops.
 </div>
 
 Current AI is still below that bar, but it is already useful in software development.
@@ -48,6 +50,8 @@ decide which one fits the codebase, the team, and the moment.
 **That is the balance I want.**
 
 The question is: **How do I work with an AI agent without losing ownership of the codebase?**
+
+For me, the answer is **PCR: Plan, Code, Review**.
 
 ## The Risk Is Losing the Loop
 
@@ -89,7 +93,7 @@ This is where Codex became part of my daily workflow.
 I created four working modes: `ask`, `plan`, `code`, and `review`. The modes are useful, but the real idea behind them
 is the loop they create.
 
-In some agent setups, these modes could be mapped to skills. The important part is not the mechanism. The important part
+These modes could be mapped to skills. The important part is not the mechanism. The important part
 is that the agent knows which kind of collaboration we are having.
 
 **Plan, Code, Review. (PCR)**
@@ -98,17 +102,19 @@ TDD gave me a loop for writing code: **Red, Green, Refactor**.
 
 PCR gives me a loop for working with AI agents.
 
+`ask` sits before the loop. It is the default discussion mode, like talking with a senior developer in the office. I use
+it to test ideas, compare options, and clarify the problem before I ask for a plan.
+
 <div class="tip" markdown="1">
 The goal is simple: a short planning step, a small implementation slice, then a review step where I stay close to the
 change.
 </div>
 
-| Mode     | Purpose                                                                                                         | Deliverable                         |
-|----------|-----------------------------------------------------------------------------------------------------------------|-------------------------------------|
-| `ask`    | Discuss with Codex like a senior developer in the office. Test ideas, compare options, and clarify the problem. | Clearer question or direction.      |
-| `plan`   | Start the PCR loop. Choose a direction, split the work into slices, and create a checkpoint before code starts. | Implementation slices and risks.    |
-| `code`   | Let the agent write the chosen slice after the problem, direction, and boundary are clear.                      | A small, reviewable code change.    |
-| `review` | Review the changes myself, then use Codex to challenge my thinking and surface risks I may have missed.         | Accepted changes or a new PCR loop. |
+| Step     | Purpose                                                                                                 | Deliverable                         |
+|----------|---------------------------------------------------------------------------------------------------------|-------------------------------------|
+| `plan`   | Choose a direction, split the work into slices, and create a checkpoint before code starts.             | Implementation slices and risks.    |
+| `code`   | Let the agent write the chosen slice after the problem, direction, and boundary are clear.              | A small, reviewable code change.    |
+| `review` | Review the changes myself, then use Codex to challenge my thinking and surface risks I may have missed. | Accepted changes or a new PCR loop. |
 
 The agent is not the owner of the review. I am.
 
@@ -122,22 +128,23 @@ PCR is not a replacement for testing. Tests are still part of the work, especial
 collaboration loop around the agent. It keeps the work small, keeps the decisions visible, and keeps me responsible for
 the result.
 
+For example, instead of asking the agent to "refactor this service," I first ask for a plan. The output I want is not
+code. I want slices, risks, and tests. Only after that do I move to code.
+
 The agent can help me think, plan, and write code faster. But the workflow must keep me close enough to understand the
 change, review the trade-offs, and own the final shape of the code.
 
 ## What Changed in My Work
 
-The biggest change is that I type less code, but I think more deliberately.
+The biggest change is that Codex forced me to make hidden decisions explicit.
 
-Before using Codex this way, some parts of the work were mixed together. I would think, design, type, test, refactor,
-and review in one long flow. That can work, especially when I know the area well. It also hides decisions inside motion.
-A design choice can happen while writing a function. A trade-off can happen while fixing a test. A shortcut can happen
-because I am tired and the code is already open.
+Before using Codex this way, I would often think, design, type, test, refactor, and review in one long flow. That can
+work, especially when I know the area well. It also hides decisions inside motion. A design choice can happen while
+writing a function. A trade-off can happen while fixing a test. A shortcut can happen because I am tired and the code is
+already open.
 
 Because the agent can move quickly, I had to become clearer about when I am thinking and when I am executing. I had to
 name the mode, explain the goal, and decide whether I wanted discussion, planning, implementation, or review.
-
-That extra clarity improved my own process.
 
 Sometimes it gives me a solution I did not expect. Sometimes that solution is better than mine, and sometimes it is
 technically correct but wrong for the project. Both cases are useful.
@@ -148,7 +155,7 @@ That is one of the hidden benefits of working with an AI agent. If I cannot expl
 will often step over it. That is annoying, but it is also feedback. It shows me where my own understanding,
 documentation, or architecture is not explicit enough.
 
-So the workflow is about controlling the agent and improving the way I communicate engineering intent.
+So the workflow is about controlling the agent by improving the way I communicate engineering intent.
 
 A good AI workflow makes hidden knowledge more visible. It pushes hidden assumptions into words. It turns "you know what
 I mean" into actual constraints. It makes me say why a boundary matters, why a test should exist, why a shortcut is
@@ -174,3 +181,5 @@ understandable, and owned.
 </div>
 
 Use the agent's speed, but keep your hands on the steering wheel.
+
+The agent can move fast. PCR keeps the work owned.
