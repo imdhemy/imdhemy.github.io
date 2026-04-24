@@ -1,6 +1,205 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-04-24T18:30:16+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-04-24T21:18:39+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
 I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">A Simple Currying Refactor: Remove Pass-Through Arguments</title><link href="https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination.html" rel="alternate" type="text/html" title="A Simple Currying Refactor: Remove Pass-Through Arguments" /><published>2026-03-16T12:32:33+00:00</published><updated>2026-03-16T12:32:33+00:00</updated><id>https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination</id><content type="html" xml:base="https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination.html"><![CDATA[<p>Like I said at the beginning of this series, I wanted refactoring existing code to use currying and partial
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Plan, Code, Review: How I Use AI Agents Without Losing Control</title><link href="https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control.html" rel="alternate" type="text/html" title="Plan, Code, Review: How I Use AI Agents Without Losing Control" /><published>2026-04-24T00:00:00+00:00</published><updated>2026-04-24T00:00:00+00:00</updated><id>https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control</id><content type="html" xml:base="https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control.html"><![CDATA[<p>I have been integrating AI agents into my workflow as a developer. The most useful mental model so far is simple: I
+treat the AI agent like another developer on the team.</p>
+
+<p>Yes, developer.</p>
+
+<p>It is fast, generalist, and familiar with many languages, frameworks, and patterns. It can type code quickly, explore
+APIs, and explain unfamiliar ideas without needing a long introduction.</p>
+
+<p>It also needs direction, review, and clear boundaries.</p>
+
+<p>AI agents are useful, but without a workflow they can make you lose ownership of the codebase. My answer became a simple
+loop: <strong>Plan, Code, Review</strong>.</p>
+
+<p>That distinction matters because current AI has not reached AGI yet.</p>
+
+<div class="info">
+  <p><a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence">AGI</a>, or Artificial General Intelligence, is a
+hypothetical type of AI that “matches or surpasses human capabilities across virtually all cognitive tasks.”</p>
+
+  <p>That is not what we have today. We have useful agents that work best inside clear, constrained feedback loops.</p>
+</div>
+
+<p>Current AI is still below that bar, but it is already useful in software development.</p>
+
+<p>Programming is a good environment for current AI agents because programming languages have clear syntax and strong
+feedback loops. Compilers complain. Tests fail. Linters point at mistakes. Runtime errors show where reality disagrees
+with the generated code. In many cases, failure is visible.</p>
+
+<p>That makes code generation a strong use case for the AI agent.</p>
+
+<p>I cannot beat the AI agent in typing, it is far faster than me. The same applies to exploring APIs, generating
+boilerplate, and moving across topics quickly.</p>
+
+<p>But I am much better than the AI agent at other parts of the work.</p>
+
+<p>I can switch contexts with memory. I can connect today’s decision to something that happened six months ago. I can make
+better calls in the languages and frameworks I have mastered. I can listen to valid trade-offs from the AI agent, then
+decide which one fits the codebase, the team, and the moment.</p>
+
+<p><strong>The AI agent has speed and breadth. I have context, ownership, and judgment.</strong></p>
+
+<p><strong>That is the balance I want.</strong></p>
+
+<p>The question is: <strong>How do I work with an AI agent without losing ownership of the codebase?</strong></p>
+
+<p>For me, the answer is <strong>PCR: Plan, Code, Review</strong>.</p>
+
+<h2 id="the-risk-is-losing-the-loop">The Risk Is Losing the Loop</h2>
+
+<p>The biggest risk I found was volume. Humans already produce enough bad code.</p>
+
+<p>An AI agent can produce too much code too quickly, and that creates too much review too quickly. After a while, the
+developer can become tired, passive, and disconnected from the work.</p>
+
+<p>That is what I wanted to avoid. I did not want to approve changes because they looked fine, or scroll through generated
+code while slowly losing the thread. I wanted the codebase to remain something I understand and own.</p>
+
+<p>This is what I call losing the loop.</p>
+
+<div class="caution">
+  <p>You lose the loop when you cannot explain why the change exists, describe the trade-off, or tell whether the solution
+belongs in the system. Speed helps only when understanding keeps up with it. Otherwise, speed becomes noise.</p>
+</div>
+
+<p>This is close to the same risk I wrote about in <a href="/blog/generic/the-pipeline-ate-my-code.html">The pipeline ate my code</a>.
+Automation can help you, but it cannot carry your engineering judgment for you.</p>
+
+<p>So I needed a loop, not just a better prompt.</p>
+
+<p>The model I wanted was close to pairing with another senior developer. A good engineer gives me another perspective,
+surprises me with different solutions, and creates pressure to explain my thinking out loud. That pressure is useful
+because explaining a decision often improves it.</p>
+
+<p>I wanted that from the AI agent, but I also needed boundaries.</p>
+
+<p>A human teammate usually understands when we are brainstorming, designing, coding, or reviewing. With an AI agent, I had
+to make those modes explicit.</p>
+
+<h2 id="plan-code-review">Plan, Code, Review</h2>
+
+<p><img src="/assets/img/plan-code-review-how-i-use-ai-agents-without-losing-control-pcr.png" alt="Plan, Code, Review loop for working with AI agents" /></p>
+
+<p>This is where Codex became part of my daily workflow.</p>
+
+<p>I created four working modes: <code class="language-plaintext highlighter-rouge">ask</code>, <code class="language-plaintext highlighter-rouge">plan</code>, <code class="language-plaintext highlighter-rouge">code</code>, and <code class="language-plaintext highlighter-rouge">review</code>. The modes are useful, but the real idea behind them
+is the loop they create.</p>
+
+<p>These modes could be mapped to skills. The important part is not the mechanism. The important part
+is that the agent knows which kind of collaboration we are having.</p>
+
+<p><strong>Plan, Code, Review. (PCR)</strong></p>
+
+<p>TDD gave me a loop for writing code: <strong>Red, Green, Refactor</strong>.</p>
+
+<p>PCR gives me a loop for working with AI agents.</p>
+
+<p><code class="language-plaintext highlighter-rouge">ask</code> sits before the loop. It is the default discussion mode, like talking with a senior developer in the office. I use
+it to test ideas, compare options, and clarify the problem before I ask for a plan.</p>
+
+<div class="tip">
+  <p>The goal is simple: a short planning step, a small implementation slice, then a review step where I stay close to the
+change.</p>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Purpose</th>
+      <th>Deliverable</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">plan</code></td>
+      <td>Choose a direction, split the work into slices, and create a checkpoint before code starts.</td>
+      <td>Implementation slices and risks.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">code</code></td>
+      <td>Let the agent write the chosen slice after the problem, direction, and boundary are clear.</td>
+      <td>A small, reviewable code change.</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext highlighter-rouge">review</code></td>
+      <td>Review the changes myself, then use Codex to challenge my thinking and surface risks I may have missed.</td>
+      <td>Accepted changes or a new PCR loop.</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The agent is not the owner of the review. I am.</p>
+
+<p>Then I repeat:</p>
+
+<ol>
+  <li>Plan the next slice.</li>
+  <li>Let the agent code it.</li>
+  <li>Review the result and challenge the decisions.</li>
+</ol>
+
+<p>PCR is not a replacement for testing. Tests are still part of the work, especially in the code step. PCR is the
+collaboration loop around the agent. It keeps the work small, keeps the decisions visible, and keeps me responsible for
+the result.</p>
+
+<p>For example, instead of asking the agent to “refactor this service,” I first ask for a plan. The output I want is not
+code. I want slices, risks, and tests. Only after that do I move to code.</p>
+
+<p>The agent can help me think, plan, and write code faster. But the workflow must keep me close enough to understand the
+change, review the trade-offs, and own the final shape of the code.</p>
+
+<h2 id="what-changed-in-my-work">What Changed in My Work</h2>
+
+<p>The biggest change is that Codex forced me to make hidden decisions explicit.</p>
+
+<p>Before using Codex this way, I would often think, design, type, test, refactor, and review in one long flow. That can
+work, especially when I know the area well. It also hides decisions inside motion. A design choice can happen while
+writing a function. A trade-off can happen while fixing a test. A shortcut can happen because I am tired and the code is
+already open.</p>
+
+<p>Because the agent can move quickly, I had to become clearer about when I am thinking and when I am executing. I had to
+name the mode, explain the goal, and decide whether I wanted discussion, planning, implementation, or review.</p>
+
+<p>Sometimes it gives me a solution I did not expect. Sometimes that solution is better than mine, and sometimes it is
+technically correct but wrong for the project. Both cases are useful.</p>
+
+<p>The first one teaches me. The second one forces me to explain the system better.</p>
+
+<p>That is one of the hidden benefits of working with an AI agent. If I cannot explain the constraint clearly, the agent
+will often step over it. That is annoying, but it is also feedback. It shows me where my own understanding,
+documentation, or architecture is not explicit enough.</p>
+
+<p>So the workflow is about controlling the agent by improving the way I communicate engineering intent.</p>
+
+<p>A good AI workflow makes hidden knowledge more visible. It pushes hidden assumptions into words. It turns “you know what
+I mean” into actual constraints. It makes me say why a boundary matters, why a test should exist, why a shortcut is
+acceptable, or why a generic abstraction would hurt us.</p>
+
+<p>That is valuable because the collaboration makes my own judgment more explicit.</p>
+
+<h2 id="the-takeaway">The Takeaway</h2>
+
+<p>AI agents are useful because they are fast and broad. Ownership still stays with the developer: the context, the
+trade-offs, and the final decision.</p>
+
+<p>For me, the working model is simple: treat the AI agent as a fast generalist teammate, then manage the collaboration with
+a clear loop.</p>
+
+<div class="tip">
+  <p><strong>Plan. Code. Review.</strong></p>
+
+  <p>That is PCR.</p>
+
+  <p>It is inspired by TDD, but for augmented programming. It is the loop I use to keep AI-assisted work small,
+understandable, and owned.</p>
+</div>
+
+<p>Use the agent’s speed, but keep your hands on the steering wheel.</p>
+
+<p>The agent can move fast. PCR keeps the work owned.</p>]]></content><author><name>Dhemy</name></author><category term="coding-agents" /><category term="ai" /><category term="developer-workflow" /><category term="codex" /><category term="software-engineering" /><summary type="html"><![CDATA[I have been integrating AI agents into my workflow as a developer. The most useful mental model so far is simple: I treat the AI agent like another developer on the team.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/plan-code-review-how-i-use-ai-agents-without-losing-control.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/plan-code-review-how-i-use-ai-agents-without-losing-control.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">A Simple Currying Refactor: Remove Pass-Through Arguments</title><link href="https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination.html" rel="alternate" type="text/html" title="A Simple Currying Refactor: Remove Pass-Through Arguments" /><published>2026-03-16T12:32:33+00:00</published><updated>2026-03-16T12:32:33+00:00</updated><id>https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination</id><content type="html" xml:base="https://imdhemy.com/blog/fp/core-heuristic-pass-through-argument-elimination.html"><![CDATA[<p>Like I said at the beginning of this series, I wanted refactoring existing code to use currying and partial
 application to feel natural and intuitive. This heuristic is a big part of that.</p>
 
 <p>This post covers one simple heuristic for spotting those cases. By the end, you should be able to look at a small
@@ -1002,48 +1201,4 @@ best.</p>
 
 <p>At the end of the day, the people will remember how you made them feel, it’s not about how good you are at your job.
 It’s also crucial to <a href="/blog/generic/the-pipeline-ate-my-code.html">pay attention to the feedback</a> you receive and
-to be open to change.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><category term="career" /><category term="teamwork" /><category term="workplace-culture" /><category term="leadership" /><category term="reflection" /><summary type="html"><![CDATA[Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently, our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other navigating a more difficult transition. I’ve been taught a valuable lesson last week!]]></summary></entry><entry><title type="html">HTTP Client Factory Code Refactoring</title><link href="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html" rel="alternate" type="text/html" title="HTTP Client Factory Code Refactoring" /><published>2024-10-27T00:00:00+00:00</published><updated>2024-10-27T00:00:00+00:00</updated><id>https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring</id><content type="html" xml:base="https://imdhemy.com/blog/dev-log/http-client-factory-code-refactoring.html"><![CDATA[<p>I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for
-HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and
-configurations.</p>
-
-<p>The system started with a single API, “PeelAPI,” for which we provided a <code class="language-plaintext highlighter-rouge">createClient</code> function that returned an Axios
-instance with the correct configuration. When we added a second API, “BunchAPI,” we created another <code class="language-plaintext highlighter-rouge">createClient</code>
-function for it, but in a different subdomain. The same was done for the third API, “SplitAPI.” For each Axios instance,
-we wrapped errors in a custom error class to identify the source of the error, accomplished by a response interceptor.</p>
-
-<div class="tip">
-  <p>One API, one <code class="language-plaintext highlighter-rouge">createClient</code>—simple, right? Fast forward to three APIs, and now it’s like juggling bananas 🍌🍌🍌 with TypeScript.</p>
-</div>
-
-<p>The issue is that we now have a lot of duplicated code, and the <code class="language-plaintext highlighter-rouge">createClient</code> functions break the Single Responsibility
-Principle, as they are responsible for both creating the client and handling authentication. I’m uncertain whether it’s
-best to keep error wrapping within the same function or move it to a separate module after the client is created.</p>
-
-<p>To add complexity, since client tokens are cached in Redis, we need to pass the Cache service to the <code class="language-plaintext highlighter-rouge">createClient</code>
-function, although not all clients require token caching. This results in different signatures for each <code class="language-plaintext highlighter-rouge">createClient</code>
-function.</p>
-
-<p>I’m considering using a Factory pattern for client creation. The plan is to unify or standardize the client creation
-functions so they have a consistent signature, allowing us to replace them with a single Factory function that creates
-clients based on configuration.</p>
-
-<p>I discovered that <code class="language-plaintext highlighter-rouge">baseURL</code> is the only configuration that varies between clients so far. I’m unsure whether it’s best
-to accept a configuration object or just <code class="language-plaintext highlighter-rouge">baseURL</code> as a parameter. I chose <code class="language-plaintext highlighter-rouge">baseURL</code>, as it’s easier to handle only when
-needed than creating a configuration object with a single property.</p>
-
-<p>Last week, I began refactoring the “PeelAPI” client and ended up with a <code class="language-plaintext highlighter-rouge">createClient(baseURL: string): AxiosInstance</code>
-function, which returns an Axios instance with the correct configuration. I then moved on to “BunchAPI,” which was less
-straightforward because, unlike “PeelAPI,” “BunchAPI” requires authentication. I had to extract the authentication logic
-into a separate function. I didn’t change the signature of the <code class="language-plaintext highlighter-rouge">createClient</code> function, planning to address that in the
-next merge request.</p>
-
-<div class="tip">
-  <p>Once standardized, Factory Pattern will take the wheel. But the question remains: what’s the cleanest way to handle authentication? 🤔 #CodeDesign</p>
-</div>
-
-<p>The first merge request is already merged, but I’m waiting for the second one to be reviewed. Once it’s merged, I will
-standardize the <code class="language-plaintext highlighter-rouge">createClient</code> functions, ensuring that the first two API clients have a consistent signature. Then, the
-third API client will be refactored in two steps: first to address authentication, then to standardize the signature.</p>
-
-<p>After all <code class="language-plaintext highlighter-rouge">createClient</code> functions are standardized, I’ll create the Factory function to generate clients based on
-configuration. I still need to determine a clean way to handle authentication. Do you have any suggestions?</p>]]></content><author><name>Dhemy</name></author><category term="dev-log" /><category term="typescript" /><category term="refactoring" /><category term="design-patterns" /><category term="http-clients" /><category term="software-architecture" /><summary type="html"><![CDATA[I’m working on a Proxy/Adapter project, which we’ll call “Banana.” Banana is developed in TypeScript and uses Axios for HTTP requests. It’s designed to communicate with different APIs, each with distinct authentication methods and configurations.]]></summary></entry></feed>
+to be open to change.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><category term="career" /><category term="teamwork" /><category term="workplace-culture" /><category term="leadership" /><category term="reflection" /><summary type="html"><![CDATA[Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently, our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other navigating a more difficult transition. I’ve been taught a valuable lesson last week!]]></summary></entry></feed>
