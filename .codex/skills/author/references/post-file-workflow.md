@@ -10,15 +10,18 @@ Approval must be explicit in chat.
 
 ## New Post Location
 
-Create new posts as drafts by default:
+Create new posts under `_posts` by default unless Dhemy explicitly asks for a draft:
 
 ```text
-_drafts/<category>/<slug>.md
+_posts/<category>/<YYYY-MM-DD>-<slug>.md
 ```
 
 If the category is unknown, ask Dhemy. Do not silently choose a category unless the conversation makes it clear.
 
 Use `generic` only when Dhemy accepts the default or the topic clearly belongs there.
+
+Use the current date in `YYYY-MM-DD` format as the filename prefix. Only create files under `_drafts` when Dhemy asks for
+a draft.
 
 ## Slug
 
@@ -32,7 +35,7 @@ Generate a lowercase slug from the final title:
 
 ## Front Matter
 
-Use this minimum front matter for new drafts:
+Use this minimum front matter for new posts:
 
 ```yaml
 ---
@@ -45,7 +48,7 @@ tags: []
 
 Rules:
 
-- Omit `date` for drafts unless Dhemy asks for it.
+- Omit `date` because the post date is expressed by the filename unless Dhemy asks for an explicit front matter date.
 - Omit `image`, `image_alt`, and `image_source` unless an image exists.
 - Add `math: true` only when the post uses MathJax.
 - Do not add `created_at` or `updated_at` unless the target repo convention changes or an existing post already uses them.

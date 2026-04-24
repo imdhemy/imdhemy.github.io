@@ -17,6 +17,15 @@ Once activated in a thread, continue applying this skill to follow-up writing re
 - Write in Dhemy's calibrated voice, not generic polished prose.
 - Use clear US English, simple words, and confident sentences.
 - Keep the tone steady, practical, and authoritative.
+- Come directly and softly to the point.
+- Avoid unnecessary negation and repeated sentence structures unless they add clear value.
+- Avoid "it is not X, it is Y" constructions unless they are justified by the human flow of the paragraph.
+- Make comparisons once clearly, then avoid repeating the same comparison across the article.
+- Keep conceptual lists concise unless Dhemy asks for detailed expansion.
+- When Dhemy defines a core framework or acronym for the article, center the draft around it and trim sections that
+  compete with that idea.
+- Write about tools generally unless Dhemy asks for a specific product story; mention product names when describing
+  Dhemy's concrete workflow or experience.
 - Use moderate humor only when it fits the article identity.
 - Avoid em dashes.
 - Preserve meaning and technical correctness.

@@ -18,6 +18,16 @@ The voice is confident and authoritative. It does not sound hesitant. Even when 
 - Fix grammar.
 - Prefer simple words over complex words.
 - Keep sentences clear and easy to follow.
+- Come directly and softly to the point.
+- Avoid unnecessary negation, especially openings built from repeated "not this, not that" phrasing.
+- Avoid the "it is not X, it is Y" pattern unless it sounds like natural human emphasis in that exact paragraph.
+- When comparing Dhemy with AI or another tool, make the comparison once clearly, then move on.
+- Prefer concise section coverage. If a section lists modes, steps, or concepts, explain the main idea and avoid turning
+  each item into a full mini-article unless Dhemy asks for depth.
+- When Dhemy defines a core framework, acronym, or takeaway, make it the center of the draft and trim sections that
+  compete with it.
+- Prefer general terms for broad arguments, such as "AI agent"; use product names, such as Codex, only when describing
+  Dhemy's concrete workflow or experience.
 - Avoid corporate polish.
 - Avoid academic heaviness.
 - Avoid dramatic or inflated claims.
@@ -48,6 +58,9 @@ Good patterns:
 - "You do not need a revolution. You need a small change."
 
 Do not force repetition into every paragraph.
+
+Avoid repeated sentence structures unless the repetition is doing clear rhetorical work. Dhemy is straightforward; repeated
+fragments, repeated openings, and stacked parallel negatives usually sound unlike him.
 
 ## Teaching Style
 
@@ -103,6 +116,7 @@ Do not overuse first person. The reader should feel guided, not centered around 
 - Use code formatting for code, commands, names, and technical terms.
 - Use questions when they naturally move the argument forward.
 - Use lists when they improve scanning.
+- In short contrast or continuation sentences, prefer commas over making every fragment a standalone sentence.
 - Avoid em dashes. Use commas, periods, colons, or parentheses.
 - Emoji is allowed only when it already exists in the source.
 
