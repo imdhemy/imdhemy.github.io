@@ -1047,6 +1047,7 @@ h6 {
 .site-header__container,
 .hero-section__container,
 .latest-posts__container,
+.certificates__container,
 .contributions__container,
 .testimonials__container,
 .page-header-wrap__container {
@@ -1102,6 +1103,9 @@ h6 {
 .nav-link:focus-visible,
 .primary-button:focus-visible,
 .secondary-button:focus-visible,
+.certificate-card__image-button:focus-visible,
+.certificate-card__credential-link:focus-visible,
+.certificate-modal__close:focus-visible,
 .site-logo:focus-visible,
 .post-back-link:focus-visible,
 .post-card__title-link:focus-visible,
@@ -1476,12 +1480,14 @@ h6 {
 }
 
 .latest-posts,
+.certificates,
 .contributions,
 .testimonials {
   margin-bottom: 2rem;
 }
 
 .latest-posts__inner,
+.certificates__inner,
 .contributions__inner,
 .testimonials__inner {
   padding: 1.25rem;
@@ -1492,6 +1498,7 @@ h6 {
 }
 
 .latest-posts__title,
+.certificates__title,
 .contributions__title,
 .testimonials__title {
   margin-bottom: 2rem;
@@ -2414,10 +2421,209 @@ h6 {
 }
 
 .contributions__grid,
+.certificates__grid,
 .testimonials__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.25rem;
+}
+
+.certificates__grid {
+  gap: 1rem;
+}
+
+.certificate-card {
+  display: flex;
+  min-width: 0;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--color-border) 72%, #ffffff 28%);
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--color-surface) 96%, var(--color-brand-surface) 4%);
+}
+
+.certificate-card__image-button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 14rem;
+  padding: 1rem;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 68%, #ffffff 32%);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-brand-surface) 58%, #ffffff 42%), #ffffff);
+  cursor: zoom-in;
+}
+
+.certificate-card__image-button:hover .certificate-card__image-frame,
+.certificate-card__image-button:focus-visible .certificate-card__image-frame {
+  transform: translateY(-2px);
+}
+
+.certificate-card__image-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 24rem);
+  aspect-ratio: 1.414/1;
+  padding: 0.45rem;
+  border: 1px solid color-mix(in srgb, var(--color-border) 70%, #ffffff 30%);
+  border-radius: 0.35rem;
+  background: #ffffff;
+  transition: transform 0.2s ease;
+}
+
+.certificate-card__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.certificate-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 1.1rem;
+}
+
+.certificate-card__title {
+  margin: 0;
+  font-size: var(--font-heading-sm-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-heading-sm-line-height);
+  color: var(--color-text);
+}
+
+.certificate-card__issuer {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.certificate-card__issuer-logo {
+  display: block;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 1.35rem;
+  object-fit: contain;
+}
+
+.certificate-card__issuer-text {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.certificate-card__issuer-name {
+  font-size: var(--font-text-sm-size);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--font-text-sm-line-height);
+  color: var(--color-text);
+}
+
+.certificate-card__date {
+  font-size: var(--font-text-sm-size);
+  line-height: var(--font-text-sm-line-height);
+  color: var(--color-muted);
+}
+
+.certificate-card__credential-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  align-self: flex-start;
+  min-height: 2.75rem;
+  margin-top: auto;
+  padding: 0.65rem 0;
+  border-radius: 999px;
+  font-size: var(--font-text-sm-size);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  color: var(--color-brand);
+  background: transparent;
+}
+
+.certificate-card__credential-link:hover {
+  color: var(--color-brand-strong);
+}
+
+.certificate-modal {
+  width: min(100% - 2rem, 960px);
+  max-height: min(100% - 2rem, 860px);
+  margin: auto;
+  padding: 0;
+  border: 1px solid color-mix(in srgb, var(--color-border) 75%, #ffffff 25%);
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  background: var(--color-surface);
+  box-shadow: 0 24px 80px -32px rgba(15, 23, 42, 0.65);
+}
+
+.certificate-modal:not([open]) {
+  display: none;
+}
+
+.certificate-modal[open] {
+  display: block;
+}
+
+.certificate-modal::backdrop {
+  background: rgba(15, 23, 42, 0.68);
+}
+
+.certificate-modal__inner {
+  display: flex;
+  max-height: inherit;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.certificate-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0.85rem 0.85rem 1rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--color-border) 75%, #ffffff 25%);
+}
+
+.certificate-modal__title {
+  margin: 0;
+  font-size: var(--font-heading-xs-size);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--font-heading-xs-line-height);
+}
+
+.certificate-modal__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 0.5rem;
+  color: var(--color-text);
+  background: transparent;
+}
+
+.certificate-modal__close ion-icon {
+  font-size: 1.5rem;
+}
+
+.certificate-modal__image {
+  display: block;
+  width: 100%;
+  max-height: calc(100vh - 8rem);
+  padding: 1rem;
+  object-fit: contain;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--color-brand-surface) 52%, #ffffff 48%), #ffffff);
 }
 
 .contributions__item {
@@ -2866,6 +3072,11 @@ h6 {
     font-size: clamp(var(--font-heading-lg-size), 7.2vw, var(--font-heading-xl-size));
   }
 }
+@media (min-width: 768px) {
+  .certificates__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
 @media (min-width: 1024px) {
   .page-header-wrap--blog .page-header-wrap__container,
   .page-header-wrap--archive .page-header-wrap__container,
@@ -2905,6 +3116,7 @@ h6 {
     line-height: var(--font-text-lg-line-height);
   }
   .latest-posts__inner,
+  .certificates__inner,
   .contributions__inner,
   .testimonials__inner {
     padding: 1.25rem;
@@ -3010,6 +3222,7 @@ h6 {
     line-height: 1.05;
   }
   .contributions__grid,
+  .certificates__grid,
   .testimonials__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
