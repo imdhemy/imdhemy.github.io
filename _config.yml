@@ -177,3 +177,29 @@ theme_comments:
     theme: "light"
     lang: "en"
     loading: "lazy"
+
+# -------------------------------------------------------------------------------------------------
+# Certificates
+# -------------------------------------------------------------------------------------------------
+certificates:
+  - title: "Collaborate Effectively for Professional Success"
+    issuer: "IBM"
+    issuer_logo: "theme/images/certificates/ibm.png"
+    issue_date: "November 5, 2025"
+    image: "theme/images/certificates/ibm-collaborate-effectively.png"
+    image_alt: "IBM Collaborate Effectively for Professional Success Certificate"
+    credential_url: "https://www.coursera.org/account/accomplishments/verify/UNWV7YPHWJ0G"
+  - title: "Domain Driven Design Made Easy"
+    issuer: "Educative"
+    issuer_logo: "theme/images/certificates/educative.svg"
+    issue_date: "May 19, 2026"
+    image: "theme/images/certificates/educative-ddd.png"
+    image_alt: "Educative Domain Driven Design Made Easy Certificate"
+    credential_url: "https://www.educative.io/verify-certificate/X7HQCQUVDH"
+  - title: "Distributed Systems for Practitioners"
+    issuer: "Educative"
+    issuer_logo: "theme/images/certificates/educative.svg"
+    issue_date: "May 28, 2026"
+    image: "theme/images/certificates/educative-distributed-systems.png"
+    image_alt: "Educative Distributed Systems for Practitioners Certificate"
+    credential_url: "https://www.educative.io/verify-certificate/DYZPFWATGY"
