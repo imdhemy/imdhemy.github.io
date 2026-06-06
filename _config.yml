@@ -111,12 +111,36 @@ contributions:
 # Testimonials
 # -------------------------------------------------------------------------------------------------
 testimonials:
+  - name: "Nikolaus Huber"
+    description: "Software Architect at Reservix GmbH"
+    image: "theme/images/testimonials/niko.jpeg"
+    content: |
+      While working with Dhemy, I noticed him as a very proficient engineer with a broad knowledge on software 
+      engineering and software delivery and strong ownership for what he does. When giving him a task, I was sure 
+      that he will take care of it. I also like his willingness to learn new things and that he is also not afraid to
+      dive into problems/challenges he has not dealt with before. He also helps others to learn and grow.
+
+  - name: "Carsten Müller"
+    description: "Team lead Software Development at Reservix GmbH"
+    image: "theme/images/testimonials/carsten.jpeg"
+    content: |
+      I can wholeheartedly recommend Dhemy as both an exceptional developer and a very good teammate. He 
+      combines deep technical expertise with a proactive mindset that consistently drives projects forward.
+      I have been particularly impressed by his ability to independently master complex new technologies and 
+      translate them into clear technical visions and long-term strategies. 
+      Dhemy doesn't just take full ownership of his responsibilities; he is also an outstanding mentor. He always 
+      makes time for questions and is deeply committed to helping other developers grow and succeed.
+
   - name: "Dogan Aydin"
     description: "TurkNet CTO"
     image: "theme/images/testimonials/dogan-aydin.jpg"
     content: |
-      Endorsing Dhemy for his exceptional coding skills and commitment to best practices. 
-      With an R&D engineer mindset and meticulous approach to code structure, I highly recommend Dhemy to any company.
+      I remember the time when we were trying to find senior software developers as it was really challenging. 
+      At that time, we met with Mohamad and shared a project with him and wanted him to complete the project. 
+      When he shared his source code with us, we found that the source code was quite impressive. 
+      he always tries to find the best practice and approach to solve the problems that are given to him. 
+      Therefore, he is a really good fit for companies which really care about engineering as Mohamad really cares about
+      the structure of source codes, design patterns etc.
 
   - name: "Obada Qawwas"
     description: "Frontend Tech Lead at Valtech"
