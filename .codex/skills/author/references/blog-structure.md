@@ -1,27 +1,29 @@
 # Blog Structure
 
-Dhemy's posts usually work best when they teach one practical idea clearly.
+Dhemy's technical writing works best when it teaches one practical idea clearly.
 
-## Common Shape
+Use an essence-first shape by default. Do not force it when another structure better serves the piece.
 
-1. Hook with a story, claim, analogy, or real team problem.
-2. Define the main concept in plain language.
-3. Show the software or team context.
-4. Explain the failure mode.
-5. Offer a practical alternative.
+## Essence-First Shape
+
+1. Hook with a story, memory, practical claim, historical note, or concrete team problem.
+2. Define the core concept in plain language.
+3. Make the abstraction concrete with an analogy, example, or code.
+4. Show the failure mode.
+5. Offer the practical alternative.
 6. Close with a strong, simple takeaway.
-
-Do not force every post into this exact shape. Use it as a default when the user gives only an idea.
 
 ## Strong Openings
 
 Good openings can start with:
 
-- a small story
+- a personal engineering memory
+- a small story from a team or project
 - a practical claim
 - a surprising comparison
-- a concrete team situation
+- a concrete failure mode
 - a simple question
+- a short historical note when history genuinely clarifies the idea
 
 Avoid generic openings:
 
@@ -29,16 +31,51 @@ Avoid generic openings:
 - "This article explores..."
 - "Let's dive into..."
 - "It is important to understand..."
+- "As technology continues to evolve..."
 
 ## Thesis
 
-The thesis should be one clear sentence.
+The thesis should be one clear sentence. It should name the point, not circle around it.
 
 Examples of useful thesis shapes:
 
 - "Small changes beat big rewrites because they keep feedback alive."
 - "A test name should describe behavior, not implementation."
-- "A pipeline is not a replacement for engineering judgment."
+- "A pipeline is useful only when engineers keep their judgment."
+- "The simplest abstraction is the one the team can use without ceremony."
+
+## Failure Mode
+
+The failure mode shows the cost of ignoring the idea.
+
+Good failure modes explain:
+
+- what breaks
+- what slows down
+- what becomes harder to reason about
+- what risk grows silently
+- what the team starts normalizing
+
+Do not exaggerate. Make the risk specific.
+
+## Analogy
+
+Use physical analogies when they make the idea easier to hold.
+
+Good analogies are:
+
+- simple
+- concrete
+- short
+- connected to the technical point
+
+Avoid analogies that become the article.
+
+## Code
+
+When code is the clearest explanation, show it early.
+
+Use code to make the smallest reusable building block visible. Keep examples minimal and focused. Avoid needless variables, syntax, and scaffolding.
 
 ## Sections
 
@@ -48,6 +85,7 @@ Good section jobs:
 
 - define a term
 - expose a problem
+- show a failure mode
 - compare two options
 - explain a rule
 - give an example
@@ -61,7 +99,7 @@ End with a practical takeaway. The reader should know what to do next or what id
 
 Good endings are firm and simple:
 
-- "Start small. Keep going. Let the progress stack up."
+- "Start small. Keep moving. Let the progress stack up."
 - "Make the test readable first. The structure will follow."
 - "The pipeline can help you. It cannot think for you."
 

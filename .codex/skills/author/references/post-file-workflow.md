@@ -1,14 +1,24 @@
 # Post File Workflow
 
-Use this workflow when creating or updating Markdown files.
+Use this workflow when creating or updating Markdown or writing files.
 
 ## Approval
 
-Always ask approval before creating or editing files.
+Always ask explicit approval before creating or editing writing files.
 
-Approval must be explicit in chat.
+Approval must be explicit in chat. Do not infer approval from a general writing request.
 
-## New Post Location
+## General Writing Files
+
+When working outside the blog post structure:
+
+- preserve the existing file format
+- preserve metadata unless Dhemy asks to change it
+- preserve links, images, code blocks, embeds, and special syntax unless a change is approved
+- edit only the requested scope
+- ask before renaming, moving, or deleting files
+
+## New Blog Post Location
 
 Create new posts under `_posts` by default unless Dhemy explicitly asks for a draft:
 
@@ -20,8 +30,7 @@ If the category is unknown, ask Dhemy. Do not silently choose a category unless 
 
 Use `generic` only when Dhemy accepts the default or the topic clearly belongs there.
 
-Use the current date in `YYYY-MM-DD` format as the filename prefix. Only create files under `_drafts` when Dhemy asks for
-a draft.
+Use the current date in `YYYY-MM-DD` format as the filename prefix. Only create files under `_drafts` when Dhemy asks for a draft.
 
 ## Slug
 
@@ -54,7 +63,7 @@ Rules:
 - Do not add `created_at` or `updated_at` unless the target repo convention changes or an existing post already uses them.
 - Preserve existing front matter when editing posts, except for approved title changes.
 
-## Existing Posts
+## Existing Blog Posts
 
 When editing an existing post:
 
@@ -65,8 +74,8 @@ When editing an existing post:
 
 ## Final Response
 
-After creating or updating a post, return:
+After creating or updating a file, return:
 
-- the post path
+- the file path
 - a short summary of what changed
-- any useful next step, such as adding an image
+- any useful next step, such as adding an image or reviewing a section

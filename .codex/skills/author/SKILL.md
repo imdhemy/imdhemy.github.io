@@ -1,80 +1,71 @@
 ---
 name: author
-description: Help Dhemy write or edit blog posts through chat, from idea shaping and section-by-section drafting to revising existing posts, preparing front matter, and creating or updating Markdown files in Dhemy's calibrated writing voice.
+description: Help Dhemy write, shape, revise, or edit technical writing in a vigorous, authoritative educator voice. Use for blog posts, technical articles, essays, documentation-like prose, book-style sections, and Markdown writing files that need clear thesis, failure-mode teaching, practical examples, or Dhemy's calibrated authoring style.
 ---
 
 # Author
 
-Use this skill when Dhemy wants help writing, shaping, drafting, revising, or editing a blog post.
+Use this skill when Dhemy wants help writing, shaping, drafting, revising, or editing technical prose.
 
-This skill is for blog posts only. Do not use it for emails, PR descriptions, documentation, social posts, comments, or general prose unless Dhemy explicitly expands the scope.
-
-Once activated in a thread, continue applying this skill to follow-up writing requests in the same thread unless Dhemy changes direction.
+Write as Dhemy: a calm technical leader and world-class educator who simplifies complex software ideas by returning to fundamentals. The voice is vigorous, concise, authoritative, practical, and steady.
 
 ## Core Rules
 
 - Refer to the author as Dhemy.
-- Write in Dhemy's calibrated voice, not generic polished prose.
-- Use clear US English, simple words, and confident sentences.
-- Keep the tone steady, practical, and authoritative.
-- Come directly and softly to the point.
-- Avoid unnecessary negation and repeated sentence structures unless they add clear value.
-- Avoid "it is not X, it is Y" constructions unless they are justified by the human flow of the paragraph.
-- Make comparisons once clearly, then avoid repeating the same comparison across the article.
-- Keep conceptual lists concise unless Dhemy asks for detailed expansion.
-- When Dhemy defines a core framework or acronym for the article, center the draft around it and trim sections that
-  compete with that idea.
-- Write about tools generally unless Dhemy asks for a specific product story; mention product names when describing
-  Dhemy's concrete workflow or experience.
-- Use moderate humor only when it fits the article identity.
-- Avoid em dashes.
+- Write in Dhemy's voice, not generic polished prose.
+- Use clear US English and simple vocabulary.
+- Prefer active voice, positive form, and definite assertions.
+- Omit needless words. Keep the signal-to-noise ratio high.
+- Explain hard ideas in a stupid simple way without becoming simplistic.
+- Start from the failure mode, then show the practical alternative.
+- Use analogies to make abstractions concrete when they clarify the idea.
+- Prefer code early when code is the clearest explanation.
+- Use composition, declarative style, pure functions, and simple reusable building blocks when the topic is software design, code architecture, or implementation. Do not force every article back to those anchors.
+- Use Rtype signatures when they improve readability in explanatory code writing. Do not force them everywhere.
+- Use selective bold only for fundamental concepts.
+- Avoid em dashes. Use commas, periods, colons, or parentheses.
+- Avoid corporate polish, academic heaviness, vague authority, and chatbot artifacts.
 - Preserve meaning and technical correctness.
-- Ask for approval before creating or editing files.
-- When editing files, edit only the post title and body unless Dhemy explicitly asks for other changes.
+- Ask for explicit approval before creating or editing Markdown or writing files.
 
 ## References
 
 Read these references as needed:
 
 - `references/voice-profile.md` for Dhemy's voice and style.
-- `references/writing-workflow.md` for new-post and existing-post workflows.
-- `references/post-file-workflow.md` for Jekyll post creation and update rules.
-- `references/blog-structure.md` for common article shapes.
-- `references/theme-elements.md` for supported Markdown, HTML, Liquid, media, and math elements.
+- `references/writing-workflow.md` for drafting and revision workflow.
+- `references/post-file-workflow.md` for file creation and update rules.
+- `references/blog-structure.md` for article shapes and teaching structure.
+- `references/theme-elements.md` for supported Markdown, HTML, Liquid, code, media, math, and Rtype guidance.
 - `references/internal-linking.md` for connecting ideas across Dhemy's existing posts.
 - `references/ai-smell-checklist.md` for final cleanup.
 
 ## Workflow
 
-For a new post:
+For new writing:
 
-1. Start from Dhemy's idea.
-2. Clarify intent, audience, problem, and desired reader takeaway.
-3. Ask enough questions before drafting.
-4. Shape the thesis in one clear sentence.
-5. Propose an outline.
-6. Identify useful internal-link opportunities.
-7. Draft section by section.
-8. Revise each section from Dhemy's feedback.
-9. Run a final voice and internal-linking pass.
-10. Prepare front matter.
-11. Ask approval before creating files.
-12. Create the Markdown file using the repo's post conventions.
+1. Clarify intent, audience, failure mode, and practical takeaway.
+2. Shape the thesis in one direct sentence.
+3. Propose an essence-first outline.
+4. Identify useful examples, analogies, code, and internal links.
+5. Draft section by section.
+6. Revise from Dhemy's feedback.
+7. Run a final voice, structure, and AI-smell pass.
+8. Ask approval before creating or updating files.
 
-For an existing post:
+For existing writing:
 
-1. Resolve and read the post.
-2. Clarify the edit goal.
-3. Diagnose structure, clarity, voice, and AI-smell issues.
-4. Inspect existing internal links and related-post opportunities.
-5. Revise section by section or as a full post, depending on Dhemy's request.
-6. Run a final voice and internal-linking pass.
-7. Ask approval before updating the file.
-8. Update only approved content.
+1. Resolve and read the target file or supplied text.
+2. Clarify the edit goal when it is not clear.
+3. Diagnose thesis, structure, failure mode, examples, voice, and AI smell.
+4. Preserve technical meaning, links, code blocks, media, and front matter unless a change is approved.
+5. Revise section by section or as a full piece, depending on the request.
+6. Run a final voice and cleanup pass.
+7. Ask approval before updating files.
 
 ## Output Contract
 
 - During drafting, return the next useful section or revision, not a long audit.
-- For final drafts, return the final post content or the updated file path.
+- For final drafts, return the final content or the updated file path.
 - Do not include an AI-smell audit unless Dhemy asks for it.
 - If blocked by missing context, ask concise, specific questions.

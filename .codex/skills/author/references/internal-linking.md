@@ -2,7 +2,7 @@
 
 Use internal links to connect Dhemy's ideas across posts when they help the reader continue learning.
 
-Internal links should feel editorial, not mechanical. The goal is reader continuity, not SEO stuffing.
+Internal links should feel editorial, not mechanical. The goal is a learning path, not SEO stuffing.
 
 ## Discovery
 
@@ -15,6 +15,7 @@ Search `_posts/` and `_drafts/` for related posts by:
 - repeated concepts
 - related examples
 - related problems or trade-offs
+- prerequisite ideas
 
 Prefer posts that deepen the current idea or give useful background.
 

@@ -1,26 +1,21 @@
 # Writing Workflow
 
-The canonical workflow is:
+The workflow starts with the failure mode, then moves toward a clear thesis and practical alternative.
 
 ```text
-idea or existing post
--> clarify intent
--> ask enough questions
--> shape thesis
--> outline
--> identify useful internal-link opportunities
+idea or existing text
+-> clarify intent, audience, and failure mode
+-> shape one direct thesis
+-> choose the teaching structure
+-> identify examples, analogies, code, and internal links
 -> draft section by section
--> use theme elements where they improve clarity
--> add internal referrals where they support the argument
--> revise section by section
--> final voice and internal-linking pass
--> prepare or update front matter
--> ask approval
--> create or update Markdown file
--> final post
+-> revise from feedback
+-> run final voice and AI-smell cleanup
+-> ask approval before file changes
+-> create or update the writing file
 ```
 
-## New Posts
+## New Writing
 
 Start with conversation, not a full draft.
 
@@ -28,57 +23,70 @@ Clarify:
 
 - the main idea
 - the intended reader
-- the problem that triggered the post
+- the failure mode or pain that triggered the piece
 - the practical takeaway
-- the desired tone
+- the desired strength of the argument
 - examples Dhemy wants to include
-- whether the post should be a story, teaching article, opinion, or practical guide
+- whether the piece should be a story, teaching article, opinion, practical guide, documentation-like explainer, or book-style section
 
 Then produce:
 
 1. a one-sentence thesis
-2. a concise outline
-3. likely internal-link candidates from existing posts
-4. one drafted section at a time
+2. a concise essence-first outline
+3. likely examples, analogies, and code opportunities
+4. likely internal-link candidates when working on the blog
+5. one drafted section at a time
 
 After each section, accept corrections and direction before continuing.
 
-## Existing Posts
+## Existing Writing
 
-When editing an existing post:
+When editing existing writing:
 
-1. Resolve the file by explicit path, title, slug, or dated filename.
-2. Read the title, front matter, body, links, images, code blocks, embeds, and HTML elements.
+1. Resolve the file, title, slug, or supplied text.
+2. Read enough context to preserve meaning.
 3. Ask what kind of edit Dhemy wants if it is not clear.
-4. Preserve technical meaning.
-5. Preserve links, images, code blocks, Liquid blocks, embeds, and HTML unless a change is approved.
-6. Add or improve internal referrals only when they strengthen the reader's path.
-7. Revise title and body only unless Dhemy explicitly asks for front matter changes.
+4. Identify the thesis, failure mode, practical alternative, and final takeaway.
+5. Preserve technical meaning.
+6. Preserve links, images, code blocks, Liquid blocks, embeds, and HTML unless a change is approved.
+7. Add or improve internal links only when they strengthen the reader's path.
+8. Revise title and body only unless Dhemy explicitly asks for front matter or metadata changes.
 
 Possible edit goals:
 
-- make the post clearer
-- make it more like Dhemy
+- sharpen the thesis
+- clarify the failure mode
+- make the writing more vigorous
 - reduce AI smell
 - improve structure
-- strengthen the thesis
 - tighten language
-- soften harsh criticism
+- soften harsh criticism without weakening the point
 - expand weak sections
 - improve title
+- add stronger examples or analogies
 - connect related ideas across existing posts
+
+## Drafting Rules
+
+- Each section should do one job.
+- Use code early when code is the clearest explanation.
+- Use analogy when analogy carries the abstraction better than more explanation.
+- Prefer concrete examples from software delivery, testing, AI agents, architecture, maintainability, and engineering judgment.
+- Do not over-explain obvious points.
+- Do not stack mini-articles inside one article.
+- Do not hide the point behind setup.
 
 ## Revision
 
 Use two revision levels:
 
 - section-level revision while drafting
-- final voice pass after the whole article is stable
+- final voice pass after the whole piece is stable
 
-The final voice and internal-linking pass should improve clarity, rhythm, confidence, consistency, and reader continuity. It should not turn the post into generic editorial prose or add links that interrupt the argument.
+The final pass should improve clarity, rhythm, confidence, consistency, and reader continuity. It should not turn the writing into generic editorial prose.
 
 ## Questions
 
-Ask enough questions to avoid generic writing. Do not ask questions whose answers are obvious from the post, file, or prior chat.
+Ask enough questions to avoid generic writing. Do not ask questions whose answers are obvious from the text, file, or prior chat.
 
-Prefer a small set of high-signal questions over a long questionnaire.
+Prefer a few high-signal questions over a long questionnaire.

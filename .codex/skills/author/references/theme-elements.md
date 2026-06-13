@@ -12,11 +12,26 @@ Markdown headings from `#` to `######` are supported.
 
 Use headings to make the argument scannable. Do not add decorative headings.
 
+## Emphasis
+
+Use bold selectively.
+
+Bold only fundamental concepts, such as:
+
+- **pure functions**
+- **composition**
+- **shared state**
+- **feedback**
+- **technical debt**
+- **failure mode**
+
+Do not bold every list label. Do not use bold as decoration.
+
 ## Lists
 
 Ordered and unordered lists are supported.
 
-Use lists for steps, traits, trade-offs, or examples. Avoid list padding.
+Use lists for steps, traits, trade-offs, examples, or failure modes. Keep list items tight.
 
 ## Tables
 
@@ -110,6 +125,24 @@ Diff blocks are supported:
 ````
 
 Use inline code for commands, identifiers, filenames, and technical terms.
+
+When code is the clearest explanation, show it early. Keep code examples small enough for the reader to hold in working memory.
+
+## Rtype Signatures
+
+Use Rtype signatures when they make function behavior easier to understand:
+
+```text
+functionName(param: Type) => ReturnType
+```
+
+Example:
+
+```text
+createUser(input: UserInput) => User
+```
+
+Use Rtype for explanatory writing when it is clearer than a full TypeScript declaration. Do not force it into every article.
 
 ## Media
 
