@@ -1,9 +1,7 @@
 # @see https://github.com/limjh16/jekyll-action-ts
 name: "Deploy"
 on:
-  push:
-    branches:
-      - master
+  workflow_dispatch:
 
 jobs:
   deploy:
