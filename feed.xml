@@ -1,6 +1,143 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-06-13T13:51:48+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-06-14T15:22:19+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
 I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Plan, Code, Review: How I Use AI Agents Without Losing Control</title><link href="https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control.html" rel="alternate" type="text/html" title="Plan, Code, Review: How I Use AI Agents Without Losing Control" /><published>2026-04-24T00:00:00+00:00</published><updated>2026-04-24T00:00:00+00:00</updated><id>https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control</id><content type="html" xml:base="https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control.html"><![CDATA[<p>I have been integrating AI agents into my workflow as a developer. The most useful mental model so far is simple: I
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">Write pure functions and eat your vegetables</title><link href="https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables.html" rel="alternate" type="text/html" title="Write pure functions and eat your vegetables" /><published>2026-06-14T00:00:00+00:00</published><updated>2026-06-14T00:00:00+00:00</updated><id>https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables</id><content type="html" xml:base="https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables.html"><![CDATA[<p>Pure functions are a fundamental concept in functional programming. A pure function returns the same output for the
+same input and does not change anything outside itself.</p>
+
+<p>But pure functions are not the whole app. Real applications still need state, I/O, network calls, databases, logs, time,
+and other effects. Functional programming does not make those things disappear. It helps us keep them under control.</p>
+
+<p>I want to say that early because many developers assume functional programming means writing only pure functions. I used
+to think that too. Then I got stuck trying to figure out where state, I/O, and wiring should go.</p>
+
+<h2 id="functions-by-the-job-they-do">Functions by the job they do</h2>
+
+<p>To understand pure functions, we first need to name the jobs functions do. At the simplest level, many functions are
+<strong>mappers</strong>. They take some input and return a relevant output.</p>
+
+<p>A <a href="/blog/fp/how-to-use-predicate-functions-in-javascript.html">predicate</a> is a mapper that returns a
+boolean. A factory is a mapper that returns a new object or a new function. A transformer is a mapper that returns a
+new shape of the input.</p>
+
+<p>The important distinction starts when a function does more than mapping. Some functions coordinate steps. Some handle
+requests or events. Some talk to the network, the database, the file system, or the browser.</p>
+
+<p>Pure functions are all about mapping: input in, output out, and no outside changes.</p>
+
+<h2 id="same-input-same-output">Same input, same output</h2>
+
+<p>A pure function is deterministic. It returns the same value for the same arguments.</p>
+
+<p>Some built-in functions behave this way:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Math</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span> <span class="c1">// 9</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nf">max</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">);</span> <span class="c1">// 9</span>
+
+<span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span> <span class="c1">// 3</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nf">floor</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span> <span class="c1">// 3</span>
+</code></pre></div></div>
+
+<p>We can write our own pure functions too:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">const</span> <span class="nx">double</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span><span class="p">:</span> <span class="kr">number</span><span class="p">):</span> <span class="kr">number</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="nf">double</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 8</span>
+<span class="nf">double</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> <span class="c1">// 8</span>
+</code></pre></div></div>
+
+<p>The output comes from the input. Nothing else.</p>
+
+<p>Not all built-in functions are pure. For example, <code class="language-plaintext highlighter-rouge">Math.random()</code> does not return a value based on explicit input. You
+cannot predict the result from its arguments. Also <code class="language-plaintext highlighter-rouge">Date.now()</code> returns the current timestamp, so it changes every time
+you call it. These functions are not pure.</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">();</span> <span class="c1">// 0.8625834166994483</span>
+<span class="nb">Math</span><span class="p">.</span><span class="nf">random</span><span class="p">();</span> <span class="c1">// 0.34723300540473223</span>
+
+<span class="nb">Date</span><span class="p">.</span><span class="nf">now</span><span class="p">();</span> <span class="c1">// 1781447915258</span>
+<span class="nb">Date</span><span class="p">.</span><span class="nf">now</span><span class="p">();</span> <span class="c1">// 1781447919162</span>
+</code></pre></div></div>
+
+<p>Both of them depend on something outside the function: the current time or a random seed. They are not pure.</p>
+
+<h2 id="no-side-effects">No side effects</h2>
+
+<p>In pure functions, you don’t communicate with the network, you don’t change the state, you don’t alter the storage,
+and so on. You don’t do anything outside the function, nor you depend on anything outside the function.</p>
+
+<p><code class="language-plaintext highlighter-rouge">fetch()</code> is not pure because it talks to the network, and <code class="language-plaintext highlighter-rouge">localStorage.setItem()</code> is not pure because it changes the
+storage. Even if you call them with the same arguments and they return the same value, they are not pure because
+they have side effects. Yes, side effects. That is what we call any interaction with the outside world.</p>
+
+<h2 id="pure-functions-are-boring">Pure functions are boring</h2>
+
+<p>Pure functions are boring, just like vegetables. That is the point.</p>
+
+<p>Vegetables are not exciting. They do not feel like a reward. But they keep the body healthy.</p>
+
+<p>Pure functions do the same thing for code. They are plain, predictable, and easy to reason about. They do not read hidden
+state. They do not change the outside world. They take input and return output.</p>
+
+<p>That boring shape gives us real benefits.</p>
+
+<p>Pure functions are easier to test because the test does not need a database, a network, a clock, or a browser. It only
+needs input and expected output.</p>
+
+<p>Pure functions are easier to debug because the result comes from the arguments. If the output is wrong, you know where
+to look.</p>
+
+<p>Pure functions are safer to reuse because they do not carry hidden behavior with them. Calling the function does not
+secretly update shared state or trigger an external action.</p>
+
+<p>Pure functions are also easier to run in parallel because they do not fight over shared mutable state. No hidden writes.
+No surprise I/O. No whatchamacallit side effects.</p>
+
+<p>That is why pure functions matter. They are not impressive because they are clever. They are useful because they are
+boring.</p>
+
+<h2 id="where-pure-functions-belong">Where pure functions belong</h2>
+
+<div class="tip">
+  <p>Pure functions work best in the middle of the program.</p>
+</div>
+
+<p><img src="/assets/img/write-pure-functions-and-eat-your-vegetables-where-pure-functions-belong.png" alt="Pure functions belong in the middle of the program" /></p>
+
+<p>The edges talk to the outside world. They read from the database, receive HTTP requests, write logs, call APIs, or
+update the UI.</p>
+
+<p>The middle should do the thinking. It validates, calculates, filters, sorts, transforms, and decides.</p>
+
+<p>That is the practical shape:</p>
+
+<ol>
+  <li>Read data at the edge.</li>
+  <li>Pass plain values into pure functions.</li>
+  <li>Get plain values back.</li>
+  <li>Write the result at the edge.</li>
+</ol>
+
+<p>The app still has effects. We just stop mixing them with every small decision.</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">type</span> <span class="nx">CartItem</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="na">price</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+  <span class="nl">quantity</span><span class="p">:</span> <span class="kr">number</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="kd">const</span> <span class="nx">calculateTotal</span> <span class="o">=</span> <span class="p">(</span><span class="nx">items</span><span class="p">:</span> <span class="nx">CartItem</span><span class="p">[]):</span> <span class="kr">number</span> <span class="o">=&gt;</span>
+  <span class="nx">items</span><span class="p">.</span><span class="nf">reduce</span><span class="p">((</span><span class="nx">total</span><span class="p">,</span> <span class="nx">item</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">total</span> <span class="o">+</span> <span class="nx">item</span><span class="p">.</span><span class="nx">price</span> <span class="o">*</span> <span class="nx">item</span><span class="p">.</span><span class="nx">quantity</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The database does not belong inside <code class="language-plaintext highlighter-rouge">calculateTotal()</code>. The function should not care where the cart came from.</p>
+
+<h2 id="keep-the-vegetables-on-the-plate">Keep the vegetables on the plate</h2>
+
+<p>You do not need to make every function pure. Some code must talk to the outside world. Some code must coordinate work.
+Some code must change state. But when a piece of code can be pure, make it pure.</p>
+
+<p>If a function can take input and return output without touching anything else, keep it that way. That boring choice
+gives you code that is easier to test, easier to debug, and easier to trust.</p>
+
+<p>Write pure functions where they fit. Eat your vegetables.</p>]]></content><author><name>Dhemy</name></author><category term="fp" /><category term="fp" /><category term="javascript" /><category term="pure-functions" /><summary type="html"><![CDATA[Pure functions are a fundamental concept in functional programming. A pure function returns the same output for the same input and does not change anything outside itself.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/write-pure-functions-and-eat-your-vegetables.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/write-pure-functions-and-eat-your-vegetables.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Plan, Code, Review: How I Use AI Agents Without Losing Control</title><link href="https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control.html" rel="alternate" type="text/html" title="Plan, Code, Review: How I Use AI Agents Without Losing Control" /><published>2026-04-24T00:00:00+00:00</published><updated>2026-04-24T00:00:00+00:00</updated><id>https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control</id><content type="html" xml:base="https://imdhemy.com/blog/coding-agents/plan-code-review-how-i-use-ai-agents-without-losing-control.html"><![CDATA[<p>I have been integrating AI agents into my workflow as a developer. The most useful mental model so far is simple: I
 treat the AI agent like another developer on the team.</p>
 
 <p>Yes, developer.</p>
@@ -1172,33 +1309,4 @@ rebase enabled, Git reapplies your local commits on top of the fetched commits, 
 keeps your commit history cleaner and more readable by avoiding unnecessary merge commits.</p>
 
 <p>Wrapping up, it was a week of successful deliveries and much-needed organization. I’m looking forward to the next
-steps… 🐾</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><category term="delivery" /><category term="project-management" /><category term="git" /><category term="developer-workflow" /><category term="productivity" /><summary type="html"><![CDATA[Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully handed over a project to the Deutscher Fußball-Bund (DFB) right on schedule. The DFB, being the German Football Association, is not only one of our biggest clients but also one of the largest football associations globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and it did! 🎉]]></summary></entry><entry><title type="html">A Week of Goodbyes</title><link href="https://imdhemy.com/blog/generic/week-of-goodbyes.html" rel="alternate" type="text/html" title="A Week of Goodbyes" /><published>2024-11-03T00:00:00+00:00</published><updated>2024-11-03T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/week-of-goodbyes</id><content type="html" xml:base="https://imdhemy.com/blog/generic/week-of-goodbyes.html"><![CDATA[<p>Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently,
-our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other
-navigating a more difficult transition. I’ve been taught a valuable lesson last week!</p>
-
-<h2 id="goodbye-benni">Goodbye, Benni</h2>
-
-<p>Benjamin Berg, aka Benni, has left Reservix. He was a great colleague, and I wish him all the best for his future.
-Although I didn’t have the chance to work on the same team as him, I enjoyed sharing the office with him for almost two
-years. He was always friendly and helpful. Everyone acknowledges his impact on his team and the company, not only as a
-developer but also for his leadership and ability to bring people together. I hope we can stay in touch and go
-to <a href="https://www.tripadvisor.de/Restaurant_Review-g187337-d2166694-Reviews-Tatie_Food_Drinks-Frankfurt_Hesse.html?m=19905&amp;ref=imdhemy.com">Tatie</a>
-together.</p>
-
-<p>We had a farewell party at the office. It was emotional and fun, with pizza, drinks, and lots of laughs. Leonie shared a
-fun questions box game with us. We had to answer questions like “How many times has this country won the World Cup?”
-or “What is the name of this formula?” Rafi was impressive as always, and I was lucky to be on the same team as Benni.</p>
-
-<p>The moment when Carsten gave Benni a present that was collectively bought by the team was very emotional. Benni was
-especially happy when he saw a device that he wanted to try to automate his home. That was a great idea from Wiktor.
-They were creative enough to give him a soundboard with some funny sounds to remind him of our soundboard in the office.</p>
-
-<h2 id="another-team-member-moves-on">Another team member moves on</h2>
-
-<p>Last week wasn’t easy for our team. The team decided to go to different ways with one our colleagues. She was a good
-developer, but we couldn’t find a way to continue working together. I hope she finds a new job soon. I wish her all the
-best.</p>
-
-<p>At the end of the day, the people will remember how you made them feel, it’s not about how good you are at your job.
-It’s also crucial to <a href="/blog/generic/the-pipeline-ate-my-code.html">pay attention to the feedback</a> you receive and
-to be open to change.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><category term="career" /><category term="teamwork" /><category term="workplace-culture" /><category term="leadership" /><category term="reflection" /><summary type="html"><![CDATA[Change is an inevitable part of any workplace, often bringing both joyful farewells and challenging goodbyes. Recently, our team experienced this duality with the departure of two colleagues—one celebrated and cherished, and the other navigating a more difficult transition. I’ve been taught a valuable lesson last week!]]></summary></entry></feed>
+steps… 🐾</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><category term="delivery" /><category term="project-management" /><category term="git" /><category term="developer-workflow" /><category term="productivity" /><summary type="html"><![CDATA[Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully handed over a project to the Deutscher Fußball-Bund (DFB) right on schedule. The DFB, being the German Football Association, is not only one of our biggest clients but also one of the largest football associations globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and it did! 🎉]]></summary></entry></feed>
