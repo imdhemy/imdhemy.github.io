@@ -54,9 +54,9 @@ double(4); // 8
 
 The output comes from the input. Nothing else.
 
-Not all built-in functions are pure. For example, `Math.random()` returns a different value each time or at least
-you can't predict the value. Also `Date.now()` returns the current timestamp, so it changes every time you call it.
-These functions are not pure.
+Not all built-in functions are pure. For example, `Math.random()` does not return a value based on explicit input. You
+cannot predict the result from its arguments. Also `Date.now()` returns the current timestamp, so it changes every time
+you call it. These functions are not pure.
 
 ```ts
 Math.random(); // 0.8625834166994483
@@ -75,7 +75,7 @@ and so on. You don't do anything outside the function, nor you depend on anythin
 
 `fetch()` is not pure because it talks to the network, and `localStorage.setItem()` is not pure because it changes the
 storage. Even if you call them with the same arguments and they return the same value, they are not pure because
-they have side effects. Yes, side effects, this how we call any interaction with the outside world.
+they have side effects. Yes, side effects. That is what we call any interaction with the outside world.
 
 ## Pure functions are boring
 
@@ -83,8 +83,7 @@ Pure functions are boring, just like vegetables. That is the point.
 
 Vegetables are not exciting. They do not feel like a reward. But they keep the body healthy.
 
-Pure functions do the same thing for code. They are plain, predictable, and easy to reason about. They do not read
-hidden
+Pure functions do the same thing for code. They are plain, predictable, and easy to reason about. They do not read hidden
 state. They do not change the outside world. They take input and return output.
 
 That boring shape gives us real benefits.
@@ -128,12 +127,12 @@ The app still has effects. We just stop mixing them with every small decision.
 
 ```ts
 type CartItem = {
-    price: number;
-    quantity: number;
+  price: number;
+  quantity: number;
 };
 
 const calculateTotal = (items: CartItem[]): number =>
-    items.reduce((total, item) => total + item.price * item.quantity, 0);
+  items.reduce((total, item) => total + item.price * item.quantity, 0);
 ```
 
 The database does not belong inside `calculateTotal()`. The function should not care where the cart came from.
