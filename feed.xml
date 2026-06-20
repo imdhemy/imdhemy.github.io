@@ -1,6 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-06-14T15:22:19+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://imdhemy.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://imdhemy.com/" rel="alternate" type="text/html" /><updated>2026-06-20T18:41:40+00:00</updated><id>https://imdhemy.com/feed.xml</id><title type="html">Imdhemy</title><subtitle>I&apos;m a software engineer and customer data expert focused on turning raw data into meaningful, actionable insights.
 I work across the full customer data lifecycle, from clean data capture to behavior-aware models and decisions.
-</subtitle><author><name>Dhemy</name></author><entry><title type="html">Write pure functions and eat your vegetables</title><link href="https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables.html" rel="alternate" type="text/html" title="Write pure functions and eat your vegetables" /><published>2026-06-14T00:00:00+00:00</published><updated>2026-06-14T00:00:00+00:00</updated><id>https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables</id><content type="html" xml:base="https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables.html"><![CDATA[<p>Pure functions are a fundamental concept in functional programming. A pure function returns the same output for the
+</subtitle><author><name>Dhemy</name></author><entry><title type="html">AI Makes You Faster, Not Better</title><link href="https://imdhemy.com/blog/generic/ai-makes-you-faster-not-better.html" rel="alternate" type="text/html" title="AI Makes You Faster, Not Better" /><published>2026-06-20T00:00:00+00:00</published><updated>2026-06-20T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/ai-makes-you-faster-not-better</id><content type="html" xml:base="https://imdhemy.com/blog/generic/ai-makes-you-faster-not-better.html"><![CDATA[<p>I’ve noticed that AI-augmented development does not take you further than what you already know. It just takes you there faster.</p>
+
+<p>Picture a developer who knows nothing about design patterns and is using the latest state-of-the-art AI tools, prompting something like: “Implement this X feature and use the correct design pattern.”</p>
+
+<p>Most likely, the result will not use the correct design pattern. It will instead implement it like a student who previously pushed similar code to GitHub.</p>
+
+<p>Another risk is the AI false confidence trap.</p>
+
+<p>The false confidence trap happens when someone relies heavily on AI-generated results without understanding the underlying concepts. It often gives the impression that the user has learned more than they actually have.</p>
+
+<p>The risk is not only that they speak shit. It is that they speak shit with confidence because the AI said so.</p>
+
+<p>The more you mature in software development, the more you start to value the fundamentals.</p>
+
+<p>At the beginning, many principles can look obvious or too simple to deserve much attention. With experience, you begin to understand that these principles are not shallow. Applying them consistently becomes more difficult as systems grow and complexity increases.</p>
+
+<p>John Maeda described a similar idea through Karate:</p>
+
+<p>“In the martial art of Karate, the symbol of pride for a black belt is to wear it long enough such that the dye fades to white, symbolizing a return to the beginner state.”</p>
+
+<p>The white belt at the beginning represents someone who knows very little. The faded black belt represents someone who has learned deeply but returned to the mindset of a beginner, curious, humble, and focused on the basics.</p>
+
+<p>Software development often follows the same path.</p>
+
+<p>You begin with the fundamentals, then move towards advanced tools, patterns, and techniques. After enough experience, you often return to the fundamentals, but with a much deeper understanding of why they matter.</p>
+
+<p>What has changed with the AI hype is that many Karate beginners are being handed black belts before earning them. The black dye is fake and permanent. It does not fade because it was never produced through practice, learning, and real experience.</p>
+
+<p>Some have traded learning opportunities and real experience for speed, convenience, and ego.</p>
+
+<p>Do not get me wrong. I am not saying that everyone using AI is wearing a fake black belt. AI can help experienced developers move faster, and it can help beginners learn when they use it with curiosity, humility, and a willingness to verify what it produces.</p>
+
+<p>The fake black belt belongs to those who use AI to skip the learning process, while adopting the confidence and authority of someone who has already gone through it.</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><category term="ai" /><category term="software-development" /><category term="fundamentals" /><summary type="html"><![CDATA[I’ve noticed that AI-augmented development does not take you further than what you already know. It just takes you there faster.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/ai-makes-you-faster-not-better.png" /><media:content medium="image" url="https://imdhemy.com/assets/img/ai-makes-you-faster-not-better.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Write pure functions and eat your vegetables</title><link href="https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables.html" rel="alternate" type="text/html" title="Write pure functions and eat your vegetables" /><published>2026-06-14T00:00:00+00:00</published><updated>2026-06-14T00:00:00+00:00</updated><id>https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables</id><content type="html" xml:base="https://imdhemy.com/blog/fp/write-pure-functions-and-eat-your-vegetables.html"><![CDATA[<p>Pure functions are a fundamental concept in functional programming. A pure function returns the same output for the
 same input and does not change anything outside itself.</p>
 
 <p>But pure functions are not the whole app. Real applications still need state, I/O, network calls, databases, logs, time,
@@ -1258,55 +1290,4 @@ you! 🐨</del></p>
 
 <p>Even though I won’t publish a second article, the path to improving the movie recommender is clear: the richer your movie attributes, the better the recommendations you’ll get. Enhancing the documents with extra metadata like cast, director, language, country, keywords, runtime, or even ratings will make the <code class="language-plaintext highlighter-rouge">moreLikeThis</code> query far more effective. So, if you want better results, feed your database with real-world movie data that’s as complete as possible.</p>
 
-<p>Let the KoalaTs be with you! 🐨</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><category term="nodejs" /><category term="mongodb" /><category term="recommender-systems" /><category term="koalats" /><category term="backend" /><summary type="html"><![CDATA[Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights into what should be the next improvement. I decided to build a simple movie recommender using KoalaTs and MongoDB. Once, I had the simple version working, I decided to dive deeper into the project and make it more powerful and robust.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/koala.jpg" /><media:content medium="image" url="https://imdhemy.com/assets/img/koala.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Delivery on Time and Some Clean Up 🧹</title><link href="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html" rel="alternate" type="text/html" title="Delivery on Time and Some Clean Up 🧹" /><published>2024-11-10T00:00:00+00:00</published><updated>2024-11-10T00:00:00+00:00</updated><id>https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup</id><content type="html" xml:base="https://imdhemy.com/blog/generic/delivery-on-time-and-cleanup.html"><![CDATA[<p>Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully
-handed over a project to the Deutscher Fußball-Bund (<a href="https://www.dfb.de/">DFB</a>) right on schedule. The DFB, being the
-German Football Association, is not only one of our biggest clients but also one of the largest football associations
-globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and
-it did! 🎉</p>
-
-<p>During this time, I also decided to tackle some overdue cleaning tasks. From tidying up my desk and washing room
-to organizing my kitchen and even my Git branches, it was a week of thorough cleanup.</p>
-
-<p>My friend Eman introduced me to Hadeer, a talented organizer. She helped me organize my desk and plans to add some
-aesthetic touches later.</p>
-
-<p><img src="/assets/img/desk-bike.JPG" alt="Desk-Bike" />
-I wanted to share a photo of my desk, but the surrounding mess still impacts its appearance.</p>
-
-<p><img src="/assets/img/any-zhgt.PNG" alt="Zhgt" />
-I’m thinking about either cleaning up the entire office or moving my desk to a different spot.</p>
-
-<p>Another spot that needed attention was my PS4 desk:</p>
-
-<p><img src="/assets/img/ps4.JPG" alt="PS4" /></p>
-
-<p>The cable arrangement still bothers me, but I’ve ordered some cable management tools arriving tomorrow. Hopefully, it
-will look much better after that.</p>
-
-<p>On the tech side, I realized I had many local Git branches that were no longer needed since they had already been
-merged. While Jetbrains IDEs can filter branches easily, I wanted to handle this cleanup from the terminal. So, I
-updated my <code class="language-plaintext highlighter-rouge">~/.gitconfig</code> file with a new alias tailored for our team’s workflow:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span><span class="nb">alias</span><span class="o">]</span>
-    cleanup <span class="o">=</span> <span class="s2">"!f() { git branch | grep -v 'develop' | grep -v 'main' | grep -v 'master' | grep -v -E '^[0-9]+</span><span class="se">\\</span><span class="s2">.x' | grep -v '</span><span class="se">\\</span><span class="s2">*' | xargs git branch -D; }; f"</span>
-</code></pre></div></div>
-
-<p>This way, I can simply run:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git cleanup
-</code></pre></div></div>
-
-<p>And all branches will be deleted except <code class="language-plaintext highlighter-rouge">develop</code>, <code class="language-plaintext highlighter-rouge">main</code>, <code class="language-plaintext highlighter-rouge">master</code>, and any <code class="language-plaintext highlighter-rouge">1.x</code> or similar branches.</p>
-
-<p>Additionally, to keep my Git history clean, I configured my Git pulls to rebase:</p>
-
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>pull]
-    rebase <span class="o">=</span> <span class="nb">true</span>
-</code></pre></div></div>
-
-<p>Typically, when you pull changes from a remote repository, Git merges them into your current branch. However, with
-rebase enabled, Git reapplies your local commits on top of the fetched commits, creating a linear project history. This
-keeps your commit history cleaner and more readable by avoiding unnecessary merge commits.</p>
-
-<p>Wrapping up, it was a week of successful deliveries and much-needed organization. I’m looking forward to the next
-steps… 🐾</p>]]></content><author><name>Dhemy</name></author><category term="generic" /><category term="delivery" /><category term="project-management" /><category term="git" /><category term="developer-workflow" /><category term="productivity" /><summary type="html"><![CDATA[Delivering a project to a major client always brings a mix of excitement and relief. Last week, our team successfully handed over a project to the Deutscher Fußball-Bund (DFB) right on schedule. The DFB, being the German Football Association, is not only one of our biggest clients but also one of the largest football associations globally. We had an online meeting to oversee the project’s launch and ensure everything went off without a hitch, and it did! 🎉]]></summary></entry></feed>
+<p>Let the KoalaTs be with you! 🐨</p>]]></content><author><name>Dhemy</name></author><category term="nodejs" /><category term="nodejs" /><category term="mongodb" /><category term="recommender-systems" /><category term="koalats" /><category term="backend" /><summary type="html"><![CDATA[Last week, I wanted to try out KoalaTs in a real-world project to see how it would perform, and to get some insights into what should be the next improvement. I decided to build a simple movie recommender using KoalaTs and MongoDB. Once, I had the simple version working, I decided to dive deeper into the project and make it more powerful and robust.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://imdhemy.com/assets/img/koala.jpg" /><media:content medium="image" url="https://imdhemy.com/assets/img/koala.jpg" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
